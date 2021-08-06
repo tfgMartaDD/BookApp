@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "862738544837",
+    "project_id": "bookapp-3c15f",
+    "storage_bucket": "bookapp-3c15f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862738544837:android:21a903df9e9f7fa64798ac",
+        "android_client_info": {
+          "package_name": "com.marta.bookapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862738544837-gpteoj72i83ngoe6phdt050gk9l7avf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZlRv_-oFAGcY6e-PZy3aS8sOuF54O7m4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862738544837-gpteoj72i83ngoe6phdt050gk9l7avf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
