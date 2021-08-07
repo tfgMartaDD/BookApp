@@ -72,13 +72,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String mail = emailET.getText().toString();
-        String pass = passwordET.getText().toString();
+
 
         accederBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(mail.isEmpty())&&!(pass.isEmpty())){
+
+                String mail = emailET.getText().toString();
+                String pass = passwordET.getText().toString();
+
+                if(mail.isEmpty() || pass.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Rellene los campos de Usuario y Contraseña para continuar", Toast.LENGTH_LONG).show();
+
+                }else {
+
                     if(awesomeValidation.validate()){
                     /*String mail = emailET.getText().toString();
                     String pass = passwordET.getText().toString();*/
@@ -95,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }else {
-                    Toast.makeText(MainActivity.this, "Rellene los campos de Usuario y Contraseña para continuar", Toast.LENGTH_LONG).show();
                 }
             }
 

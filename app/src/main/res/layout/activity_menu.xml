@@ -9,7 +9,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="400dp"
         android:layout_margin="8dp"
         android:gravity="center">
 
@@ -58,10 +58,11 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/datos"
+        android:id="@+id/datosButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MIS DATOS"
+        android:gravity="bottom"
         android:layout_margin="8dp"/>
 
 </LinearLayout>
