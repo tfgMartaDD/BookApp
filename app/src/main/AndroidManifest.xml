@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookApp">
         <activity
+            android:name=".DatosPersonalesActivity"
+            android:exported="true" />
+        <activity
             android:name=".PeticionesActivity"
             android:exported="true" />
         <activity
