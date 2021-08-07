@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        accederBTN = findViewById(R.id.cerrarBoton);
+        accederBTN = findViewById(R.id.accederBoton);
         registrarBTN = findViewById(R.id.registrarBoton);
         olvideBTN = findViewById(R.id.olvideBoton);
 

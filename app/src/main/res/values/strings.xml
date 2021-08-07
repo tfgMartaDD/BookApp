@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">BookApp</string>
 
+    //botones, editText, etc
+    <string name="acceder">ACCEDER</string>
+    <string name="anadir">AÑADIR</string>
+    <string name="cerrar_sesion">CERRAR SESION</string>
+    <string name="donaciones">DONACIONES</string>
+    <string name="eliminar">ELIMINAR</string>
+    <string name="email">Email</string>
+    <string name="libros_disponibles">LIBROS DISPONIBLES</string>
+    <string name="menu">MENU</string>
+    <string name="mis_datos">MIS DATOS</string>
+    <string name="modificar">MODIFICAR</string>
+    <string name="name"> BOOK APP!</string>
+    <string name="olvide">OLVIDE MI CONTRASEÑA</string>
+    <string name="password">Contraseña</string>
+    <string name="peticiones">MIS PETICIONES</string>
+    <string name="prestamos">MIS PRESTAMOS</string>
+    <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
+
+
+
     <string name="prefs_file">com.marta.bookapp.PREFERENCE_FILE_KEY</string>
 
     <string name="invalid_mail">Introduzca un email que sea válido</string>

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="BOOK APP!" />
+            android:text="@string/name" />
 
         <Space
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Space
@@ -52,22 +52,22 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/cerrarBoton"
+            android:id="@+id/accederBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ACCEDER" />
+            android:text="@string/acceder" />
 
         <Button
             android:id="@+id/olvideBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OLVIDE MI CONTRASEÑA" />
+            android:text="@string/olvide" />
 
         <Button
             android:id="@+id/registrarBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SOY NUEVO, QUIERO REGISTRARME" />
+            android:text="@string/registro" />
 
     </LinearLayout>
 

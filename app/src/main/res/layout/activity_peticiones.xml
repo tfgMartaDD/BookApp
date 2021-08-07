@@ -38,20 +38,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="AÑADIR" />
+            android:text="@string/anadir" />
 
         <Button
             android:id="@+id/modificarBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="MODIFICAR" />
+            android:text="@string/modificar" />
 
         <Button
             android:id="@+id/eliminarBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="eliminar" />
+            android:text="@string/eliminar" />
     </LinearLayout>
 </LinearLayout>
