@@ -40,22 +40,24 @@
         android:layout_height="8dp" />
 
     <EditText
-        android:id="@+id/nombreTextView"
+        android:id="@+id/nombreEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:hint="@string/nombre" />
+        android:hint="@string/nombre"
+        android:autofillHints="name" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
     <EditText
-        android:id="@+id/apellidoTextView"
+        android:id="@+id/apellidoEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:hint="@string/apellido" />
+        android:hint="@string/apellido"
+        android:autofillHints="apellido"/>
 
     <Space
         android:layout_width="match_parent"
