@@ -6,6 +6,7 @@
     <string name="anadir">AÑADIR</string>
     <string name="apellido">Apellido</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
+    <string name="datos_personales">MIS DATOS PERSONALES</string>
     <string name="donaciones">DONACIONES</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>

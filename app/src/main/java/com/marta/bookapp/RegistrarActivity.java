@@ -79,11 +79,15 @@ public class RegistrarActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(RegistrarActivity.this, "Usuario creado con exito", Toast.LENGTH_SHORT).show();
+
+                                //guardar en la firestore
                                 Map<String, Object> user = new HashMap<>();
-                                user.put("email", mail);
                                 user.put("nombre", nombre.getText().toString());
                                 user.put("apellido", apellido.getText().toString());
-                                db.collection("users").add(user)
+
+                                db.collection("users").document(mail).set(user);
+
+                                        /*.add(user)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
@@ -95,7 +99,7 @@ public class RegistrarActivity extends AppCompatActivity {
                                             public void onFailure(@NonNull Exception e) {
                                                 Log.w(TAG, "Error adding document", e);
                                             }
-                                        });
+                                        });*/
                                 finish();
                             }else {
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
