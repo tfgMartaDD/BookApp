@@ -10,33 +10,34 @@
 
     <TextView
         android:id="@+id/textView"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:text="Registrar Cuenta" />
+        android:text="@string/registrar_cuenta" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
-
+    <!---android:ems="10"-->
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Contraseña"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REGISTRAR" />
+        android:layout_margin="8dp"
+        android:text="@string/registrar" />
 
 </LinearLayout>
