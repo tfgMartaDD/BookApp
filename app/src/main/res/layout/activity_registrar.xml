@@ -23,6 +23,7 @@
         android:layout_height="50dp"
         android:layout_margin="8dp"
         android:hint="@string/email"
+        android:autofillHints="emailAddress"
         android:inputType="textEmailAddress" />
     <!---android:ems="10"-->
     <EditText
@@ -31,7 +32,34 @@
         android:layout_height="50dp"
         android:layout_margin="8dp"
         android:hint="@string/password"
+        android:autofillHints="password"
         android:inputType="textPassword" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <EditText
+        android:id="@+id/nombreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:hint="@string/nombre" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <EditText
+        android:id="@+id/apellidoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:hint="@string/apellido" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <Button
         android:id="@+id/registrar"
