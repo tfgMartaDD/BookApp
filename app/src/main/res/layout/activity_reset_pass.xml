@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="16dp">
 
         <TextView
             android:id="@+id/textView"
@@ -38,17 +39,25 @@
             android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/resetearContra"
-            android:layout_width="match_parent"
+            android:id="@+id/resetContra"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/recuperar_contraseña" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/volverButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/volverButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/volver"
+            android:layout_gravity="bottom"/>
+    </LinearLayout>
 
 </LinearLayout>

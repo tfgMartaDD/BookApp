@@ -26,6 +26,7 @@
     <string name="registrar">REGISTRAR</string>
     <string name="registrar_cuenta">Registrar Cuenta</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
+    <string name="volver">Volver a la pantalla inicial</string>
 
 
     <string name="prefs_file">com.marta.bookapp.PREFERENCE_FILE_KEY</string>
