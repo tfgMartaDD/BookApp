@@ -57,7 +57,6 @@ public class ResetPassActivity extends AppCompatActivity {
 
     private void redirigirAmain() {
         Intent i = new Intent (this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
 }

@@ -36,11 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setup();
-        sesion();
-    }
+        //setup();
 
-    private void setup() {
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -110,13 +107,18 @@ public class MainActivity extends AppCompatActivity {
         olvideBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent (MainActivity.this, ResetPassActivity.class);
+                Intent i = new Intent(MainActivity.this,ResetPassActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
-
-
             }
         });
+
+        sesion();
+    }
+
+    private void setup() {
+
+
     }
 
     private void sesion() {

@@ -10,6 +10,7 @@
     <string name="donaciones">DONACIONES</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
+    <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
     <string name="menu">MENU</string>

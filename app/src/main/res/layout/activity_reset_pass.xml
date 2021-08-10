@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/recuperar_contraseña" />
+            android:text="@string/enviar_email" />
     </LinearLayout>
 
     <LinearLayout
