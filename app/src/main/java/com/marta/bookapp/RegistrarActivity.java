@@ -84,6 +84,7 @@ public class RegistrarActivity extends AppCompatActivity {
                                 Map<String, Object> user = new HashMap<>();
                                 user.put("nombre", nombre.getText().toString());
                                 user.put("apellido", apellido.getText().toString());
+                                user.put("email",mail);
 
                                 db.collection("users").document(mail).set(user);
 
