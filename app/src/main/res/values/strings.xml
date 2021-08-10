@@ -10,6 +10,7 @@
     <string name="donaciones">DONACIONES</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
+    <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
     <string name="menu">MENU</string>
     <string name="mis_datos">MIS DATOS</string>
@@ -20,10 +21,11 @@
     <string name="password">Contraseña</string>
     <string name="peticiones">MIS PETICIONES</string>
     <string name="prestamos">MIS PRESTAMOS</string>
+    <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
     <string name="registrar">REGISTRAR</string>
     <string name="registrar_cuenta">Registrar Cuenta</string>
-
+    <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
 
 
     <string name="prefs_file">com.marta.bookapp.PREFERENCE_FILE_KEY</string>

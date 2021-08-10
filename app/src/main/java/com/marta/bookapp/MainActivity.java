@@ -110,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
         olvideBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent (MainActivity.this, ResetPassActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+
 
             }
         });
