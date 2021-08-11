@@ -13,12 +13,17 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class ResetPassActivity extends AppCompatActivity {
 
     EditText email;
     Button reset, volver;
     FirebaseAuth auth;
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +39,19 @@ public class ResetPassActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mail = email.getText().toString();
+
+                //Query query = db.collection("users").whereEqualTo("email",email);
+
                 if(!mail.isEmpty()){
+                    auth.setLanguageCode("es");
                     auth.sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(ResetPassActivity.this,"Correo enviado correctamente." , Toast.LENGTH_SHORT).show();
                                 redirigirAmain();
+                            }else{
+                                Toast.makeText(ResetPassActivity.this,"Debe introducir un correo que haya sido registrado en la app." , Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
