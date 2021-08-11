@@ -27,13 +27,14 @@ public class ResetPassActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        String mail = email.getText().toString();
+        email = findViewById(R.id.emailEditText2);
         reset = findViewById(R.id.resetContra);
 
-        if(!mail.isEmpty()){
-            reset.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mail = email.getText().toString();
+                if(!mail.isEmpty()){
                     auth.sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -44,8 +45,12 @@ public class ResetPassActivity extends AppCompatActivity {
                         }
                     });
                 }
-            });
-        }
+            }
+        });
+
+
+
+
 
         volver = findViewById(R.id.volverButton);
 
