@@ -53,10 +53,7 @@ public class MainActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.passwordEditText, ".{6,}" ,R.string.invalid_password);
 
 
-
-        accederBTN = findViewById(R.id.accederBoton);
         registrarBTN = findViewById(R.id.registrarBoton);
-        olvideBTN = findViewById(R.id.olvideBoton);
 
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        accederBTN = findViewById(R.id.accederBoton);
 
         accederBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,12 +101,14 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+        olvideBTN = findViewById(R.id.olvideBoton);
+
         olvideBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ResetPassActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
+                Intent intent = new Intent( MainActivity.this,  ResetPassActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -133,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirigirAhome(String email) {
-        Intent i = new Intent (this, HomeActivity.class);
-        i.putExtra("email",email);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
+        Intent in = new Intent (this, HomeActivity.class);
+        in.putExtra("email",email);
+        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(in);
     }
 
 }

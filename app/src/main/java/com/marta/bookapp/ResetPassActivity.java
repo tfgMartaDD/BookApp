@@ -18,12 +18,14 @@ public class ResetPassActivity extends AppCompatActivity {
 
     EditText email;
     Button reset, volver;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
+
+        auth = FirebaseAuth.getInstance();
 
         String mail = email.getText().toString();
         reset = findViewById(R.id.resetContra);
