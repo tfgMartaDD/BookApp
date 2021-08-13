@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookApp">
         <activity
+            android:name=".ListadoDispActivity"
+            android:exported="true" />
+        <activity
             android:name=".CursosActivity"
             android:exported="true" />
         <activity

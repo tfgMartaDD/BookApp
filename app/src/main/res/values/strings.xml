@@ -5,6 +5,8 @@
     <string name="acceder">ACCEDER</string>
     <string name="anadir">AÑADIR</string>
     <string name="apellido">Apellido</string>
+    <string name="clase">CLASE</string>
+    <string name="curso">CURSO</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
     <string name="datos_personales">MIS DATOS PERSONALES</string>
     <string name="donaciones">DONACIONES</string>
@@ -17,6 +19,7 @@
     <string name="menu">MENU</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
+    <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="name_app"> BOOK APP!</string>
     <string name="nombre">Nombre</string>
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>

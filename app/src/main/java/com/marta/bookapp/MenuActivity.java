@@ -25,5 +25,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        listaBTN = findViewById(R.id.listaButton);
+        listaBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent (MenuActivity.this, CursosActivity.class);
+                startActivity(in);
+            }
+        });
+
     }
 }
