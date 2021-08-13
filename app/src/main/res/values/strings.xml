@@ -13,6 +13,7 @@
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
+    <string name="listado_cursos">LISTADO POR CURSOS</string>
     <string name="menu">MENU</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
@@ -29,6 +30,16 @@
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
     <string name="volver">Volver a la pantalla inicial</string>
 
+    <string name="primero">PRIMERO</string>
+    <string name="segundo">SEGUNDO</string>
+    <string name="tercero">TERCERO</string>
+    <string name="cuarto">CUARTO</string>
+    <string name="quinto">QUINTO</string>
+    <string name="sexto">SEXTO</string>
+
+    <string name="primaria">PRIMARIA</string>
+    <string name="eso">ESO</string>
+    <string name="bachillerato">BACHILLERATO</string>
 
     <string name="prefs_file">com.marta.bookapp.PREFERENCE_FILE_KEY</string>
 
