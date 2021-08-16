@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -16,12 +17,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ListadoDispActivity extends AppCompatActivity {
 
     TextView cursoTV, claseTV;
     ListView listaDisponibles;
-    ArrayList<String> listaLibros = new ArrayList<String>();
+    ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -35,6 +37,10 @@ public class ListadoDispActivity extends AppCompatActivity {
         String curso = bundle.getString("curso");
         String clase = bundle.getString("clase");
 
+        listaLibros = new ArrayList<java.util.Map<String, Object>>();
+
+        listaDisponibles = findViewById(R.id.lv1);
+
         cursoTV = findViewById(R.id.textViewCurso);
         cursoTV.setText(curso);
 
@@ -43,23 +49,22 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         CollectionReference libros = db.collection("libros");
 
-
         libros.whereEqualTo("Curso", curso).whereEqualTo("Clase", clase).whereEqualTo("Estado", "disponible").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //listaLibros.add(document.);
+                                listaLibros.add(document.getData());
                                 System.out.println(document.getId()+" --> "+document.getData());
                             }
                         } else {
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
-        listaDisponibles = findViewById(R.id.lv1);
+        arrayAdapter = new ArrayAdapter<String>(this,R.layout);
 
 
     }
