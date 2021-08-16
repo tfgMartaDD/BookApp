@@ -3,6 +3,7 @@ package com.marta.bookapp;
 public class Libro {
 
     String id, asignatura, clase, curso, donante, editorial, estado;
+    //int imagen;
 
     public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado) {
         this.id = id;

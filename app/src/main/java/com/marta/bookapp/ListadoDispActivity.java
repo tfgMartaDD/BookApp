@@ -64,7 +64,7 @@ public class ListadoDispActivity extends AppCompatActivity {
                     }
                 });
 
-        arrayAdapter = new ArrayAdapter<String>(this,R.layout);
+        //arrayAdapter = new ArrayAdapter<String>(this,R.layout);
 
 
     }
