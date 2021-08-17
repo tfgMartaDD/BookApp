@@ -4,12 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
@@ -58,9 +55,11 @@ public class ListAdapter extends BaseAdapter {
         editorialTextV = convertView.findViewById(R.id.editorialTV);
 
         //portada.setImageResource(l.imagen);
-        asignaturaTextV.setText(l.asignatura);
-        claseTextV.setText(l.clase +" " +l.curso);
-        editorialTextV.setText(l.editorial);
+        asignaturaTextV.setText(l.getAsignatura());
+
+        String cursoclase = l.getCurso() +" " +l.getClase();
+        claseTextV.setText(cursoclase);
+        editorialTextV.setText(l.getEditorial());
 
         return convertView;
     }
