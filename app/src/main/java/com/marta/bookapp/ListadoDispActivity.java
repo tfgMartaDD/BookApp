@@ -27,7 +27,7 @@ public class ListadoDispActivity extends AppCompatActivity {
 
     TextView cursoTV, claseTV, mostrarTV;
     ListView listViewDisponibles;
-    List<Libro> listaLibro;
+    List<Libro> listaLibro = new ArrayList<Libro>();
     //ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
 
@@ -54,13 +54,13 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         mostrarTV = findViewById(R.id.mostrarTextView);
 
-        listaLibro = obtenerLibros(curso, clase);
+        //listaLibro = obtenerLibros(curso, clase);
 
         listViewDisponibles = findViewById(R.id.lv1);
 
-        System.out.println(listaLibro.size());
+        //System.out.println(listaLibro.size());
 
-        ListAdapter adapter = new ListAdapter(this, listaLibro);
+        ListAdapter adapter = new ListAdapter(this, obtenerLibros(curso, clase) );
         listViewDisponibles.setAdapter(adapter);
 
         listViewDisponibles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,43 +83,24 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         libros.whereEqualTo("Curso", curso).whereEqualTo("Clase", clase).whereEqualTo("Estado", "disponible").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Libro libro = new Libro(document.getString("Id"), document.getString("Asignatura"), document.getString("Clase"),
                                         document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
-
+                                        //,(int)document.get("imagen"));*/
                                 lista.add(libro);
                                 System.out.println(libro.getAsignatura());
                             }
-                            System.out.println(listaLibro.size());
-                        } else {
-                            Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-        /*
-        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Libro libro = new Libro(document.getString("Id"), document.getString("Asignatura"), document.getString("Clase"),
-                                        document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
-
-                                lista.add(libro);
-                                System.out.println(libro.getAsignatura());
-                            }
-                            System.out.println(listaLibro.size());
+                            System.out.println(lista.size());
                         } else {
                             Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
-
-         */
 
         System.out.println(lista.size());
         return lista;
