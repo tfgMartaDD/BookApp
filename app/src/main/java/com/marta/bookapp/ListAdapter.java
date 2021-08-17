@@ -1,11 +1,13 @@
 package com.marta.bookapp;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +15,11 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter {
 
     Context context;
-    List lst;
+    List<Libro> lst;
    //ArrayList<Libro> arrayList;
 
 
-    public ListAdapter(Context context, List lsts) {
+    public ListAdapter(Context context, List<Libro> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -40,8 +42,26 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ImageView portada;
+        //ImageView portada;
+        TextView asignaturaTextV;
+        TextView claseTextV;
+        TextView editorialTextV;
 
-        return null;
+        Libro l = lst.get(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_libros, null);
+        }
+        //portada = convertView.findViewById(R.id.portadaImageView);
+        asignaturaTextV = convertView.findViewById(R.id.asignaturaTV);
+        claseTextV = convertView.findViewById(R.id.claseTV);
+        editorialTextV = convertView.findViewById(R.id.editorialTV);
+
+        //portada.setImageResource(l.imagen);
+        asignaturaTextV.setText(l.asignatura);
+        claseTextV.setText(l.clase +" " +l.curso);
+        editorialTextV.setText(l.editorial);
+
+        return convertView;
     }
 }

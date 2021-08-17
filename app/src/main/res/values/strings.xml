@@ -33,6 +33,8 @@
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
     <string name="volver">Volver a la pantalla inicial</string>
 
+    <string name="campos_libro">ASIGNATURA \t CLASE  CURSO \t EDITORIAL</string>
+
     <string name="primero">PRIMERO</string>
     <string name="segundo">SEGUNDO</string>
     <string name="tercero">TERCERO</string>
