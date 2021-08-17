@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +75,6 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         List<Libro> lista = new ArrayList<>();
 
-
         CollectionReference libros = db.collection("libros");
         libros.whereEqualTo("Curso", curso).whereEqualTo("Clase", clase).whereEqualTo("Estado", "disponible").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -82,18 +82,23 @@ public class ListadoDispActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Libro libro = new Libro(document.get("id").toString(), document.get("asignatura").toString(), document.get("clase").toString(),
-                                        document.get("curso").toString(), document.get("donante").toString(),document.get("editorial").toString(), document.get("estado").toString());
-                                        //,(int)document.get("imagen"));
+                                //
+
+                                Libro libro = new Libro(document.getString("Id"), document.getString("Asignatura"), document.getString("Clase"),
+                                        document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
+                                        //,(int)document.get("imagen"));*/
+
                                 lista.add(libro);
-                                //listaLibros.add(document.getData());
-                                System.out.println(document.getId()+" --> "+document.getData());
+
+                                System.out.println(libro.getAsignatura());
+                                //System.out.println(document.getId()+" --> "+document.getData());
                             }
                         } else {
                             Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
+
         return lista;
     }
 }
