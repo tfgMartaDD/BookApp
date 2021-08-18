@@ -9,16 +9,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ListAdapter extends BaseAdapter {
+public class DonAdapter extends BaseAdapter {
 
     Context context;
-    List<Libro> lst;
-
-
-    public ListAdapter(Context context, List<Libro> lst) {
-        this.context = context;
-        this.lst = lst;
-    }
+    List<Donacion> lst;
 
     @Override
     public int getCount() {
@@ -39,17 +33,17 @@ public class ListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //ImageView portada;
-        TextView asignaturaTextV;
-        TextView claseTextV;
-        TextView editorialTextV;
+        TextView asignaturaTV;
+        TextView donanteTV;
+        TextView claseTV;
 
-        Libro l = lst.get(position);
+        Donacion d = lst.get(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.listview_libros, null);
         }
         //portada = convertView.findViewById(R.id.portadaImageView);
-        asignaturaTextV = convertView.findViewById(R.id.asignaturaTV);
+        /*asignaturaTV = convertView.findViewById(R.id.asignaturaTV);
         claseTextV = convertView.findViewById(R.id.claseTV);
         editorialTextV = convertView.findViewById(R.id.editorialTV);
 
@@ -58,7 +52,7 @@ public class ListAdapter extends BaseAdapter {
 
         String clasecurso = l.getClase() +" " +l.getCurso();
         claseTextV.setText(clasecurso);
-        editorialTextV.setText(l.getEditorial());
+        editorialTextV.setText(l.getEditorial());*/
 
         return convertView;
     }
