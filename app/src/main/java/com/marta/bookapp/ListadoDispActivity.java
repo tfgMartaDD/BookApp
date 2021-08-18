@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ListadoDispActivity extends AppCompatActivity {
 
@@ -30,6 +32,7 @@ public class ListadoDispActivity extends AppCompatActivity {
     List<Libro> listaLibro = new ArrayList<Libro>();
     //ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
+    ListAdapter adapter;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -54,13 +57,15 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         mostrarTV = findViewById(R.id.mostrarTextView);
 
-        //listaLibro = obtenerLibros(curso, clase);
+
+
+        listaLibro = obtenerLibros(curso, clase);
 
         listViewDisponibles = findViewById(R.id.lv1);
 
         //System.out.println(listaLibro.size());
 
-        ListAdapter adapter = new ListAdapter(this, obtenerLibros(curso, clase) );
+        adapter = new ListAdapter(this, listaLibro );
         listViewDisponibles.setAdapter(adapter);
 
         listViewDisponibles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,7 +85,6 @@ public class ListadoDispActivity extends AppCompatActivity {
         List<Libro> lista = new ArrayList<>();
 
         CollectionReference libros = db.collection("libros");
-
         libros.whereEqualTo("Curso", curso).whereEqualTo("Clase", clase).whereEqualTo("Estado", "disponible").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -90,19 +94,19 @@ public class ListadoDispActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Libro libro = new Libro(document.getString("Id"), document.getString("Asignatura"), document.getString("Clase"),
                                         document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
-                                        //,(int)document.get("imagen"));*/
-                                lista.add(libro);
+                                //,(int)document.get("imagen"));*/
+                                listaLibro.add(libro);
+                                adapter.notifyDataSetChanged();
                                 System.out.println(libro.getAsignatura());
                             }
-                            System.out.println(lista.size());
+                            adapter.notifyDataSetChanged();
+                            System.out.println(listaLibro.size());
+
                         } else {
                             Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
-
-        System.out.println(lista.size());
         return lista;
     }
 }

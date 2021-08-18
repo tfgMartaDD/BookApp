@@ -57,8 +57,8 @@ public class ListAdapter extends BaseAdapter {
         //portada.setImageResource(l.imagen);
         asignaturaTextV.setText(l.getAsignatura());
 
-        String cursoclase = l.getCurso() +" " +l.getClase();
-        claseTextV.setText(cursoclase);
+        String clasecurso = l.getClase() +" " +l.getCurso();
+        claseTextV.setText(clasecurso);
         editorialTextV.setText(l.getEditorial());
 
         return convertView;
