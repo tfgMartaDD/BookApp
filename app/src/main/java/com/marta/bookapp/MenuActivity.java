@@ -34,5 +34,32 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        peticionesBTN = findViewById(R.id.peticionesButton);
+        peticionesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent (MenuActivity.this, PeticionesActivity.class);
+                startActivity(in);
+            }
+        });
+
+        prestamosBTN = findViewById(R.id.prestamosButton);
+        prestamosBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent (MenuActivity.this, PrestamosActivity.class);
+                startActivity(in);
+            }
+        });
+
+        donacionesBTN = findViewById(R.id.donacionesButton);
+        donacionesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent (MenuActivity.this, DonacionesActivity.class);
+                startActivity(in);
+            }
+        });
+
     }
 }
