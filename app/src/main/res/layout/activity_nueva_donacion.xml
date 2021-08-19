@@ -6,20 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".NuevaDonacionActivity">
 
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nueva_donacion"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <LinearLayout
+        android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lv2">
+        app:layout_constraintTop_toBottomOf="@id/textView17">
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/deseo_donar" />
 
         <Spinner
@@ -27,15 +38,27 @@
             android:layout_width="match_parent"
             android:layout_height="35dp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <Spinner
             android:id="@+id/claseSpinner"
             android:layout_width="match_parent"
             android:layout_height="35dp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <Spinner
             android:id="@+id/cursoSpinner"
             android:layout_width="match_parent"
             android:layout_height="35dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <Spinner
             android:id="@+id/editorialSpinner"
@@ -43,4 +66,14 @@
             android:layout_height="35dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/libroTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll1"
+        android:gravity="bottom"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
