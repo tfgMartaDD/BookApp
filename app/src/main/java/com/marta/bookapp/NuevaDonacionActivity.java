@@ -8,6 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class NuevaDonacionActivity extends AppCompatActivity {
 
     Spinner asigSpin;
@@ -16,6 +23,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     Spinner editorialSpin;
     TextView libroTextView;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +54,34 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         editorialSpin.setAdapter(editorialAdapter);
 
 
+
+
     }
 
     public void seleccion(View view){
 
-        String asig = asigSpin.getSelectedItem().toString();
+        String asignatura = asigSpin.getSelectedItem().toString();
 
-        String clas = claseSpin.getSelectedItem().toString();
+        String clase = claseSpin.getSelectedItem().toString();
 
-        String cur = cursoSpin.getSelectedItem().toString();
+        String curso = cursoSpin.getSelectedItem().toString();
 
-        String edit = editorialSpin.getSelectedItem().toString();
+        String editorial = editorialSpin.getSelectedItem().toString();
 
-        libroTextView.setText(asig + "\t" + clas + "\t" + cur +"\t" + edit);
+        libroTextView.setText(asignatura + "\t" + clase + "\t" + curso +"\t" + editorial);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        System.out.println(user);
+
+        Map<String, Object> donation = new HashMap<>();
+        donation.put("Asignatura", asignatura);
+        donation.put("Clase", clase);
+        donation.put("Curso", curso);
+        donation.put("Editorial", editorial);
+
+
+
+        db.collection("donaciones").document().set(donation);
 
     }
 }
