@@ -36,7 +36,7 @@
         <Spinner
             android:id="@+id/asigSpinner"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="48dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         <Spinner
             android:id="@+id/claseSpinner"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="48dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         <Spinner
             android:id="@+id/cursoSpinner"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="48dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -63,9 +63,20 @@
         <Spinner
             android:id="@+id/editorialSpinner"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="48dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/donarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="seleccion"
+        android:text="@string/donar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll1" />
 
     <TextView
         android:id="@+id/libroTV"
@@ -74,6 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll1"
+        app:layout_constraintTop_toBottomOf="@id/donarButton"
         android:gravity="bottom"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

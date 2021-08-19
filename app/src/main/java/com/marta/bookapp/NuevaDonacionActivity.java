@@ -3,6 +3,7 @@ package com.marta.bookapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,13 +33,32 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         ArrayAdapter<String> asigAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, asignaturas);
         asigSpin.setAdapter(asigAdapter);
 
-        String [] clases = {"primero","segundo","tercero","cuarto", "quinto", "sexto"};
+        String [] clases = {"PRIMERO","SEGUNDO","TERCERO","CUARTO", "QUINTO", "SEXTO"};
         ArrayAdapter<String> claseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, clases);
         claseSpin.setAdapter(claseAdapter);
 
-        String [] cursos = {"primaria","eso", "bachillerato"};
+        String [] cursos = {"PRIMARIA","ESO", "BACHILLERATO"};
         ArrayAdapter<String> cursoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cursos);
         cursoSpin.setAdapter(cursoAdapter);
+
+        String [] editoriales = {"SM","ANAYA"};
+        ArrayAdapter<String> editorialAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, editoriales);
+        editorialSpin.setAdapter(editorialAdapter);
+
+
+    }
+
+    public void seleccion(View view){
+
+        String asig = asigSpin.getSelectedItem().toString();
+
+        String clas = claseSpin.getSelectedItem().toString();
+
+        String cur = cursoSpin.getSelectedItem().toString();
+
+        String edit = editorialSpin.getSelectedItem().toString();
+
+        libroTextView.setText(asig + "\t" + clas + "\t" + cur +"\t" + edit);
 
     }
 }
