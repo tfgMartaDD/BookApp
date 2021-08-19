@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">BookApp</string>
 
-    //botones, editText, etc
+    <!-- botones, editText, etc -->
     <string name="acceder">ACCEDER</string>
     <string name="anadir">AÑADIR</string>
+    <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
     <string name="apellido">Apellido</string>
     <string name="clase">CLASE</string>
     <string name="curso">CURSO</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
     <string name="datos_personales">MIS DATOS PERSONALES</string>
+    <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
     <string name="donaciones">DONACIONES</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
@@ -35,6 +37,7 @@
 
     <string name="campos_libro">ASIGNATURA \t CLASE  CURSO \t EDITORIAL</string>
 
+    <!-- clases -->
     <string name="primero">PRIMERO</string>
     <string name="segundo">SEGUNDO</string>
     <string name="tercero">TERCERO</string>
@@ -42,9 +45,21 @@
     <string name="quinto">QUINTO</string>
     <string name="sexto">SEXTO</string>
 
+    <!-- cursos -->
     <string name="primaria">PRIMARIA</string>
     <string name="eso">ESO</string>
     <string name="bachillerato">BACHILLERATO</string>
+
+    <!-- EDITORIALES -->
+    <string name="anaya">ANAYA</string>
+    <string name="sm">SM</string>
+
+    <!-- ASIGNATURAS-->
+    <string name="matematicas">MATEMATICAS</string>
+    <string name="lengua">LENGUA</string>
+    <string name="biologia">BIOLOGIA</string>
+    <string name="sociales">SOCIALES</string>
+
 
     <string name="prefs_file">com.marta.bookapp.PREFERENCE_FILE_KEY</string>
 
