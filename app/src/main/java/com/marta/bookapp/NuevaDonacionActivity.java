@@ -71,7 +71,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         libroTextView.setText(asignatura + "\t" + clase + "\t" + curso +"\t" + editorial);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        System.out.println(user);
+        System.out.println("----------"+user);
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("Asignatura", asignatura);
@@ -79,7 +79,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         donation.put("Curso", curso);
         donation.put("Editorial", editorial);
 
-
+        //añadir usuario(hay que cogerlo) y fecha
 
         db.collection("donaciones").document().set(donation);
 
