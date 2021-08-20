@@ -36,6 +36,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         mail = findViewById(R.id.correoTextView);
         nombre = findViewById(R.id.nombreEditText);
         apellido = findViewById(R.id.apellidoEditText);
+
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         actualUser = prefs.getString("email","");
 

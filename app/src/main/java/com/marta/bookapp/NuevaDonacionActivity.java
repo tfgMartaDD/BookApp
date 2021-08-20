@@ -1,17 +1,23 @@
 package com.marta.bookapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +29,10 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     Spinner editorialSpin;
     TextView libroTextView;
 
+    Button donarBTN;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,34 +63,90 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         editorialSpin.setAdapter(editorialAdapter);
 
 
+        donarBTN = findViewById(R.id.donarButton);
+        donarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String asignatura = asigSpin.getSelectedItem().toString();
+                String clase = claseSpin.getSelectedItem().toString();
+                String curso = cursoSpin.getSelectedItem().toString();
+                String editorial = editorialSpin.getSelectedItem().toString();
+
+                prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+                String actualUser = prefs.getString("email","");
+
+                Date date = new Date();
+
+                Map<String, Object> donation = new HashMap<>();
+                donation.put("Asignatura", asignatura);
+                donation.put("Clase", clase);
+                donation.put("Curso", curso);
+                donation.put("Editorial", editorial);
+                donation.put("Usuario", actualUser);
+                donation.put("Fecha",date);
+
+                String frase = "¿Está seguro de que quiere donar el libro de la asignatura "+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial + "?";
+
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
+                alerta.setMessage(frase).setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                AlertDialog alertDialog = alerta.create();
+                alertDialog.setTitle("¿ESTAS SEGURO?");
+                alertDialog.show();
+
+            }
+        });
+
 
 
     }
 
-    public void seleccion(View view){
+   /* public void seleccion(View view){
 
         String asignatura = asigSpin.getSelectedItem().toString();
-
         String clase = claseSpin.getSelectedItem().toString();
-
         String curso = cursoSpin.getSelectedItem().toString();
-
         String editorial = editorialSpin.getSelectedItem().toString();
 
-        libroTextView.setText(asignatura + "\t" + clase + "\t" + curso +"\t" + editorial);
+        prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String actualUser = prefs.getString("email","");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        System.out.println("----------"+user);
+        Date date = new Date();
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("Asignatura", asignatura);
         donation.put("Clase", clase);
         donation.put("Curso", curso);
         donation.put("Editorial", editorial);
+        donation.put("Usuario", actualUser);
+        donation.put("Fecha",date);
 
-        //añadir usuario(hay que cogerlo) y fecha
+        String frase = "La donación del libro de la asignatura"+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial
+                +" está pendiente de aprobar por los administradores. En breve se pondran en contacto con usted.";
 
-        db.collection("donaciones").document().set(donation);
+        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(NuevaDonacionActivity.this, frase, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-    }
+
+
+    }*/
 }
