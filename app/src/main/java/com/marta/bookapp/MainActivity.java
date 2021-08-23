@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //setup();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -81,14 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 }else {
 
                     if(awesomeValidation.validate()){
-                    /*String mail = emailET.getText().toString();
-                    String pass = passwordET.getText().toString();*/
 
                         firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    redirigirAhome(task.getResult().getUser().getEmail());
+                                    redirigirAmenu(task.getResult().getUser().getEmail());
                                 }else{
                                     String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                                     MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
@@ -115,10 +111,6 @@ public class MainActivity extends AppCompatActivity {
         sesion();
     }
 
-    private void setup() {
-
-
-    }
 
     private void sesion() {
 
@@ -126,13 +118,13 @@ public class MainActivity extends AppCompatActivity {
         String mail = prefs.getString("email", null);
 
         if(mail != null){
-            redirigirAhome(mail);
+            redirigirAmenu(mail);
         }
 
     }
 
-    private void redirigirAhome(String email) {
-        Intent in = new Intent (this, HomeActivity.class);
+    private void redirigirAmenu(String email) {
+        Intent in = new Intent (this, MenuActivity.class);
         in.putExtra("email",email);
         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(in);
