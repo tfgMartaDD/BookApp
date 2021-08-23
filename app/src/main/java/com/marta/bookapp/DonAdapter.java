@@ -14,6 +14,11 @@ public class DonAdapter extends BaseAdapter {
     Context context;
     List<Donacion> lst;
 
+    public DonAdapter(Context context, List<Donacion> lst) {
+        this.context = context;
+        this.lst = lst;
+    }
+
     @Override
     public int getCount() {
         return lst.size();

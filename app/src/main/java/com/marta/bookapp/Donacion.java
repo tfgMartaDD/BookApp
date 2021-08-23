@@ -6,9 +6,11 @@ public class Donacion {
     String id;
     String emailUsuario;
     String idLibro;
-    Date fecha;
+    //Date fecha;
+    String fecha;
 
-    public Donacion(String id, String emailUsuario, String idLibro, Date fecha) {
+    //public Donacion(String id, String emailUsuario, String idLibro, Date fecha) {
+    public Donacion(String id, String emailUsuario, String idLibro, String fecha) {
         this.id = id;
         this.emailUsuario = emailUsuario;
         this.idLibro = idLibro;
@@ -39,11 +41,19 @@ public class Donacion {
         this.idLibro = idLibro;
     }
 
-    public Date getFecha() {
+    /*public Date getFecha() {
         return fecha;
     }
 
     public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }*/
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 }

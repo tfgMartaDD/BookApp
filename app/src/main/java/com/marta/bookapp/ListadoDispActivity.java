@@ -13,17 +13,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class ListadoDispActivity extends AppCompatActivity {
 
@@ -45,9 +41,6 @@ public class ListadoDispActivity extends AppCompatActivity {
         String curso = bundle.getString("curso");
         String clase = bundle.getString("clase");
 
-        //listaLibros = new ArrayList<java.util.Map<String, Object>>();
-
-
 
         cursoTV = findViewById(R.id.textViewCurso);
         cursoTV.setText(curso);
@@ -57,13 +50,9 @@ public class ListadoDispActivity extends AppCompatActivity {
 
         mostrarTV = findViewById(R.id.mostrarTextView);
 
-
-
         listaLibro = obtenerLibros(curso, clase);
 
         listViewDisponibles = findViewById(R.id.lv1);
-
-        //System.out.println(listaLibro.size());
 
         adapter = new ListAdapter(this, listaLibro );
         listViewDisponibles.setAdapter(adapter);
@@ -77,7 +66,6 @@ public class ListadoDispActivity extends AppCompatActivity {
             }
         });
 
-        //arrayAdapter = new ArrayAdapter<String>(this,R.layout);
     }
 
     public List<Libro> obtenerLibros(String curso, String clase){
