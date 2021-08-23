@@ -1,17 +1,14 @@
 package com.marta.bookapp;
 
 
+import static com.marta.bookapp.BotonesComunes.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 public class CursosActivity extends AppCompatActivity {
 
@@ -20,7 +17,6 @@ public class CursosActivity extends AppCompatActivity {
     Button pribachBTN, segbachBTN;
 
     Button cerrarSesion, menu;
-    SharedPreferences  prefs;
 
 
     @Override
@@ -125,29 +121,22 @@ public class CursosActivity extends AppCompatActivity {
             }
         });
 
-        cerrarSesion = findViewById(R.id.cerrarbutton);
+        cerrarSesion = findViewById(R.id.cerrarCursos);
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Borrado de datos del usuario actual
-                prefs  = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.clear();
-                editor.apply();
-
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(CursosActivity.this, "Sesión cerrada correctamente.", Toast.LENGTH_SHORT).show();
-                redirigirAhome();
+                cerrarSesion(CursosActivity.this);
             }
         });
 
-    }
+        menu = findViewById(R.id.menuCursos);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAMenu(CursosActivity.this);
+            }
+        });
 
-    private void redirigirAhome() {
-        Intent i = new Intent (this,MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
     }
 
     private void redirigir(String clase, String curso){
