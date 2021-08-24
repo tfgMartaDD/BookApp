@@ -17,6 +17,7 @@ public class Libro {
         //this.imagen = imagen;
     }
 
+
     /*public int getImagen() {
         return imagen;
     }

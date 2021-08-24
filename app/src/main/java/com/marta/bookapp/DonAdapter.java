@@ -38,26 +38,28 @@ public class DonAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //ImageView portada;
-        TextView asignaturaTV;
-        TextView donanteTV;
-        TextView claseTV;
+        TextView libroTV;
+        //TextView userTV;
+        TextView fechaTV;
 
         Donacion d = lst.get(position);
+        Libro l = d.getLibro();
 
         if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_libros, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_donaciones, null);
         }
         //portada = convertView.findViewById(R.id.portadaImageView);
-        /*asignaturaTV = convertView.findViewById(R.id.asignaturaTV);
-        claseTextV = convertView.findViewById(R.id.claseTV);
-        editorialTextV = convertView.findViewById(R.id.editorialTV);
+        libroTV = convertView.findViewById(R.id.libroTV);
+        //userTV = convertView.findViewById(R.id.userTV);
+        fechaTV = convertView.findViewById(R.id.fechaTV);
 
         //portada.setImageResource(l.imagen);
-        asignaturaTextV.setText(l.getAsignatura());
+        String libro = l.getAsignatura()+" " +l.getClase() +" " +l.getCurso()+" " +l.getEditorial();
+        libroTV.setText(libro);
 
-        String clasecurso = l.getClase() +" " +l.getCurso();
-        claseTextV.setText(clasecurso);
-        editorialTextV.setText(l.getEditorial());*/
+
+        //userTV.setText(d.getEmailUsuario());
+        fechaTV.setText(d.getFecha().toString());
 
         return convertView;
     }

@@ -17,6 +17,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -72,15 +75,34 @@ public class DonacionesActivity extends AppCompatActivity {
     public List<Donacion> obtenerMisDonaciones(String user){
         List<Donacion> lista = new ArrayList<>();
 
+
+        //CollectionReference libros = db.collection("libros");
         CollectionReference donaciones = db.collection("donaciones");
         donaciones.whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"),
-                                document.getString("Libro"),document.getString("Fecha"));
-                        listaDonacion.add(donacion);
+                        String libroID = document.getString("Libro");
+
+                        CollectionReference libros = db.collection("libros");
+                        libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
+                                if (task2.isSuccessful()) {
+                                    for (QueryDocumentSnapshot query : task2.getResult()) {
+                                        Libro libro = new Libro(query.getString("Id"), query.getString("Asignatura"), query.getString("Clase"),
+                                                query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
+
+                                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"),
+                                                libro, document.getDate("Fecha"));
+                                        listaDonacion.add(donacion);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
                         adapter.notifyDataSetChanged();
                     }
                     adapter.notifyDataSetChanged();
