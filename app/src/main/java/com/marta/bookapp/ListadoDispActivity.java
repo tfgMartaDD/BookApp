@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class ListadoDispActivity extends AppCompatActivity {
     //ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
     ListAdapter adapter;
+    Button reservarBTN;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -62,6 +64,13 @@ public class ListadoDispActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Libro l = listaLibro.get(position);
                 mostrarTV.setText(l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial());
+            }
+        });
+
+        reservarBTN = findViewById(R.id.reservarButton);
+        reservarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
