@@ -39,7 +39,8 @@
     <string name="registrar_cuenta">Registrar Cuenta</string>
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
-    <string name="volver">Volver a la pantalla inicial</string>
+    <string name="volver_inicial">Volver a la pantalla inicial</string>
+    <string name="volver_atras">Volver</string>
     <string name="volver_menu">Volver al menu</string>
 
     <string name="campos_libro">ASIGNATURA \t CLASE  CURSO \t EDITORIAL</string>
