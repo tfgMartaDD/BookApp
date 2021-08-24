@@ -9,9 +9,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class BotonesComunes {
 
+    static String prefs_file = "com.marta.bookapp.PREFERENCE_FILE_KEY";
+
     public static void cerrarSesion(Context context){
 
-        String prefs_file = "com.marta.bookapp.PREFERENCE_FILE_KEY";
+
 
         //Borrado de datos del usuario actual
         SharedPreferences prefs  = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
@@ -28,8 +30,12 @@ public class BotonesComunes {
     }
 
     public static void volverAMenu(Context context){
+
+        SharedPreferences prefs = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
+        String email = prefs.getString("email","");
+
         Intent in = new Intent (context,MenuActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        in.putExtra("email",email);
         context.startActivity(in);
     }
 

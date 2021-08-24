@@ -1,8 +1,11 @@
 package com.marta.bookapp;
 
+import static com.marta.bookapp.BotonesComunes.volverAMenu;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +37,7 @@ public class ListadoDispActivity extends AppCompatActivity {
     //ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
     ListAdapter adapter;
-    Button reservarBTN;
+    Button reservarBTN, volverBTN, menuBTN;
     //Libro libro = new Libro();
     Libro libro;
 
@@ -100,6 +103,23 @@ public class ListadoDispActivity extends AppCompatActivity {
                         Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        volverBTN = findViewById(R.id.volverAtras);
+        volverBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent (ListadoDispActivity.this, CursosActivity.class);
+                startActivity(in);
+            }
+        });
+
+        menuBTN = findViewById(R.id.volverMenu);
+        menuBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAMenu(ListadoDispActivity.this);
             }
         });
 
