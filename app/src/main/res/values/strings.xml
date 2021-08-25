@@ -17,6 +17,7 @@
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="fecha_donacion">FECHA DONACION</string>
+    <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libro">LIBRO</string>
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>
@@ -32,6 +33,7 @@
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
     <string name="password">Contraseña</string>
     <string name="peticiones">MIS PETICIONES</string>
+    <string name="peticion_seleccionada">PETICION SELECCIONADA</string>
     <string name="prestamos">MIS PRESTAMOS</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
@@ -43,7 +45,7 @@
     <string name="volver_lista">Volver a la lista</string>
     <string name="volver_menu">Volver al menu</string>
 
-    <string name="campos_libro">ASIGNATURA \t CLASE  CURSO \t EDITORIAL</string>
+    <string name="campos_libro">ASIGNATURA \t\t CLASE  CURSO \t\t EDITORIAL</string>
 
     <!-- clases -->
     <string name="primero">PRIMERO</string>

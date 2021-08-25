@@ -33,7 +33,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
     Button donarBTN, menuBTN;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
 
     @Override
@@ -49,19 +49,19 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         editorialSpin = findViewById(R.id.editorialSpinner);
 
         String [] asignaturas = {"MATEMATICAS", "LENGUA", "BIOLOGIA", "SOCIALES", "INGLES"};
-        ArrayAdapter<String> asigAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, asignaturas);
+        ArrayAdapter<String> asigAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, asignaturas);
         asigSpin.setAdapter(asigAdapter);
 
         String [] clases = {"PRIMERO","SEGUNDO","TERCERO","CUARTO", "QUINTO", "SEXTO"};
-        ArrayAdapter<String> claseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, clases);
+        ArrayAdapter<String> claseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, clases);
         claseSpin.setAdapter(claseAdapter);
 
         String [] cursos = {"PRIMARIA","ESO", "BACHILLERATO"};
-        ArrayAdapter<String> cursoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cursos);
+        ArrayAdapter<String> cursoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cursos);
         cursoSpin.setAdapter(cursoAdapter);
 
         String [] editoriales = {"SM","ANAYA"};
-        ArrayAdapter<String> editorialAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, editoriales);
+        ArrayAdapter<String> editorialAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, editoriales);
         editorialSpin.setAdapter(editorialAdapter);
 
 
@@ -97,6 +97,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                                volverAMenu(NuevaDonacionActivity.this);
                             }
                         });
                     }
@@ -121,41 +122,6 @@ public class NuevaDonacionActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-   /* public void seleccion(View view){
-
-        String asignatura = asigSpin.getSelectedItem().toString();
-        String clase = claseSpin.getSelectedItem().toString();
-        String curso = cursoSpin.getSelectedItem().toString();
-        String editorial = editorialSpin.getSelectedItem().toString();
-
-        prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-        String actualUser = prefs.getString("email","");
-
-        Date date = new Date();
-
-        Map<String, Object> donation = new HashMap<>();
-        donation.put("Asignatura", asignatura);
-        donation.put("Clase", clase);
-        donation.put("Curso", curso);
-        donation.put("Editorial", editorial);
-        donation.put("Usuario", actualUser);
-        donation.put("Fecha",date);
-
-        String frase = "La donación del libro de la asignatura"+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial
-                +" está pendiente de aprobar por los administradores. En breve se pondran en contacto con usted.";
-
-        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(NuevaDonacionActivity.this, frase, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-    }*/
 }

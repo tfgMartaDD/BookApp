@@ -9,7 +9,6 @@
         android:id="@+id/libroTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:layout_weight="1"
         android:layout_margin="8dp"/>
 
@@ -18,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView"
         android:layout_margin="8dp"/>
 
 </LinearLayout>
