@@ -13,11 +13,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -54,11 +52,15 @@ public class PeticionesActivity extends AppCompatActivity {
         adapter = new DonAdapter(this, listaPeticion);
         listViewPeticiones.setAdapter(adapter);
 
+        mostrarTV = findViewById(R.id.mostrarPeticion);
+
         listViewPeticiones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Donacion d = listaPeticion.get(position);
-                mostrarTV.setText(d.getLibro().getAsignatura() + "\t" + d.getLibro().getClase() + "  " + d.getLibro().getCurso() + "\t" + d.getLibro().getEditorial());
+                Libro l = d.getLibro();
+                String mostrar = l.getAsignatura() + "\t\t" + l.getClase() + "  " + l.getCurso() + "\t\t" + l.getEditorial();
+                mostrarTV.setText(mostrar);
 
             }
         });
@@ -71,12 +73,11 @@ public class PeticionesActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
     public List<Donacion> obtenerMisPeticiones(String user){
-        List<Donacion> lista = new ArrayList<Donacion>();
+        List<Donacion> lista = new ArrayList<>();
         System.out.println("obtener");
 
         db.collection("peticiones").whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

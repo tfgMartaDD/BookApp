@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,8 +16,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,7 +29,7 @@ public class DonacionesActivity extends AppCompatActivity {
     Button addBTN;
 
     ListView listViewDonaciones;
-    List<Donacion> listaDonacion = new ArrayList<Donacion>();
+    List<Donacion> listaDonacion = new ArrayList<>();
     DonAdapter adapter;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -63,12 +60,12 @@ public class DonacionesActivity extends AppCompatActivity {
         adapter = new DonAdapter(this, listaDonacion);
         listViewDonaciones.setAdapter(adapter);
 
-        listViewDonaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listViewDonaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Donacion d = listaDonacion.get(position);
             }
-        });
+        });*/
 
     }
 
