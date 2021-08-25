@@ -89,12 +89,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/eliminarBoton"
+            android:id="@+id/deshacerReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/deshacer_reserva"
-            android:layout_weight="1"/>
+            android:text="@string/deshacer_reserva"/>
 
         <Space
             android:layout_width="0dp"
