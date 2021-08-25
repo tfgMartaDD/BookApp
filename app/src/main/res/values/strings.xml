@@ -11,6 +11,7 @@
     <string name="cerrar_sesion">CERRAR SESION</string>
     <string name="datos_personales">MIS DATOS PERSONALES</string>
     <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
+    <style name="deshacer_reserva">DESHACER RESERVA</style>
     <string name="donaciones">DONACIONES</string>
     <string name="donar">DONAR</string>
     <string name="eliminar">ELIMINAR</string>
