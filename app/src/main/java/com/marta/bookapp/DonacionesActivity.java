@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,7 +28,7 @@ public class DonacionesActivity extends AppCompatActivity {
     Button addBTN;
 
     ListView listViewDonaciones;
-    List<Donacion> listaDonacion = new ArrayList<>();
+    List<DonacionPeticion> listaDonacion = new ArrayList<>();
     DonAdapter adapter;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -69,8 +68,8 @@ public class DonacionesActivity extends AppCompatActivity {
 
     }
 
-    public List<Donacion> obtenerMisDonaciones(String user){
-        List<Donacion> lista = new ArrayList<>();
+    public List<DonacionPeticion> obtenerMisDonaciones(String user){
+        List<DonacionPeticion> lista = new ArrayList<>();
 
 
         //CollectionReference libros = db.collection("libros");
@@ -91,7 +90,7 @@ public class DonacionesActivity extends AppCompatActivity {
                                         Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"),
                                                 query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
 
-                                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"),
+                                        DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
                                                 libro, document.getDate("Fecha"));
                                         listaDonacion.add(donacion);
                                         adapter.notifyDataSetChanged();

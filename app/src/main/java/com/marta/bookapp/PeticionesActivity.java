@@ -30,7 +30,7 @@ public class PeticionesActivity extends AppCompatActivity {
     TextView mostrarTV;
 
     ListView listViewPeticiones;
-    List<Donacion> listaPeticion = new ArrayList<Donacion>();
+    List<DonacionPeticion> listaPeticion = new ArrayList<>();
     DonAdapter adapter;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -57,7 +57,7 @@ public class PeticionesActivity extends AppCompatActivity {
         listViewPeticiones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Donacion d = listaPeticion.get(position);
+                DonacionPeticion d = listaPeticion.get(position);
                 Libro l = d.getLibro();
                 String mostrar = l.getAsignatura() + "\t\t" + l.getClase() + "  " + l.getCurso() + "\t\t" + l.getEditorial();
                 mostrarTV.setText(mostrar);
@@ -76,8 +76,8 @@ public class PeticionesActivity extends AppCompatActivity {
     }
 
 
-    public List<Donacion> obtenerMisPeticiones(String user){
-        List<Donacion> lista = new ArrayList<>();
+    public List<DonacionPeticion> obtenerMisPeticiones(String user){
+        List<DonacionPeticion> lista = new ArrayList<>();
         System.out.println("obtener");
 
         db.collection("peticiones").whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -93,7 +93,7 @@ public class PeticionesActivity extends AppCompatActivity {
                                         Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"),
                                                 document2.getString("Curso"), document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"));
                                         System.out.println("asig:"+libro.getAsignatura());
-                                        Donacion donacion = new Donacion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
+                                        DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
                                         listaPeticion.add(donacion);
                                         adapter.notifyDataSetChanged();
 

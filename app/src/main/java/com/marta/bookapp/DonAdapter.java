@@ -12,9 +12,9 @@ import java.util.List;
 public class DonAdapter extends BaseAdapter {
 
     Context context;
-    List<Donacion> lst;
+    List<DonacionPeticion> lst;
 
-    public DonAdapter(Context context, List<Donacion> lst) {
+    public DonAdapter(Context context, List<DonacionPeticion> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -42,7 +42,7 @@ public class DonAdapter extends BaseAdapter {
         //TextView userTV;
         TextView fechaTV;
 
-        Donacion d = lst.get(position);
+        DonacionPeticion d = lst.get(position);
         Libro l = d.getLibro();
 
         if(convertView == null){
