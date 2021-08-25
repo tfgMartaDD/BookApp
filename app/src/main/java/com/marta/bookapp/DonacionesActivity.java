@@ -91,7 +91,7 @@ public class DonacionesActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task2) {
                                 if (task2.isSuccessful()) {
                                     for (QueryDocumentSnapshot query : task2.getResult()) {
-                                        Libro libro = new Libro(query.getString("Id"), query.getString("Asignatura"), query.getString("Clase"),
+                                        Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"),
                                                 query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
 
                                         Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"),

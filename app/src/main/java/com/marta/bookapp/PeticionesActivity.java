@@ -1,5 +1,7 @@
 package com.marta.bookapp;
 
+import static com.marta.bookapp.BotonesComunes.volverAMenu;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,7 @@ import java.util.List;
 public class PeticionesActivity extends AppCompatActivity {
 
     Button eliminarBTN, menuBTN;
+    TextView mostrarTV;
 
     ListView listViewPeticiones;
     List<Donacion> listaPeticion = new ArrayList<Donacion>();
@@ -54,51 +58,46 @@ public class PeticionesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Donacion d = listaPeticion.get(position);
+                mostrarTV.setText(d.getLibro().getAsignatura() + "\t" + d.getLibro().getClase() + "  " + d.getLibro().getCurso() + "\t" + d.getLibro().getEditorial());
+
             }
         });
+
+        menuBTN = findViewById(R.id.menuPeticion);
+        menuBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAMenu(PeticionesActivity.this);
+            }
+        });
+
 
     }
 
 
     public List<Donacion> obtenerMisPeticiones(String user){
         List<Donacion> lista = new ArrayList<Donacion>();
+        System.out.println("obtener");
 
-
-        //CollectionReference libros = db.collection("libros");
-        CollectionReference donaciones = db.collection("donaciones");
-        donaciones.whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        CollectionReference libros = db.collection("libros");
+        libros.whereEqualTo("Usuario",user).whereEqualTo("Estado","Reservado").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                System.out.println("task");
                 if (task.isSuccessful()) {
+                    System.out.println("succesful");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String libroID = document.getString("Libro");
-
-                        CollectionReference libros = db.collection("libros");
-                        libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
-                                if (task2.isSuccessful()) {
-                                    for (QueryDocumentSnapshot query : task2.getResult()) {
-                                        Libro libro = new Libro(query.getString("Id"), query.getString("Asignatura"), query.getString("Clase"),
-                                                query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
-
-                                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"),
-                                                libro, document.getDate("Fecha"));
-                                        listaDonacion.add(donacion);
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
+                        Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"),
+                                document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
+                        System.out.println(libro.getAsignatura());
+                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"), libro, document.getDate("Fecha"));
+                        listaPeticion.add(donacion);
                         adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
-                }else {
-                    Toast.makeText(DonacionesActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
         return lista;
     }
 
