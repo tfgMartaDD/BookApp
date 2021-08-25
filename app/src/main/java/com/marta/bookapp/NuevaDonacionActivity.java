@@ -1,5 +1,7 @@
 package com.marta.bookapp;
 
+import static com.marta.bookapp.BotonesComunes.volverAMenu;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +31,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     Spinner editorialSpin;
     TextView libroTextView;
 
-    Button donarBTN;
+    Button donarBTN, menuBTN;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
@@ -108,6 +110,14 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                 alertDialog.setTitle("¿ESTAS SEGURO?");
                 alertDialog.show();
 
+            }
+        });
+
+        menuBTN = findViewById(R.id.menuDonacion);
+        menuBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAMenu(NuevaDonacionActivity.this);
             }
         });
 
