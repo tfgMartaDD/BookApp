@@ -79,20 +79,28 @@ public class PeticionesActivity extends AppCompatActivity {
         List<Donacion> lista = new ArrayList<Donacion>();
         System.out.println("obtener");
 
-        CollectionReference libros = db.collection("libros");
-        libros.whereEqualTo("Usuario",user).whereEqualTo("Estado","Reservado").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("peticiones").whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                System.out.println("task");
                 if (task.isSuccessful()) {
-                    System.out.println("succesful");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"),
-                                document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
-                        System.out.println(libro.getAsignatura());
-                        Donacion donacion = new Donacion(document.getId(), document.getString("Usuario"), libro, document.getDate("Fecha"));
-                        listaPeticion.add(donacion);
-                        adapter.notifyDataSetChanged();
+                        db.collection("libros").whereEqualTo(FieldPath.documentId(),document.getString("Libro")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document2 : task.getResult()) {
+                                        Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"),
+                                                document2.getString("Curso"), document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"));
+                                        System.out.println("asig:"+libro.getAsignatura());
+                                        Donacion donacion = new Donacion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
+                                        listaPeticion.add(donacion);
+                                        adapter.notifyDataSetChanged();
+
+                                    }
+                                }
+                            }
+                        });
+
                     }
                 }
             }

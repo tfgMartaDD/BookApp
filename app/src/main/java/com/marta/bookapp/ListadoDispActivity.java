@@ -5,7 +5,9 @@ import static com.marta.bookapp.BotonesComunes.volverAMenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +37,14 @@ public class ListadoDispActivity extends AppCompatActivity {
     TextView cursoTV, claseTV, mostrarTV;
     ListView listViewDisponibles;
     List<Libro> listaLibro = new ArrayList<Libro>();
-    //ArrayList<Map<String, Object>> listaLibros;
     ArrayAdapter <String> arrayAdapter;
     ListAdapter adapter;
     Button reservarBTN, volverBTN, menuBTN;
-    //Libro libro = new Libro();
     Libro libro;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference libros = db.collection("libros");
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,9 @@ public class ListadoDispActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String curso = bundle.getString("curso");
         String clase = bundle.getString("clase");
+
+        prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String actualUser = prefs.getString("email","");
 
 
         cursoTV = findViewById(R.id.textViewCurso);
@@ -103,6 +108,18 @@ public class ListadoDispActivity extends AppCompatActivity {
                         Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                Date date = new Date();
+
+                Map<String, Object> peticion= new HashMap<>();
+                peticion.put("Libro",libro.getId());
+                peticion.put("Usuario",actualUser);
+                peticion.put("Fecha",date);
+
+                db.collection("peticiones").add(peticion);
+
+                adapter.notifyDataSetChanged();
+
             }
         });
 
