@@ -13,8 +13,6 @@ public class BotonesComunes {
 
     public static void cerrarSesion(Context context){
 
-
-
         //Borrado de datos del usuario actual
         SharedPreferences prefs  = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
