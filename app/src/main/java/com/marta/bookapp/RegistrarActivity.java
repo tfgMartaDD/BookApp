@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,24 +64,21 @@ public class RegistrarActivity extends AppCompatActivity {
 
 
             if(awesomeValidation.validate()){
-                firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(RegistrarActivity.this, "Usuario creado con exito", Toast.LENGTH_SHORT).show();
+                firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(RegistrarActivity.this, "Usuario creado con exito", Toast.LENGTH_SHORT).show();
 
-                            //guardar en la firestore
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("nombre", nombre.getText().toString());
-                            user.put("apellido", apellido.getText().toString());
-                            user.put("email",mail);
+                        //guardar en la firestore
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("nombre", nombre.getText().toString());
+                        user.put("apellido", apellido.getText().toString());
+                        user.put("email",mail);
 
-                            db.collection("users").document(mail).set(user);
-                            finish();
-                        }else {
-                            String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
-                            MensajeError.menError(errorCode,RegistrarActivity.this, email, password);
-                        }
+                        db.collection("users").document(mail).set(user);
+                        finish();
+                    }else {
+                        String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+                        MensajeError.menError(errorCode,RegistrarActivity.this, email, password);
                     }
                 });
             }else{

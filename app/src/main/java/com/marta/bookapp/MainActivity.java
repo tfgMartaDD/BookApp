@@ -15,12 +15,13 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,15 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if(awesomeValidation.validate()){
 
-                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                redirigirAmenu(task.getResult().getUser().getEmail());
-                            }else{
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
-                            }
+                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
+                        if(task.isSuccessful()){
+                            redirigirAmenu(mail);
+                        }else{
+                            String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+                            MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
                         }
                     });
                 }

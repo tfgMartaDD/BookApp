@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ListadoDispActivity extends AppCompatActivity {
 
@@ -70,15 +70,12 @@ public class ListadoDispActivity extends AppCompatActivity {
         adapter = new ListAdapter(this, listaLibro );
         listViewDisponibles.setAdapter(adapter);
 
-        listViewDisponibles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Libro l = listaLibro.get(position);
-                libro = listaLibro.get(position);
-                String mostrar = l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial();
-                mostrarTV.setText(mostrar);
+        listViewDisponibles.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            Libro l = listaLibro.get(position);
+            libro = listaLibro.get(position);
+            String mostrar = l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial();
+            mostrarTV.setText(mostrar);
 
-            }
         });
 
 
@@ -130,25 +127,21 @@ public class ListadoDispActivity extends AppCompatActivity {
 
 
         libros.whereEqualTo("Curso", curso).whereEqualTo("Clase", clase).whereEqualTo("Estado", "disponible").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"),
-                                        document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
-                                //,(int)document.get("imagen"));*/
-                                listaLibro.add(libro);
-                                adapter.notifyDataSetChanged();
-                                System.out.println(libro.getAsignatura()+"  "+libro.getId());
-                            }
+                .addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"),
+                                    document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
+                            //,(int)document.get("imagen"));*/
+                            listaLibro.add(libro);
                             adapter.notifyDataSetChanged();
-                            System.out.println(listaLibro.size());
-
-                        } else {
-                            Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
+                            System.out.println(libro.getAsignatura()+"  "+libro.getId());
                         }
+                        adapter.notifyDataSetChanged();
+                        System.out.println(listaLibro.size());
+
+                    } else {
+                        Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
                     }
                 });
         return lista;

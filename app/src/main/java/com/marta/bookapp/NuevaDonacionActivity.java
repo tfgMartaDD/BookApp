@@ -88,18 +88,13 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
-            alerta.setMessage(frase).setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    db.collection("posiblesDonaciones").document() .set(donation).addOnSuccessListener( (Void unused) -> {
-                        Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                        volverAMenu(NuevaDonacionActivity.this);
-                    });
-                }
-            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show();
-                }
-            });
+            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+                db.collection("posiblesDonaciones").document() .set(donation).addOnSuccessListener( (Void unused) -> {
+                    Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                    volverAMenu(NuevaDonacionActivity.this);
+                });
+
+            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.setTitle("¿ESTAS SEGURO?");

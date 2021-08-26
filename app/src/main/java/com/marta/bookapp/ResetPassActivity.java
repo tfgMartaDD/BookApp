@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,42 +29,28 @@ public class ResetPassActivity extends AppCompatActivity {
         email = findViewById(R.id.emailEditText2);
         reset = findViewById(R.id.resetContra);
 
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String mail = email.getText().toString();
+        reset.setOnClickListener( (View v) -> {
+            String mail = email.getText().toString();
 
-                //Query query = db.collection("users").whereEqualTo("email",email);
+            //Query query = db.collection("users").whereEqualTo("email",email);
 
-                if(!mail.isEmpty()){
-                    auth.setLanguageCode("es");
-                    auth.sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(ResetPassActivity.this,"Correo enviado correctamente." , Toast.LENGTH_SHORT).show();
-                                redirigirAmain();
-                            }else{
-                                Toast.makeText(ResetPassActivity.this,"Debe introducir un correo que haya sido registrado en la app." , Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+            if(!mail.isEmpty()){
+                auth.setLanguageCode("es");
+                auth.sendPasswordResetEmail(mail).addOnCompleteListener( (@NonNull Task<Void> task) -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ResetPassActivity.this,"Correo enviado correctamente." , Toast.LENGTH_SHORT).show();
+                        redirigirAmain();
+                    }else{
+                        Toast.makeText(ResetPassActivity.this,"Debe introducir un correo que haya sido registrado en la app." , Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
-
-
-
 
         volver = findViewById(R.id.volverButton);
 
-        volver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigirAmain();
-            }
-        });
+        volver.setOnClickListener((View v) ->  redirigirAmain());
+
     }
 
     private void redirigirAmain() {
