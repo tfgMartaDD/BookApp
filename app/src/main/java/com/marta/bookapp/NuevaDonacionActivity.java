@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -66,61 +65,50 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
 
         donarBTN = findViewById(R.id.donarButton);
-        donarBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String asignatura = asigSpin.getSelectedItem().toString();
-                String clase = claseSpin.getSelectedItem().toString();
-                String curso = cursoSpin.getSelectedItem().toString();
-                String editorial = editorialSpin.getSelectedItem().toString();
+        donarBTN.setOnClickListener( (View v) -> {
+            String asignatura = asigSpin.getSelectedItem().toString();
+            String clase = claseSpin.getSelectedItem().toString();
+            String curso = cursoSpin.getSelectedItem().toString();
+            String editorial = editorialSpin.getSelectedItem().toString();
 
-                prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-                String actualUser = prefs.getString("email","");
+            prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+            String actualUser = prefs.getString("email","");
 
-                Date date = new Date();
+            Date date = new Date();
 
-                Map<String, Object> donation = new HashMap<>();
-                donation.put("Asignatura", asignatura);
-                donation.put("Clase", clase);
-                donation.put("Curso", curso);
-                donation.put("Editorial", editorial);
-                donation.put("Usuario", actualUser);
-                donation.put("Fecha",date);
+            Map<String, Object> donation = new HashMap<>();
+            donation.put("Asignatura", asignatura);
+            donation.put("Clase", clase);
+            donation.put("Curso", curso);
+            donation.put("Editorial", editorial);
+            donation.put("Usuario", actualUser);
+            donation.put("Fecha",date);
 
-                String frase = "¿Está seguro de que quiere donar el libro de la asignatura "+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial + "?";
+            String frase = "¿Está seguro de que quiere donar el libro de la asignatura "+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial + "?";
 
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
-                alerta.setMessage(frase).setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                                volverAMenu(NuevaDonacionActivity.this);
-                            }
-                        });
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
+            alerta.setMessage(frase).setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    db.collection("posiblesDonaciones").document() .set(donation).addOnSuccessListener( (Void unused) -> {
+                        Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                        volverAMenu(NuevaDonacionActivity.this);
+                    });
+                }
+            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                AlertDialog alertDialog = alerta.create();
-                alertDialog.setTitle("¿ESTAS SEGURO?");
-                alertDialog.show();
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("¿ESTAS SEGURO?");
+            alertDialog.show();
 
-            }
         });
 
         menuBTN = findViewById(R.id.menuDonacion);
-        menuBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAMenu(NuevaDonacionActivity.this);
-            }
-        });
+        menuBTN.setOnClickListener( (View v) -> volverAMenu(NuevaDonacionActivity.this));
 
     }
 

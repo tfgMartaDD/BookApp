@@ -37,57 +37,38 @@ public class MenuActivity extends AppCompatActivity {
 
 
         datosBTN = findViewById(R.id.datosButton);
-        datosBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent (MenuActivity.this, DatosPersonalesActivity.class);
-                startActivity(i);
-            }
+        datosBTN.setOnClickListener( (View v) -> {
+            Intent i = new Intent (MenuActivity.this, DatosPersonalesActivity.class);
+            startActivity(i);
         });
 
         listaBTN = findViewById(R.id.listaButton);
-        listaBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (MenuActivity.this, CursosActivity.class);
-                startActivity(in);
-            }
+        listaBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (MenuActivity.this, CursosActivity.class);
+            startActivity(in);
         });
 
         peticionesBTN = findViewById(R.id.peticionesButton);
-        peticionesBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (MenuActivity.this, PeticionesActivity.class);
-                startActivity(in);
-            }
+        peticionesBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (MenuActivity.this, PeticionesActivity.class);
+            startActivity(in);
         });
 
         prestamosBTN = findViewById(R.id.prestamosButton);
-        prestamosBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (MenuActivity.this, PrestamosActivity.class);
-                startActivity(in);
-            }
+        prestamosBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (MenuActivity.this, PrestamosActivity.class);
+            startActivity(in);
         });
 
         donacionesBTN = findViewById(R.id.donacionesButton);
-        donacionesBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (MenuActivity.this, DonacionesActivity.class);
-                startActivity(in);
-            }
+        donacionesBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (MenuActivity.this, DonacionesActivity.class);
+            startActivity(in);
         });
 
         cerrarSesion = findViewById(R.id.cerrarbutton);
-        cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cerrarSesion(MenuActivity.this);
-            }
-        });
+        cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(MenuActivity.this));
+
     }
 
 }
