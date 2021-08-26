@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,8 @@ public class PeticionesActivity extends AppCompatActivity {
 
     Button deshacerBTN, menuBTN;
     TextView mostrarTV;
+    TextView seleccion, campos;
+    ImageView imagen;
 
     ListView listViewPeticiones;
     List<DonacionPeticion> listaPeticion = new ArrayList<>();
@@ -58,12 +61,21 @@ public class PeticionesActivity extends AppCompatActivity {
 
         mostrarTV = findViewById(R.id.mostrarPeticion);
 
+        seleccion = findViewById(R.id.seleccionTV);
+        campos = findViewById(R.id.camposLibro);
+        imagen = findViewById(R.id.imageView);
+
         listViewPeticiones.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             DonacionPeticion d = listaPeticion.get(position);
             reserva = d;
             Libro l = d.getLibro();
+
             String mostrar = l.getAsignatura() + "\t\t" + l.getClase() + "  " + l.getCurso() + "\t\t" + l.getEditorial();
             mostrarTV.setText(mostrar);
+            imagen.setImageResource(l.getImagen());
+
+            seleccion.setVisibility(View.VISIBLE);
+            campos.setVisibility(View.VISIBLE);
         });
 
         menuBTN = findViewById(R.id.menuPeticion);
