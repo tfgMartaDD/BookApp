@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class AdminPrestamoActivity extends AppCompatActivity {
+public class AdminPrestamosActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_prestamo);
+        setContentView(R.layout.activity_admin_prestamos);
     }
 }

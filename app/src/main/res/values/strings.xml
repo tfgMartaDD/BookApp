@@ -14,6 +14,7 @@
     <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
     <string name="deshacer_reserva">DESHACER RESERVA</string>
     <string name="donaciones">DONACIONES</string>
+    <string name="donaciones_aprobar">DONACIONES POR APROBAR</string>
     <string name="donacion_seleccionada">DONACION SELECCIONADA</string>
     <string name="donar">DONAR</string>
     <string name="editorial">EDITORIAL</string>
@@ -28,6 +29,7 @@
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
     <string name="listado_cursos">LISTADO POR CURSOS</string>
+    <string name="lista_libros">LISTA DE LIBROS</string>
     <string name="menu">MENU</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
@@ -38,8 +40,10 @@
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
     <string name="password">Contraseña</string>
     <string name="peticiones">MIS PETICIONES</string>
+    <string name="peticiones_pendientes">PETICIONES PENDIENTES</string>
     <string name="peticion_seleccionada">PETICION SELECCIONADA</string>
     <string name="prestamos">MIS PRESTAMOS</string>
+    <string name="prestamos_actuales">PRESTAMOS ACTUALES</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
     <string name="registrar">REGISTRAR</string>
