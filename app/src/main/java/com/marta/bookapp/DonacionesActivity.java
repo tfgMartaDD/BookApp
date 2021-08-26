@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FieldPath;
@@ -22,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DonacionesActivity extends AppCompatActivity {
 
@@ -71,39 +71,31 @@ public class DonacionesActivity extends AppCompatActivity {
 
         //CollectionReference libros = db.collection("libros");
         CollectionReference donaciones = db.collection("donaciones");
-        donaciones.whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String libroID = document.getString("Libro");
+        donaciones.whereEqualTo("Usuario",user).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    String libroID = document.getString("Libro");
 
-                        CollectionReference libros = db.collection("libros");
-                        libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
-                                if (task2.isSuccessful()) {
-                                    for (QueryDocumentSnapshot query : task2.getResult()) {
-                                        Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"),
-                                                query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
+                    CollectionReference libros = db.collection("libros");
+                    libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
+                        if (task2.isSuccessful()) {
+                            for (QueryDocumentSnapshot query : Objects.requireNonNull(task2.getResult())) {
+                                Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"),
+                                        query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
 
-                                        DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
-                                                libro, document.getDate("Fecha"));
-                                        listaDonacion.add(donacion);
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }
+                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
+                                        libro, document.getDate("Fecha"));
+                                listaDonacion.add(donacion);
+                                adapter.notifyDataSetChanged();
                             }
-                        });
-                        adapter.notifyDataSetChanged();
-                    }
-                    adapter.notifyDataSetChanged();
-                }else {
-                    Toast.makeText(DonacionesActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
+            }else {
+                Toast.makeText(DonacionesActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
             }
         });
+
         return lista;
     }
 }

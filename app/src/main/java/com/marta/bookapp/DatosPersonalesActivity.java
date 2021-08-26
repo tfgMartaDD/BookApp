@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -40,13 +39,10 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         actualUser = prefs.getString("email","");
 
-        db.collection("users").document(actualUser).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                nombre.setText(documentSnapshot.getString("nombre"));
-                apellido.setText(documentSnapshot.getString("apellido"));
-                mail.setText(documentSnapshot.getString("email"));
-            }
+        db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
+            nombre.setText(documentSnapshot.getString("nombre"));
+            apellido.setText(documentSnapshot.getString("apellido"));
+            mail.setText(documentSnapshot.getString("email"));
         });
 
         modificarBTN = findViewById(R.id.modificarbutton);
@@ -57,12 +53,8 @@ public class DatosPersonalesActivity extends AppCompatActivity {
             user.put("apellido", apellido.getText().toString());
             user.put("email",mail.getText().toString());
 
-            db.collection("users").document(mail.getText().toString()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(DatosPersonalesActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show();
-                }
-            });
+            db.collection("users").document(mail.getText().toString()).set(user).addOnSuccessListener( (Void unused) ->
+                    Toast.makeText(DatosPersonalesActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
 
         });
 
