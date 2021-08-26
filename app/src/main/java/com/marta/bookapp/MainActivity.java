@@ -56,56 +56,47 @@ public class MainActivity extends AppCompatActivity {
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
 
-        registrarBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,RegistrarActivity.class);
-                startActivity(i);
-            }
+        registrarBTN.setOnClickListener((View view) -> {
+            Intent i = new Intent(MainActivity.this,RegistrarActivity.class);
+            startActivity(i);
         });
 
+
+
         accederBTN = findViewById(R.id.accederBoton);
+        accederBTN.setOnClickListener((View view) -> {
 
-        accederBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            String mail = emailET.getText().toString();
+            String pass = passwordET.getText().toString();
 
-                String mail = emailET.getText().toString();
-                String pass = passwordET.getText().toString();
+            if(mail.isEmpty() || pass.isEmpty()){
+                Toast.makeText(MainActivity.this, "Rellene los campos de Usuario y Contraseña para continuar", Toast.LENGTH_LONG).show();
 
-                if(mail.isEmpty() || pass.isEmpty()){
-                    Toast.makeText(MainActivity.this, "Rellene los campos de Usuario y Contraseña para continuar", Toast.LENGTH_LONG).show();
+            }else {
 
-                }else {
+                if(awesomeValidation.validate()){
 
-                    if(awesomeValidation.validate()){
-
-                        firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    redirigirAmenu(task.getResult().getUser().getEmail());
-                                }else{
-                                    String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                    MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
-                                }
+                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                redirigirAmenu(task.getResult().getUser().getEmail());
+                            }else{
+                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+                                MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             }
-
         });
 
 
         olvideBTN = findViewById(R.id.olvideBoton);
 
-        olvideBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this,  ResetPassActivity.class);
-                startActivity(intent);
-            }
+        olvideBTN.setOnClickListener( (View view) -> {
+            Intent intent = new Intent( MainActivity.this,  ResetPassActivity.class);
+            startActivity(intent);
         });
 
         sesion();

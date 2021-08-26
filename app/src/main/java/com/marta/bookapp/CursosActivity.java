@@ -37,105 +37,35 @@ public class CursosActivity extends AppCompatActivity {
         pribachBTN = findViewById(R.id.primerobachBoton);
         segbachBTN = findViewById(R.id.segundobachBoton);
 
-        pripriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("primero","primaria");
-            }
-        });
+        pripriBTN.setOnClickListener( (View v) -> redirigir("primero","primaria"));
 
-        segpriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("segundo","primaria");
-            }
-        });
+        segpriBTN.setOnClickListener( (View v) ->  redirigir("segundo","primaria"));
 
-        terpriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("tercero","primaria");
-            }
-        });
+        terpriBTN.setOnClickListener( (View v) -> redirigir("tercero","primaria"));
 
-        cuapriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("cuarto","primaria");
-            }
-        });
+        cuapriBTN.setOnClickListener( (View v) -> redirigir("cuarto","primaria") );
 
-        quipriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("quinto","primaria");
-            }
-        });
+        quipriBTN.setOnClickListener( (View v) -> redirigir("quinto","primaria"));
 
-        sextpriBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("sexto","primaria");
-            }
-        });
+        sextpriBTN.setOnClickListener( (View v) -> redirigir("sexto","primaria"));
 
-        priesoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("primero","eso");
-            }
-        });
+        priesoBTN.setOnClickListener( (View v) -> redirigir("primero","eso"));
 
-        segesoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("segundo","eso");
-            }
-        });
+        segesoBTN.setOnClickListener( (View v) -> redirigir("segundo","eso"));
 
-        teresoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("tercero","eso");
-            }
-        });
+        teresoBTN.setOnClickListener( (View v) -> redirigir("tercero","eso"));
 
-        cuaesoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("cuarto","eso");
-            }
-        });
+        cuaesoBTN.setOnClickListener( (View v) -> redirigir("cuarto","eso"));
 
-        pribachBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("primero","bachillerato");
-            }
-        });
+        pribachBTN.setOnClickListener((View v) ->  redirigir("primero","bachillerato"));
 
-        segbachBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirigir("segundo","bachillerato");
-            }
-        });
+        segbachBTN.setOnClickListener( (View v) ->  redirigir("segundo","bachillerato"));
 
         cerrarSesion = findViewById(R.id.cerrarCursos);
-        cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cerrarSesion(CursosActivity.this);
-            }
-        });
+        cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(CursosActivity.this));
 
         menu = findViewById(R.id.menuCursos);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAMenu(CursosActivity.this);
-            }
-        });
+        menu.setOnClickListener( (View v) ->  volverAMenu(CursosActivity.this));
 
     }
 
