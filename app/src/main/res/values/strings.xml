@@ -6,6 +6,7 @@
     <string name="anadir">AÑADIR</string>
     <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
     <string name="apellido">Apellido</string>
+    <string name="asignatura">ASIGNATURA</string>
     <string name="clase">CLASE</string>
     <string name="curso">CURSO</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
@@ -13,7 +14,9 @@
     <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
     <string name="deshacer_reserva">DESHACER RESERVA</string>
     <string name="donaciones">DONACIONES</string>
+    <string name="donacion_seleccionada">DONACION SELECCIONADA</string>
     <string name="donar">DONAR</string>
+    <string name="editorial">EDITORIAL</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>

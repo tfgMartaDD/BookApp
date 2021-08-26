@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
@@ -30,6 +33,11 @@ public class DonacionesActivity extends AppCompatActivity {
     ListView listViewDonaciones;
     List<DonacionPeticion> listaDonacion = new ArrayList<>();
     DonAdapter adapter;
+
+    ImageView imagen;
+    TextView asignatura, clase, editorial;
+    TextView a, c, e, don;
+
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
@@ -56,12 +64,34 @@ public class DonacionesActivity extends AppCompatActivity {
         adapter = new DonAdapter(this, listaDonacion);
         listViewDonaciones.setAdapter(adapter);
 
-        /*listViewDonaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        asignatura = findViewById(R.id.asignaturatv);
+        a = findViewById(R.id.tvasig);
+        clase = findViewById(R.id.clasetv);
+        c = findViewById(R.id.tvclase);
+        editorial = findViewById(R.id.editorialtv);
+        e = findViewById(R.id.tveditorial);
+        imagen = findViewById(R.id.portadaIV);
+        don = findViewById(R.id.donacionSelec);
+
+        listViewDonaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Donacion d = listaDonacion.get(position);
+                DonacionPeticion d = listaDonacion.get(position);
+                Libro l = d.getLibro();
+
+                a.setVisibility(View.VISIBLE);
+                c.setVisibility(View.VISIBLE);
+                e.setVisibility(View.VISIBLE);
+                don.setVisibility(View.VISIBLE);
+
+                imagen.setImageResource(l.getImagen());
+                asignatura.setText(l.getAsignatura());
+
+                String clasecurso = l.getClase() +" " +l.getCurso();
+                clase.setText(clasecurso);
+                editorial.setText(l.getEditorial());
             }
-        });*/
+        });
 
     }
 
