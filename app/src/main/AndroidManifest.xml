@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookApp">
         <activity
+            android:name=".AdminMenuActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminPeticionesActivity"
             android:exported="true" />
         <activity
