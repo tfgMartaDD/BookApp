@@ -11,17 +11,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,8 +33,7 @@ public class ListadoDispActivity extends AppCompatActivity {
 
     TextView cursoTV, claseTV, mostrarTV;
     ListView listViewDisponibles;
-    List<Libro> listaLibro = new ArrayList<Libro>();
-    ArrayAdapter <String> arrayAdapter;
+    List<Libro> listaLibro = new ArrayList<>();
     ListAdapter adapter;
     Button reservarBTN, volverBTN, menuBTN;
     Libro libro;
@@ -79,7 +75,8 @@ public class ListadoDispActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Libro l = listaLibro.get(position);
                 libro = listaLibro.get(position);
-                mostrarTV.setText(l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial());
+                String mostrar = l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial();
+                mostrarTV.setText(mostrar);
 
             }
         });
@@ -87,58 +84,43 @@ public class ListadoDispActivity extends AppCompatActivity {
 
 
         reservarBTN = findViewById(R.id.reservarButton);
-        reservarBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        reservarBTN.setOnClickListener( (View v) ->{
 
-                //cambiamos el estado del libro de Disponible a Reservado
-                Map<String, Object> reserva= new HashMap<>();
+            //cambiamos el estado del libro de Disponible a Reservado
+            Map<String, Object> reserva= new HashMap<>();
 
-                reserva.put("Asignatura",libro.getAsignatura());
-                reserva.put("Clase",libro.getClase());
-                reserva.put("Curso",libro.getCurso());
-                reserva.put("Donante",libro.getDonante());
-                reserva.put("Editorial",libro.getEditorial());
-                reserva.put("Estado", "reservado");
+            reserva.put("Asignatura",libro.getAsignatura());
+            reserva.put("Clase",libro.getClase());
+            reserva.put("Curso",libro.getCurso());
+            reserva.put("Donante",libro.getDonante());
+            reserva.put("Editorial",libro.getEditorial());
+            reserva.put("Estado", "reservado");
 
 
-                libros.document(libro.getId()).set(reserva).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
+                    Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show());
 
-                Date date = new Date();
+            Date date = new Date();
 
-                Map<String, Object> peticion= new HashMap<>();
-                peticion.put("Libro",libro.getId());
-                peticion.put("Usuario",actualUser);
-                peticion.put("Fecha",date);
+            Map<String, Object> peticion= new HashMap<>();
+            peticion.put("Libro",libro.getId());
+            peticion.put("Usuario",actualUser);
+            peticion.put("Fecha",date);
 
-                db.collection("peticiones").add(peticion);
+            db.collection("peticiones").add(peticion);
 
-                adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
 
-            }
         });
 
         volverBTN = findViewById(R.id.volverAtras);
-        volverBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (ListadoDispActivity.this, CursosActivity.class);
-                startActivity(in);
-            }
+        volverBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (ListadoDispActivity.this, CursosActivity.class);
+            startActivity(in);
         });
 
         menuBTN = findViewById(R.id.volverMenu);
-        menuBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAMenu(ListadoDispActivity.this);
-            }
-        });
+        menuBTN.setOnClickListener( (View v) ->  volverAMenu(ListadoDispActivity.this));
 
     }
 

@@ -40,12 +40,9 @@ public class DonacionesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donaciones);
 
         addBTN = findViewById(R.id.addButton);
-        addBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent (DonacionesActivity.this, NuevaDonacionActivity.class);
-                startActivity(in);
-            }
+        addBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (DonacionesActivity.this, NuevaDonacionActivity.class);
+            startActivity(in);
         });
 
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);

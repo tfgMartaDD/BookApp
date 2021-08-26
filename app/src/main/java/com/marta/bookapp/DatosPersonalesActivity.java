@@ -50,23 +50,20 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         });
 
         modificarBTN = findViewById(R.id.modificarbutton);
-        modificarBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        modificarBTN.setOnClickListener( (View v) -> {
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("nombre", nombre.getText().toString());
-                user.put("apellido", apellido.getText().toString());
-                user.put("email",mail.getText().toString());
+            Map<String, Object> user = new HashMap<>();
+            user.put("nombre", nombre.getText().toString());
+            user.put("apellido", apellido.getText().toString());
+            user.put("email",mail.getText().toString());
 
-                db.collection("users").document(mail.getText().toString()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(DatosPersonalesActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            db.collection("users").document(mail.getText().toString()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(DatosPersonalesActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }
         });
 
     }
