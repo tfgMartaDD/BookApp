@@ -65,12 +65,13 @@ public class DonacionesActivity extends AppCompatActivity {
         listViewDonaciones.setAdapter(adapter);
 
         asignatura = findViewById(R.id.asignaturatv);
-        a = findViewById(R.id.tvasig);
         clase = findViewById(R.id.clasetv);
-        c = findViewById(R.id.tvclase);
-        editorial = findViewById(R.id.editorialtv);
-        e = findViewById(R.id.tveditorial);
+        editorial = findViewById(R.id.editorialTV);
         imagen = findViewById(R.id.portadaIV);
+
+        a = findViewById(R.id.tvasig);
+        c = findViewById(R.id.tvclase);
+        e = findViewById(R.id.tveditorial);
         don = findViewById(R.id.donacionSelec);
 
         listViewDonaciones.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
@@ -87,7 +88,9 @@ public class DonacionesActivity extends AppCompatActivity {
 
             String clasecurso = l.getClase() +" " +l.getCurso();
             clase.setText(clasecurso);
+
             editorial.setText(l.getEditorial());
+            System.out.println(l.getEditorial());
         });
 
     }
