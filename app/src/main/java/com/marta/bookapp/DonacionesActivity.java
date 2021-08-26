@@ -73,24 +73,21 @@ public class DonacionesActivity extends AppCompatActivity {
         imagen = findViewById(R.id.portadaIV);
         don = findViewById(R.id.donacionSelec);
 
-        listViewDonaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DonacionPeticion d = listaDonacion.get(position);
-                Libro l = d.getLibro();
+        listViewDonaciones.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            DonacionPeticion d = listaDonacion.get(position);
+            Libro l = d.getLibro();
 
-                a.setVisibility(View.VISIBLE);
-                c.setVisibility(View.VISIBLE);
-                e.setVisibility(View.VISIBLE);
-                don.setVisibility(View.VISIBLE);
+            a.setVisibility(View.VISIBLE);
+            c.setVisibility(View.VISIBLE);
+            e.setVisibility(View.VISIBLE);
+            don.setVisibility(View.VISIBLE);
 
-                imagen.setImageResource(l.getImagen());
-                asignatura.setText(l.getAsignatura());
+            imagen.setImageResource(l.getImagen());
+            asignatura.setText(l.getAsignatura());
 
-                String clasecurso = l.getClase() +" " +l.getCurso();
-                clase.setText(clasecurso);
-                editorial.setText(l.getEditorial());
-            }
+            String clasecurso = l.getClase() +" " +l.getCurso();
+            clase.setText(clasecurso);
+            editorial.setText(l.getEditorial());
         });
 
     }
