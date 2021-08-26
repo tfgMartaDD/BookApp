@@ -19,6 +19,7 @@
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="fecha_donacion">FECHA DONACION</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
+    <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libro">LIBRO</string>
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>

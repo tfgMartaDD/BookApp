@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //ImageView portada;
+        ImageView portada;
         TextView asignaturaTextV;
         TextView claseTextV;
         TextView editorialTextV;
@@ -48,12 +49,12 @@ public class ListAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.listview_libros, null);
         }
-        //portada = convertView.findViewById(R.id.portadaImageView);
+        portada = convertView.findViewById(R.id.portadaImageView);
         asignaturaTextV = convertView.findViewById(R.id.asignaturaTV);
         claseTextV = convertView.findViewById(R.id.claseTV);
         editorialTextV = convertView.findViewById(R.id.editorialTV);
 
-        //portada.setImageResource(l.imagen);
+        portada.setImageResource(l.getImagen());
         asignaturaTextV.setText(l.getAsignatura());
 
         String clasecurso = l.getClase() +" " +l.getCurso();

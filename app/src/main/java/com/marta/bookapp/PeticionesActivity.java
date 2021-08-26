@@ -111,8 +111,8 @@ public class PeticionesActivity extends AppCompatActivity {
                     db.collection("libros").whereEqualTo(FieldPath.documentId(),document.getString("Libro")).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"),
-                                        document2.getString("Curso"), document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"));
+                                Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
+                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
                                 System.out.println("asig:"+libro.getAsignatura());
                                 DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
                                 listaPeticion.add(donacion);

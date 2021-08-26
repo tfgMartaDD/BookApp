@@ -130,8 +130,8 @@ public class ListadoDispActivity extends AppCompatActivity {
                 .addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"),
-                                    document.getString("Curso"), document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"));
+                            Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                                    document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
                             //,(int)document.get("imagen"));*/
                             listaLibro.add(libro);
                             adapter.notifyDataSetChanged();

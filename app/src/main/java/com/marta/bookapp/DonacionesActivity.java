@@ -80,8 +80,8 @@ public class DonacionesActivity extends AppCompatActivity {
                     libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot query : Objects.requireNonNull(task2.getResult())) {
-                                Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"),
-                                        query.getString("Curso"), query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"));
+                                Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"),
+                                        query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), (R.drawable.imagen_no_disp));
 
                                 DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
                                         libro, document.getDate("Fecha"));
