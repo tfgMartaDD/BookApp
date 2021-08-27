@@ -38,6 +38,8 @@ public class ListadoDispActivity extends AppCompatActivity {
     Button reservarBTN, volverBTN, menuBTN;
     Libro libro;
 
+    int i = 0;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference libros = db.collection("libros");
     SharedPreferences prefs;
@@ -73,6 +75,9 @@ public class ListadoDispActivity extends AppCompatActivity {
         listViewDisponibles.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             Libro l = listaLibro.get(position);
             libro = listaLibro.get(position);
+
+            i = position;
+
             String mostrar = l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial();
             mostrarTV.setText(mostrar);
 
@@ -106,6 +111,7 @@ public class ListadoDispActivity extends AppCompatActivity {
 
             db.collection("peticiones").add(peticion);
 
+            listaLibro.remove(i);
             adapter.notifyDataSetChanged();
 
         });

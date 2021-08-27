@@ -40,6 +40,8 @@ public class PeticionesActivity extends AppCompatActivity {
     DonAdapter adapter;
     DonacionPeticion reserva;
 
+    int i=0;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
 
@@ -47,6 +49,7 @@ public class PeticionesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peticiones);
+
 
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         String actualUser = prefs.getString("email","");
@@ -69,6 +72,7 @@ public class PeticionesActivity extends AppCompatActivity {
             DonacionPeticion d = listaPeticion.get(position);
             reserva = d;
             Libro l = d.getLibro();
+            i = position;
 
             String mostrar = l.getAsignatura() + "\t\t" + l.getClase() + "  " + l.getCurso() + "\t\t" + l.getEditorial();
             mostrarTV.setText(mostrar);
@@ -95,7 +99,10 @@ public class PeticionesActivity extends AppCompatActivity {
 
                 db.collection("peticiones").document(reserva.getId()).delete();
 
+
                 db.collection("libros").document(li.getId()).update("Estado","disponible").addOnSuccessListener( (Void unused) -> {
+                    listaPeticion.remove(i);
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(PeticionesActivity.this, "RESERVA CANCELADA", Toast.LENGTH_LONG).show();
                     volverAMenu(PeticionesActivity.this);
                 });
