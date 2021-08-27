@@ -44,7 +44,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         });
 
 
-        cerrarSesion = findViewById(R.id.cerrarbutton);
+        cerrarSesion = findViewById(R.id.cerraradmin);
         cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(AdminMenuActivity.this));
 
     }

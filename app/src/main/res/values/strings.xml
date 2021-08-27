@@ -31,6 +31,8 @@
     <string name="listado_cursos">LISTADO POR CURSOS</string>
     <string name="lista_libros">LISTA DE LIBROS</string>
     <string name="menu">MENU</string>
+    <string name="menu_principal">MENU PRINCIPAL</string>
+    <string name="menu_admin">MENU ADMINISTRADORES</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>

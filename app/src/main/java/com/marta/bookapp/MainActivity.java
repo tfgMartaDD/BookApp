@@ -15,11 +15,16 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
@@ -42,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
-        /*if(user != null){
-            redirigirAhome();
-        }*/
+        if(user != null){
+            redirigirAmenu(user.getEmail());
+        }
 
         //Filtros comprobacion email y contraseña
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -79,7 +84,18 @@ public class MainActivity extends AppCompatActivity {
 
                     firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
                         if(task.isSuccessful()){
-                            redirigirAmenu(mail);
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            CollectionReference users = db.collection("users");
+                            users.document(mail).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
+                                Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
+                                if(esAdmin){
+                                    Intent intent = new Intent( MainActivity.this,  AdminMenuActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    redirigirAmenu(mail);
+                                }
+                            });
+
                         }else{
                             String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
                             MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
