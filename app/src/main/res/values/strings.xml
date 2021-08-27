@@ -3,6 +3,8 @@
 
     <!-- botones, editText, etc -->
     <string name="acceder">ACCEDER</string>
+    <string name="aceptar_peticion">ACEPTAR PETICION</string>
+    <string name="aceptar_todas">ACEPTAR TODAS LAS PETICIONES</string>
     <string name="anadir">AÑADIR</string>
     <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
     <string name="apellido">Apellido</string>
@@ -21,6 +23,7 @@
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>
+    <string name="estado">ESTADO</string>
     <string name="fecha_donacion">FECHA DONACION</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
@@ -48,10 +51,12 @@
     <string name="prestamos_actuales">PRESTAMOS ACTUALES</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
+    <string name="rechazar_peticion">RECHAZAR PETICION</string>
     <string name="registrar">REGISTRAR</string>
     <string name="registrar_cuenta">Registrar Cuenta</string>
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
+    <string name="usuario">USUARIO</string>
     <string name="volver_inicial">Volver a la pantalla inicial</string>
     <string name="volver_lista">Volver a la lista</string>
     <string name="volver_menu">Volver al menu</string>

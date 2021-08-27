@@ -73,6 +73,7 @@ public class RegistrarActivity extends AppCompatActivity {
                         user.put("nombre", nombre.getText().toString());
                         user.put("apellido", apellido.getText().toString());
                         user.put("email",mail);
+                        user.put("esAdmin","false");
 
                         db.collection("users").document(mail).set(user);
                         finish();
