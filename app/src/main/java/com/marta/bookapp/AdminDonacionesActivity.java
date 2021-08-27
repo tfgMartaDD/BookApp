@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +32,8 @@ public class AdminDonacionesActivity extends AppCompatActivity {
     List<DonacionPeticion> listaDonaciones = new ArrayList<>();
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    int i = 0;
 
 
     @Override
@@ -62,6 +63,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
             DonacionPeticion d = listaDonaciones.get(position);
             Libro l = d.getLibro();
+            i = position;
 
             linearLayout.setVisibility(View.VISIBLE);
 
@@ -72,6 +74,23 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
             usuario.setText(d.getEmailUsuario());
             fecha.setText(d.getFecha().toString());
+        });
+
+        aceptar.setOnClickListener( (View v) -> {
+
+            db.collection("posiblesDonaciones");
+
+
+        });
+
+        rechazar.setOnClickListener( (View v) -> {
+
+
+        });
+
+        aceptarTodas.setOnClickListener( (View v) -> {
+
+
         });
 
 
