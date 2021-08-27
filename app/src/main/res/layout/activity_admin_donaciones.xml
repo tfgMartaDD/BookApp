@@ -54,19 +54,32 @@
     <ListView
         android:id="@+id/lvDonacionesAprobar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
+        android:layout_margin="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout6">
 
     </ListView>
 
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lvDonacionesAprobar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/donacion_seleccionada"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/lvDonacionesAprobar"
+        app:layout_constraintTop_toBottomOf="@id/textView25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="invisible">
@@ -138,6 +151,7 @@
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/usuario" />
 
             <TextView
@@ -149,6 +163,7 @@
                 android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/fecha_reserva" />
 
             <TextView
@@ -163,7 +178,7 @@
         android:id="@+id/aceptarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/aceptar_peticion"
+        android:text="@string/aceptar_donacion"
         app:layout_constraintTop_toBottomOf="@id/linearLayout7"
         app:layout_constraintEnd_toStartOf="@id/rechazarButton"
         app:layout_constraintStart_toStartOf="parent" />
@@ -172,7 +187,7 @@
         android:id="@+id/rechazarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rechazar_peticion"
+        android:text="@string/rechazar_donacion"
         app:layout_constraintTop_toBottomOf="@id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/aceptarButton" />
@@ -181,7 +196,7 @@
         android:id="@+id/aceptarTodasButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/aceptar_todas"
+        android:text="@string/aceptar_todas_donaciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aceptarButton" />

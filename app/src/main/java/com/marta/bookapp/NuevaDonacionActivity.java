@@ -89,7 +89,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
             alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
-                db.collection("posiblesDonaciones").document() .set(donation).addOnSuccessListener( (Void unused) -> {
+                db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener( (Void unused) -> {
                     Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
                     volverAMenu(NuevaDonacionActivity.this);
                 });
