@@ -51,6 +51,7 @@
     <string name="peticion_seleccionada">PETICION SELECCIONADA</string>
     <string name="prestamos">MIS PRESTAMOS</string>
     <string name="prestamos_actuales">PRESTAMOS ACTUALES</string>
+    <string name="portada">PORTADA</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
     <string name="rechazar_donacion">RECHAZAR DONACION</string>

@@ -37,29 +37,29 @@ public class CursosActivity extends AppCompatActivity {
         pribachBTN = findViewById(R.id.primerobachBoton);
         segbachBTN = findViewById(R.id.segundobachBoton);
 
-        pripriBTN.setOnClickListener( (View v) -> redirigir("primero","primaria"));
+        pripriBTN.setOnClickListener( (View v) -> redirigir("PRIMERO","PRIMARIA"));
 
-        segpriBTN.setOnClickListener( (View v) ->  redirigir("segundo","primaria"));
+        segpriBTN.setOnClickListener( (View v) ->  redirigir("SEGUNDO","PRIMARIA"));
 
-        terpriBTN.setOnClickListener( (View v) -> redirigir("tercero","primaria"));
+        terpriBTN.setOnClickListener( (View v) -> redirigir("TERCERO","PRIMARIA"));
 
-        cuapriBTN.setOnClickListener( (View v) -> redirigir("cuarto","primaria") );
+        cuapriBTN.setOnClickListener( (View v) -> redirigir("CUARTO","PRIMARIA") );
 
-        quipriBTN.setOnClickListener( (View v) -> redirigir("quinto","primaria"));
+        quipriBTN.setOnClickListener( (View v) -> redirigir("QUINTO","PRIMARIA"));
 
-        sextpriBTN.setOnClickListener( (View v) -> redirigir("sexto","primaria"));
+        sextpriBTN.setOnClickListener( (View v) -> redirigir("SEXTO","PRIMARIA"));
 
-        priesoBTN.setOnClickListener( (View v) -> redirigir("primero","eso"));
+        priesoBTN.setOnClickListener( (View v) -> redirigir("PRIMERO","ESO"));
 
-        segesoBTN.setOnClickListener( (View v) -> redirigir("segundo","eso"));
+        segesoBTN.setOnClickListener( (View v) -> redirigir("SEGUNDO","ESO"));
 
-        teresoBTN.setOnClickListener( (View v) -> redirigir("tercero","eso"));
+        teresoBTN.setOnClickListener( (View v) -> redirigir("TERCERO","ESO"));
 
-        cuaesoBTN.setOnClickListener( (View v) -> redirigir("cuarto","eso"));
+        cuaesoBTN.setOnClickListener( (View v) -> redirigir("CUARTO","ESO"));
 
-        pribachBTN.setOnClickListener((View v) ->  redirigir("primero","bachillerato"));
+        pribachBTN.setOnClickListener((View v) ->  redirigir("PRIMERO","BACHILLERATO"));
 
-        segbachBTN.setOnClickListener( (View v) ->  redirigir("segundo","bachillerato"));
+        segbachBTN.setOnClickListener( (View v) ->  redirigir("SEGUNDO","BACHILLERATO"));
 
         cerrarSesion = findViewById(R.id.cerrarCursos);
         cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(CursosActivity.this));

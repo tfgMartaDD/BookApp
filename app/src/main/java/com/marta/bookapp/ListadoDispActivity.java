@@ -32,6 +32,7 @@ import java.util.Objects;
 public class ListadoDispActivity extends AppCompatActivity {
 
     TextView cursoTV, claseTV, mostrarTV;
+    TextView campos, seleccion;
     ListView listViewDisponibles;
     List<Libro> listaLibro = new ArrayList<>();
     ListAdapter adapter;
@@ -56,6 +57,8 @@ public class ListadoDispActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         String actualUser = prefs.getString("email","");
 
+        campos = findViewById(R.id.camposTV);
+        seleccion = findViewById(R.id.seleccionTV);
 
         cursoTV = findViewById(R.id.textViewCurso);
         cursoTV.setText(curso);
@@ -75,6 +78,9 @@ public class ListadoDispActivity extends AppCompatActivity {
         listViewDisponibles.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             Libro l = listaLibro.get(position);
             libro = listaLibro.get(position);
+
+            campos.setVisibility(View.VISIBLE);
+            seleccion.setVisibility(View.VISIBLE);
 
             i = position;
 
@@ -113,6 +119,9 @@ public class ListadoDispActivity extends AppCompatActivity {
 
             listaLibro.remove(i);
             adapter.notifyDataSetChanged();
+
+            campos.setVisibility(View.INVISIBLE);
+            seleccion.setVisibility(View.INVISIBLE);
 
         });
 

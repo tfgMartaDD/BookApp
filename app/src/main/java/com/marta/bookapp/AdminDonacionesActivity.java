@@ -124,7 +124,31 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         });
 
         aceptarTodas.setOnClickListener( (View v) -> {
+            for (int in = listaDonaciones.size(); in > 0; in --){
 
+                DonacionPeticion d = listaDonaciones.get(in-1);
+                Libro l = d.getLibro();
+
+                Date date = new Date();
+
+                Map<String, Object> libro = new HashMap<>();
+                libro.put("Asignatura", l.getAsignatura());
+                libro.put("Clase", l.getClase());
+                libro.put("Curso", l.getCurso());
+                libro.put("Editorial", l.getEditorial());
+                libro.put("Estado", "disponible");
+                libro.put("Donante", d.getEmailUsuario());
+                libro.put("Fecha",date);
+
+                db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
+                        Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
+
+                db.collection("posiblesDonaciones").document(d.getId()).delete();
+
+
+            }
+            listaDonaciones.clear();
+            adapter.notifyDataSetChanged();
 
         });
 
