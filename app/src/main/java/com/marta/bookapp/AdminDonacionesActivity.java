@@ -85,22 +85,13 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         db.collection("posiblesDonaciones").get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    String libroID = document.getString("Libro");
+                    Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                            document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
 
-                    db.collection("libros").whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
-                        if (task2.isSuccessful()) {
-                            for (QueryDocumentSnapshot query : Objects.requireNonNull(task2.getResult())) {
-                                Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"),
-                                        query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), (R.drawable.imagen_no_disp));
-
-                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
-                                        libro, document.getDate("Fecha"));
-                                lista.add(donacion);
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
-
+                    DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
+                            libro, document.getDate("Fecha"));
+                    lista.add(donacion);
+                    adapter.notifyDataSetChanged();
                 }
             }
         });

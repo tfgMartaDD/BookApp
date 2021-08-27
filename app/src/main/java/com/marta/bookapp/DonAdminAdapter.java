@@ -59,7 +59,8 @@ public class DonAdminAdapter extends BaseAdapter {
 
 
         userTV.setText(d.getEmailUsuario());
-        fechaTV.setText(d.getFecha().toString());
+        String fecha = String.valueOf(d.getFecha());
+        fechaTV.setText(fecha);
 
         return convertView;
     }
