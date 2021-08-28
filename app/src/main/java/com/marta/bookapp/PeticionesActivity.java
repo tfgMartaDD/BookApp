@@ -86,7 +86,6 @@ public class PeticionesActivity extends AppCompatActivity {
         menuBTN.setOnClickListener( (View v) -> volverAMenu(PeticionesActivity.this));
 
 
-        System.out.println("deshacer");
 
         deshacerBTN = findViewById(R.id.deshacerReserva);
         deshacerBTN.setOnClickListener( (View v) -> {
@@ -122,7 +121,6 @@ public class PeticionesActivity extends AppCompatActivity {
 
     public List<DonacionPeticion> obtenerMisPeticiones(String user){
         List<DonacionPeticion> lista = new ArrayList<>();
-        System.out.println("obtener");
 
         db.collection("peticiones").whereEqualTo("Usuario",user).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
             if (task.isSuccessful()) {
