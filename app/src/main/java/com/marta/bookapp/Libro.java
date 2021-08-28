@@ -16,6 +16,16 @@ public class Libro {
         this.imagen = imagen;
     }
 
+    public Libro(String asignatura, String clase, String curso, String donante, String editorial, String estado, int imagen) {
+        this.asignatura = asignatura;
+        this.clase = clase;
+        this.curso = curso;
+        this.donante = donante;
+        this.editorial = editorial;
+        this.estado = estado;
+        this.imagen = imagen;
+    }
+
     public int getImagen() {
         return imagen;
     }

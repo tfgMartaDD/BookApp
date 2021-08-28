@@ -31,8 +31,10 @@ public class DonacionesActivity extends AppCompatActivity {
     Button addBTN;
 
     ListView listViewDonaciones;
-    List<DonacionPeticion> listaDonacion = new ArrayList<>();
-    DonAdapter adapter;
+    //List<DonacionPeticion> listaDonacion = new ArrayList<>();
+    List<Libro> listaDonacion = new ArrayList<>();
+    //DonAdapter adapter;
+    ListAdapter adapter;
 
     ImageView imagen;
     TextView asignatura, clase, editorial;
@@ -61,7 +63,7 @@ public class DonacionesActivity extends AppCompatActivity {
 
         listViewDonaciones = findViewById(R.id.lvDonaciones);
 
-        adapter = new DonAdapter(this, listaDonacion);
+        adapter = new ListAdapter(this, listaDonacion);
         listViewDonaciones.setAdapter(adapter);
 
         asignatura = findViewById(R.id.asignaturatv);
@@ -75,8 +77,9 @@ public class DonacionesActivity extends AppCompatActivity {
         don = findViewById(R.id.donacionSelec);
 
         listViewDonaciones.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
-            DonacionPeticion d = listaDonacion.get(position);
-            Libro l = d.getLibro();
+            //DonacionPeticion d = listaDonacion.get(position);
+            //Libro l = d.getLibro();
+            Libro l = listaDonacion.get(position);
 
             a.setVisibility(View.VISIBLE);
             c.setVisibility(View.VISIBLE);
@@ -95,7 +98,7 @@ public class DonacionesActivity extends AppCompatActivity {
 
     }
 
-    public List<DonacionPeticion> obtenerMisDonaciones(String user){
+    /*public List<DonacionPeticion> obtenerMisDonaciones(String user){
         List<DonacionPeticion> lista = new ArrayList<>();
 
 
@@ -123,6 +126,23 @@ public class DonacionesActivity extends AppCompatActivity {
                 }
             }else {
                 Toast.makeText(DonacionesActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
+            }
+        });
+        return lista;
+    }
+    */
+    public List<Libro> obtenerMisDonaciones(String user){
+        List<Libro> lista = new ArrayList<>();
+
+        db.collection("libros").whereEqualTo("Donante",user).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())) {
+                    Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"),
+                            query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), (R.drawable.imagen_no_disp));
+
+                    lista.add(libro);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 

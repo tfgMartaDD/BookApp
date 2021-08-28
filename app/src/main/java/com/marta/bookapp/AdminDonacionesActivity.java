@@ -1,6 +1,7 @@
 package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenu;
+import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -124,9 +125,9 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         });
 
         aceptarTodas.setOnClickListener( (View v) -> {
-            for (int in = listaDonaciones.size(); in > 0; in --){
+            for (int in = 0 ; in < listaDonaciones.size(); in++){
 
-                DonacionPeticion d = listaDonaciones.get(in-1);
+                DonacionPeticion d = listaDonaciones.get(in);
                 Libro l = d.getLibro();
 
                 Date date = new Date();
@@ -141,14 +142,14 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 libro.put("Fecha",date);
 
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminDonacionesActivity.this, "DONACIONES ACEPTADAS.\n Libros añadidos a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
 
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
-
 
             }
             listaDonaciones.clear();
             adapter.notifyDataSetChanged();
+            volverAMenuAdmin(AdminDonacionesActivity.this);
 
         });
 
@@ -163,7 +164,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         db.collection("posiblesDonaciones").get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                    Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                             document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
 
                     DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
