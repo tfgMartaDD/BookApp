@@ -26,7 +26,9 @@
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="estado">ESTADO</string>
+    <string name="fecha_devolucion">FECHA DEVOLUCION</string>
     <string name="fecha_donacion">FECHA DONACION</string>
+    <string name="fecha_prestamo">FECHA PRESTAMO</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
@@ -51,6 +53,7 @@
     <string name="peticion_seleccionada">PETICION SELECCIONADA</string>
     <string name="prestamos">MIS PRESTAMOS</string>
     <string name="prestamos_actuales">PRESTAMOS ACTUALES</string>
+    <string name="prestamo_seleccionado">PRESTAMO SELECCIONADO</string>
     <string name="portada">PORTADA</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>

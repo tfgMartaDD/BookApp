@@ -113,8 +113,8 @@
         <Button
             android:id="@+id/deshacerReserva"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deshacer_reserva"/>
+            android:layout_height="48dp"
+            android:text="@string/deshacer_reserva" />
 
         <Space
             android:layout_width="0dp"
@@ -124,8 +124,8 @@
         <Button
             android:id="@+id/menuPeticion"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/volver_menu"/>
+            android:layout_height="48dp"
+            android:text="@string/volver_menu" />
     </LinearLayout>
 
 </LinearLayout>
