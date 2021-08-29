@@ -50,6 +50,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_peticiones);
 
+
         linearLayout = findViewById(R.id.ll5);
         tv = findViewById(R.id.peticionestv);
 
@@ -107,16 +108,16 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA.\n . ", Toast.LENGTH_SHORT).show() );
 
-                Date fecha = new Date(2022,6,25);
+                Date fechaDev = new Date(2022,6,25);
 
                 Map<String, Object> prestamo = new HashMap<>();
                 prestamo.put("Libro", l.getId());
                 prestamo.put("Usuario", p.getEmailUsuario());
                 prestamo.put("FechaPrestamo", date);
-                prestamo.put("FechaDevolucion", fecha);
+                prestamo.put("FechaDevolucion", fechaDev);
 
                 db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fecha, Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDev, Toast.LENGTH_LONG).show() );
 
                 db.collection("peticiones").document(p.getId()).delete();
 
@@ -149,21 +150,21 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 libro.put("Editorial", l.getEditorial());
                 libro.put("Estado", "prestado");
                 libro.put("Donante", p.getEmailUsuario());
-                libro.put("Fecha",date);
+                libro.put("Fecha", date);
 
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICIONES ACEPTADAS. ", Toast.LENGTH_LONG).show() );
 
-                Date fecha = new Date(2022,6,25);
+                Date fechaDev = new Date(2022,6,25);
 
                 Map<String, Object> prestamo = new HashMap<>();
                 prestamo.put("Libro", l.getId());
                 prestamo.put("Usuario", p.getEmailUsuario());
                 prestamo.put("FechaPrestamo", date);
-                prestamo.put("FechaDevolucion", fecha);
+                prestamo.put("FechaDevolucion", fechaDev);
 
                 db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fecha, Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDev, Toast.LENGTH_LONG).show() );
 
                 db.collection("peticiones").document(p.getId()).delete();
 
@@ -191,7 +192,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
                                         document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
                                 System.out.println("asig:"+libro.getAsignatura());
-                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
+                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"), libro, document.getDate("Fecha"));
                                 lista.add(donacion);
                                 adapter.notifyDataSetChanged();
 
