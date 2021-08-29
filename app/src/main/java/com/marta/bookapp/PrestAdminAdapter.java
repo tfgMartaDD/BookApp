@@ -47,7 +47,7 @@ public class PrestAdminAdapter extends BaseAdapter {
         Libro l = p.getLibro();
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_prestamos, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_admin_prestamos, null);
         }
 
         usuarioTV = convertView.findViewById(R.id.usuarioAdmPres);

@@ -30,6 +30,7 @@
     <string name="fecha_donacion">FECHA DONACION</string>
     <string name="fecha_prestamo">FECHA PRESTAMO</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
+    <string name="fechas">FECHA PRESTAMO \n DEVOLUCION</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libro">LIBRO</string>
@@ -38,6 +39,8 @@
     <string name="listado_cursos">LISTADO POR CURSOS</string>
     <string name="lista_libros">LISTA DE LIBROS</string>
     <string name="listar">LISTAR</string>
+    <string name="listar_clases">LISTAR POR CLASES</string>
+    <string name="listar_todos">LISTAR TODOS</string>
     <string name="menu">MENU</string>
     <string name="menu_principal">MENU PRINCIPAL</string>
     <string name="menu_admin">MENU ADMINISTRADORES</string>

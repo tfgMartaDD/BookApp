@@ -105,7 +105,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 libro.put("Donante", p.getEmailUsuario());
                 libro.put("Fecha",date);
 
-                db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
+                db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA.\n . ", Toast.LENGTH_SHORT).show() );
 
                 Date fechaDev = new Date(2022,6,25);
@@ -152,7 +152,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 libro.put("Donante", p.getEmailUsuario());
                 libro.put("Fecha", date);
 
-                db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
+                db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICIONES ACEPTADAS. ", Toast.LENGTH_LONG).show() );
 
                 Date fechaDev = new Date(2022,6,25);

@@ -29,9 +29,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
     List<Prestamo> listaPrestamos = new ArrayList<>();
 
     Spinner spinner1;
-    RadioButton rbu, rbc;
-
-    Button ordenarBTN;
+    RadioButton rbt, rbc;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -42,24 +40,26 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         listViewAdminPrestamos = findViewById(R.id.lvPrestamosAdmin);
 
-        rbu = findViewById(R.id.rbUsuario);
+        rbt = findViewById(R.id.rbTodos);
         rbc = findViewById(R.id.rbClase);
 
         spinner1 = findViewById(R.id.spinner1);
-
 
     }
 
     public void comprobarRadioButton(View view){
 
-        if(rbu.isChecked()){
-            System.out.println("user");
+        if(rbt.isChecked()){
+
+            listViewAdminPrestamos.setVisibility(View.INVISIBLE);
             spinner1.setVisibility(View.INVISIBLE);
-            listaPrestamos = obtenerPrestamosUsuarios();
+            listaPrestamos = obtenerPrestamos();
+            listViewAdminPrestamos.setVisibility(View.VISIBLE);
 
         }else if(rbc.isChecked()){
-            System.out.println("spinner");
+
             spinner1.setVisibility(View.VISIBLE);
+            listViewAdminPrestamos.setVisibility(View.INVISIBLE);
 
             String [] opciones = {"PRIMERO PRIMARIA", "SEGUNDO PRIMARIA", "TERCERO PRIMARIA", "CUARTO PRIMARIA", "QUINTO PRIMARIA", "SEXTO PRIMARIA",
                     "PRIMERO ESO", "SEGUNDO ESO", "TERCERO ESO", "CUARTO ESO", "PRIMERO BACHILLERATO", "SEGUNDO BACHILLERATO"};
@@ -70,6 +70,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
             String clasecurso = spinner1.getSelectedItem().toString();
 
             listaPrestamos = obtenerPrestamosClases(clasecurso);
+            listViewAdminPrestamos.setVisibility(View.VISIBLE);
         }
 
         adapter = new PrestAdminAdapter(this, listaPrestamos);
@@ -78,10 +79,31 @@ public class AdminPrestamosActivity extends AppCompatActivity {
     }
 
 
-    public List<Prestamo> obtenerPrestamosUsuarios(){
-        List<Prestamo> listaUsuarios = new ArrayList<>();
+    public List<Prestamo> obtenerPrestamos(){
+        List<Prestamo> listaTodos = new ArrayList<>();
 
-        return listaUsuarios;
+        db.collection("libros").whereEqualTo("Estado", "prestado").get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    System.out.println("Libro" + document.getString("Libro"));
+                    db.collection("prestamos").whereEqualTo("Libro", document.getId()).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
+                        if (task2.isSuccessful()) {
+                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                                        document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                                Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
+                                        document2.getDate("FechaPrestamo"), document2.getDate("FechaDevolucion"));
+
+                                listaTodos.add(p);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        return listaTodos;
     }
 
     public List<Prestamo> obtenerPrestamosClases(String cursoClase){
@@ -91,22 +113,18 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         String clase = partes[0];
         String curso = partes[1];
 
-        System.out.println(clase);
-        System.out.println(curso);
 
-        db.collection("prestamos").whereEqualTo("Clase", clase).whereEqualTo("Curso", curso).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+        db.collection("libros").whereEqualTo("Estado", "prestado").whereEqualTo("Clase", clase).whereEqualTo("Curso", curso).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
             if(task.isSuccessful()){
-                System.out.println("prestamo");
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     System.out.println("Libro"+document.getString("Libro") );
-                    db.collection("libros").whereEqualTo(FieldPath.documentId(),document.getString("Libro")).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
+                    db.collection("prestamos").whereEqualTo("Libro",document.getId()).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
-                            System.out.println("libro");
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
-                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
-                                Prestamo p = new Prestamo(document.getId(), libro, document.getString("Usuario"),
-                                        document.getDate("FechaPrestamo"), document.getDate("FechaDevolucion"));
+                                Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                                        document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"),(R.drawable.imagen_no_disp));
+                                Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
+                                        document2.getDate("FechaPrestamo"), document2.getDate("FechaDevolucion"));
 
                                 listaClases.add(p);
                                 adapter.notifyDataSetChanged();
