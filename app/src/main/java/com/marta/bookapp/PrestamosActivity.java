@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,7 +53,7 @@ public class PrestamosActivity extends AppCompatActivity {
         adapter = new PrestAdapter(this, listaPrestamos);
         listViewPrestamos.setAdapter(adapter);
 
-        seleccion = findViewById(R.id.seleccionTV);
+        seleccion = findViewById(R.id.prestamoSelec);
         linearLayout = findViewById(R.id.llSeleccion);
 
         asignatura = findViewById(R.id.asignaturaPrestamo);
@@ -64,22 +63,19 @@ public class PrestamosActivity extends AppCompatActivity {
         imagen = findViewById(R.id.imageView2);
 
 
-        listViewPrestamos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Prestamo p = listaPrestamos.get(position);
-                Libro l = p.getLibro();
+        listViewPrestamos.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            Prestamo p = listaPrestamos.get(position);
+            Libro l = p.getLibro();
 
-                asignatura.setText(l.getAsignatura());
-                String clasecurso = l.getClase() +" "+l.getCurso();
-                clase.setText(clasecurso);
-                fecha.setText(p.getFecha().toString());
-                fechaDev.setText(p.getFechaDev().toString());
-                imagen.setImageResource(l.getImagen());
+            asignatura.setText(l.getAsignatura());
+            String clasecurso = l.getClase() +" "+l.getCurso();
+            clase.setText(clasecurso);
+            fecha.setText(p.getFecha().toString());
+            fechaDev.setText(p.getFechaDev().toString());
+            imagen.setImageResource(l.getImagen());
 
-                linearLayout.setVisibility(View.VISIBLE);
-                seleccion.setVisibility(View.VISIBLE);
-            }
+            linearLayout.setVisibility(View.VISIBLE);
+            seleccion.setVisibility(View.VISIBLE);
         });
 
 
@@ -88,27 +84,24 @@ public class PrestamosActivity extends AppCompatActivity {
     public List<Prestamo> obtenerMisPrestamos(String user){
         List<Prestamo> lista = new ArrayList<>();
 
-        db.collection("prestamos").whereEqualTo("Usuario",user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        db.collection("libros").whereEqualTo(FieldPath.documentId(), document.getString("Libro")).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
-                            if (task2.isSuccessful()) {
-                                for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                    Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
-                                            document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
+        db.collection("prestamos").whereEqualTo("Usuario",user).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+            if(task.isSuccessful()){
+                for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    db.collection("libros").whereEqualTo(FieldPath.documentId(), document.getString("Libro")).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
+                        if (task2.isSuccessful()) {
+                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
+                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
 
 
-                                    Prestamo p = new Prestamo(document.getId(), libro, document.getString("Usuario"),
-                                            document.getDate("FechaPrestamo"), document.getDate("FechaDevolucion"));
+                                Prestamo p = new Prestamo(document.getId(), libro, document.getString("Usuario"),
+                                        document.getDate("FechaPrestamo"), document.getDate("FechaDevolucion"));
 
-                                    lista.add(p);
-                                    adapter.notifyDataSetChanged();
-                                }
+                                lista.add(p);
+                                adapter.notifyDataSetChanged();
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             }
         });
