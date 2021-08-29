@@ -59,7 +59,7 @@ public class PrestAdapter extends BaseAdapter {
         clasecursoTV.setText(clasecurso);
 
         fechaTV.setText(p.getFecha().toString());
-        fechaDevTV.setText(p.getFecha().toString());
+        fechaDevTV.setText(p.getFechaDev().toString());
 
         return convertView;
     }

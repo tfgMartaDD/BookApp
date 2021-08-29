@@ -72,6 +72,10 @@ public class PrestamosActivity extends AppCompatActivity {
             clase.setText(clasecurso);
             fecha.setText(p.getFecha().toString());
             fechaDev.setText(p.getFechaDev().toString());
+
+
+            System.out.println(p.getFechaDev().toString());
+            System.out.println("ppppp " +fechaDev.getText());
             imagen.setImageResource(l.getImagen());
 
             linearLayout.setVisibility(View.VISIBLE);
