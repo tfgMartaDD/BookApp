@@ -124,7 +124,6 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         rechazar.setOnClickListener( (View v) -> {
 
             DonacionPeticion p = listaDonaciones.get(i);
-            Libro l = p.getLibro();
 
             String frase = "¿Estás seguro de que desea rechazar la donacion de "+ p.getEmailUsuario()+" ? ";
 

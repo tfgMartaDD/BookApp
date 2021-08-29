@@ -1,6 +1,5 @@
 package com.marta.bookapp;
 
-import static com.marta.bookapp.BotonesComunes.volverAMenu;
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
 import androidx.annotation.NonNull;
@@ -17,8 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -137,7 +134,6 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
         rechazar.setOnClickListener( (View v) -> {
             DonacionPeticion p = listaPeticiones.get(i);
-            Libro l = p.getLibro();
 
             String frase = "¿Estás seguro de que desea rechazar la peticion de "+ p.getEmailUsuario()+" ? ";
 
@@ -221,13 +217,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                             }
                         }
                     });
-                    /*Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                            document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
 
-                    DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
-                            libro, document.getDate("Fecha"));
-                    lista.add(donacion);
-                    adapter.notifyDataSetChanged();*/
                 }
             }
         });
