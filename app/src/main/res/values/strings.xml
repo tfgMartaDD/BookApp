@@ -37,6 +37,7 @@
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
     <string name="listado_cursos">LISTADO POR CURSOS</string>
     <string name="lista_libros">LISTA DE LIBROS</string>
+    <string name="listar">LISTAR</string>
     <string name="menu">MENU</string>
     <string name="menu_principal">MENU PRINCIPAL</string>
     <string name="menu_admin">MENU ADMINISTRADORES</string>
@@ -47,7 +48,8 @@
     <string name="nombre">Nombre</string>
     <string name="nueva_donacion">NUEVA DONACION</string>
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
-    <string name="ordenar">ORDENAR POR: </string>
+    <string name="ordenar">ORDENAR</string>
+    <string name="ordenar_por">ORDENAR POR: </string>
     <string name="password">Contraseña</string>
     <string name="peticiones">MIS PETICIONES</string>
     <string name="peticiones_pendientes">PETICIONES PENDIENTES</string>
