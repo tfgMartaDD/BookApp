@@ -4,8 +4,10 @@ package com.marta.bookapp;
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -120,6 +122,25 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         });
 
         rechazar.setOnClickListener( (View v) -> {
+
+            DonacionPeticion p = listaDonaciones.get(i);
+            Libro l = p.getLibro();
+
+            String frase = "¿Estás seguro de que desea rechazar la donacion de "+ p.getEmailUsuario()+" ? ";
+
+            AlertDialog.Builder alerta = new AlertDialog.Builder(AdminDonacionesActivity.this);
+            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+                db.collection("posiblesDonaciones").document(p.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                    Toast.makeText(AdminDonacionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
+                    listaDonaciones.remove(i);
+                    adapter.notifyDataSetChanged();
+                });
+
+            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminDonacionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("¿ESTAS SEGURO?");
+            alertDialog.show();
 
 
         });

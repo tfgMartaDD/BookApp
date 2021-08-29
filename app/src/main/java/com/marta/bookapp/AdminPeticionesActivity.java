@@ -1,10 +1,13 @@
 package com.marta.bookapp;
 
+import static com.marta.bookapp.BotonesComunes.volverAMenu;
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -131,7 +136,24 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         });
 
         rechazar.setOnClickListener( (View v) -> {
+            DonacionPeticion p = listaPeticiones.get(i);
+            Libro l = p.getLibro();
 
+            String frase = "¿Estás seguro de que desea rechazar la peticion de "+ p.getEmailUsuario()+" ? ";
+
+            AlertDialog.Builder alerta = new AlertDialog.Builder(AdminPeticionesActivity.this);
+            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+                db.collection("peticiones").document(p.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                    Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
+                    listaPeticiones.remove(i);
+                    adapter.notifyDataSetChanged();
+                });
+
+            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("¿ESTAS SEGURO?");
+            alertDialog.show();
 
         });
 
