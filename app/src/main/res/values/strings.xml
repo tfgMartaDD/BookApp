@@ -47,6 +47,7 @@
     <string name="nombre">Nombre</string>
     <string name="nueva_donacion">NUEVA DONACION</string>
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
+    <string name="ordenar">ORDENAR POR: </string>
     <string name="password">Contraseña</string>
     <string name="peticiones">MIS PETICIONES</string>
     <string name="peticiones_pendientes">PETICIONES PENDIENTES</string>
