@@ -22,6 +22,9 @@
             android:name=".AdminPeticionesActivity"
             android:exported="true" />
         <activity
+            android:name=".AdminPrestamosActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminDonacionesActivity"
             android:exported="true" />
         <activity

@@ -27,9 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginStart="8dp"
+            android:layout_marginHorizontal="16dp"
             android:text="@string/ordenar"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -38,21 +38,20 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/rbUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="@string/usuario" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rbClase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/clase"
-
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
         </RadioGroup>
 
     </LinearLayout>
