@@ -2,12 +2,16 @@ package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,7 +20,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +40,11 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     TextView libroTextView;
 
     Button donarBTN, menuBTN;
+    Button anadirImagen;
+
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 1;
+
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
@@ -40,12 +54,16 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_donacion);
 
+        mStorage = FirebaseStorage.getInstance().getReference();
+
         libroTextView = findViewById(R.id.libroTV);
 
         asigSpin = findViewById(R.id.asigSpinner);
         claseSpin = findViewById(R.id.claseSpinner);
         cursoSpin = findViewById(R.id.cursoSpinner);
         editorialSpin = findViewById(R.id.editorialSpinner);
+
+        anadirImagen = findViewById(R.id.anadirBTN);
 
         String [] asignaturas = {"MATEMATICAS", "LENGUA", "BIOLOGIA", "SOCIALES", "INGLES"};
         ArrayAdapter<String> asigAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, asignaturas);
@@ -102,9 +120,34 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         });
 
+        anadirImagen.setOnClickListener( (View v) -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_INTENT);
+        });
+
         menuBTN = findViewById(R.id.menuDonacion);
         menuBTN.setOnClickListener( (View v) -> volverAMenu(NuevaDonacionActivity.this));
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+            Uri uri = data.getData();
+
+            StorageReference filePath = mStorage.child("portadas").child(uri.getLastPathSegment());
+
+            filePath.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
+    }
 }

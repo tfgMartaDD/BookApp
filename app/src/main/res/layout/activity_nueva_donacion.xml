@@ -71,6 +71,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llimagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll1"
+        android:layout_marginHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"/>
+
+        <Button
+            android:id="@+id/anadirBTN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="@string/anadir_portada" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/donarButton"
         android:layout_width="wrap_content"
@@ -79,7 +106,7 @@
         android:text="@string/donar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll1" />
+        app:layout_constraintTop_toBottomOf="@id/llimagen" />
 
     <Button
         android:id="@+id/menuDonacion"
