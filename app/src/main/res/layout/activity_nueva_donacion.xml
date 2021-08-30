@@ -41,7 +41,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="8dp" />
 
         <Spinner
             android:id="@+id/claseSpinner"
@@ -51,7 +51,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="8dp" />
 
         <Spinner
             android:id="@+id/cursoSpinner"
@@ -61,7 +61,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="8dp" />
 
         <Spinner
             android:id="@+id/editorialSpinner"
@@ -71,6 +71,39 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/tvanadir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rgroup"
+        app:layout_constraintTop_toBottomOf="@id/ll1"
+        app:layout_constraintBottom_toTopOf="@id/llimagen"
+        android:text="@string/seleccionar"
+        android:onClick="comprobarRB"/>
+
+    <RadioGroup
+        android:id="@+id/rgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/tvanadir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll1">
+
+        <RadioButton
+            android:id="@+id/defectoRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/anadir_portada_defecto" />
+
+        <RadioButton
+            android:id="@+id/galeriaRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/anadir_portada_galeria" />
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/llimagen"
         android:layout_width="match_parent"
@@ -78,16 +111,18 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll1"
-        android:layout_marginHorizontal="16dp">
+        app:layout_constraintTop_toBottomOf="@id/rgroup"
+        android:layout_marginHorizontal="16dp"
+        android:visibility="invisible">
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:padding="8dp"
             android:layout_weight="1"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:contentDescription="@string/imagen_portada"/>
 
         <Button
             android:id="@+id/anadirBTN"
@@ -102,9 +137,8 @@
         android:id="@+id/donarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/donar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llimagen" />
 
@@ -114,10 +148,10 @@
         android:layout_height="wrap_content"
         android:text="@string/volver_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llimagen"
         android:layout_margin="16dp"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/libroTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,6 +159,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/donarButton"
-        android:gravity="bottom"/>
+        android:gravity="bottom"/>-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,10 +41,15 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     Spinner claseSpin;
     Spinner cursoSpin;
     Spinner editorialSpin;
-    TextView libroTextView;
+    //TextView libroTextView;
 
     Button donarBTN, menuBTN;
+    ImageView imagen;
     Button anadirImagen;
+
+    Button seleccionarBTN;
+    RadioButton defectoRB, galeriaRB;
+    LinearLayout llimagen;
 
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 1;
@@ -56,7 +65,13 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
-        libroTextView = findViewById(R.id.libroTV);
+        seleccionarBTN= findViewById(R.id.tvanadir);
+        defectoRB = findViewById(R.id.defectoRB);
+        galeriaRB = findViewById(R.id.galeriaRB);
+        llimagen = findViewById(R.id.llimagen);
+        //libroTextView = findViewById(R.id.libroTV);
+
+        imagen = findViewById(R.id.imageView3);
 
         asigSpin = findViewById(R.id.asigSpinner);
         claseSpin = findViewById(R.id.claseSpinner);
@@ -131,22 +146,36 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
     }
 
+    public void comprobarRB(View view){
+        if(defectoRB.isChecked()){
+            llimagen.setVisibility(View.INVISIBLE);
+
+        }else if(galeriaRB.isChecked()){
+            llimagen.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+
             Uri uri = data.getData();
 
             StorageReference filePath = mStorage.child("portadas").child(uri.getLastPathSegment());
 
-            filePath.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
 
+
+            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri uriFoto = taskSnapshot.getDownload;
+
+                    Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
                 }
             });
+
 
         }
     }
