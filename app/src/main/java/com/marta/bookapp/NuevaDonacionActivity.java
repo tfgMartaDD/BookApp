@@ -19,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,7 +40,8 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     Spinner claseSpin;
     Spinner cursoSpin;
     Spinner editorialSpin;
-    //TextView libroTextView;
+
+    TextView imagenTV;
 
     Button donarBTN, menuBTN;
     ImageView imagen;
@@ -50,6 +53,9 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 1;
+
+    String urlImagen;
+    String urlDefecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/portadas%2Fimagen-no-disp.png?alt=media&token=655dd067-4929-4c66-989e-4b393e90d057";
 
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,7 +72,8 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         defectoRB = findViewById(R.id.defectoRB);
         galeriaRB = findViewById(R.id.galeriaRB);
         llimagen = findViewById(R.id.llimagen);
-        //libroTextView = findViewById(R.id.libroTV);
+
+        imagenTV= findViewById(R.id.tvimagen);
 
         imagen = findViewById(R.id.imageView3);
 
@@ -113,6 +120,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
             donation.put("Editorial", editorial);
             donation.put("Usuario", actualUser);
             donation.put("Fecha",date);
+            donation.put("Imagen",urlImagen);
 
             String frase = "¿Está seguro de que quiere donar el libro de la asignatura "+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial + "?";
 
@@ -145,10 +153,19 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
     public void comprobarRB(View view){
         if(defectoRB.isChecked()){
-            llimagen.setVisibility(View.INVISIBLE);
+
+            anadirImagen.setVisibility(View.INVISIBLE);
+
+            urlImagen = urlDefecto;
+            Glide.with(NuevaDonacionActivity.this)
+                    .load(urlDefecto)
+                    .into(imagen);
+            imagenTV.setVisibility(View.VISIBLE);
+            donarBTN.setVisibility(View.VISIBLE);
 
         }else if(galeriaRB.isChecked()){
-            llimagen.setVisibility(View.VISIBLE);
+            anadirImagen.setVisibility(View.VISIBLE);
+            donarBTN.setVisibility(View.VISIBLE);
         }
     }
 
@@ -158,19 +175,24 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
 
-            Uri uri = data.getData();
+            Uri fileUri = data.getData();
 
-            StorageReference filePath = mStorage.child("portadas").child(uri.getLastPathSegment());
+            StorageReference carpeta = mStorage.child("portadas");
 
-            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
-                    Task<Uri> descarga = filePath.getDownloadUrl();
-                    System.out.println(descarga);
-                }
-            });
+            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
 
+            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                urlImagen = String.valueOf(uri);
+                System.out.println(urlImagen);
+            }));
+
+
+            Glide.with(NuevaDonacionActivity.this)
+                    .load(fileUri)
+                    .into(imagen);
+
+
+            imagenTV.setVisibility(View.VISIBLE);
 
 
             /*filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

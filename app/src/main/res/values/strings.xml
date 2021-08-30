@@ -10,8 +10,8 @@
     <string name="anadir">AÑADIR</string>
     <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
     <string name="anadir_portada">AÑADIR PORTADA</string>
-    <string name="anadir_portada_defecto">AÑADIR PORTADA POR DEFECTO</string>
-    <string name="anadir_portada_galeria">AÑADIR PORTADA DESDE GALERIA</string>
+    <string name="anadir_portada_defecto">PORTADA POR DEFECTO</string>
+    <string name="anadir_portada_galeria">DESDE GALERIA</string>
     <string name="apellido">Apellido</string>
     <string name="asignatura">ASIGNATURA</string>
     <string name="clase">CLASE</string>
@@ -35,6 +35,7 @@
     <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="fechas">FECHA PRESTAMO \n DEVOLUCION</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
+    <string name="imagen_portada_donar"> Imagen de la portada del libro que quiere donar</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="libro">LIBRO</string>
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>
@@ -73,7 +74,7 @@
     <string name="registrar_cuenta">Registrar Cuenta</string>
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
-    <string name="seleccionar">SELECCIONAR</string>
+    <string name="seleccionar_portada">SELECCIONAR PORTADA</string>
     <string name="usuario">USUARIO</string>
     <string name="volver_inicial">Volver a la pantalla inicial</string>
     <string name="volver_lista">Volver a la lista</string>

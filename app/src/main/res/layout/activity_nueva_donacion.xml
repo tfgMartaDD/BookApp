@@ -71,38 +71,42 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/tvanadir"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/rgroup"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/ll1"
         app:layout_constraintBottom_toTopOf="@id/llimagen"
-        android:text="@string/seleccionar"
-        android:onClick="comprobarRB"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <RadioGroup
-        android:id="@+id/rgroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@id/tvanadir"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll1">
-
-        <RadioButton
-            android:id="@+id/defectoRB"
+        <RadioGroup
+            android:id="@+id/rgroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/anadir_portada_defecto" />
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/galeriaRB"
+            <RadioButton
+                android:id="@+id/defectoRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anadir_portada_defecto" />
+
+            <RadioButton
+                android:id="@+id/galeriaRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anadir_portada_galeria" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/tvanadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/anadir_portada_galeria" />
-    </RadioGroup>
+            android:layout_gravity="center"
+            android:onClick="comprobarRB"
+            android:text="@string/seleccionar_portada" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llimagen"
@@ -111,9 +115,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rgroup"
+        app:layout_constraintBottom_toTopOf="@id/menuDonacion"
         android:layout_marginHorizontal="16dp"
-        android:visibility="invisible">
+        >
 
         <ImageView
             android:id="@+id/imageView3"
@@ -122,15 +126,33 @@
             android:padding="8dp"
             android:layout_weight="1"
             android:layout_margin="8dp"
-            android:contentDescription="@string/imagen_portada"/>
+            android:contentDescription="@string/imagen_portada"
+            />
 
-        <Button
-            android:id="@+id/anadirBTN"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/anadir_portada" />
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/anadirBTN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/anadir_portada"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tvimagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/imagen_portada_donar"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button
@@ -140,7 +162,8 @@
         android:text="@string/donar"
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llimagen" />
+        app:layout_constraintTop_toBottomOf="@id/llimagen"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/menuDonacion"
