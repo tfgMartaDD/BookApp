@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -29,6 +30,9 @@ public class AdminPrestamosActivity extends AppCompatActivity {
     LinearLayout ll;
     Spinner spinner1;
     RadioButton rbt, rbc;
+    String clasecurso;
+
+    Button mostrar;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -46,16 +50,21 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         ll = findViewById(R.id.llspinner);
 
+        mostrar = findViewById(R.id.buttonMostrar);
+
+
     }
 
     public void comprobarRadioButton(View view){
 
         if(rbt.isChecked()){
 
-            listViewAdminPrestamos.setVisibility(View.INVISIBLE);
-            spinner1.setVisibility(View.INVISIBLE);
+            ll.setVisibility(View.INVISIBLE);
             listaPrestamos = obtenerPrestamos();
-            listViewAdminPrestamos.setVisibility(View.VISIBLE);
+
+            adapter = new PrestAdminAdapter(this, listaPrestamos);
+            listViewAdminPrestamos.setAdapter(adapter);
+
 
         }else if(rbc.isChecked()){
 
@@ -68,19 +77,17 @@ public class AdminPrestamosActivity extends AppCompatActivity {
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
             spinner1.setAdapter(arrayAdapter);
 
+            mostrar.setOnClickListener( (View v) -> {
+                clasecurso = spinner1.getSelectedItem().toString();
+                listaPrestamos = obtenerPrestamosClases(clasecurso);
+                listViewAdminPrestamos.setVisibility(View.VISIBLE);
+
+                adapter = new PrestAdminAdapter(this, listaPrestamos);
+                listViewAdminPrestamos.setAdapter(adapter);
+
+            });
+
         }
-
-        adapter = new PrestAdminAdapter(this, listaPrestamos);
-        listViewAdminPrestamos.setAdapter(adapter);
-
-    }
-
-    public void mostrar(View view){
-
-        String clasecurso = spinner1.getSelectedItem().toString();
-
-        listaPrestamos = obtenerPrestamosClases(clasecurso);
-        listViewAdminPrestamos.setVisibility(View.VISIBLE);
 
     }
 
@@ -91,7 +98,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         db.collection("libros").whereEqualTo("Estado", "prestado").get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    System.out.println("Libro" + document.getString("Libro"));
+
                     db.collection("prestamos").whereEqualTo("Libro", document.getId()).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
@@ -123,10 +130,11 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         db.collection("libros").whereEqualTo("Estado", "prestado").whereEqualTo("Clase", clase).whereEqualTo("Curso", curso).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    System.out.println("Libro"+document.getString("Libro") );
+
                     db.collection("prestamos").whereEqualTo("Libro",document.getId()).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+
                                 Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                                         document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"),(R.drawable.imagen_no_disp));
                                 Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
