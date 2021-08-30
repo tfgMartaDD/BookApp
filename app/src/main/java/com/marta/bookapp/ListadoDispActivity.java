@@ -103,6 +103,7 @@ public class ListadoDispActivity extends AppCompatActivity {
             reserva.put("Donante",libro.getDonante());
             reserva.put("Editorial",libro.getEditorial());
             reserva.put("Estado", "reservado");
+            reserva.put("Imagen", libro.getImagen());
 
 
             libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
@@ -146,7 +147,7 @@ public class ListadoDispActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                                    document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                                    document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
                             //,(int)document.get("imagen"));*/
                             listaLibro.add(libro);
                             adapter.notifyDataSetChanged();

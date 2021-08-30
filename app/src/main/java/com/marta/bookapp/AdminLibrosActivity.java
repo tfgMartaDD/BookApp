@@ -67,7 +67,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                                document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                                document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                         lista.add(libro);
                         adapter.notifyDataSetChanged();
@@ -79,7 +79,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                                document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                                document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                         lista.add(libro);
                         adapter.notifyDataSetChanged();

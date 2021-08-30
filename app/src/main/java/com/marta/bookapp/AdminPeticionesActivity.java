@@ -106,6 +106,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 libro.put("Estado", "prestado");
                 libro.put("Donante", p.getEmailUsuario());
                 libro.put("Fecha",date);
+                libro.put("Imagen",l.getImagen());
 
                 db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA.\n . ", Toast.LENGTH_SHORT).show() );
@@ -169,6 +170,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 libro.put("Estado", "prestado");
                 libro.put("Donante", p.getEmailUsuario());
                 libro.put("Fecha", date);
+                libro.put("Imagen",l.getImagen());
 
                 db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICIONES ACEPTADAS. ", Toast.LENGTH_LONG).show() );
@@ -208,7 +210,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
-                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
+                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"), document2.getString("Imagen"));
                                 System.out.println("asig:"+libro.getAsignatura());
                                 DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"), libro, document.getDate("Fecha"));
                                 lista.add(donacion);

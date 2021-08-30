@@ -106,6 +106,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 libro.put("Estado", "disponible");
                 libro.put("Donante", d.getEmailUsuario());
                 libro.put("Fecha",date);
+                libro.put("Imagen", l.getImagen());
 
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
@@ -160,6 +161,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 libro.put("Estado", "disponible");
                 libro.put("Donante", d.getEmailUsuario());
                 libro.put("Fecha",date);
+                libro.put("Imagen",l.getImagen());
 
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminDonacionesActivity.this, "DONACIONES ACEPTADAS.\n Libros añadidos a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
@@ -185,7 +187,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                            document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                            document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                     DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
                             libro, document.getDate("Fecha"));

@@ -52,7 +52,6 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         mostrar = findViewById(R.id.buttonMostrar);
 
-
     }
 
     public void comprobarRadioButton(View view){
@@ -103,7 +102,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                 Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                                        document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), (R.drawable.imagen_no_disp));
+                                        document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
                                 Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
                                         document2.getDate("FechaPrestamo"), document2.getDate("FechaDevolucion"));
 
@@ -136,7 +135,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                 Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
-                                        document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"),(R.drawable.imagen_no_disp));
+                                        document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
                                 Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
                                         document2.getDate("FechaPrestamo"), document2.getDate("FechaDevolucion"));
 

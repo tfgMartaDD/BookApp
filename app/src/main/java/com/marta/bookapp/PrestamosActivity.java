@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -76,7 +77,11 @@ public class PrestamosActivity extends AppCompatActivity {
 
             System.out.println(p.getFechaDev().toString());
             System.out.println("ppppp " +fechaDev.getText());
-            imagen.setImageResource(l.getImagen());
+
+            Glide.with(PrestamosActivity.this)
+                    .load(l.getImagen())
+                    .into(imagen);
+            //imagen.setImageResource(l.getImagen());
 
             linearLayout.setVisibility(View.VISIBLE);
             seleccion.setVisibility(View.VISIBLE);
@@ -95,7 +100,7 @@ public class PrestamosActivity extends AppCompatActivity {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
-                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
+                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"), document2.getString("Imagen"));
 
 
                                 Prestamo p = new Prestamo(document.getId(), libro, document.getString("Usuario"),

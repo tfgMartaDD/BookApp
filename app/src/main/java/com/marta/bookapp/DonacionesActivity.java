@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -83,7 +84,11 @@ public class DonacionesActivity extends AppCompatActivity {
             e.setVisibility(View.VISIBLE);
             don.setVisibility(View.VISIBLE);
 
-            imagen.setImageResource(l.getImagen());
+            Glide.with(DonacionesActivity.this)
+                    .load(l.getImagen())
+                    .into(imagen);
+
+            //imagen.setImageResource(l.getImagen());
             asignatura.setText(l.getAsignatura());
 
             String clasecurso = l.getClase() +" " +l.getCurso();
@@ -135,7 +140,7 @@ public class DonacionesActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())) {
                     Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"),
-                            query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), (R.drawable.imagen_no_disp));
+                            query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), query.getString("Imagen"));
 
                     lista.add(libro);
                     adapter.notifyDataSetChanged();

@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
@@ -54,7 +56,11 @@ public class ListAdapter extends BaseAdapter {
         claseTextV = convertView.findViewById(R.id.claseTV);
         editorialTextV = convertView.findViewById(R.id.editorialTV);
 
-        portada.setImageResource(l.getImagen());
+        //portada.setImageResource(l.getImagen());
+        Glide.with(context)
+                .load(l.getImagen())
+                .into(portada);
+
         asignaturaTextV.setText(l.getAsignatura());
 
         String clasecurso = l.getClase() +" " +l.getCurso();

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookApp">
         <activity
-            android:name=".AccesoAdminActivity"
-            android:exported="true" />
-        <activity
             android:name=".AdminLibrosActivity"
             android:exported="true" />
         <activity

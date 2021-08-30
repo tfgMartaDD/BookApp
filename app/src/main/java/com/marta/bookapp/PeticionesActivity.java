@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -76,7 +77,11 @@ public class PeticionesActivity extends AppCompatActivity {
 
             String mostrar = l.getAsignatura() + "\t\t" + l.getClase() + "  " + l.getCurso() + "\t\t" + l.getEditorial();
             mostrarTV.setText(mostrar);
-            imagen.setImageResource(l.getImagen());
+
+            Glide.with(PeticionesActivity.this)
+                    .load(l.getImagen())
+                    .into(imagen);
+            //imagen.setImageResource(l.getImagen());
 
             seleccion.setVisibility(View.VISIBLE);
             campos.setVisibility(View.VISIBLE);
@@ -129,7 +134,7 @@ public class PeticionesActivity extends AppCompatActivity {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
-                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),(R.drawable.imagen_no_disp));
+                                        document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),document2.getString("Imagen"));
 
                                 DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
                                 listaPeticion.add(donacion);

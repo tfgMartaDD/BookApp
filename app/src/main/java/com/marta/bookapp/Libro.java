@@ -3,9 +3,9 @@ package com.marta.bookapp;
 public class Libro {
 
     String id, asignatura, clase, curso, donante, editorial, estado;
-    int imagen;
+    String imagen;
 
-    public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, int imagen) {
+    public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen) {
         this.id = id;
         this.asignatura = asignatura;
         this.clase = clase;
@@ -16,7 +16,7 @@ public class Libro {
         this.imagen = imagen;
     }
 
-    public Libro(String asignatura, String clase, String curso, String donante, String editorial, String estado, int imagen) {
+    public Libro(String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen) {
         this.asignatura = asignatura;
         this.clase = clase;
         this.curso = curso;
@@ -26,11 +26,11 @@ public class Libro {
         this.imagen = imagen;
     }
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
