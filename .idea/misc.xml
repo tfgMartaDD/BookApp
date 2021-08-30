@@ -7,6 +7,7 @@
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_acceso_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_admin_donaciones.xml" value="0.22" />
+        <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_admin_libros.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_admin_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_admin_peticiones.xml" value="0.22" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/activity_admin_prestamos.xml" value="0.21851851851851853" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/listview_admin_prestamos_usuario.xml" value="0.1" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/listview_donaciones.xml" value="0.14947916666666666" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/listview_libros.xml" value="0.15" />
+        <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/listview_listalibros.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/martu/AndroidStudioProjects/BookApp/app/src/main/res/layout/listview_prestamos.xml" value="0.15729166666666666" />
       </map>
     </option>
