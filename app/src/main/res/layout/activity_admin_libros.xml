@@ -17,11 +17,26 @@
         android:text="@string/lista_libros" />
 
 
-    <Spinner
-        android:id="@+id/spinnerLL"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="16dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="16dp">
+
+        <Spinner
+            android:id="@+id/spinnerLL"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="listar"
+            android:text="@string/listar" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

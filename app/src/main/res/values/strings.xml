@@ -46,6 +46,7 @@
     <string name="menu_admin">MENU ADMINISTRADORES</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
+    <string name="mostrar">MOSTRAR</string>
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="name_app"> BOOK APP!</string>
     <string name="nombre">Nombre</string>

@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,6 +26,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
     ListView listViewAdminPrestamos;
     List<Prestamo> listaPrestamos = new ArrayList<>();
 
+    LinearLayout ll;
     Spinner spinner1;
     RadioButton rbt, rbc;
 
@@ -45,6 +44,8 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         spinner1 = findViewById(R.id.spinner1);
 
+        ll = findViewById(R.id.llspinner);
+
     }
 
     public void comprobarRadioButton(View view){
@@ -58,7 +59,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         }else if(rbc.isChecked()){
 
-            spinner1.setVisibility(View.VISIBLE);
+            ll.setVisibility(View.VISIBLE);
             listViewAdminPrestamos.setVisibility(View.INVISIBLE);
 
             String [] opciones = {"PRIMERO PRIMARIA", "SEGUNDO PRIMARIA", "TERCERO PRIMARIA", "CUARTO PRIMARIA", "QUINTO PRIMARIA", "SEXTO PRIMARIA",
@@ -67,14 +68,19 @@ public class AdminPrestamosActivity extends AppCompatActivity {
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
             spinner1.setAdapter(arrayAdapter);
 
-            String clasecurso = spinner1.getSelectedItem().toString();
-
-            listaPrestamos = obtenerPrestamosClases(clasecurso);
-            listViewAdminPrestamos.setVisibility(View.VISIBLE);
         }
 
         adapter = new PrestAdminAdapter(this, listaPrestamos);
         listViewAdminPrestamos.setAdapter(adapter);
+
+    }
+
+    public void mostrar(View view){
+
+        String clasecurso = spinner1.getSelectedItem().toString();
+
+        listaPrestamos = obtenerPrestamosClases(clasecurso);
+        listViewAdminPrestamos.setVisibility(View.VISIBLE);
 
     }
 
