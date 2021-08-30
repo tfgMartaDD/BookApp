@@ -2,7 +2,6 @@ package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -165,16 +162,23 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
             StorageReference filePath = mStorage.child("portadas").child(uri.getLastPathSegment());
 
-
-
             filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri uriFoto = taskSnapshot.getDownload;
-
                     Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
+                    Task<Uri> descarga = filePath.getDownloadUrl();
+                    System.out.println(descarga);
                 }
             });
+
+
+
+            /*filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(NuevaDonacionActivity.this, "Imagen subida correctamente ", Toast.LENGTH_SHORT).show();
+                }
+            });*/
 
 
         }
