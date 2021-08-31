@@ -6,25 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".EscaneoActivity">
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
-        app:flashButtonVisible="true"
-        app:maskColor="#6C000000"/>
-
-    <TextView
-        android:id="@+id/textviewScanner"
+    <Button
+        android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scanner"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
         android:text="@string/escanea"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:layout_centerInParent="true"/>
+
 
 </RelativeLayout>

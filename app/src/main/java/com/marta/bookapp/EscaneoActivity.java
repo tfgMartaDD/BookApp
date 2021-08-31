@@ -1,76 +1,71 @@
 package com.marta.bookapp;
 
-import androidx.annotation.NonNull;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.budiyev.android.codescanner.CodeScanner;
-import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
-import com.google.zxing.Result;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 
 public class EscaneoActivity extends AppCompatActivity {
 
-    private CodeScanner mCodeScanner;
-    private final int CAMERA_REQUEST_CODE = 101;
-    CodeScannerView scannerView;
+   Button scanBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escaneo);
 
-        scannerView = findViewById(R.id.scanner);
-        mCodeScanner = new CodeScanner(this, scannerView);
-
-        mCodeScanner.apply
-
-        //codeScanner();
-
-    }
-
-    private void codeScanner(){
-
-        
-    }
-
-        /*CodeScannerView scannerView = findViewById(R.id.scanner);
-        mCodeScanner = new CodeScanner(this, scannerView);
-        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+        scanBTN = findViewById(R.id.scanButton);
+        scanBTN.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDecoded(@NonNull final Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(EscaneoActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            public void onClick(View v) {
+                IntentIntegrator intentIntegrator = new IntentIntegrator( EscaneoActivity.this);
+
+                intentIntegrator.setPrompt("Utiliza las teclas de volumen para activar el flash");
+
+                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.setOrientationLocked(true);
+                //set capture activity
+                intentIntegrator.setCaptureActivity(Capture.class);
+
+                intentIntegrator.initiateScan();
             }
         });
-        scannerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCodeScanner.startPreview();
-            }
-        });
+
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mCodeScanner.startPreview();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Initialize intent result
+
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        //check condition
+        if(intentResult.getContents() != null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(EscaneoActivity.this);
+            builder.setTitle("Resultado del escaneo");
+            builder.setMessage(intentResult.getContents());
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }else{
+            Toast.makeText(getApplicationContext(), "No has escaneado nada.", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    @Override
-    protected void onPause() {
-        mCodeScanner.releaseResources();
-        super.onPause();
-    }*/
-
-
-
 }
