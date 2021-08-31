@@ -12,7 +12,7 @@ import android.widget.Button;
 public class AdminMenuActivity extends AppCompatActivity {
 
     Button peticionesBTN, donacionesBTN, prestamosBTN, librosBTN;
-    Button cerrarSesion;
+    Button cerrarSesion, scannerBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +47,10 @@ public class AdminMenuActivity extends AppCompatActivity {
         cerrarSesion = findViewById(R.id.cerraradmin);
         cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(AdminMenuActivity.this));
 
+        scannerBTN = findViewById(R.id.scannerbutton);
+        scannerBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (AdminMenuActivity.this, EscaneoActivity.class);
+            startActivity(in);
+        });
     }
 }

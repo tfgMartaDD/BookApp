@@ -28,6 +28,7 @@
     <string name="eliminar">ELIMINAR</string>
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>
+    <string name="escanea">ESCANEA ALGO…</string>
     <string name="estado">ESTADO</string>
     <string name="fecha_devolucion">FECHA DEVOLUCION</string>
     <string name="fecha_donacion">FECHA DONACION</string>
@@ -37,6 +38,7 @@
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="imagen_portada_donar"> Imagen de la portada del libro que quiere donar</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
+    <string name="ir_escaner">IR A ESCANER</string>
     <string name="libro">LIBRO</string>
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>

@@ -19,6 +19,7 @@
       android:layout_marginTop="16dp"/>
 
   <TableLayout
+      android:id="@+id/table"
       android:layout_width="match_parent"
       android:layout_height="400dp"
       android:layout_margin="8dp"
@@ -73,16 +74,30 @@
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="horizontal">
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginHorizontal="12dp"
+      app:layout_constraintTop_toBottomOf="@id/table"
+      app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
-        android:id="@+id/cerraradmin"
-        android:layout_width="wrap_content"
+        android:id="@+id/scannerbutton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/cerrar_sesion"
-        android:layout_gravity="bottom"
-        android:layout_margin="8dp"  />
+        android:layout_weight="1"
+        android:text="@string/ir_escaner"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <Button
+        android:id="@+id/cerraradmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/cerrar_sesion"/>
+
 
   </LinearLayout>
 
