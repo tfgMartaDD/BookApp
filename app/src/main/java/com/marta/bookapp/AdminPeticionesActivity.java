@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +36,8 @@ public class AdminPeticionesActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     Button aceptar, rechazar, aceptarTodas;
 
+    EditText fechaEditText;
+
     TextView asignatura, clase, editorial, usuario, fecha;
     TextView tv;
 
@@ -45,6 +49,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
     int i = 0;
     boolean b = false;
+    String fechaDevolucion = "25 / 6 / 2022";
 
 
     @Override
@@ -52,6 +57,14 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_peticiones);
 
+        fechaEditText = findViewById(R.id.etFecha);
+        fechaEditText.setOnClickListener( (View v) -> {
+            switch (v.getId()) {
+                case R.id.etFecha:
+                    showDatePickerDialog();
+                    break;
+            }
+        });
 
         linearLayout = findViewById(R.id.ll5);
         tv = findViewById(R.id.peticionestv);
@@ -111,16 +124,16 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA.\n . ", Toast.LENGTH_SHORT).show() );
 
-                Date fechaDev = new Date(2022,6,25);
+                //Date fechaDev = new Date(2022,6,25);
 
                 Map<String, Object> prestamo = new HashMap<>();
                 prestamo.put("Libro", l.getId());
                 prestamo.put("Usuario", p.getEmailUsuario());
                 prestamo.put("FechaPrestamo", date);
-                prestamo.put("FechaDevolucion", fechaDev);
+                prestamo.put("FechaDevolucion", fechaDevolucion);
 
                 db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDev, Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDevolucion, Toast.LENGTH_LONG).show() );
 
                 db.collection("peticiones").document(p.getId()).delete();
 
@@ -175,16 +188,16 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminPeticionesActivity.this, "PETICIONES ACEPTADAS. ", Toast.LENGTH_LONG).show() );
 
-                Date fechaDev = new Date(2022,6,25);
+                //Date fechaDev = new Date(2022,6,25);
 
                 Map<String, Object> prestamo = new HashMap<>();
                 prestamo.put("Libro", l.getId());
                 prestamo.put("Usuario", p.getEmailUsuario());
                 prestamo.put("FechaPrestamo", date);
-                prestamo.put("FechaDevolucion", fechaDev);
+                prestamo.put("FechaDevolucion", fechaDevolucion);
 
                 db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDev, Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDevolucion, Toast.LENGTH_LONG).show() );
 
                 db.collection("peticiones").document(p.getId()).delete();
 
@@ -196,6 +209,17 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void showDatePickerDialog() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance( (DatePicker datePicker, int year, int month, int day) -> {
+            // +1 because January is zero
+            final String selectedDate = day + " / " + (month+1) + " / " + year;
+            fechaEditText.setText(selectedDate);
+            fechaDevolucion = selectedDate;
+        });
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
 
@@ -219,12 +243,11 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                             }
                         }
                     });
-
                 }
             }
         });
 
         return  lista;
-
     }
+
 }

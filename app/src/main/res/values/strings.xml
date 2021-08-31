@@ -3,8 +3,10 @@
 
     <!-- botones, editText, etc -->
     <string name="acceder">ACCEDER</string>
+    <string name="aceptar">ACEPTAR</string>
     <string name="aceptar_donacion">ACEPTAR DONACION</string>
     <string name="aceptar_peticion">ACEPTAR PETICION</string>
+    <string name="aceptar_todas">ACEPTAR TODAS</string>
     <string name="aceptar_todas_donaciones">ACEPTAR TODAS LAS DONACIONES</string>
     <string name="aceptar_todas_peticiones">ACEPTAR TODAS LAS PETICIONES</string>
     <string name="anadir">AÑADIR</string>
@@ -70,6 +72,7 @@
     <string name="portada">PORTADA</string>
     <string name="recuperar_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="registro">SOY NUEVO, QUIERO REGISTRARME</string>
+    <string name="rechazar">RECHAZAR</string>
     <string name="rechazar_donacion">RECHAZAR DONACION</string>
     <string name="rechazar_peticion">RECHAZAR PETICION</string>
     <string name="registrar">REGISTRAR</string>
