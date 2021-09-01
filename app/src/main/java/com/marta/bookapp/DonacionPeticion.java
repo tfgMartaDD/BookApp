@@ -7,13 +7,15 @@ public class DonacionPeticion {
     String emailUsuario;
     Libro libro;
     Date fecha;
+    String idPendiente;
 
 
-    public DonacionPeticion(String id, String emailUsuario, Libro libro, Date fecha) {
+    public DonacionPeticion(String id, String emailUsuario, Libro libro, Date fecha, String idPendiente) {
         this.id = id;
         this.emailUsuario = emailUsuario;
         this.libro = libro;
         this.fecha = fecha;
+        this.idPendiente = idPendiente;
     }
 
     public String getId() {
@@ -48,5 +50,11 @@ public class DonacionPeticion {
         this.fecha = fecha;
     }
 
+    public String getIdPendiente() {
+        return idPendiente;
+    }
 
+    public void setIdPendiente(String idPendiente) {
+        this.idPendiente = idPendiente;
+    }
 }

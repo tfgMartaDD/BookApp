@@ -75,8 +75,7 @@ public class DonacionesActivity extends AppCompatActivity {
         don = findViewById(R.id.donacionSelec);
 
         listViewDonaciones.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
-            //DonacionPeticion d = listaDonacion.get(position);
-            //Libro l = d.getLibro();
+
             Libro l = listaDonacion.get(position);
 
             a.setVisibility(View.VISIBLE);
@@ -100,39 +99,6 @@ public class DonacionesActivity extends AppCompatActivity {
 
     }
 
-    /*public List<DonacionPeticion> obtenerMisDonaciones(String user){
-        List<DonacionPeticion> lista = new ArrayList<>();
-
-
-        //CollectionReference libros = db.collection("libros");
-        CollectionReference donaciones = db.collection("donaciones");
-        donaciones.whereEqualTo("Usuario",user).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    String libroID = document.getString("Libro");
-
-                    CollectionReference libros = db.collection("libros");
-                    libros.whereEqualTo(FieldPath.documentId(),libroID).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task2) -> {
-                        if (task2.isSuccessful()) {
-                            for (QueryDocumentSnapshot query : Objects.requireNonNull(task2.getResult())) {
-                                Libro libro = new Libro(query.getId(), query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"),
-                                        query.getString("Donante"), query.getString("Editorial"), query.getString("Estado"), (R.drawable.imagen_no_disp));
-
-                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
-                                        libro, document.getDate("Fecha"));
-                                listaDonacion.add(donacion);
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
-                }
-            }else {
-                Toast.makeText(DonacionesActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
-            }
-        });
-        return lista;
-    }
-    */
     public List<Libro> obtenerMisDonaciones(String user){
         List<Libro> lista = new ArrayList<>();
 

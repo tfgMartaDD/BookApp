@@ -124,6 +124,9 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
                 //Date fechaDev = new Date(2022,6,25);
 
+
+                db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Aceptada");
+
                 Map<String, Object> prestamo = new HashMap<>();
                 prestamo.put("Libro", l.getId());
                 prestamo.put("Usuario", p.getEmailUsuario());
@@ -150,13 +153,16 @@ public class AdminPeticionesActivity extends AppCompatActivity {
             String frase = "¿Estás seguro de que desea rechazar la peticion de "+ p.getEmailUsuario()+" ? ";
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(AdminPeticionesActivity.this);
-            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) ->
+            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) ->{
                 db.collection("peticiones").document(p.getId()).delete().addOnSuccessListener( (Void unused) -> {
                     Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
                     listaPeticiones.remove(i);
                     adapter.notifyDataSetChanged();
-                })
-            ).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+                });
+
+                db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Rechazada");
+
+            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.setTitle("¿ESTAS SEGURO?");
@@ -198,6 +204,8 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
                 db.collection("peticiones").document(p.getId()).delete();
 
+                db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Aceptada");
+
             }
             listaPeticiones.clear();
             adapter.notifyDataSetChanged();
@@ -233,7 +241,8 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
                                         document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"), document2.getString("Imagen"));
                                 System.out.println("asig:"+libro.getAsignatura());
-                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"), libro, document.getDate("Fecha"));
+                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
+                                        libro, document.getDate("Fecha"), document.getString("idPendiente"));
                                 lista.add(donacion);
                                 adapter.notifyDataSetChanged();
 

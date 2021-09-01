@@ -91,11 +91,10 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         });
 
         aceptar.setOnClickListener( (View v) -> {
-            if(b){
+            //if(b){
                 DonacionPeticion d = listaDonaciones.get(i);
                 Libro l = d.getLibro();
 
-                //
                 Date date = new Date();
 
                 Map<String, Object> libro = new HashMap<>();
@@ -111,6 +110,8 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
 
+                db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
+
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
 
                 listaDonaciones.remove(i);
@@ -118,7 +119,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 linearLayout.setVisibility(View.INVISIBLE);
                 tv.setVisibility(View.INVISIBLE);
 
-            }
+           // }
 
         });
 
@@ -135,6 +136,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                     listaDonaciones.remove(i);
                     adapter.notifyDataSetChanged();
                 });
+                db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Rechazada");
 
             }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminDonacionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
@@ -166,6 +168,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
                         Toast.makeText(AdminDonacionesActivity.this, "DONACIONES ACEPTADAS.\n Libros añadidos a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
 
+                db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
 
             }
@@ -190,14 +193,12 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                             document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                     DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
-                            libro, document.getDate("Fecha"));
+                            libro, document.getDate("Fecha"), document.getString("idPendiente"));
                     lista.add(donacion);
                     adapter.notifyDataSetChanged();
                 }
             }
         });
-
         return  lista;
-
     }
 }

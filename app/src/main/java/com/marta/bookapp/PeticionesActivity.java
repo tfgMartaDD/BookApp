@@ -103,6 +103,7 @@ public class PeticionesActivity extends AppCompatActivity {
 
                 db.collection("peticiones").document(reserva.getId()).delete();
 
+                db.collection("pendientes").document(reserva.getIdPendiente()).delete();
 
                 db.collection("libros").document(li.getId()).update("Estado","disponible").addOnSuccessListener( (Void unused) -> {
                     listaPeticion.remove(i);
@@ -111,10 +112,7 @@ public class PeticionesActivity extends AppCompatActivity {
                     volverAMenu(PeticionesActivity.this);
                 });
 
-            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                }
-            });
+            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  dialog.dismiss() );
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.setTitle("¿ESTAS SEGURO?");
@@ -136,7 +134,8 @@ public class PeticionesActivity extends AppCompatActivity {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
                                         document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"),document2.getString("Imagen"));
 
-                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"), libro, document.getDate("Fecha"));
+                                DonacionPeticion donacion = new DonacionPeticion(document.getId(), document2.getString("Usuario"),
+                                        libro, document.getDate("Fecha"), document.getString("idPendiente"));
                                 listaPeticion.add(donacion);
                                 adapter.notifyDataSetChanged();
 

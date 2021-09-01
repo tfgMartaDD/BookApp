@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,6 +54,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 1;
 
+    String idPendiente;
     String urlImagen;
     String urlDefecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/portadas%2Fno-image.png?alt=media&token=0a85d958-6e7a-4aa6-93f7-ef7d241d59de";
 
@@ -118,27 +121,39 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                 prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
                 String actualUser = prefs.getString("email", "");
 
-                Date date = new Date();
-
-                Map<String, Object> donation = new HashMap<>();
-                donation.put("Asignatura", asignatura);
-                donation.put("Clase", clase);
-                donation.put("Curso", curso);
-                donation.put("Editorial", editorial);
-                donation.put("Usuario", actualUser);
-                donation.put("Fecha", date);
-                donation.put("Imagen", urlImagen);
-
                 String frase = "¿Está seguro de que quiere donar el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
-
 
                 AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
                 alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+
+                    Date date = new Date();
+
+                    Map<String, Object> pendiente = new HashMap<>();
+                    pendiente.put("Asignatura", asignatura);
+                    pendiente.put("esPeticion","false");
+                    pendiente.put("Clase",clase);
+                    pendiente.put("Curso",curso);
+                    pendiente.put("Estado", "Pendiente");
+                    pendiente.put("Usuario",actualUser);
+
+                    db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->
+                            idPendiente = documentReference.getId());
+
+
+                    Map<String, Object> donation = new HashMap<>();
+                    donation.put("Asignatura", asignatura);
+                    donation.put("Clase", clase);
+                    donation.put("Curso", curso);
+                    donation.put("Editorial", editorial);
+                    donation.put("Usuario", actualUser);
+                    donation.put("Fecha", date);
+                    donation.put("Imagen", urlImagen);
+                    donation.put("idPendiente", idPendiente);
+
                     db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
                         Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
                         volverAMenu(NuevaDonacionActivity.this);
                     });
-
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
 
                 AlertDialog alertDialog = alerta.create();

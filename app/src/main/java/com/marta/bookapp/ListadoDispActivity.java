@@ -106,9 +106,19 @@ public class ListadoDispActivity extends AppCompatActivity {
             reserva.put("Imagen", libro.getImagen());
 
 
-            libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
-                    Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show());
+            libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) -> {
+                Map<String, Object> pendiente = new HashMap<>();
+                pendiente.put("Asignatura", libro.getAsignatura());
+                pendiente.put("esPeticion","true");
+                pendiente.put("Clase", libro.getClase());
+                pendiente.put("Curso",libro.getCurso());
+                pendiente.put("Estado", "pendiente");
+                pendiente.put("Usuario",actualUser);
 
+                db.collection("pendientes").add(pendiente);
+
+                Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show();
+            });
             Date date = new Date();
 
             Map<String, Object> peticion= new HashMap<>();
