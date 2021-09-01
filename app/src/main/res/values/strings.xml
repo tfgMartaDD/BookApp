@@ -47,6 +47,7 @@
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>
     <string name="listado_cursos">LISTADO POR CURSOS</string>
     <string name="lista_libros">LISTA DE LIBROS</string>
+    <string name="lista_users">LISTA USUARIOS</string>
     <string name="listar">LISTAR</string>
     <string name="listar_clases">LISTAR POR CLASES</string>
     <string name="listar_todos">LISTAR TODOS</string>
@@ -55,6 +56,7 @@
     <string name="menu_admin">MENU ADMINISTRADORES</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
+    <string name="modo_usuarios">CAMBIAR A \n MODO USUARIOS</string>
     <string name="mostrar">MOSTRAR</string>
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="name_app"> BOOK APP!</string>

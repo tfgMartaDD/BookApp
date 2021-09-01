@@ -1,6 +1,7 @@
 package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.cerrarSesion;
+import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,7 @@ public class AdminMenuActivity extends AppCompatActivity {
 
     Button peticionesBTN, donacionesBTN, prestamosBTN, librosBTN;
     Button cerrarSesion, scannerBTN;
+    Button cambiarBTN, listaBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +54,15 @@ public class AdminMenuActivity extends AppCompatActivity {
             Intent in = new Intent (AdminMenuActivity.this, EscaneoActivity.class);
             startActivity(in);
         });
+
+        cambiarBTN = findViewById(R.id.cambiarBTN);
+        cambiarBTN.setOnClickListener( (View v) -> volverAMenu(AdminMenuActivity.this));
+
+        listaBTN = findViewById(R.id.listaUsersBTN);
+        listaBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (AdminMenuActivity.this, AdminUsuariosActivity.class);
+            startActivity(in);
+        });
+
     }
 }
