@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -19,6 +21,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class EscaneoActivity extends AppCompatActivity {
 
    Button scanBTN;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class EscaneoActivity extends AppCompatActivity {
 
         //check condition
         if(intentResult.getContents() != null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(EscaneoActivity.this);
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(EscaneoActivity.this);
             builder.setTitle("Resultado del escaneo");
             builder.setMessage(intentResult.getContents());
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -63,7 +66,15 @@ public class EscaneoActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
-            builder.show();
+            builder.show();*/
+            String user = intentResult.getContents();
+            String email = user.replaceAll("http://","");
+            db.collection("users").document(user).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
+                Intent in = new Intent (this,UsuarioScanActivity.class);
+                in.putExtra("email",email);
+                startActivity(in);
+            });
+
         }else{
             Toast.makeText(getApplicationContext(), "No has escaneado nada.", Toast.LENGTH_SHORT).show();
         }
