@@ -14,77 +14,126 @@
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="16dp"/>
 
-    <LinearLayout
-        android:id="@+id/ll1"
+    <TextView
+        android:id="@+id/textView16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="vertical"
+        android:text="@string/deseo_donar"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView17">
+        android:layout_margin="8dp"/>
 
-        <TextView
-            android:id="@+id/textView16"
+    <LinearLayout
+        android:id="@+id/agrupacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textView16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/asignatura"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/clase"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/curso"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/editorial"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/deseo_donar" />
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/asigSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            <Spinner
+                android:id="@+id/asigSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+            <Spinner
+                android:id="@+id/claseSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-        <Spinner
-            android:id="@+id/claseSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            <Spinner
+                android:id="@+id/cursoSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+            <Spinner
+                android:id="@+id/editorialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <Spinner
-            android:id="@+id/cursoSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <Spinner
-            android:id="@+id/editorialSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/ll1"
+        app:layout_constraintTop_toBottomOf="@id/agrupacion"
         app:layout_constraintBottom_toTopOf="@id/llimagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioGroup
             android:id="@+id/rgroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:layout_marginStart="4dp">
 
             <RadioButton
                 android:id="@+id/defectoRB"
@@ -101,9 +150,11 @@
 
         <Button
             android:id="@+id/tvanadir"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:layout_gravity="center"
+            android:layout_margin="8dp"
             android:onClick="comprobarRB"
             android:text="@string/seleccionar_portada" />
     </LinearLayout>
@@ -147,9 +198,7 @@
                 android:id="@+id/tvimagen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/imagen_portada_donar"
-                android:layout_marginTop="4dp"
-                android:visibility="invisible"/>
+                android:layout_marginTop="4dp"/>
 
         </LinearLayout>
 
@@ -174,15 +223,7 @@
         app:layout_constraintTop_toBottomOf="@id/llimagen"
         android:layout_margin="16dp"/>
 
-    <!--<TextView
-        android:id="@+id/libroTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/donarButton"
-        android:gravity="bottom"/>-->
+
 
 
 

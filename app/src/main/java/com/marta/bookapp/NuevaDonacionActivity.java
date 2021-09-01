@@ -53,7 +53,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     private static final int GALLERY_INTENT = 1;
 
     String urlImagen;
-    String urlDefecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/portadas%2Fimagen-no-disp.png?alt=media&token=655dd067-4929-4c66-989e-4b393e90d057";
+    String urlDefecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/portadas%2Fno-image.png?alt=media&token=0a85d958-6e7a-4aa6-93f7-ef7d241d59de";
 
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -101,40 +101,50 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         donarBTN = findViewById(R.id.donarButton);
         donarBTN.setOnClickListener( (View v) -> {
-            String asignatura = asigSpin.getSelectedItem().toString();
-            String clase = claseSpin.getSelectedItem().toString();
-            String curso = cursoSpin.getSelectedItem().toString();
-            String editorial = editorialSpin.getSelectedItem().toString();
+            String claseTemp = claseSpin.getSelectedItem().toString();
+            String cursoTemp = cursoSpin.getSelectedItem().toString();
 
-            prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-            String actualUser = prefs.getString("email","");
+            if( (claseTemp.equalsIgnoreCase("QUINTO") && ((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
+                    || ((claseTemp.equalsIgnoreCase("SEXTO"))&&((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
+            || ((cursoTemp.equalsIgnoreCase("BACHILLERATO")) && ((claseTemp.equalsIgnoreCase("TERCERO")) || (claseTemp.equalsIgnoreCase("CUARTO"))))){
+                Toast.makeText(NuevaDonacionActivity.this,"DEBE SELECCIONAR UNA CLASE Y CURSOS VÁLIDOS.",Toast.LENGTH_LONG).show();
 
-            Date date = new Date();
+            }else {
+                String asignatura = asigSpin.getSelectedItem().toString();
+                String clase = claseSpin.getSelectedItem().toString();
+                String curso = cursoSpin.getSelectedItem().toString();
+                String editorial = editorialSpin.getSelectedItem().toString();
 
-            Map<String, Object> donation = new HashMap<>();
-            donation.put("Asignatura", asignatura);
-            donation.put("Clase", clase);
-            donation.put("Curso", curso);
-            donation.put("Editorial", editorial);
-            donation.put("Usuario", actualUser);
-            donation.put("Fecha",date);
-            donation.put("Imagen",urlImagen);
+                prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+                String actualUser = prefs.getString("email", "");
 
-            String frase = "¿Está seguro de que quiere donar el libro de la asignatura "+ asignatura +" del curso "+clase +" " +curso+" de la editorial "+ editorial + "?";
+                Date date = new Date();
+
+                Map<String, Object> donation = new HashMap<>();
+                donation.put("Asignatura", asignatura);
+                donation.put("Clase", clase);
+                donation.put("Curso", curso);
+                donation.put("Editorial", editorial);
+                donation.put("Usuario", actualUser);
+                donation.put("Fecha", date);
+                donation.put("Imagen", urlImagen);
+
+                String frase = "¿Está seguro de que quiere donar el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
 
 
-            AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
-            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
-                db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener( (Void unused) -> {
-                    Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                    volverAMenu(NuevaDonacionActivity.this);
-                });
+                AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
+                alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+                    db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
+                        Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                        volverAMenu(NuevaDonacionActivity.this);
+                    });
 
-            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
+                }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
 
-            AlertDialog alertDialog = alerta.create();
-            alertDialog.setTitle("¿ESTAS SEGURO?");
-            alertDialog.show();
+                AlertDialog alertDialog = alerta.create();
+                alertDialog.setTitle("¿ESTAS SEGURO?");
+                alertDialog.show();
+            }
 
         });
 
@@ -158,7 +168,9 @@ public class NuevaDonacionActivity extends AppCompatActivity {
             Glide.with(NuevaDonacionActivity.this)
                     .load(urlDefecto)
                     .into(imagen);
-            imagenTV.setVisibility(View.VISIBLE);
+            String frase ="Portada no disponible";
+            imagenTV.setText(frase);
+            //imagenTV.setVisibility(View.VISIBLE);
             donarBTN.setVisibility(View.VISIBLE);
 
         }else if(galeriaRB.isChecked()){
@@ -189,13 +201,9 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                     .load(fileUri)
                     .into(imagen);
 
-
-            imagenTV.setVisibility(View.VISIBLE);
-
-
-
-
-
+            String frase = "Imagen de la portada del libro que quiere donar";
+            imagenTV.setText(frase);
+            //imagenTV.setVisibility(View.VISIBLE);
         }
     }
 }
