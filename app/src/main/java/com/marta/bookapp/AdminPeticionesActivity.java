@@ -59,10 +59,8 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
         fechaEditText = findViewById(R.id.etFecha);
         fechaEditText.setOnClickListener( (View v) -> {
-            switch (v.getId()) {
-                case R.id.etFecha:
-                    showDatePickerDialog();
-                    break;
+            if (v.getId() == R.id.etFecha) {
+                showDatePickerDialog();
             }
         });
 
@@ -152,14 +150,13 @@ public class AdminPeticionesActivity extends AppCompatActivity {
             String frase = "¿Estás seguro de que desea rechazar la peticion de "+ p.getEmailUsuario()+" ? ";
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(AdminPeticionesActivity.this);
-            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) ->
                 db.collection("peticiones").document(p.getId()).delete().addOnSuccessListener( (Void unused) -> {
                     Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
                     listaPeticiones.remove(i);
                     adapter.notifyDataSetChanged();
-                });
-
-            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+                })
+            ).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.setTitle("¿ESTAS SEGURO?");

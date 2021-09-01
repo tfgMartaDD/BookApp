@@ -13,7 +13,7 @@ import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button datosBTN, cerrarSesion;
+    Button datosBTN, cerrarSesion, pendientesBTN;
     Button peticionesBTN, prestamosBTN, donacionesBTN ,listaBTN;
 
     SharedPreferences prefs;
@@ -69,6 +69,11 @@ public class MenuActivity extends AppCompatActivity {
         cerrarSesion = findViewById(R.id.cerrarbutton);
         cerrarSesion.setOnClickListener( (View v) -> cerrarSesion(MenuActivity.this));
 
+        pendientesBTN = findViewById(R.id.estadoButton);
+        pendientesBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (MenuActivity.this, EstadoPendientesActivity.class);
+            startActivity(in);
+        });
     }
 
 }

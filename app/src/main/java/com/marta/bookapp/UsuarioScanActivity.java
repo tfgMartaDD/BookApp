@@ -2,11 +2,8 @@ package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +21,7 @@ public class UsuarioScanActivity extends AppCompatActivity {
 
     EditText nombreET, apellidoET;
     TextView emailTV;
-    Button modificarBTN, eliminarBTN, volverBTN;
+    Button modificarBTN, volverBTN;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -44,7 +41,6 @@ public class UsuarioScanActivity extends AppCompatActivity {
         apellidoET = findViewById(R.id.apellidoET);
         emailTV = findViewById(R.id.correoTV);
         modificarBTN = findViewById(R.id.buttonmodificar);
-        eliminarBTN  = findViewById(R.id.buttoneliminar);
 
         db.collection("users").document(email).get().addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
             nombreET.setText(documentSnapshot.getString("nombre"));
@@ -65,25 +61,6 @@ public class UsuarioScanActivity extends AppCompatActivity {
 
         });
 
-        eliminarBTN.setOnClickListener( (View v) -> {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(UsuarioScanActivity.this);
-            builder.setTitle("¡CUIDADO! Accion irrevocable.");
-            String frase = "¿Estas seguro de que deseas eliminar el usuario "+ email+" ?";
-            builder.setMessage(frase);
-            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            }).setNegativeButton("NO",  (DialogInterface dialog, int which) -> {
-                dialog.dismiss();
-                Toast.makeText(UsuarioScanActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
-            });
-
-            builder.show();
-
-        });
 
     }
 }
