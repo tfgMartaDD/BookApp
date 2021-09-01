@@ -68,7 +68,7 @@ public class UsuarioScanActivity extends AppCompatActivity {
         eliminarBTN.setOnClickListener( (View v) -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(UsuarioScanActivity.this);
-            builder.setTitle("ACCION IRREVOCABLE");
+            builder.setTitle("¡CUIDADO! Accion irrevocable.");
             String frase = "¿Estas seguro de que deseas eliminar el usuario "+ email+" ?";
             builder.setMessage(frase);
             builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
@@ -80,6 +80,7 @@ public class UsuarioScanActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
+                    Toast.makeText(UsuarioScanActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
                 }
             });
 
