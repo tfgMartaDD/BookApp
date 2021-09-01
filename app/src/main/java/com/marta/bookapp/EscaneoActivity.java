@@ -2,10 +2,9 @@ package com.marta.bookapp;
 
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,20 +28,17 @@ public class EscaneoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_escaneo);
 
         scanBTN = findViewById(R.id.scanButton);
-        scanBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator( EscaneoActivity.this);
+        scanBTN.setOnClickListener( (View v) -> {
+            IntentIntegrator intentIntegrator = new IntentIntegrator( EscaneoActivity.this);
 
-                intentIntegrator.setPrompt("Utiliza las teclas de volumen para activar el flash");
+            intentIntegrator.setPrompt("Utiliza las teclas de volumen para activar el flash");
 
-                intentIntegrator.setBeepEnabled(true);
-                intentIntegrator.setOrientationLocked(true);
-                //set capture activity
-                intentIntegrator.setCaptureActivity(Capture.class);
+            intentIntegrator.setBeepEnabled(true);
+            intentIntegrator.setOrientationLocked(true);
+            //set capture activity
+            intentIntegrator.setCaptureActivity(Capture.class);
 
-                intentIntegrator.initiateScan();
-            }
+            intentIntegrator.initiateScan();
         });
 
     }

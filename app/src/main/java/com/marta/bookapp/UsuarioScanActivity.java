@@ -2,9 +2,11 @@ package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +62,28 @@ public class UsuarioScanActivity extends AppCompatActivity {
 
             db.collection("users").document(email).set(user).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(UsuarioScanActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
+
+        });
+
+        eliminarBTN.setOnClickListener( (View v) -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(UsuarioScanActivity.this);
+            builder.setTitle("ACCION IRREVOCABLE");
+            String frase = "¿Estas seguro de que deseas eliminar el usuario "+ email+" ?";
+            builder.setMessage(frase);
+            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.show();
 
         });
 
