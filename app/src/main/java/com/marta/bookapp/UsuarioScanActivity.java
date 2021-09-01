@@ -76,12 +76,9 @@ public class UsuarioScanActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
-            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    Toast.makeText(UsuarioScanActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
-                }
+            }).setNegativeButton("NO",  (DialogInterface dialog, int which) -> {
+                dialog.dismiss();
+                Toast.makeText(UsuarioScanActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
             });
 
             builder.show();
