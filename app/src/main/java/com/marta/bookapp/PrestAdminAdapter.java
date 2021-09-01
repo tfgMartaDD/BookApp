@@ -40,7 +40,6 @@ public class PrestAdminAdapter extends BaseAdapter {
         TextView usuarioTV;
         TextView asigTV;
         TextView clasecursoTV;
-        //TextView fechaTV;
         TextView fechaDevTV;
 
         Prestamo p = lst.get(position);
@@ -53,7 +52,6 @@ public class PrestAdminAdapter extends BaseAdapter {
         usuarioTV = convertView.findViewById(R.id.usuarioAdmPres);
         asigTV = convertView.findViewById(R.id.asigAdmPres);
         clasecursoTV = convertView.findViewById(R.id.claseAdmPres);
-        //fechaTV = convertView.findViewById(R.id.fechaAdmPres);
         fechaDevTV = convertView.findViewById(R.id.fechaDevAdmPres);
 
         usuarioTV.setText(p.getUsuario());
@@ -62,7 +60,6 @@ public class PrestAdminAdapter extends BaseAdapter {
         String clasecurso = l.getClase() + " " + l.getCurso();
         clasecursoTV.setText(clasecurso);
 
-        //fechaTV.setText(p.getFecha().toString());
         fechaDevTV.setText(p.getFechaDev().toString());
 
         return convertView;

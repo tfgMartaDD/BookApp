@@ -37,6 +37,7 @@
     <string name="fecha_prestamo">FECHA PRESTAMO</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="fechas">FECHA PRESTAMO \n DEVOLUCION</string>
+    <string name="icono_app">icono principal app</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="imagen_portada_donar"> Imagen de la portada del libro que quiere donar</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
