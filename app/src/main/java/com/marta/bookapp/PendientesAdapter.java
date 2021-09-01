@@ -1,6 +1,7 @@
 package com.marta.bookapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class PendientesAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         TextView tipoTV;
-        TextView libroTV;
+        TextView asigTV;
+        TextView claseCursoTV;
         TextView estadoTV;
 
         Pendientes p = lst.get(position);
@@ -48,7 +50,8 @@ public class PendientesAdapter extends BaseAdapter {
         }
 
         tipoTV = convertView.findViewById(R.id.tipoTV);
-        libroTV = convertView.findViewById(R.id.libroPendTV);
+        asigTV = convertView.findViewById(R.id.asigPendTV);
+        claseCursoTV = convertView.findViewById(R.id.clasePendTV);
         estadoTV = convertView.findViewById(R.id.estadoTV);
 
         String tipo;
@@ -60,10 +63,21 @@ public class PendientesAdapter extends BaseAdapter {
 
         tipoTV.setText(tipo);
 
-        String libro = p.getAsig()+" "+ p.getClase() +" " +p.getCurso();
-        libroTV.setText(libro);
+        asigTV.setText(p.getAsig());
+        String clasecurso = p.getClase() +" " +p.getCurso();
+        claseCursoTV.setText(clasecurso);
 
-        estadoTV.setText(p.getEstado());
+        String estado = p.getEstado();
+
+        if(estado.equalsIgnoreCase("pendiente")){
+            estadoTV.setTextColor(Color.BLUE);
+        } else if(estado.equalsIgnoreCase("rechazada")){
+            estadoTV.setTextColor(Color.RED);
+        }else if(estado.equalsIgnoreCase("aceptada")){
+            estadoTV.setTextColor(Color.GREEN);
+        }
+
+        estadoTV.setText(estado);
 
         return convertView;
     }

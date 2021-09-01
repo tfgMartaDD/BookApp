@@ -50,7 +50,7 @@ public class EstadoPendientesActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
                     Pendientes p = new Pendientes(document.getId(), Boolean.valueOf(document.getString("esPeticion") ), document.getString("Asignatura"),
-                            document.getString("Clase"), document.getString("Curso"), document.getString("Estado"));
+                            document.getString("Clase"), document.getString("Curso"), document.getString("Estado"), document.getString("Usuario"));
 
                     lista.add(p);
                     adapter.notifyDataSetChanged();
