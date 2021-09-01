@@ -104,7 +104,7 @@ public class PrestamosActivity extends AppCompatActivity {
 
 
                                 Prestamo p = new Prestamo(document.getId(), libro, document.getString("Usuario"),
-                                        document.getDate("FechaPrestamo"), document.getDate("FechaDevolucion"));
+                                        document.getDate("FechaPrestamo"), document.getString("FechaDevolucion"));
 
                                 lista.add(p);
                                 adapter.notifyDataSetChanged();
