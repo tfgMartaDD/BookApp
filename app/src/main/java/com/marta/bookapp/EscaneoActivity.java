@@ -20,7 +20,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class EscaneoActivity extends AppCompatActivity {
 
-   Button scanBTN;
+    Button scanBTN;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -69,7 +69,10 @@ public class EscaneoActivity extends AppCompatActivity {
             builder.show();*/
             String user = intentResult.getContents();
             String email = user.replaceAll("http://","");
-            db.collection("users").document(user).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
+            System.out.println("user: "+user);
+            System.out.println("email: "+email);
+
+            db.collection("users").document(email).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
                 Intent in = new Intent (this,UsuarioScanActivity.class);
                 in.putExtra("email",email);
                 startActivity(in);

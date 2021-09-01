@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/tituloTextView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:gravity="center"
         android:text="@string/datos_personales_scan"
         android:textSize="20sp" />
@@ -23,8 +23,9 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:layout_margin="8dp"
         android:text="@string/nombre" />
 
     <EditText
@@ -35,15 +36,16 @@
         android:autofillHints="name"
         android:hint="@string/nombre"
         android:inputType="text"
+        android:textSize="20sp"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="@string/apellido"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <EditText
         android:id="@+id/apellidoET"
@@ -53,15 +55,16 @@
         android:autofillHints="apellido"
         android:hint="@string/apellido"
         android:inputType="text"
+        android:textSize="20sp"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="@string/email"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/correoTV"
@@ -82,7 +85,7 @@
         android:layout_marginHorizontal="20dp">
 
         <Button
-            android:id="@+id/modificarbutton"
+            android:id="@+id/buttonmodificar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -94,7 +97,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttoneliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -109,7 +112,7 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volver_menu"
