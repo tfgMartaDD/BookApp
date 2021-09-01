@@ -104,7 +104,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
                                 Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                                         document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
                                 Prestamo p = new Prestamo(document2.getId(), libro, document2.getString("Usuario"),
-                                        document2.getDate("FechaPrestamo"), document2.getDate("FechaDevolucion"));
+                                        document2.getDate("FechaPrestamo"), document2.getString("FechaDevolucion"));
 
                                 listaTodos.add(p);
                                 adapter.notifyDataSetChanged();

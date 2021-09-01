@@ -7,9 +7,9 @@ public class Prestamo {
     Libro libro;
     String usuario;
     Date fecha;
-    Date fechaDev;
+    String fechaDev;
 
-    public Prestamo(String id, Libro libro, String usuario, Date fecha, Date fechaDev) {
+    public Prestamo(String id, Libro libro, String usuario, Date fecha, String fechaDev) {
         this.id = id;
         this.libro = libro;
         this.usuario = usuario;
@@ -49,11 +49,11 @@ public class Prestamo {
         this.fecha = fecha;
     }
 
-    public Date getFechaDev() {
+    public String getFechaDev() {
         return fechaDev;
     }
 
-    public void setFechaDev(Date fechaDev) {
+    public void setFechaDev(String fechaDev) {
         this.fechaDev = fechaDev;
     }
 }
