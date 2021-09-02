@@ -1,16 +1,22 @@
 package com.marta.bookapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,6 +35,10 @@ public class AdminLibrosActivity extends AppCompatActivity {
     Button anadirBTN, eliminarBTN;
 
     Spinner spinner;
+    int i;
+    Boolean flag = false;
+    String idPendiente;
+    String idPet;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -52,8 +62,73 @@ public class AdminLibrosActivity extends AppCompatActivity {
             startActivity(in);
         });
 
+        listViewListaLibros.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            i = position;
+            flag = true;
+        });
+
         eliminarBTN = findViewById(R.id.eliminarLibroButton);
         eliminarBTN.setOnClickListener( (View v) ->{
+            if(flag){
+                Libro l = listaLibros.get(i);
+                String estado = l.getEstado();
+
+                if(estado.equalsIgnoreCase("prestado")){
+                    Toast.makeText(AdminLibrosActivity.this, "No puede eliminar un libro de la aplicación que actualmente está prestado.", Toast.LENGTH_LONG).show();
+
+                }else if (estado.equalsIgnoreCase("reservado")){
+                    String frase = "El libro que quieres borrar está reservado. \n ¿Está seguro de que desea eliminarlo de todas formas? ";
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
+                    alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+
+                        db.collection("peticiones").whereEqualTo("Libro", l.getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot query) {
+                                for (QueryDocumentSnapshot snap : query) {
+                                    idPendiente = snap.getString("idPendiente");
+                                    idPet = snap.getId();
+                                }
+                            }
+                        });
+                        db.collection("peticiones").document(idPet).delete();
+                        db.collection("pendientes").document(idPendiente).delete();
+
+                        db.collection("libros").document(l.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                            Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
+                            listaLibros.remove(i);
+                            adapter.notifyDataSetChanged();
+                        });
+
+                    }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminLibrosActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+                    AlertDialog alertDialog = alerta.create();
+                    alertDialog.setTitle("¿ESTAS SEGURO?");
+                    alertDialog.show();
+
+
+                }else if (estado.equalsIgnoreCase("disponible")){
+
+                    String frase = "¿Estás seguro de que desea eliminar el libro "+ l.getAsignatura() +" del curso "+ l.getClase()
+                            +" " + l.getCurso() +" ? ";
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
+                    alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+                        db.collection("libros").document(l.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                            Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
+                            listaLibros.remove(i);
+                            adapter.notifyDataSetChanged();
+                        });
+
+                    }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminLibrosActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+                    AlertDialog alertDialog = alerta.create();
+                    alertDialog.setTitle("¿ESTAS SEGURO?");
+                    alertDialog.show();
+                }
+
+            }
+
 
         });
 
