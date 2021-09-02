@@ -57,11 +57,11 @@ public class PendientesAdapter extends BaseAdapter {
         String tipo;
         if (p.getEsPeticion()){
             tipo="PETICION";
-            tipoTV.setTextColor(Color.argb(100,255,88,41));
+            tipoTV.setTextColor(Color.argb(200,255,88,41));
         }else{
             tipo="DONACION";
 
-            tipoTV.setTextColor(Color.argb(100, 16,72,2));
+            tipoTV.setTextColor(Color.argb(200, 16,72,2));
         }
 
         tipoTV.setText(tipo);

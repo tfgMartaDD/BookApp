@@ -22,11 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/deseo_donar"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="8dp"/>
+        android:layout_margin="16dp"/>
 
     <LinearLayout
         android:id="@+id/agrupacion"
@@ -119,6 +119,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llrgroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -166,7 +167,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/menuDonacion"
+        app:layout_constraintTop_toBottomOf="@id/llrgroup"
         android:layout_marginHorizontal="16dp"
         >
 
@@ -211,7 +212,7 @@
         android:text="@string/donar"
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llimagen"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="invisible"/>
 
     <Button
@@ -220,7 +221,7 @@
         android:layout_height="wrap_content"
         android:text="@string/volver_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llimagen"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="16dp"/>
 
 
