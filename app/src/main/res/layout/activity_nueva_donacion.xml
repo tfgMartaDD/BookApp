@@ -54,7 +54,7 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/textView40"
+                android:id="@+id/donClase"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -64,17 +64,17 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/donCurso"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/curso"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:gravity="center" />
+                android:gravity="center"/>
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/donEditorial"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

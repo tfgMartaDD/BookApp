@@ -136,24 +136,25 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                     pendiente.put("Estado", "Pendiente");
                     pendiente.put("Usuario",actualUser);
 
-                    db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->
-                            idPendiente = documentReference.getId());
+                    db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->{
+                        idPendiente = documentReference.getId();
 
+                        Map<String, Object> donation = new HashMap<>();
+                        donation.put("Asignatura", asignatura);
+                        donation.put("Clase", clase);
+                        donation.put("Curso", curso);
+                        donation.put("Editorial", editorial);
+                        donation.put("Usuario", actualUser);
+                        donation.put("Fecha", date);
+                        donation.put("Imagen", urlImagen);
+                        donation.put("idPendiente", idPendiente);
 
-                    Map<String, Object> donation = new HashMap<>();
-                    donation.put("Asignatura", asignatura);
-                    donation.put("Clase", clase);
-                    donation.put("Curso", curso);
-                    donation.put("Editorial", editorial);
-                    donation.put("Usuario", actualUser);
-                    donation.put("Fecha", date);
-                    donation.put("Imagen", urlImagen);
-                    donation.put("idPendiente", idPendiente);
-
-                    db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
-                        Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                        volverAMenu(NuevaDonacionActivity.this);
+                        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
+                            Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                            volverAMenu(NuevaDonacionActivity.this);
+                        });
                     });
+
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
 
                 AlertDialog alertDialog = alerta.create();

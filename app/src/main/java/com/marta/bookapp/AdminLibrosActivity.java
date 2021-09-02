@@ -65,13 +65,19 @@ public class AdminLibrosActivity extends AppCompatActivity {
         listViewListaLibros.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             i = position;
             flag = true;
+
+            System.out.println("posiiccion "+ i);
         });
 
         eliminarBTN = findViewById(R.id.eliminarLibroButton);
         eliminarBTN.setOnClickListener( (View v) ->{
             if(flag){
+
                 Libro l = listaLibros.get(i);
                 String estado = l.getEstado();
+
+                String idLibro = l.getId();
+
 
                 if(estado.equalsIgnoreCase("prestado")){
                     Toast.makeText(AdminLibrosActivity.this, "No puede eliminar un libro de la aplicación que actualmente está prestado.", Toast.LENGTH_LONG).show();
@@ -82,19 +88,22 @@ public class AdminLibrosActivity extends AppCompatActivity {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
                     alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
 
-                        db.collection("peticiones").whereEqualTo("Libro", l.getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        db.collection("peticiones").whereEqualTo("Libro", idLibro).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot query) {
                                 for (QueryDocumentSnapshot snap : query) {
                                     idPendiente = snap.getString("idPendiente");
                                     idPet = snap.getId();
+                                    db.collection("peticiones").document(idPet).delete();
+                                    db.collection("pendientes").document(idPendiente).delete();
                                 }
                             }
                         });
-                        db.collection("peticiones").document(idPet).delete();
-                        db.collection("pendientes").document(idPendiente).delete();
+                        System.out.println("ID --->>>> "+idPendiente +"Pet---> "+idPet);
 
-                        db.collection("libros").document(l.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                        System.out.println("librooo"+idLibro);
+
+                        db.collection("libros").document(idLibro).delete().addOnSuccessListener( (Void unused) -> {
                             Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
                             listaLibros.remove(i);
                             adapter.notifyDataSetChanged();
