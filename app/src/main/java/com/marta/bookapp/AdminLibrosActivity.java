@@ -3,6 +3,7 @@ package com.marta.bookapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,6 +45,17 @@ public class AdminLibrosActivity extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
         listViewListaLibros = findViewById(R.id.lvlistaLibros);
+
+        anadirBTN = findViewById(R.id.anadirLibroButton);
+        anadirBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (AdminLibrosActivity.this, LibroAddActivity.class);
+            startActivity(in);
+        });
+
+        eliminarBTN = findViewById(R.id.eliminarLibroButton);
+        eliminarBTN.setOnClickListener( (View v) ->{
+
+        });
 
     }
 
