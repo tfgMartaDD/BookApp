@@ -32,7 +32,8 @@ import java.util.Objects;
 public class AdminDonacionesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
-    Button aceptar, rechazar, aceptarTodas;
+
+    Button aceptarTodas;
 
     TextView asignatura, clase, editorial, usuario, fecha;
     TextView tv;
@@ -43,9 +44,6 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    int i = 0;
-    boolean b = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +53,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayout7);
         tv = findViewById(R.id.textView25);
 
-        aceptar = findViewById(R.id.aceptarButton);
-        rechazar = findViewById(R.id.rechazarButton);
+
         aceptarTodas = findViewById(R.id.aceptarTodasButton);
 
         asignatura = findViewById(R.id.asignaturatvDon);
@@ -75,8 +72,6 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
             DonacionPeticion d = listaDonaciones.get(position);
             Libro l = d.getLibro();
-            i = position;
-            b = true;
 
             linearLayout.setVisibility(View.VISIBLE);
             tv.setVisibility(View.VISIBLE);
@@ -88,13 +83,11 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
             usuario.setText(d.getEmailUsuario());
             fecha.setText(d.getFecha().toString());
-        });
 
-        aceptar.setOnClickListener( (View v) -> {
-            //if(b){
-                DonacionPeticion d = listaDonaciones.get(i);
-                Libro l = d.getLibro();
+            String frase = "¿Que desea hacer con la donación seleccionada?";
 
+            AlertDialog.Builder alerta1 = new AlertDialog.Builder(AdminDonacionesActivity.this);
+            alerta1.setMessage(frase).setPositiveButton("ACEPTAR",  (DialogInterface dialog, int id2) ->{
                 Date date = new Date();
 
                 Map<String, Object> libro = new HashMap<>();
@@ -108,44 +101,43 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 libro.put("Imagen", l.getImagen());
 
                 db.collection("libros").document().set(libro).addOnSuccessListener( (Void unused) ->
-                    Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
+                        Toast.makeText(AdminDonacionesActivity.this, "DONACION ACEPTADA.\n Libro añadido a la lista de disponibles. ", Toast.LENGTH_LONG).show() );
 
                 db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
 
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
 
-                listaDonaciones.remove(i);
+                listaDonaciones.remove(position);
                 adapter.notifyDataSetChanged();
                 linearLayout.setVisibility(View.INVISIBLE);
                 tv.setVisibility(View.INVISIBLE);
+            }).setNegativeButton("RECHAZAR",  (DialogInterface dialog, int id2) ->  {
 
-           // }
+                String frase2 = "¿Estás seguro de que desea rechazar la donacion de "+ d.getEmailUsuario()+" ? ";
 
-        });
+                AlertDialog.Builder alerta2 = new AlertDialog.Builder(AdminDonacionesActivity.this);
+                alerta2.setMessage(frase2).setPositiveButton("SI",  (DialogInterface dialog2, int id3) -> {
+                    db.collection("posiblesDonaciones").document(d.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                        Toast.makeText(AdminDonacionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
+                        listaDonaciones.remove(position);
+                        adapter.notifyDataSetChanged();
+                    });
+                    db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Rechazada");
 
-        rechazar.setOnClickListener( (View v) -> {
+                }).setNegativeButton("NO",  (DialogInterface dialog2, int id3) ->  Toast.makeText(AdminDonacionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
-            DonacionPeticion p = listaDonaciones.get(i);
+                AlertDialog alertDialog2 = alerta2.create();
+                alertDialog2.setTitle("¿ESTAS SEGURO?");
+                alertDialog2.show();
+            });
 
-            String frase = "¿Estás seguro de que desea rechazar la donacion de "+ p.getEmailUsuario()+" ? ";
-
-            AlertDialog.Builder alerta = new AlertDialog.Builder(AdminDonacionesActivity.this);
-            alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
-                db.collection("posiblesDonaciones").document(p.getId()).delete().addOnSuccessListener( (Void unused) -> {
-                    Toast.makeText(AdminDonacionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
-                    listaDonaciones.remove(i);
-                    adapter.notifyDataSetChanged();
-                });
-                db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Rechazada");
-
-            }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminDonacionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
-
-            AlertDialog alertDialog = alerta.create();
+            AlertDialog alertDialog = alerta1.create();
             alertDialog.setTitle("¿ESTAS SEGURO?");
             alertDialog.show();
 
 
-        });
+
+            });
 
         aceptarTodas.setOnClickListener( (View v) -> {
             for (int in = 0 ; in < listaDonaciones.size(); in++){

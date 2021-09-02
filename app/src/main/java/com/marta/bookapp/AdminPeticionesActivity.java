@@ -34,7 +34,6 @@ import java.util.Objects;
 public class AdminPeticionesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
-    //Button aceptar, rechazar,
     Button aceptarTodas;
 
 
@@ -49,8 +48,6 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    //int i = 0;
-    //boolean b = false;
     String fechaDevolucion = "25 / 6 / 2022";
 
 
@@ -69,8 +66,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.ll5);
         tv = findViewById(R.id.peticionestv);
 
-        //aceptar = findViewById(R.id.aceptarPetButton);
-        //rechazar = findViewById(R.id.rechazarPetButton);
+
         aceptarTodas = findViewById(R.id.aceptarTodasPetButton);
 
         asignatura = findViewById(R.id.asignaturatvPet);
@@ -146,8 +142,8 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
                 String frase3 = "¿Estás seguro de que desea rechazar la peticion de "+ d.getEmailUsuario()+" ? ";
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(AdminPeticionesActivity.this);
-                alerta.setMessage(frase3).setPositiveButton("SI",  (DialogInterface dialog2, int id3) ->{
+                AlertDialog.Builder alerta2 = new AlertDialog.Builder(AdminPeticionesActivity.this);
+                alerta2.setMessage(frase3).setPositiveButton("SI",  (DialogInterface dialog2, int id3) ->{
 
                     db.collection("peticiones").document(d.getId()).delete().addOnSuccessListener( (Void unused) -> {
                         Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
@@ -159,9 +155,9 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
                 }).setNegativeButton("NO",  (DialogInterface dialog2, int id3) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
-                AlertDialog alertDialog = alerta.create();
-                alertDialog.setTitle("¿ESTAS SEGURO?");
-                alertDialog.show();
+                AlertDialog alertDialog2 = alerta2.create();
+                alertDialog2.setTitle("¿ESTAS SEGURO?");
+                alertDialog2.show();
 
                 Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
             });
@@ -172,18 +168,6 @@ public class AdminPeticionesActivity extends AppCompatActivity {
         });
 
 
-        /*aceptar.setOnClickListener( (View v) -> {
-            if(b){
-
-            }
-        });
-
-        rechazar.setOnClickListener( (View v) -> {
-
-            DonacionPeticion p = listaPeticiones.get(i);
-
-
-        });*/
 
         aceptarTodas.setOnClickListener( (View v) -> {
             for (int in = 0 ; in < listaPeticiones.size(); in++){
