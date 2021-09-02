@@ -27,8 +27,9 @@
             android:id="@+id/spinnerLL"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:layout_marginEnd="16dp" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/button"
@@ -67,6 +68,32 @@
     <ListView
         android:id="@+id/lvlistaLibros"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="360dp"
         android:layout_margin="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <Button
+            android:id="@+id/anadirLibroButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/anadir_libro"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/eliminarLibroButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/eliminar_libro" />
+    </LinearLayout>
 </LinearLayout>

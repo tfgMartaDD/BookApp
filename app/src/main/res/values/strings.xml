@@ -11,6 +11,7 @@
     <string name="aceptar_todas_peticiones">ACEPTAR TODAS LAS PETICIONES</string>
     <string name="anadir">AÑADIR</string>
     <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
+    <string name="anadir_libro">AÑADIR LIBRO</string>
     <string name="anadir_portada">AÑADIR PORTADA</string>
     <string name="anadir_portada_defecto">PORTADA POR DEFECTO</string>
     <string name="anadir_portada_galeria">DESDE GALERIA</string>
@@ -30,6 +31,7 @@
     <string name="editorial">EDITORIAL</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="eliminar_cuenta">ELIMINAR CUENTA</string>
+    <string name="eliminar_libro">ELIMINAR LIBRO</string>
     <string name="email">Email</string>
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="escanea">ESCANEA ALGO…</string>

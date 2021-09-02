@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -23,6 +24,8 @@ public class AdminLibrosActivity extends AppCompatActivity {
     ListView listViewListaLibros;
     List<Libro> listaLibros = new ArrayList<>();
     ListaLibrosAdapter adapter;
+
+    Button anadirBTN, eliminarBTN;
 
     Spinner spinner;
 
