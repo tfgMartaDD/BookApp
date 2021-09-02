@@ -95,19 +95,19 @@
                 android:id="@+id/asigSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Spinner
                 android:id="@+id/claseSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Spinner
                 android:id="@+id/cursoSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Spinner
                 android:id="@+id/editorialSpinner"
@@ -224,8 +224,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="16dp"/>
 
-
-
-
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
