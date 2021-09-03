@@ -49,7 +49,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinnerLL);
 
-        String [] opciones = {"reservado", "prestado", "disponible", "todos"};
+        String [] opciones = {"todos", "reservado", "prestado", "disponible" };
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
         spinner.setAdapter(arrayAdapter);

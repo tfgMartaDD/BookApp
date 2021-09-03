@@ -1,6 +1,7 @@
 package com.marta.bookapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,17 @@ public class ListaLibrosAdapter extends BaseAdapter {
         claseTV.setText(clasecurso);
 
         editorialTV.setText(l.getEditorial());
-        estadoTV.setText(l.getEstado().toUpperCase(Locale.ROOT));
+
+        String estado = l.getEstado();
+        if(estado.equalsIgnoreCase("reservado")){
+            estadoTV.setTextColor(Color.BLUE);
+        } else if(estado.equalsIgnoreCase("prestado")){
+            estadoTV.setTextColor(Color.RED);
+        }else if(estado.equalsIgnoreCase("disponible")){
+            estadoTV.setTextColor(Color.GREEN);
+        }
+
+        estadoTV.setText(estado.toUpperCase(Locale.ROOT));
 
         return convertView;
     }

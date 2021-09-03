@@ -201,7 +201,7 @@
         android:id="@+id/anadirLibroBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/donar"
+        android:text="@string/anadir_libro"
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
