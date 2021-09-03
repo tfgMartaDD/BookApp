@@ -2,29 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <TextView
         android:id="@+id/emailUserTV"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content" />
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_margin="4dp"/>
 
     <TextView
         android:id="@+id/nombreUserTV"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content" />
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_margin="4dp"/>
 
     <TextView
         android:id="@+id/donacionesUserTV"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"/>
 
     <TextView
         android:id="@+id/prestamosUserTV"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_marginVertical="4dp"/>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.marta.bookapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,11 +37,13 @@ public class AdminUsuariosActivity extends AppCompatActivity {
         adapter = new UsuariosAdapter(this, listaUsuarios);
         listViewUsuarios.setAdapter(adapter);
 
-        listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        listViewUsuarios.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            String email = listaUsuarios.get(position).getId();
 
-            }
+            Intent in = new Intent (this, ResumenUsuarioActivity.class);
+            in.putExtra("email",email);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(in);
         });
     }
 

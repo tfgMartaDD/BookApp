@@ -31,7 +31,7 @@
             android:id="@+id/textView50"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/usuario"
             android:layout_gravity="center"
             android:gravity="center"
@@ -41,7 +41,7 @@
             android:id="@+id/textView51"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:text="@string/nombre_completo"
             android:gravity="center"
             android:textStyle="bold"/>
@@ -50,7 +50,7 @@
             android:id="@+id/textView52"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:text="@string/numero_donaciones"
             android:gravity="center"
             android:textStyle="bold"/>
@@ -59,7 +59,7 @@
             android:id="@+id/textView53"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:text="@string/numero_peticiones"
             android:gravity="center"
             android:textStyle="bold"/>

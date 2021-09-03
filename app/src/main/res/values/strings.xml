@@ -45,6 +45,7 @@
     <string name="icono_app">icono principal app</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="imagen_portada_donar"> Imagen de la portada del libro que quiere donar</string>
+    <string name="info_usuario">INFORMACIÓN USUARIO</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="ir_escaner">IR A ESCANER</string>
     <string name="libro">LIBRO</string>
@@ -68,8 +69,8 @@
     <string name="nombre">Nombre</string>
     <string name="nombre_completo">NOMBRE Y APELLIDOS</string>
     <string name="nueva_donacion">NUEVA DONACION</string>
-    <string name="numero_donaciones">NUMERO DONACIONES</string>
-    <string name="numero_peticiones">NUMERO PETICIONES</string>
+    <string name="numero_donaciones">Nº DON.</string>
+    <string name="numero_peticiones">Nº PET.</string>
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
     <string name="ordenar">ORDENAR</string>
     <string name="ordenar_por">ORDENAR POR: </string>
