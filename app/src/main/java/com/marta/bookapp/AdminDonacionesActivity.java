@@ -132,7 +132,7 @@ public class AdminDonacionesActivity extends AppCompatActivity {
             });
 
             AlertDialog alertDialog = alerta1.create();
-            alertDialog.setTitle("¿ESTAS SEGURO?");
+            alertDialog.setTitle("DONACION");
             alertDialog.show();
 
 

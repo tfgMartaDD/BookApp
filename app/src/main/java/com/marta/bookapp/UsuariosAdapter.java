@@ -38,49 +38,32 @@ public class UsuariosAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        /*TextView tipoTV;
-        TextView asigTV;
-        TextView claseCursoTV;
-        TextView estadoTV;
+        TextView emailTV;
+        TextView nombreTV;
+        TextView numDonTV;
+        TextView numPresTV;
 
-        Pendientes p = lst.get(position);
+        UserLista u = lst.get(position);
 
         if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_pendientes, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_usuarios, null);
         }
 
-        tipoTV = convertView.findViewById(R.id.tipoTV);
-        asigTV = convertView.findViewById(R.id.asigPendTV);
-        claseCursoTV = convertView.findViewById(R.id.clasePendTV);
-        estadoTV = convertView.findViewById(R.id.estadoTV);
+        emailTV = convertView.findViewById(R.id.emailUserTV);
+        nombreTV = convertView.findViewById(R.id.nombreUserTV);
+        numDonTV = convertView.findViewById(R.id.donacionesUserTV);
+        numPresTV = convertView.findViewById(R.id.prestamosUserTV);
 
-        String tipo;
-        if (p.getEsPeticion()){
-            tipo="PETICION";
-            tipoTV.setTextColor(Color.argb(200,255,88,41));
-        }else{
-            tipo="DONACION";
 
-            tipoTV.setTextColor(Color.argb(200, 16,72,2));
-        }
+        emailTV.setText(u.getId());
 
-        tipoTV.setText(tipo);
 
-        asigTV.setText(p.getAsig());
-        String clasecurso = p.getClase() +" " +p.getCurso();
-        claseCursoTV.setText(clasecurso);
+        String nombre = u.getNombre() +" " +u.getApellido();
+        nombreTV.setText(nombre);
 
-        String estado = p.getEstado();
+        numDonTV.setText(u.getDonaciones());
 
-        if(estado.equalsIgnoreCase("pendiente")){
-            estadoTV.setTextColor(Color.BLUE);
-        } else if(estado.equalsIgnoreCase("rechazada")){
-            estadoTV.setTextColor(Color.RED);
-        }else if(estado.equalsIgnoreCase("aceptada")){
-            estadoTV.setTextColor(Color.GREEN);
-        }
-
-        estadoTV.setText(estado);*/
+        numPresTV.setText(u.getPrestamos());
 
         return convertView;
     }
