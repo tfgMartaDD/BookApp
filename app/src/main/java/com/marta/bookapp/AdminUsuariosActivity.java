@@ -21,7 +21,7 @@ public class AdminUsuariosActivity extends AppCompatActivity {
 
     UsuariosAdapter adapter;
     ListView listViewUsuarios;
-    List<UserLista> listaUsuarios = new ArrayList<>();
+    List<Usuario> listaUsuarios = new ArrayList<>();
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -44,28 +44,23 @@ public class AdminUsuariosActivity extends AppCompatActivity {
         });
     }
 
-    private List<UserLista> obtenerListaUsuarios() {
+    private List<Usuario> obtenerListaUsuarios() {
 
-        List<UserLista> lista = new ArrayList<>();
+        List<Usuario> lista = new ArrayList<>();
 
 
         db.collection("users").get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
             if(task.isSuccessful()){
                 for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                    String numD, numP;
-                    int numDonaciones = 0, numPrestamos = 0;
+                    long numDonaciones , numPrestamos;
 
                     if(document != null){
-                        numD = document.getString("numDonaciones");
-                        if(numD != null){
-                             numDonaciones = Integer.parseInt(numD);
-                        }
-                        numP = document.getString("numPrestamos");
-                        if(numP != null){
-                            numPrestamos = Integer.parseInt(numP);
-                        }
-                        UserLista user = new UserLista(document.getId(), document.getString("nombre"),document.getString("apellido"),
+                        numDonaciones = document.getLong("numDonaciones");
+
+                        numPrestamos =  document.getLong("numPrestamos");
+
+                        Usuario user = new Usuario(document.getId(), document.getString("nombre"),document.getString("apellido"),
                                 numDonaciones, numPrestamos);
                         lista.add(user);
                         adapter.notifyDataSetChanged();

@@ -1,7 +1,6 @@
 package com.marta.bookapp;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,9 @@ import java.util.List;
 public class UsuariosAdapter extends BaseAdapter {
 
     Context context;
-    List<UserLista> lst;
+    List<Usuario> lst;
 
-    public UsuariosAdapter(Context context, List<UserLista> lst) {
+    public UsuariosAdapter(Context context, List<Usuario> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -43,7 +42,7 @@ public class UsuariosAdapter extends BaseAdapter {
         TextView numDonTV;
         TextView numPresTV;
 
-        UserLista u = lst.get(position);
+        Usuario u = lst.get(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.listview_usuarios, null);
@@ -61,9 +60,9 @@ public class UsuariosAdapter extends BaseAdapter {
         String nombre = u.getNombre() +" " +u.getApellido();
         nombreTV.setText(nombre);
 
-        numDonTV.setText(Integer.toString(u.getDonaciones()));
+        numDonTV.setText(Long.toString(u.getDonaciones()));
 
-        numPresTV.setText(Integer.toString(u.getPrestamos()));
+        numPresTV.setText(Long.toString(u.getPrestamos()));
 
         return convertView;
     }

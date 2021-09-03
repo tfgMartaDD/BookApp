@@ -136,10 +136,10 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
-                        String num = document.getString("numPrestamos");
+                        Long num = document.getLong("numPrestamos");
                         if(num != null){
-                            int numero = Integer.parseInt(num) + 1;
-                            db.collection("users").document(d.getEmailUsuario()).update("numPrestamos",numero);
+                            num++;
+                            db.collection("users").document(d.getEmailUsuario()).update("numPrestamos",num);
                         }
                     }
                 });
@@ -220,11 +220,9 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("users").document(p.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
-                        String num = document.getString("numPrestamos");
-                        if(num != null){
-                            int numero = Integer.parseInt(num) + 1;
-                            db.collection("users").document(p.getEmailUsuario()).update("numPrestamos",numero);
-                        }
+                        Long num = document.getLong("numPrestamos");
+                        num++;
+                        db.collection("users").document(p.getEmailUsuario()).update("numPrestamos",num);
                     }
                 });
 

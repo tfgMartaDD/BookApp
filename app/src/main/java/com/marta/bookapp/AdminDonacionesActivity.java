@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -112,10 +111,10 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
-                        String num = document.getString("numDonaciones");
+                        Long num = document.getLong("numDonaciones");
                         if(num != null){
-                            int numero = Integer.parseInt(num) + 1;
-                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",numero);
+                            num++;
+                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",num);
                         }
                     }
                 });
@@ -178,10 +177,10 @@ public class AdminDonacionesActivity extends AppCompatActivity {
                 db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
-                        String num = document.getString("numDonaciones");
+                        Long num = document.getLong("numDonaciones");
                         if(num != null){
-                            int numero = Integer.parseInt(num) + 1;
-                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",numero);
+                            num++;
+                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",num);
                         }
                     }
                 });

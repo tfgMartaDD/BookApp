@@ -25,41 +25,44 @@
         app:layout_constraintTop_toBottomOf="@id/textView42"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="4dp">
+        android:layout_marginTop="16dp">
 
         <TextView
             android:id="@+id/textView50"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/usuario"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView51"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:text="@string/nombre_completo"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView52"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/numero_donaciones"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView53"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/numero_peticiones"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <ListView

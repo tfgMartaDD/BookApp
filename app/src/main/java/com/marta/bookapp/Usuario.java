@@ -1,14 +1,14 @@
 package com.marta.bookapp;
 
-public class UserLista {
+public class Usuario {
 
     String id;
     String nombre;
     String apellido;
-    int donaciones;
-    int prestamos;
+    long donaciones;
+    long prestamos;
 
-    public UserLista(String id, String nombre, String apellido, int donaciones, int prestamos) {
+    public Usuario(String id, String nombre, String apellido, long donaciones, long prestamos) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -40,19 +40,19 @@ public class UserLista {
         this.apellido = apellido;
     }
 
-    public int getDonaciones() {
+    public long getDonaciones() {
         return donaciones;
     }
 
-    public void setDonaciones(int donaciones) {
+    public void setDonaciones(long donaciones) {
         this.donaciones = donaciones;
     }
 
-    public int getPrestamos() {
+    public long getPrestamos() {
         return prestamos;
     }
 
-    public void setPrestamos(int prestamos) {
+    public void setPrestamos(long prestamos) {
         this.prestamos = prestamos;
     }
 }
