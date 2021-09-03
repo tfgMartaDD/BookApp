@@ -5,6 +5,7 @@ import java.util.Date;
 public class Prestamo {
     String id;
     Libro libro;
+    String idLibro;
     String usuario;
     Date fecha;
     String fechaDev;
@@ -15,6 +16,22 @@ public class Prestamo {
         this.usuario = usuario;
         this.fecha = fecha;
         this.fechaDev = fechaDev;
+    }
+
+    public Prestamo(String id, String idLibro, String usuario, Date fecha, String fechaDev) {
+        this.id = id;
+        this.idLibro = idLibro;
+        this.usuario = usuario;
+        this.fecha = fecha;
+        this.fechaDev = fechaDev;
+    }
+
+    public String getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(String idLibro) {
+        this.idLibro = idLibro;
     }
 
     public String getId() {

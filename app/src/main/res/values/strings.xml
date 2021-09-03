@@ -66,7 +66,10 @@
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="name_app"> BOOK APP!</string>
     <string name="nombre">Nombre</string>
+    <string name="nombre_completo">NOMBRE Y APELLIDOS</string>
     <string name="nueva_donacion">NUEVA DONACION</string>
+    <string name="numero_donaciones">NUMERO DONACIONES</string>
+    <string name="numero_peticiones">NUMERO PETICIONES</string>
     <string name="olvide">OLVIDE MI CONTRASEÑA</string>
     <string name="ordenar">ORDENAR</string>
     <string name="ordenar_por">ORDENAR POR: </string>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -132,6 +133,17 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
                 db.collection("peticiones").document(d.getId()).delete();
 
+                db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null){
+                        String num = document.getString("numPrestamos");
+                        if(num != null){
+                            int numero = Integer.parseInt(num) + 1;
+                            db.collection("users").document(d.getEmailUsuario()).update("numPrestamos",numero);
+                        }
+                    }
+                });
+
                 listaPeticiones.remove(position);
                 adapter.notifyDataSetChanged();
                 linearLayout.setVisibility(View.INVISIBLE);
@@ -204,6 +216,17 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                 db.collection("peticiones").document(p.getId()).delete();
 
                 db.collection("pendientes").document(p.getIdPendiente()).update("Estado","Aceptada");
+
+                db.collection("users").document(p.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null){
+                        String num = document.getString("numPrestamos");
+                        if(num != null){
+                            int numero = Integer.parseInt(num) + 1;
+                            db.collection("users").document(p.getEmailUsuario()).update("numPrestamos",numero);
+                        }
+                    }
+                });
 
             }
             listaPeticiones.clear();

@@ -17,7 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -107,6 +109,17 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
 
+                db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null){
+                        String num = document.getString("numDonaciones");
+                        if(num != null){
+                            int numero = Integer.parseInt(num) + 1;
+                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",numero);
+                        }
+                    }
+                });
+
                 listaDonaciones.remove(position);
                 adapter.notifyDataSetChanged();
                 linearLayout.setVisibility(View.INVISIBLE);
@@ -132,9 +145,8 @@ public class AdminDonacionesActivity extends AppCompatActivity {
             });
 
             AlertDialog alertDialog = alerta1.create();
-            alertDialog.setTitle("DONACION");
+            alertDialog.setTitle("DONACION SELECCIONADA");
             alertDialog.show();
-
 
 
             });
@@ -162,6 +174,17 @@ public class AdminDonacionesActivity extends AppCompatActivity {
 
                 db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
                 db.collection("posiblesDonaciones").document(d.getId()).delete();
+
+                db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null){
+                        String num = document.getString("numDonaciones");
+                        if(num != null){
+                            int numero = Integer.parseInt(num) + 1;
+                            db.collection("users").document(d.getEmailUsuario()).update("numDonaciones",numero);
+                        }
+                    }
+                });
 
             }
             listaDonaciones.clear();

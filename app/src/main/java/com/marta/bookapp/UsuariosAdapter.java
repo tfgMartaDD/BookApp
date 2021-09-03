@@ -61,9 +61,9 @@ public class UsuariosAdapter extends BaseAdapter {
         String nombre = u.getNombre() +" " +u.getApellido();
         nombreTV.setText(nombre);
 
-        numDonTV.setText(u.getDonaciones());
+        numDonTV.setText(Integer.toString(u.getDonaciones()));
 
-        numPresTV.setText(u.getPrestamos());
+        numPresTV.setText(Integer.toString(u.getPrestamos()));
 
         return convertView;
     }
