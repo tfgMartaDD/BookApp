@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".AdminUsuariosActivity">
 
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lista_users"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:textSize="30sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
