@@ -12,15 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.util.Objects;
 
 
 public class EscaneoActivity extends AppCompatActivity {
@@ -59,35 +58,19 @@ public class EscaneoActivity extends AppCompatActivity {
 
         //check condition
         if(intentResult.getContents() != null){
-            /*AlertDialog.Builder builder = new AlertDialog.Builder(EscaneoActivity.this);
-            builder.setTitle("Resultado del escaneo");
-            builder.setMessage(intentResult.getContents());
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.show();*/
+
             String user = intentResult.getContents();
             String email = user.replaceAll("http://","");
-            System.out.println("user: "+user);
-            System.out.println("email: "+email);
 
-            db.collection("users").whereEqualTo(FieldPath.documentId(),email).get().addOnSuccessListener( (QuerySnapshot queryDocumentSnapshots) -> {
-
-                Intent in = new Intent (this,UsuarioScanActivity.class);
-                in.putExtra("email",email);
-                startActivity(in);
-
+            db.collection("users").whereEqualTo("email",email).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
+                        Intent in = new Intent (this,UsuarioScanActivity.class);
+                        in.putExtra("email",email);
+                        startActivity(in);
+                    }
+                }
             });
-
-
-        /*.addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
-                Intent in = new Intent (this,UsuarioScanActivity.class);
-                in.putExtra("email",email);
-                startActivity(in);
-            });*/
 
         }else{
             Toast.makeText(getApplicationContext(), "No has escaneado nada.", Toast.LENGTH_SHORT).show();

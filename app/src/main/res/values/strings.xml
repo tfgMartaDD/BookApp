@@ -17,6 +17,7 @@
     <string name="anadir_portada_galeria">DESDE GALERIA</string>
     <string name="apellido">Apellido</string>
     <string name="asignatura">ASIGNATURA</string>
+    <string name="buscar_escaneando">ESCANEAR CODIGO</string>
     <string name="clase">CLASE</string>
     <string name="curso">CURSO</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
@@ -24,6 +25,7 @@
     <string name="datos_personales_scan">DATOS PERSONALES USUARIO ESCANEADO</string>
     <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
     <string name="deshacer_reserva">DESHACER RESERVA</string>
+    <string name="detalles_libro_scan">DETALLES LIBRO ESCANEADO</string>
     <string name="donaciones">DONACIONES</string>
     <string name="donaciones_aprobar">DONACIONES POR APROBAR</string>
     <string name="donacion_seleccionada">DONACION SELECCIONADA</string>

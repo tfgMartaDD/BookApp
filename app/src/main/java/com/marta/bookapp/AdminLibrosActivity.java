@@ -1,6 +1,7 @@
 package com.marta.bookapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,12 +16,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
     List<Libro> listaLibros = new ArrayList<>();
     ListaLibrosAdapter adapter;
 
-    Button anadirBTN, eliminarBTN;
+    Button anadirBTN, eliminarBTN, busquedaBTN;
 
     Spinner spinner;
     int i;
@@ -88,16 +89,14 @@ public class AdminLibrosActivity extends AppCompatActivity {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
                     alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
 
-                        db.collection("peticiones").whereEqualTo("Libro", idLibro).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot query) {
-                                for (QueryDocumentSnapshot snap : query) {
-                                    idPendiente = snap.getString("idPendiente");
-                                    idPet = snap.getId();
-                                    db.collection("peticiones").document(idPet).delete();
-                                    db.collection("pendientes").document(idPendiente).delete();
-                                }
+                        db.collection("peticiones").whereEqualTo("Libro", idLibro).get().addOnSuccessListener( (QuerySnapshot query) -> {
+                            for (QueryDocumentSnapshot snap : query) {
+                                idPendiente = snap.getString("idPendiente");
+                                idPet = snap.getId();
+                                db.collection("peticiones").document(idPet).delete();
+                                db.collection("pendientes").document(idPendiente).delete();
                             }
+
                         });
                         System.out.println("ID --->>>> "+idPendiente +"Pet---> "+idPet);
 
@@ -122,14 +121,14 @@ public class AdminLibrosActivity extends AppCompatActivity {
                             +" " + l.getCurso() +" ? ";
 
                     AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
-                    alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
+                    alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) ->
                         db.collection("libros").document(l.getId()).delete().addOnSuccessListener( (Void unused) -> {
                             Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
                             listaLibros.remove(i);
                             adapter.notifyDataSetChanged();
-                        });
+                        })
 
-                    }).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminLibrosActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+                    ).setNegativeButton("NO",  (DialogInterface dialog, int id) ->  Toast.makeText(AdminLibrosActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
                     AlertDialog alertDialog = alerta.create();
                     alertDialog.setTitle("¿ESTAS SEGURO?");
@@ -138,6 +137,22 @@ public class AdminLibrosActivity extends AppCompatActivity {
 
             }
 
+
+        });
+
+        busquedaBTN = findViewById(R.id.busquedaScan);
+        busquedaBTN.setOnClickListener( (View v) ->{
+
+            IntentIntegrator intentIntegrator = new IntentIntegrator( AdminLibrosActivity.this);
+
+            intentIntegrator.setPrompt("Utiliza las teclas de volumen para activar el flash");
+
+            intentIntegrator.setBeepEnabled(false);
+            intentIntegrator.setOrientationLocked(true);
+            //set capture activity
+            intentIntegrator.setCaptureActivity(Capture.class);
+
+            intentIntegrator.initiateScan();
 
         });
 
@@ -152,6 +167,37 @@ public class AdminLibrosActivity extends AppCompatActivity {
         adapter = new ListaLibrosAdapter(this, listaLibros);
         listViewListaLibros.setAdapter(adapter);
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Initialize intent result
+
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        //check condition
+        if(intentResult.getContents() != null){
+
+            String c = intentResult.getContents();
+            Long codigo = Long.valueOf(c);
+
+            db.collection("libros").whereEqualTo("Codigo", codigo).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
+                        String id = query.getId();
+                        Intent in = new Intent (this,BusquedaActivity.class);
+                        in.putExtra("id",id);
+                        startActivity(in);
+                    }
+                }
+            });
+
+        }else{
+            Toast.makeText(getApplicationContext(), "No has escaneado nada.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
