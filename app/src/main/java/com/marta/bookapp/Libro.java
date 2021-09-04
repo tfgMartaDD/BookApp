@@ -4,6 +4,7 @@ public class Libro {
 
     String id, asignatura, clase, curso, donante, editorial, estado;
     String imagen;
+    String tipo;
 
     public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen) {
         this.id = id;
@@ -24,6 +25,18 @@ public class Libro {
         this.editorial = editorial;
         this.estado = estado;
         this.imagen = imagen;
+    }
+
+    public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen, String tipo) {
+        this.id = id;
+        this.asignatura = asignatura;
+        this.clase = clase;
+        this.curso = curso;
+        this.donante = donante;
+        this.editorial = editorial;
+        this.estado = estado;
+        this.imagen = imagen;
+        this.tipo = tipo;
     }
 
     public String getImagen() {
@@ -88,5 +101,13 @@ public class Libro {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }
