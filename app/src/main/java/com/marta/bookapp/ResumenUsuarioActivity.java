@@ -34,6 +34,7 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
 
     ImageView imagen;
     TextView asig, clase, curso, editorial;
+    TextView titulo;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -62,6 +63,7 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
         clase = findViewById(R.id.tvresclase);
         curso = findViewById(R.id.tvrescurso);
         editorial = findViewById(R.id.tvreseditorial);
+        titulo = findViewById(R.id.tituloResumen);
 
         listViewUsuario.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
 
@@ -70,6 +72,8 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
             Glide.with(ResumenUsuarioActivity.this)
                     .load(l.getImagen())
                     .into(imagen);
+
+            titulo.setText(l.getTipo());
 
             asig.setText(l.getAsignatura());
             clase.setText(l.getClase());

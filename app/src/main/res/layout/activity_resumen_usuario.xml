@@ -80,6 +80,7 @@
         android:id="@+id/tituloResumen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/usuariosLV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -96,13 +97,15 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="90dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/portada"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -129,7 +132,7 @@
             <TextView
                 android:id="@+id/tvreseditorial"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
         </LinearLayout>
