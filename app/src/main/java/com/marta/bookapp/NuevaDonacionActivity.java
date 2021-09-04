@@ -85,7 +85,8 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         anadirImagen = findViewById(R.id.anadirBTN);
 
-        String [] asignaturas = {"MATEMATICAS", "LENGUA", "BIOLOGIA", "SOCIALES", "INGLES"};
+        String [] asignaturas = {"MATEMATICAS", "LENGUA", "BIOLOGIA", "SOCIALES", "INGLES", "FRANCES", "EDUCACION FISICA",
+                "PLASTICA", "QUIMICA", "NATURALES", "LATIN"};
         ArrayAdapter<String> asigAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, asignaturas);
         asigSpin.setAdapter(asigAdapter);
 
@@ -97,7 +98,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         ArrayAdapter<String> cursoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cursos);
         cursoSpin.setAdapter(cursoAdapter);
 
-        String [] editoriales = {"SM","ANAYA"};
+        String [] editoriales = {"SM", "ANAYA", "EDELVIVES", "SANTILLANA", "OXFORD"};
         ArrayAdapter<String> editorialAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, editoriales);
         editorialSpin.setAdapter(editorialAdapter);
 
@@ -199,7 +200,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
 
             Uri fileUri = data.getData();
 
