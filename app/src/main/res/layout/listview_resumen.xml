@@ -6,19 +6,21 @@
 
     <TextView
         android:id="@+id/tvtipo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/tvasignaturaRes"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -27,13 +29,13 @@
             android:id="@+id/tvclaseRes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/tvcursoRes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +31,9 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
 
     List<Libro> listaLibros = new ArrayList<>();
     ResumenAdapter adapter;
+
+    ImageView imagen;
+    TextView asig, clase, curso, editorial;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -50,6 +56,26 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
         listViewUsuario = findViewById(R.id.usuariosLV);
         adapter = new ResumenAdapter(this, listaLibros);
         listViewUsuario.setAdapter(adapter);
+
+        imagen = findViewById(R.id.imageView4);
+        asig = findViewById(R.id.tvresasig);
+        clase = findViewById(R.id.tvresclase);
+        curso = findViewById(R.id.tvrescurso);
+        editorial = findViewById(R.id.tvreseditorial);
+
+        listViewUsuario.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+
+            Libro l = listaLibros.get(position);
+
+            Glide.with(ResumenUsuarioActivity.this)
+                    .load(l.getImagen())
+                    .into(imagen);
+
+            asig.setText(l.getAsignatura());
+            clase.setText(l.getClase());
+            curso.setText(l.getCurso());
+            editorial.setText(l.getEditorial());
+        });
 
         menuBTN.setOnClickListener((View v) -> volverAMenuAdmin(ResumenUsuarioActivity.this));
     }
