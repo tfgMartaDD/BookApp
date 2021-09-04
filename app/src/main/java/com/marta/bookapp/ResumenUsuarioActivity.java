@@ -22,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ResumenUsuarioActivity extends AppCompatActivity {
 
@@ -90,7 +91,7 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
 
         db.collection("libros").whereEqualTo("Donante", mail).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
             if(task.isSuccessful()){
-                for(QueryDocumentSnapshot document : task.getResult()){
+                for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())){
                     Libro l = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"), document.getString("Donante"),
                             document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"), "DONACION" );
 
@@ -101,12 +102,12 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
         });
         db.collection("prestamos").whereEqualTo("Usuario", mail).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task3) -> {
             if(task3.isSuccessful()){
-                for(QueryDocumentSnapshot document3 : task3.getResult()){
+                for(QueryDocumentSnapshot document3 : Objects.requireNonNull(task3.getResult())){
                     String libroid = document3.getString("Libro");
                     System.out.println("Libro----> "+libroid);
                     db.collection("libros").whereEqualTo(FieldPath.documentId(), libroid).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
-                            for (QueryDocumentSnapshot document2 : task2.getResult()) {
+                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"), document2.getString("Donante"),
                                         document2.getString("Editorial"), document2.getString("Estado"), document2.getString("Imagen"), "PRESTAMO");

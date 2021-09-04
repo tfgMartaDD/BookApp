@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,6 +43,8 @@ public class ListadoDispActivity extends AppCompatActivity {
 
     int i = 0;
     String idPendiente = "";
+    Boolean flag = false;
+    Boolean flag2 = false;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference libros = db.collection("libros");
@@ -89,6 +92,33 @@ public class ListadoDispActivity extends AppCompatActivity {
 
             String mostrar = l.getAsignatura() + "\t" + l.getClase() + "  " + l.getCurso() + "\t" + l.getEditorial();
             mostrarTV.setText(mostrar);
+            flag = true;
+
+            String asigL = libro.getAsignatura();
+            String claseL = libro.getClase();
+            String cursoL = libro.getCurso();
+
+            db.collection("prestamos").whereEqualTo("Usuario", actualUser).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())) {
+                        String id2 = query.getString("Libro");
+                        db.collection("libros").whereEqualTo(FieldPath.documentId(), id2).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
+                            if (task2.isSuccessful()) {
+                                for (QueryDocumentSnapshot query2 : Objects.requireNonNull(task2.getResult())) {
+                                    String a = query2.getString("Asignatura");
+                                    String cl = query2.getString("Clase");
+                                    String cu = query2.getString("Curso");
+
+                                    if ((a.equalsIgnoreCase(asigL)) && (cl.equalsIgnoreCase(claseL)) && (cu.equalsIgnoreCase(cursoL))) {
+                                        flag = false;
+                                        flag2 = true;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
 
         });
 
@@ -97,53 +127,60 @@ public class ListadoDispActivity extends AppCompatActivity {
         reservarBTN = findViewById(R.id.reservarButton);
         reservarBTN.setOnClickListener( (View v) ->{
 
-            Map<String, Object> pendiente = new HashMap<>();
-            pendiente.put("Asignatura", libro.getAsignatura());
-            pendiente.put("esPeticion","true");
-            pendiente.put("Clase", libro.getClase());
-            pendiente.put("Curso",libro.getCurso());
-            pendiente.put("Estado", "pendiente");
-            pendiente.put("Usuario", actualUser);
+            if(flag){
+
+                Map<String, Object> pendiente = new HashMap<>();
+                pendiente.put("Asignatura", libro.getAsignatura());
+                pendiente.put("esPeticion","true");
+                pendiente.put("Clase", libro.getClase());
+                pendiente.put("Curso",libro.getCurso());
+                pendiente.put("Estado", "pendiente");
+                pendiente.put("Usuario", actualUser);
+
+                db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->  {
+                    idPendiente = documentReference.getId();
+
+                    //cambiamos el estado del libro de Disponible a Reservado
+                    Map<String, Object> reserva= new HashMap<>();
+                    reserva.put("Asignatura",libro.getAsignatura());
+                    reserva.put("Clase",libro.getClase());
+                    reserva.put("Curso",libro.getCurso());
+                    reserva.put("Donante",libro.getDonante());
+                    reserva.put("Editorial",libro.getEditorial());
+                    reserva.put("Estado", "reservado");
+                    reserva.put("Imagen", libro.getImagen());
 
 
+                    libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
+                            Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show());
 
-            db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->  {
-                idPendiente = documentReference.getId();
-                System.out.println("ID ->>>>> "+idPendiente);
+                    Date date = new Date();
 
-                //cambiamos el estado del libro de Disponible a Reservado
-                Map<String, Object> reserva= new HashMap<>();
-                reserva.put("Asignatura",libro.getAsignatura());
-                reserva.put("Clase",libro.getClase());
-                reserva.put("Curso",libro.getCurso());
-                reserva.put("Donante",libro.getDonante());
-                reserva.put("Editorial",libro.getEditorial());
-                reserva.put("Estado", "reservado");
-                reserva.put("Imagen", libro.getImagen());
+                    Map<String, Object> peticion= new HashMap<>();
+                    peticion.put("Libro",libro.getId());
+                    peticion.put("Usuario",actualUser);
+                    peticion.put("Fecha",date);
+                    peticion.put("idPendiente",idPendiente);
 
+                    db.collection("peticiones").add(peticion);
 
-                libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show());
+                });
 
-                Date date = new Date();
+                listaLibro.remove(i);
+                adapter.notifyDataSetChanged();
 
-                Map<String, Object> peticion= new HashMap<>();
-                peticion.put("Libro",libro.getId());
-                peticion.put("Usuario",actualUser);
-                peticion.put("Fecha",date);
-                peticion.put("idPendiente",idPendiente);
+                mostrarTV.setVisibility(View.INVISIBLE);
+                campos.setVisibility(View.INVISIBLE);
+                seleccion.setVisibility(View.INVISIBLE);
 
-                db.collection("peticiones").add(peticion);
+            }else{
+                if(flag2){
+                    Toast.makeText(ListadoDispActivity.this, "No puede reservar más de un libro de la misma asignatura y la misma clase. \n SELECCIONE UN LIBRO DISTINTO",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(ListadoDispActivity.this, "SELECCIONE EL LIBRO QUE DESEA RESERVAR.",Toast.LENGTH_SHORT).show();
 
-            });
-
-            System.out.println("ID ->>>>> "+idPendiente);
-
-            listaLibro.remove(i);
-            adapter.notifyDataSetChanged();
-
-            campos.setVisibility(View.INVISIBLE);
-            seleccion.setVisibility(View.INVISIBLE);
+                }
+            }
 
         });
 
@@ -169,13 +206,11 @@ public class ListadoDispActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                                     document.getString("Donante"),document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
-                            //,(int)document.get("imagen"));*/
+
                             listaLibro.add(libro);
                             adapter.notifyDataSetChanged();
-                            System.out.println(libro.getAsignatura()+"  "+libro.getId());
                         }
                         adapter.notifyDataSetChanged();
-                        System.out.println(listaLibro.size());
 
                     } else {
                         Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
