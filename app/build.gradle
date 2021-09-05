@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'com.basgeekball:awesome-validation:4.3'
     testImplementation 'junit:junit:4.+'

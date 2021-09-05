@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -66,7 +67,11 @@ public class RegistrarActivity extends AppCompatActivity {
             if(awesomeValidation.validate()){
                 firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
                     if(task.isSuccessful()){
-                        Toast.makeText(RegistrarActivity.this, "Usuario creado con exito", Toast.LENGTH_SHORT).show();
+                        FirebaseUser usuario = firebaseAuth.getCurrentUser();
+                        if (usuario != null) {
+                            usuario.sendEmailVerification();
+                        }
+                        Toast.makeText(RegistrarActivity.this, "Usuario creado con exito. Verifique su correo", Toast.LENGTH_SHORT).show();
 
                         //guardar en la firestore
                         Map<String, Object> user = new HashMap<>();
@@ -76,6 +81,8 @@ public class RegistrarActivity extends AppCompatActivity {
                         user.put("esAdmin","false");
 
                         db.collection("users").document(mail).set(user);
+
+
                         finish();
                     }else {
                         String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();

@@ -81,26 +81,30 @@ public class MainActivity extends AppCompatActivity {
             }else {
 
                 if(awesomeValidation.validate()){
+                    if(!user.isEmailVerified()){
+                        Toast.makeText(this,"No has verificado el correo electronico.", Toast.LENGTH_LONG).show();
+                    }else {
 
-                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
-                        if(task.isSuccessful()){
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            CollectionReference users = db.collection("users");
-                            users.document(mail).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
-                                Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
-                                if(esAdmin){
-                                    Intent intent = new Intent( MainActivity.this,  AdminMenuActivity.class);
-                                    startActivity(intent);
-                                }else{
-                                    redirigirAmenu(mail);
-                                }
-                            });
+                        firebaseAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener((@NonNull Task<AuthResult> task) -> {
+                            if (task.isSuccessful()) {
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                CollectionReference users = db.collection("users");
+                                users.document(mail).get().addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
+                                    Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
+                                    if (esAdmin) {
+                                        Intent intent = new Intent(MainActivity.this, AdminMenuActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        redirigirAmenu(mail);
+                                    }
+                                });
 
-                        }else{
-                            String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
-                            MensajeError.menError(errorCode,MainActivity.this, emailET,passwordET);
-                        }
-                    });
+                            } else {
+                                String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+                                MensajeError.menError(errorCode, MainActivity.this, emailET, passwordET);
+                            }
+                        });
+                    }
                 }
             }
         });
