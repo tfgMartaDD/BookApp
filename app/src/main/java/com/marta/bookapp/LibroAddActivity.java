@@ -114,8 +114,13 @@ public class LibroAddActivity extends AppCompatActivity {
                 String editorial = editorialSpin.getSelectedItem().toString();
 
                 String c = String.valueOf(codigoET.getText());
-                Long codigo  = Long.valueOf(c);
+                Long codigo;
 
+                if(c.equalsIgnoreCase("")){
+                    codigo = 0L;
+                }else{
+                    codigo = Long.valueOf(c);
+                }
 
                 String frase = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
 
