@@ -73,12 +73,16 @@ public class RegistrarActivity extends AppCompatActivity {
                         }
                         Toast.makeText(RegistrarActivity.this, "Usuario creado con exito. Verifique su correo", Toast.LENGTH_SHORT).show();
 
+                        Long num = 0L;
+
                         //guardar en la firestore
                         Map<String, Object> user = new HashMap<>();
                         user.put("nombre", nombre.getText().toString());
                         user.put("apellido", apellido.getText().toString());
                         user.put("email",mail);
                         user.put("esAdmin","false");
+                        user.put("numDonaciones", num);
+                        user.put("numPrestamos",num);
 
                         db.collection("users").document(mail).set(user);
 

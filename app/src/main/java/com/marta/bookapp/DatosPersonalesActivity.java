@@ -46,6 +46,11 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         actualUser = prefs.getString("email","");
 
+        /*FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        if (usuario != null) {
+            usuario.sendEmailVerification();
+        }*/
+
         db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
             nombre.setText(documentSnapshot.getString("nombre"));
             apellido.setText(documentSnapshot.getString("apellido"));
@@ -55,12 +60,17 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         modificarBTN = findViewById(R.id.modificarbutton);
         modificarBTN.setOnClickListener( (View v) -> {
 
-            Map<String, Object> user = new HashMap<>();
+            /*Map<String, Object> user = new HashMap<>();
             user.put("nombre", nombre.getText().toString());
             user.put("apellido", apellido.getText().toString());
-            user.put("email",mail.getText().toString());
+            user.put("email",mail.getText().toString());*/
+            String email = mail.getText().toString();
+            String nom = nombre.getText().toString();
+            String ape = apellido.getText().toString();
 
-            db.collection("users").document(mail.getText().toString()).set(user).addOnSuccessListener( (Void unused) ->
+            db.collection("users").document(email).update("nombre", nom);
+
+            db.collection("users").document(email).update("apellido", ape).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(DatosPersonalesActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
 
         });
