@@ -45,6 +45,8 @@ public class BusquedaActivity extends AppCompatActivity {
         curso = findViewById(R.id.busqCurso);
         editorial = findViewById(R.id.busqEdit);
 
+
+
         db.collection("libros").document(id).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
             Libro libro = new Libro(documentSnapshot.getId(), documentSnapshot.getString("Asignatura"), documentSnapshot.getString("Clase"), documentSnapshot.getString("Curso"),
                     documentSnapshot.getString("Donante"), documentSnapshot.getString("Editorial"), documentSnapshot.getString("Estado"), documentSnapshot.getString("Imagen"), documentSnapshot.getString("Tipo") );
@@ -61,12 +63,12 @@ public class BusquedaActivity extends AppCompatActivity {
             editorial.setText(edit);
 
             listaLibros = obtenerLibros(asig, cl, cu, edit);
+            listViewBusqueda = findViewById(R.id.listViewBusqueda);
+            adapter = new BusquedaAdapter(this, listaLibros);
+            listViewBusqueda.setAdapter(adapter);
 
         });
 
-        listViewBusqueda = findViewById(R.id.listViewBusqueda);
-        adapter = new BusquedaAdapter(this, listaLibros);
-        listViewBusqueda.setAdapter(adapter);
 
     }
 
@@ -85,9 +87,10 @@ public class BusquedaActivity extends AppCompatActivity {
                     String idL = query.getId();
                     if(estado != null){
                         if(estado.equalsIgnoreCase("disponible")){
-                            System.out.println("3333");
+                            System.out.println("3333"+ idL);
                             Libro l = new Libro(idL, query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"), query.getString("Donante"),
                                     query.getString("Editorial"), estado, query.getString("Imagen"), "donacion", query.getDate("Fecha") );
+                            System.out.println(l.getAsignatura());
                             lista.add(l);
                             adapter.notifyDataSetChanged();
 
@@ -106,6 +109,7 @@ public class BusquedaActivity extends AppCompatActivity {
                                 }
                             });
 
+
                         }else if(estado.equalsIgnoreCase("prestado")){
                             System.out.println("6666");
                             db.collection("prestamos").whereEqualTo("Libro", idL).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task3) -> {
@@ -120,9 +124,9 @@ public class BusquedaActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                         }
                     }
+                    adapter.notifyDataSetChanged();
                 }
             }
         });

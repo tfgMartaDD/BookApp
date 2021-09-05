@@ -40,6 +40,7 @@
     <string name="escanea">ESCANEA ALGO…</string>
     <string name="estado">ESTADO</string>
     <string name="estado_pendientes">ESTADO DE LAS DONACIONES Y PETICIONES PENDIENTES</string>
+    <string name="fecha">FECHA</string>
     <string name="fecha_devolucion">FECHA DEVOLUCION</string>
     <string name="fecha_donacion">FECHA DONACION</string>
     <string name="fecha_prestamo">FECHA PRESTAMO</string>
