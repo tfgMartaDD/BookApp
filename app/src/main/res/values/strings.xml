@@ -54,6 +54,7 @@
     <string name="info_usuario">INFORMACIÓN USUARIO</string>
     <string name="introduzca_email">Introduzca el email al que le enviaremos la nueva contraseña.</string>
     <string name="ir_escaner">IR A ESCANER</string>
+    <string name="hacer_admin">HACER ADMINISTRADOR</string>
     <string name="libro">LIBRO</string>
     <string name="libro_seleccionado">LIBRO SELECCIONADO</string>
     <string name="libros_disponibles">LIBROS DISPONIBLES</string>

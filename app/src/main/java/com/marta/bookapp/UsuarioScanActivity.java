@@ -2,8 +2,10 @@ package com.marta.bookapp;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,7 @@ public class UsuarioScanActivity extends AppCompatActivity {
     EditText nombreET, apellidoET;
     TextView emailTV;
     Button modificarBTN, volverBTN;
+    Button adminBTN;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -58,6 +61,26 @@ public class UsuarioScanActivity extends AppCompatActivity {
 
             db.collection("users").document(email).set(user).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(UsuarioScanActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
+
+        });
+
+        adminBTN = findViewById(R.id.adminButton);
+        adminBTN.setOnClickListener( (View v)  -> {
+
+            String frase = "¿Estás seguro de que desea hacer que "+email+" sea administrador?";
+            AlertDialog.Builder alerta = new AlertDialog.Builder(UsuarioScanActivity.this);
+            alerta.setMessage(frase).setPositiveButton("ACEPTAR",  (DialogInterface dialog, int id) -> {
+                db.collection("users").document(email).update("esAdmin", "true");
+                Toast.makeText(this, "Ahora "+email+" también es administrador en la app.", Toast.LENGTH_LONG).show();
+
+            }).setNegativeButton("RECHAZAR",  (DialogInterface dialog, int id) ->   {
+                dialog.dismiss();
+                Toast.makeText(this, "ACCIÓN CANCELADA", Toast.LENGTH_SHORT).show();
+            } );
+
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("NUEVO ADMINISTRADOR DE LA APP");
+            alertDialog.show();
 
         });
 

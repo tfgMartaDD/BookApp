@@ -3,8 +3,10 @@ package com.marta.bookapp;
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +31,7 @@ import java.util.Objects;
 
 public class ResumenUsuarioActivity extends AppCompatActivity {
 
-    Button menuBTN;
+    Button menuBTN, adminBTN;
     TextView usuarioTV;
     ListView listViewUsuario;
 
@@ -85,6 +88,26 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
         });
 
         menuBTN.setOnClickListener((View v) -> volverAMenuAdmin(ResumenUsuarioActivity.this));
+
+        adminBTN = findViewById(R.id.admin2Button);
+        adminBTN.setOnClickListener( (View v)  -> {
+
+            String frase = "¿Estás seguro de que desea hacer que "+email+" sea administrador?";
+            AlertDialog.Builder alerta = new AlertDialog.Builder(ResumenUsuarioActivity.this);
+            alerta.setMessage(frase).setPositiveButton("ACEPTAR",  (DialogInterface dialog, int id) -> {
+                db.collection("users").document(email).update("esAdmin", "true");
+                Toast.makeText(this, "Ahora "+email+" también es administrador en la app.", Toast.LENGTH_LONG).show();
+
+            }).setNegativeButton("RECHAZAR",  (DialogInterface dialog, int id) ->   {
+                dialog.dismiss();
+                Toast.makeText(this, "ACCIÓN CANCELADA", Toast.LENGTH_SHORT).show();
+            } );
+
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("NUEVO ADMINISTRADOR DE LA APP");
+            alertDialog.show();
+
+        });
     }
 
     private List<Libro> obtenerLibros(String mail){
