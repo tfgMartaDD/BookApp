@@ -68,6 +68,7 @@ public class BusquedaAdapter extends BaseAdapter {
                 .into(portada);
 
         String estado = l.getEstado();
+        System.out.println("estado"+estado);
         if(estado.equalsIgnoreCase("reservado")){
             estadoTV.setTextColor(Color.BLUE);
 

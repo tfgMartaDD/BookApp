@@ -64,8 +64,6 @@ public class BusquedaActivity extends AppCompatActivity {
 
         });
 
-
-
         listViewBusqueda = findViewById(R.id.listViewBusqueda);
         adapter = new BusquedaAdapter(this, listaLibros);
         listViewBusqueda.setAdapter(adapter);
@@ -76,37 +74,44 @@ public class BusquedaActivity extends AppCompatActivity {
 
         List<Libro> lista = new ArrayList<>();
 
+        System.out.println("1111");
         db.collection("libros").whereEqualTo("Asignatura", asig).whereEqualTo("Clase",cl).whereEqualTo("Curso",cu)
                 .whereEqualTo("Editorial", edit).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
 
             if(task.isSuccessful()){
                 for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
+                    System.out.println("222");
                     String estado = query.getString("Estado");
                     String idL = query.getId();
                     if(estado != null){
                         if(estado.equalsIgnoreCase("disponible")){
+                            System.out.println("3333");
                             Libro l = new Libro(idL, query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"), query.getString("Donante"),
                                     query.getString("Editorial"), estado, query.getString("Imagen"), "donacion", query.getDate("Fecha") );
                             lista.add(l);
                             adapter.notifyDataSetChanged();
 
                         }else if(estado.equalsIgnoreCase("reservado")){
+                            System.out.println("4444");
                             db.collection("peticiones").whereEqualTo("Libro", idL).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
                                 if (task2.isSuccessful()) {
                                     for (QueryDocumentSnapshot query2 : Objects.requireNonNull(task2.getResult())) {
-                                            Libro l = new Libro(idL, query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"), query2.getString("Usuario"),
+                                        System.out.println("5555");
+                                        Libro l = new Libro(idL, query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"), query2.getString("Usuario"),
                                                 query.getString("Editorial"), estado, query.getString("Imagen"), "peticino", query.getDate("Fecha") );
-                                            lista.add(l);
-                                            adapter.notifyDataSetChanged();
+                                        lista.add(l);
+                                        adapter.notifyDataSetChanged();
 
                                     }
                                 }
                             });
 
                         }else if(estado.equalsIgnoreCase("prestado")){
+                            System.out.println("6666");
                             db.collection("prestamos").whereEqualTo("Libro", idL).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task3) -> {
                                 if (task3.isSuccessful()) {
                                     for (QueryDocumentSnapshot query3 : Objects.requireNonNull(task3.getResult())) {
+                                        System.out.println("7777");
                                         Libro l = new Libro(idL, query.getString("Asignatura"), query.getString("Clase"), query.getString("Curso"), query3.getString("Usuario"),
                                                 query.getString("Editorial"), estado, query.getString("Imagen"), "prestamo", query.getDate("Fecha") );
                                         lista.add(l);
