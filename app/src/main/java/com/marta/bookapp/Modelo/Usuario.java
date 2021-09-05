@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Modelo;
 
 public class Usuario {
 

@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.marta.bookapp.Modelo.Usuario;
+import com.marta.bookapp.adapter.UsuariosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

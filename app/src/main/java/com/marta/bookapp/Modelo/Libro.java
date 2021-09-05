@@ -1,10 +1,13 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Modelo;
+
+import java.util.Date;
 
 public class Libro {
 
     String id, asignatura, clase, curso, donante, editorial, estado;
     String imagen;
     String tipo;
+    Date fecha;
 
     public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen) {
         this.id = id;
@@ -37,6 +40,19 @@ public class Libro {
         this.estado = estado;
         this.imagen = imagen;
         this.tipo = tipo;
+    }
+
+    public Libro(String id, String asignatura, String clase, String curso, String donante, String editorial, String estado, String imagen, String tipo, Date fecha) {
+        this.id = id;
+        this.asignatura = asignatura;
+        this.clase = clase;
+        this.curso = curso;
+        this.donante = donante;
+        this.editorial = editorial;
+        this.estado = estado;
+        this.imagen = imagen;
+        this.tipo = tipo;
+        this.fecha = fecha;
     }
 
     public String getImagen() {
@@ -106,8 +122,15 @@ public class Libro {
     public String getTipo() {
         return tipo;
     }
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

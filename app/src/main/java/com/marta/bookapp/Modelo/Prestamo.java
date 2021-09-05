@@ -1,4 +1,6 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Modelo;
+
+import com.marta.bookapp.Modelo.Libro;
 
 import java.util.Date;
 

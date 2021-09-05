@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.R;
 
 import java.util.List;
 

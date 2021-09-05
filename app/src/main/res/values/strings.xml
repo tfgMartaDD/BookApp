@@ -30,6 +30,7 @@
     <string name="donaciones_aprobar">DONACIONES POR APROBAR</string>
     <string name="donacion_seleccionada">DONACION SELECCIONADA</string>
     <string name="donar">DONAR</string>
+    <string name="donado">DONADO POR</string>
     <string name="editorial">EDITORIAL</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="eliminar_cuenta">ELIMINAR CUENTA</string>
@@ -80,6 +81,7 @@
     <string name="peticiones">MIS PETICIONES</string>
     <string name="peticiones_pendientes">PETICIONES PENDIENTES</string>
     <string name="peticion_seleccionada">PETICION SELECCIONADA</string>
+    <string name="prestado">PRESTADO A </string>
     <string name="prestamos">MIS PRESTAMOS</string>
     <string name="prestamos_actuales">PRESTAMOS ACTUALES</string>
     <string name="prestamo_seleccionado">PRESTAMO SELECCIONADO</string>
@@ -91,6 +93,7 @@
     <string name="rechazar_peticion">RECHAZAR PETICION</string>
     <string name="registrar">REGISTRAR</string>
     <string name="registrar_cuenta">Registrar Cuenta</string>
+    <string name="reservado">RESERVADO POR</string>
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
     <string name="seleccionar_portada">SELECCIONAR PORTADA</string>

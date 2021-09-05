@@ -22,6 +22,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.adapter.ListaLibrosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

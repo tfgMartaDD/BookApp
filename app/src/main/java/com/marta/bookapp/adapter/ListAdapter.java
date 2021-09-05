@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.R;
 
 import java.util.List;
 
