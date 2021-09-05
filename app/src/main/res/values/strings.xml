@@ -19,6 +19,8 @@
     <string name="asignatura">ASIGNATURA</string>
     <string name="buscar_escaneando">ESCANEAR CODIGO</string>
     <string name="clase">CLASE</string>
+    <string name="codigo">CODIGO</string>
+    <string name="codigo_barras">CODIGO DE BARRAS</string>
     <string name="curso">CURSO</string>
     <string name="cerrar_sesion">CERRAR SESION</string>
     <string name="datos_personales">MIS DATOS PERSONALES</string>

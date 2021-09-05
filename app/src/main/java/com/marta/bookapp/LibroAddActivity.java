@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -38,6 +39,7 @@ public class LibroAddActivity extends AppCompatActivity {
     LinearLayout llimagen;
     ImageView imagen;
     TextView imagenTv;
+    EditText codigoET;
 
     Button anadirBTN, menuBTN, seleccionarBTN, galeriaBTN;
 
@@ -74,6 +76,8 @@ public class LibroAddActivity extends AppCompatActivity {
         cursoSpin = findViewById(R.id.spinnerCursoLibro);
         editorialSpin = findViewById(R.id.spinnerEditorialLibro);
 
+        codigoET = findViewById(R.id.codigoET);
+
         llimagen = findViewById(R.id.llimagen2);
 
         String [] asignaturas = {"MATEMATICAS", "LENGUA", "BIOLOGIA", "SOCIALES", "INGLES", "FRANCES", "EDUCACION FISICA",
@@ -109,6 +113,9 @@ public class LibroAddActivity extends AppCompatActivity {
                 String curso = cursoSpin.getSelectedItem().toString();
                 String editorial = editorialSpin.getSelectedItem().toString();
 
+                String c = String.valueOf(codigoET.getText());
+                Long codigo  = Long.valueOf(c);
+
 
                 String frase = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
 
@@ -126,6 +133,7 @@ public class LibroAddActivity extends AppCompatActivity {
                     libro.put("Donante", donante);
                     libro.put("Fecha", date);
                     libro.put("Imagen", urlImagen);
+                    libro.put("Codigo", codigo);
 
                     db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
                         Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
