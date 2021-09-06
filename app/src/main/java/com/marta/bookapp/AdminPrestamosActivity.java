@@ -66,6 +66,7 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
             adapter = new PrestAdminAdapter(this, listaPrestamos);
             listViewAdminPrestamos.setAdapter(adapter);
+            listViewAdminPrestamos.setVisibility(View.VISIBLE);
 
 
         }else if(rbc.isChecked()){
