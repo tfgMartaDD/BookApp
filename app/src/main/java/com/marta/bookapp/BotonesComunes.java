@@ -38,7 +38,11 @@ public class BotonesComunes {
     }
 
     public static void volverAMenuAdmin(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
+        String email = prefs.getString("email","");
+
         Intent in = new Intent (context,AdminMenuActivity.class);
+        in.putExtra("email",email);
         context.startActivity(in);
     }
 
