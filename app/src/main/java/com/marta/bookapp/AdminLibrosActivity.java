@@ -124,7 +124,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
 
                     AlertDialog.Builder alerta = new AlertDialog.Builder(AdminLibrosActivity.this);
                     alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) ->
-                        db.collection("libros").document(l.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                        db.collection("libros").document(idLibro).delete().addOnSuccessListener( (Void unused) -> {
                             Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
                             listaLibros.remove(i);
                             adapter.notifyDataSetChanged();
@@ -211,7 +211,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
             db.collection("libros").get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) ->{
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                        Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                                 document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                         lista.add(libro);
@@ -223,7 +223,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
             db.collection("libros").whereEqualTo("Estado",eleccion).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) ->{
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        Libro libro = new Libro(document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
+                        Libro libro = new Libro(document.getId(), document.getString("Asignatura"), document.getString("Clase"), document.getString("Curso"),
                                 document.getString("Donante"), document.getString("Editorial"), document.getString("Estado"), document.getString("Imagen"));
 
                         lista.add(libro);

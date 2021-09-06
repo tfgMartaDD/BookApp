@@ -28,7 +28,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
     TextView mail;
     EditText nombre, apellido;
-    Button modificarBTN, eliminarBTN;
+    Button modificarBTN, eliminarBTN, modoAdminBTN;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
     String actualUser;
@@ -50,11 +50,17 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         if (usuario != null) {
             usuario.sendEmailVerification();
         }*/
+        modoAdminBTN = findViewById(R.id.modoAdmin);
 
         db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
             nombre.setText(documentSnapshot.getString("nombre"));
             apellido.setText(documentSnapshot.getString("apellido"));
             mail.setText(documentSnapshot.getString("email"));
+
+            Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
+            if (esAdmin) {
+                modoAdminBTN.setVisibility(View.VISIBLE);
+            }
         });
 
         modificarBTN = findViewById(R.id.modificarbutton);
@@ -112,6 +118,11 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
             builder.show();
 
+        });
+
+        modoAdminBTN.setOnClickListener((View v) -> {
+            Intent in = new Intent(DatosPersonalesActivity.this, AdminMenuActivity.class);
+            startActivity(in);
         });
 
     }

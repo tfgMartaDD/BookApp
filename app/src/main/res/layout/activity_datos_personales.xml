@@ -97,6 +97,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/eliminar_cuenta" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/modoAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/modo_admin"
+            style="?android:attr/buttonBarButtonStyle"
+            android:visibility="invisible"/>
     </LinearLayout>
 
 

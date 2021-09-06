@@ -5,7 +5,9 @@ import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,9 @@ public class AdminMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
+
+        SharedPreferences  prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String email = prefs.getString("email","");
 
         librosBTN = findViewById(R.id.listalibros);
         librosBTN.setOnClickListener( (View v) -> {
@@ -56,7 +61,11 @@ public class AdminMenuActivity extends AppCompatActivity {
         });
 
         cambiarBTN = findViewById(R.id.cambiarBTN);
-        cambiarBTN.setOnClickListener( (View v) -> volverAMenu(AdminMenuActivity.this));
+        cambiarBTN.setOnClickListener( (View v) -> {
+            Intent in = new Intent (this,MenuActivity.class);
+            in.putExtra("email",email);
+            startActivity(in);
+        });
 
         listaBTN = findViewById(R.id.listaUsersBTN);
         listaBTN.setOnClickListener( (View v) -> {
