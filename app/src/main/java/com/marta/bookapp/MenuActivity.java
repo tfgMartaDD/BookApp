@@ -26,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String email = bundle.getString("email");
+        System.out.println("email"+email);
 
         if (!(email.isEmpty())) {
             //Guardado de datos del usuario actual

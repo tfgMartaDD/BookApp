@@ -18,13 +18,23 @@ public class AdminMenuActivity extends AppCompatActivity {
     Button cerrarSesion, scannerBTN;
     Button cambiarBTN, listaBTN;
 
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
 
-        SharedPreferences  prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-        String email = prefs.getString("email","");
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.getString("email");
+
+        if (!(email.isEmpty())) {
+            //Guardado de datos del usuario actual
+            prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("email", email);
+            editor.apply();
+        }
 
         librosBTN = findViewById(R.id.listalibros);
         librosBTN.setOnClickListener( (View v) -> {
