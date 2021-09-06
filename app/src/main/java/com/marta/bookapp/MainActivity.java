@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                                     Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
                                     if (esAdmin) {
                                         Intent intent = new Intent(MainActivity.this, AdminMenuActivity.class);
+                                        intent.putExtra("email",mail);
                                         startActivity(intent);
                                     } else {
                                         redirigirAmenu(mail);

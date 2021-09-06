@@ -122,6 +122,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
         modoAdminBTN.setOnClickListener((View v) -> {
             Intent in = new Intent(DatosPersonalesActivity.this, AdminMenuActivity.class);
+            in.putExtra("email",actualUser);
             startActivity(in);
         });
 
