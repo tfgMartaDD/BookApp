@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.marta.bookapp.Activitys.AdminMenuActivity;
+import com.marta.bookapp.Activitys.MainActivity;
+import com.marta.bookapp.Activitys.MenuActivity;
 
 public class BotonesComunes {
 
@@ -22,7 +25,7 @@ public class BotonesComunes {
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(context, "Sesión cerrada correctamente.", Toast.LENGTH_SHORT).show();
 
-        Intent i = new Intent (context,MainActivity.class);
+        Intent i = new Intent (context, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
@@ -32,7 +35,7 @@ public class BotonesComunes {
         SharedPreferences prefs = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
         String email = prefs.getString("email","");
 
-        Intent in = new Intent (context,MenuActivity.class);
+        Intent in = new Intent (context, MenuActivity.class);
         in.putExtra("email",email);
         context.startActivity(in);
     }
@@ -41,7 +44,7 @@ public class BotonesComunes {
         SharedPreferences prefs = context.getSharedPreferences(prefs_file, Context.MODE_PRIVATE);
         String email = prefs.getString("email","");
 
-        Intent in = new Intent (context,AdminMenuActivity.class);
+        Intent in = new Intent (context, AdminMenuActivity.class);
         in.putExtra("email",email);
         context.startActivity(in);
     }

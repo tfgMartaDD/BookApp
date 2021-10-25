@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,9 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.marta.bookapp.R;
 
 public class DatosPersonalesActivity extends AppCompatActivity {
 
@@ -103,7 +101,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                             editor.clear();
                             editor.apply();
 
-                            Intent i = new Intent(DatosPersonalesActivity.this,MainActivity.class);
+                            Intent i = new Intent(DatosPersonalesActivity.this, MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
                         }else{

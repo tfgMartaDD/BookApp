@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.cerrarSesion;
 
@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.marta.bookapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 

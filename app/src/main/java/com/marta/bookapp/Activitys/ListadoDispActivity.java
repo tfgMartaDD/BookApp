@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.R;
 import com.marta.bookapp.adapter.ListAdapter;
 
 import java.util.ArrayList;

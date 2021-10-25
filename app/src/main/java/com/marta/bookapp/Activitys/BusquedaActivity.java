@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.R;
 import com.marta.bookapp.adapter.BusquedaAdapter;
 
 import java.util.ArrayList;

@@ -12,73 +12,73 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookApp">
         <activity
-            android:name=".BusquedaActivity"
+            android:name=".Activitys.BusquedaActivity"
             android:exported="true" />
         <activity
-            android:name=".ResumenUsuarioActivity"
+            android:name=".Activitys.ResumenUsuarioActivity"
             android:exported="true" />
         <activity
-            android:name=".LibroAddActivity"
+            android:name=".Activitys.LibroAddActivity"
             android:exported="true" />
         <activity
-            android:name=".EstadoPendientesActivity"
+            android:name=".Activitys.EstadoPendientesActivity"
             android:exported="true" />
         <activity
-            android:name=".UsuarioScanActivity"
+            android:name=".Activitys.UsuarioScanActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminUsuariosActivity"
+            android:name=".Activitys.AdminUsuariosActivity"
             android:exported="true" />
         <activity
-            android:name=".EscaneoActivity"
+            android:name=".Activitys.EscaneoActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminLibrosActivity"
+            android:name=".Activitys.AdminLibrosActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminMenuActivity"
+            android:name=".Activitys.AdminMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminPeticionesActivity"
+            android:name=".Activitys.AdminPeticionesActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminPrestamosActivity"
+            android:name=".Activitys.AdminPrestamosActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminDonacionesActivity"
+            android:name=".Activitys.AdminDonacionesActivity"
             android:exported="true" />
         <activity
-            android:name=".NuevaDonacionActivity"
+            android:name=".Activitys.NuevaDonacionActivity"
             android:exported="true" />
         <activity
-            android:name=".DonacionesActivity"
+            android:name=".Activitys.DonacionesActivity"
             android:exported="true" />
         <activity
-            android:name=".PrestamosActivity"
+            android:name=".Activitys.PrestamosActivity"
             android:exported="true" />
         <activity
-            android:name=".ListadoDispActivity"
+            android:name=".Activitys.ListadoDispActivity"
             android:exported="true" />
         <activity
-            android:name=".CursosActivity"
+            android:name=".Activitys.CursosActivity"
             android:exported="true" />
         <activity
-            android:name=".ResetPassActivity"
+            android:name=".Activitys.ResetPassActivity"
             android:exported="true" />
         <activity
-            android:name=".DatosPersonalesActivity"
+            android:name=".Activitys.DatosPersonalesActivity"
             android:exported="true" />
         <activity
-            android:name=".PeticionesActivity"
+            android:name=".Activitys.PeticionesActivity"
             android:exported="true" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".Activitys.MenuActivity"
             android:exported="true" />
         <activity
-            android:name=".RegistrarActivity"
+            android:name=".Activitys.RegistrarActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activitys.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

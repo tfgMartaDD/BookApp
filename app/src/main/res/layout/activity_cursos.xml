@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/constraint_layout"
-    tools:context=".CursosActivity">
+    tools:context=".Activitys.CursosActivity">
 
     <TextView
         android:id="@+id/textView"

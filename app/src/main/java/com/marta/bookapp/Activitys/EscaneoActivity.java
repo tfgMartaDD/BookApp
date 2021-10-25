@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 
 import androidx.annotation.NonNull;
@@ -18,6 +18,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.marta.bookapp.Capture;
+import com.marta.bookapp.R;
 
 import java.util.Objects;
 
@@ -65,7 +67,7 @@ public class EscaneoActivity extends AppCompatActivity {
             db.collection("users").whereEqualTo("email",email).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
-                        Intent in = new Intent (this,UsuarioScanActivity.class);
+                        Intent in = new Intent (this, UsuarioScanActivity.class);
                         in.putExtra("email",email);
                         startActivity(in);
                     }

@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +22,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.marta.bookapp.Capture;
 import com.marta.bookapp.Modelo.Libro;
+import com.marta.bookapp.R;
 import com.marta.bookapp.adapter.ListaLibrosAdapter;
 
 import java.util.ArrayList;
@@ -190,7 +192,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
                         String id = query.getId();
-                        Intent in = new Intent (this,BusquedaActivity.class);
+                        Intent in = new Intent (this, BusquedaActivity.class);
                         in.putExtra("id",id);
                         startActivity(in);
                     }

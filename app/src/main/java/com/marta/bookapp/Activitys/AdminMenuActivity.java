@@ -1,7 +1,6 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.cerrarSesion;
-import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.marta.bookapp.R;
 
 public class AdminMenuActivity extends AppCompatActivity {
 
@@ -72,7 +73,7 @@ public class AdminMenuActivity extends AppCompatActivity {
 
         cambiarBTN = findViewById(R.id.cambiarBTN);
         cambiarBTN.setOnClickListener( (View v) -> {
-            Intent in = new Intent (this,MenuActivity.class);
+            Intent in = new Intent (this, MenuActivity.class);
             in.putExtra("email",email);
             startActivity(in);
         });

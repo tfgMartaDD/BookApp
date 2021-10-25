@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.marta.bookapp.R;
 
 import java.util.HashMap;
 import java.util.Map;

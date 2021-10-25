@@ -1,4 +1,4 @@
-package com.marta.bookapp;
+package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.marta.bookapp.MensajeError;
+import com.marta.bookapp.R;
 
 
 import java.util.Objects;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.passwordET);
 
         registrarBTN.setOnClickListener((View view) -> {
-            Intent i = new Intent(MainActivity.this,RegistrarActivity.class);
+            Intent i = new Intent(MainActivity.this, RegistrarActivity.class);
             startActivity(i);
         });
 
