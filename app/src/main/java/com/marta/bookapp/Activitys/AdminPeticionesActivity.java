@@ -28,7 +28,7 @@ import com.marta.bookapp.DatePickerFragment;
 import com.marta.bookapp.Modelo.DonacionPeticion;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.DonAdminAdapter;
+import com.marta.bookapp.Adapter.DonAdminAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.marta.bookapp.adapter;
+package com.marta.bookapp.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,12 +13,12 @@ import com.marta.bookapp.R;
 
 import java.util.List;
 
-public class PrestAdapter extends BaseAdapter {
+public class PrestAdminAdapter extends BaseAdapter {
 
     Context context;
     List<Prestamo> lst;
 
-    public PrestAdapter(Context context, List<Prestamo> lst) {
+    public PrestAdminAdapter(Context context, List<Prestamo> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -41,28 +41,29 @@ public class PrestAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        TextView usuarioTV;
         TextView asigTV;
         TextView clasecursoTV;
-        TextView fechaTV;
         TextView fechaDevTV;
 
         Prestamo p = lst.get(position);
         Libro l = p.getLibro();
 
-        if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_prestamos, null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_admin_prestamos, null);
         }
-        asigTV = convertView.findViewById(R.id.asigtv);
-        clasecursoTV = convertView.findViewById(R.id.clasecurso);
-        fechaTV = convertView.findViewById(R.id.fechaTextv);
-        fechaDevTV = convertView.findViewById(R.id.fechaDevTextv);
 
+        usuarioTV = convertView.findViewById(R.id.usuarioAdmPres);
+        asigTV = convertView.findViewById(R.id.asigAdmPres);
+        clasecursoTV = convertView.findViewById(R.id.claseAdmPres);
+        fechaDevTV = convertView.findViewById(R.id.fechaDevAdmPres);
+
+        usuarioTV.setText(p.getUsuario());
         asigTV.setText(l.getAsignatura());
 
-        String clasecurso = l.getClase() +" " +l.getCurso();
+        String clasecurso = l.getClase() + " " + l.getCurso();
         clasecursoTV.setText(clasecurso);
 
-        fechaTV.setText(p.getFecha().toString());
         fechaDevTV.setText(p.getFechaDev().toString());
 
         return convertView;

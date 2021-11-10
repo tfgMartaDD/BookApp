@@ -27,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.DonacionPeticion;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.DonAdapter;
+import com.marta.bookapp.Adapter.DonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

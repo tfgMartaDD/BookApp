@@ -1,6 +1,4 @@
-package com.marta.bookapp.adapter;
-
-import static com.marta.bookapp.R.string.*;
+package com.marta.bookapp.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -22,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.Modelo.Prestamo;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.PrestAdapter;
+import com.marta.bookapp.Adapter.PrestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

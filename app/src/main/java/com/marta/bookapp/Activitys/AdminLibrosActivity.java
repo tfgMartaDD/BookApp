@@ -25,7 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.marta.bookapp.Capture;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.ListaLibrosAdapter;
+import com.marta.bookapp.Adapter.ListaLibrosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

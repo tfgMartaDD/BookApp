@@ -25,7 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.ListAdapter;
+import com.marta.bookapp.Adapter.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;

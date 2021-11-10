@@ -14,7 +14,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Pendientes;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.PendientesAdapter;
+import com.marta.bookapp.Adapter.PendientesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

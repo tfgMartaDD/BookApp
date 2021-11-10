@@ -15,7 +15,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Usuario;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.UsuariosAdapter;
+import com.marta.bookapp.Adapter.UsuariosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

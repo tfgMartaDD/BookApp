@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
-import com.marta.bookapp.adapter.ResumenAdapter;
+import com.marta.bookapp.Adapter.ResumenAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
