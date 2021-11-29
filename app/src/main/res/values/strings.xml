@@ -48,6 +48,10 @@
     <string name="fecha_prestamo">FECHA PRESTAMO</string>
     <string name="fecha_reserva">FECHA RESERVA</string>
     <string name="fechas">FECHA PRESTAMO \n DEVOLUCION</string>
+    <string name="foto_defecto_hombre">FOTO POR DEFECTO HOMBRE</string>
+    <string name="foto_defecto_mujer">FOTO POR DEFECTO MUJER</string>
+    <string name="foto_eleccion">ELEGIR FOTO DE GALERIA</string>
+    <string name="foto_perfil">Foto de perfil</string>
     <string name="icono_app">icono principal app</string>
     <string name="imagen_portada">Imagen de la portada del libro</string>
     <string name="imagen_portada_donar"> Imagen de la portada del libro que quiere donar</string>
@@ -102,6 +106,7 @@
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>
     <string name="seleccionar_portada">SELECCIONAR PORTADA</string>
+    <string name="seleccionar_perfil">SELECCIONAR FOTO DE PERFIL</string>
     <string name="tipo">TIPO</string>
     <string name="usuario">USUARIO</string>
     <string name="volver_inicial">Volver a la pantalla inicial</string>

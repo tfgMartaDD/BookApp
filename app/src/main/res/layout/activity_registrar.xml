@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".Activitys.RegistrarActivity"
     android:orientation="vertical">
 
@@ -11,7 +11,7 @@
         android:id="@+id/textView10"
         android:textSize="30sp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/registrar_cuenta" />
@@ -20,7 +20,8 @@
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp"
         android:hint="@string/email"
         android:autofillHints="emailAddress"
         android:inputType="textEmailAddress" />
@@ -29,44 +30,142 @@
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp"
         android:hint="@string/password"
         android:autofillHints="password"
         android:inputType="textPassword" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="8dp" />
 
     <EditText
         android:id="@+id/nombreEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp"
         android:hint="@string/nombre"
-        android:autofillHints="name" />
+        android:autofillHints="name"
+        android:inputType="text"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="8dp" />
 
     <EditText
         android:id="@+id/apellidoEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp"
         android:hint="@string/apellido"
-        android:autofillHints="apellido"/>
+        android:autofillHints="apellido"
+        android:inputType="text"/>
 
-    <Space
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foto_perfil"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:textSize="24sp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="8dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rgroupPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="8dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/defectoMujRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/foto_defecto_mujer" />
+
+                <RadioButton
+                    android:id="@+id/defectoHomRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/foto_defecto_hombre" />
+
+                <RadioButton
+                    android:id="@+id/galeriaPerfilRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/foto_eleccion" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mujerIV"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/foto_defecto_mujer"
+                android:layout_marginHorizontal="16dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/icons8_user_female" />
+
+            <ImageView
+                android:id="@+id/hombreIV"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="16dp"
+                android:visibility="invisible"
+                android:contentDescription="@string/foto_defecto_hombre"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icons8_user_male" />
+
+            <ImageView
+                android:id="@+id/galeriaIV"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:visibility="invisible"
+                android:contentDescription="@string/foto_perfil"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/no_image"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/selecFotoPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:onClick="comprobarRBPerfil"
+            android:text="@string/seleccionar_perfil" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_gravity="bottom"
         android:text="@string/registrar" />
 
 </LinearLayout>

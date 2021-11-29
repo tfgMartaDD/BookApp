@@ -5,6 +5,7 @@ public class Usuario {
     String id;
     String nombre;
     String apellido;
+    String fotoPerfil;
     long donaciones;
     long prestamos;
 
@@ -54,5 +55,13 @@ public class Usuario {
 
     public void setPrestamos(long prestamos) {
         this.prestamos = prestamos;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }
