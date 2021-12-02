@@ -1,8 +1,11 @@
 package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -21,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.marta.bookapp.MensajeError;
 import com.marta.bookapp.R;
 
@@ -35,16 +40,20 @@ public class RegistrarActivity extends AppCompatActivity {
 
     String mail, pass;
 
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 1;
+
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    String perfilHom = "gs://bookapp-3c15f.appspot.com/fotosPerfil/icons8_user_male.png";
-    String perfilMuj = "gs://bookapp-3c15f.appspot.com/fotosPerfil/icons8_user_female.png";
-    String defecto = "gs://bookapp-3c15f.appspot.com/fotosPerfil/icono_hombre.png";
+    String perfilHom = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_male.png?alt=media&token=e7aa38b8-195c-4d39-8384-1bef39162bcd";
+    String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
+    String defecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Fno-image.png?alt=media&token=2f77ddd8-1cc8-456f-9aca-e0dbc1bde9fb";
     String urlPerfil, urlImagen;
     boolean generoFem = false;
 
+    Button seleccionarBTN;
     RadioButton hombreRB, mujerRB, galeriaRB;
     ImageView hombreiv, mujeriv, galeriaiv;
 
@@ -60,6 +69,7 @@ public class RegistrarActivity extends AppCompatActivity {
     private void registro(){
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mStorage = FirebaseStorage.getInstance().getReference();
 
         //Filtros comprobacion email y contraseña
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -81,6 +91,8 @@ public class RegistrarActivity extends AppCompatActivity {
         mujerRB = findViewById(R.id.defectoMujRB);
         galeriaRB = findViewById(R.id.galeriaPerfilRB);
 
+        seleccionarBTN = findViewById(R.id.selecFotoPerfil);
+
         registrar.setOnClickListener( (View v) -> {
             mail = email.getText().toString();
             pass = password.getText().toString();
@@ -97,11 +109,13 @@ public class RegistrarActivity extends AppCompatActivity {
 
                         Long num = 0L;
 
-                        if (generoFem) {
+                        /*if (generoFem) {
                             urlPerfil = perfilMuj;
                         } else {
                             urlPerfil = perfilHom;
-                        }
+                        }*/
+
+                        System.out.println("HHH\t"+urlImagen);
 
                         //guardar en la firestore
                         Map<String, Object> user = new HashMap<>();
@@ -111,7 +125,7 @@ public class RegistrarActivity extends AppCompatActivity {
                         user.put("esAdmin","false");
                         user.put("numDonaciones", num);
                         user.put("numPrestamos",num);
-                        user.put("fotoPerfil",urlPerfil);
+                        user.put("fotoPerfil",urlImagen);
 
                         db.collection("users").document(mail).set(user);
 
@@ -131,6 +145,7 @@ public class RegistrarActivity extends AppCompatActivity {
     public void comprobarRBPerfil(View view){
 
         if(hombreRB.isChecked()){
+            System.out.println("hhh");
             hombreiv.setVisibility(View.VISIBLE);
             mujeriv.setVisibility(View.INVISIBLE);
             galeriaiv.setVisibility(View.INVISIBLE);
@@ -161,12 +176,43 @@ public class RegistrarActivity extends AppCompatActivity {
             mujeriv.setVisibility(View.INVISIBLE);
             galeriaiv.setVisibility(View.VISIBLE);
 
-            urlImagen = defecto;
+
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_INTENT);
+
+            /*urlImagen = defecto;
             Glide.with(RegistrarActivity.this)
                     .load(urlImagen)
                     .into(galeriaiv);
-            String frase ="Imagen no disponible";
+            String frase ="Imagen no disponible";*/
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
+
+            Uri fileUri = data.getData();
+
+            StorageReference carpeta = mStorage.child("fotosPerfil");
+
+            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
+
+            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                urlImagen = String.valueOf(uri);
+                System.out.println(urlImagen);
+            }));
+
+            Glide.with(RegistrarActivity.this)
+                    .load(fileUri)
+                    .into(galeriaiv);
+
+            //String frase = "Imagen de la portada del libro que quiere donar";
+            //imagenTv.setText(frase);
         }
     }
 
