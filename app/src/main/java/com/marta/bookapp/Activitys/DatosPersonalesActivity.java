@@ -102,7 +102,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                     //guardamos los datos temporalmente por si no se elimina correctamente el usuario
                     db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
-                        System.out.println("ID "+ documentSnapshot.getId() + "kkkk "+ documentSnapshot.getString("email"));
+                       /* System.out.println("ID "+ documentSnapshot.getId() + "kkkk "+ documentSnapshot.getString("email"));
                         //String numd = documentSnapshot.getString("numDonaciones");
                         System.out.println("HHHH: " + documentSnapshot.getLong("numDonaciones"));
 
@@ -110,10 +110,10 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                         System.out.println("HHHH: " + numDon);
 
                         //String nump = documentSnapshot.getString("numPrestamos");
-                        long numPrest = documentSnapshot.getLong("numPrestamos");
+                        long numPrest = documentSnapshot.getLong("numPrestamos");*/
 
                         datosUser = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
-                                documentSnapshot.getString("fotoPerfil"),numDon,numPrest);
+                                documentSnapshot.getString("fotoPerfil"),documentSnapshot.getLong("numDonaciones"), documentSnapshot.getLong("numPrestamos"));
 
                         db.collection("users").document(actualUser).delete().addOnSuccessListener( (Void aVoid) -> {
                             System.out.println("DocumentSnapshot successfully deleted!");
