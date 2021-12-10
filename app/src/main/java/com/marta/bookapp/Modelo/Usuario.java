@@ -17,6 +17,15 @@ public class Usuario {
         this.prestamos = prestamos;
     }
 
+    public Usuario(String id, String nombre, String apellido, String fotoPerfil, long donaciones, long prestamos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fotoPerfil = fotoPerfil;
+        this.donaciones = donaciones;
+        this.prestamos = prestamos;
+    }
+
     public String getId() {
         return id;
     }

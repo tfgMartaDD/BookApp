@@ -15,14 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.marta.bookapp.Modelo.Usuario;
 import com.marta.bookapp.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatosPersonalesActivity extends AppCompatActivity {
 
@@ -32,6 +34,8 @@ public class DatosPersonalesActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
     String actualUser;
+
+    Usuario datosUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
             apellido.setText(documentSnapshot.getString("apellido"));
             mail.setText(documentSnapshot.getString("email"));
 
-            Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
+            boolean esAdmin = Boolean.parseBoolean(documentSnapshot.getString("esAdmin"));
             if (esAdmin) {
                 modoAdminBTN.setVisibility(View.VISIBLE);
             }
@@ -94,14 +98,27 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                 if (user != null) {
 
-                    db.collection("users").document(actualUser).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            System.out.println("DocumentSnapshot successfully deleted!");
+                    System.out.println("ACTUAL USER: " + actualUser);
 
+                    //guardamos los datos temporalmente por si no se elimina correctamente el usuario
+                    db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
+                        System.out.println("ID "+ documentSnapshot.getId() + "kkkk "+ documentSnapshot.getString("email"));
+                        //String numd = documentSnapshot.getString("numDonaciones");
+                        System.out.println("HHHH: " + documentSnapshot.getLong("numDonaciones"));
+
+                        long numDon =  documentSnapshot.getLong("numDonaciones");
+                        System.out.println("HHHH: " + numDon);
+
+                        //String nump = documentSnapshot.getString("numPrestamos");
+                        long numPrest = documentSnapshot.getLong("numPrestamos");
+
+                        datosUser = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
+                                documentSnapshot.getString("fotoPerfil"),numDon,numPrest);
+
+                        db.collection("users").document(actualUser).delete().addOnSuccessListener( (Void aVoid) -> {
+                            System.out.println("DocumentSnapshot successfully deleted!");
                             user.delete().addOnCompleteListener( (@NonNull Task<Void> task) -> {
                                 if (task.isSuccessful()) {
-                                    System.out.println("HHH"+actualUser);
                                     Toast.makeText(DatosPersonalesActivity.this, "CUENTA ELIMINADA CORRECTAMENTE", Toast.LENGTH_LONG).show();
 
                                     SharedPreferences prefs  = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
@@ -114,19 +131,29 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                                     startActivity(i);
                                 }else{
                                     Toast.makeText(DatosPersonalesActivity.this, "No se pudo eliminar su cuenta.", Toast.LENGTH_LONG).show();
+                                    //error al eliminar, asi que recuperamos los datos temporales
+
+                                    Map<String, Object> userTemp = new HashMap<>();
+                                    userTemp.put("nombre", datosUser.getNombre());
+                                    userTemp.put("apellido", datosUser.getApellido());
+                                    userTemp.put("email", datosUser.getId());
+                                    userTemp.put("esAdmin","false");
+                                    userTemp.put("numDonaciones", datosUser.getDonaciones());
+                                    userTemp.put("numPrestamos", datosUser.getPrestamos() );
+                                    userTemp.put("fotoPerfil", datosUser.getFotoPerfil());
+
+                                    db.collection("users").document(actualUser).set(userTemp);
                                 }
                             });
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            System.out.println("Error deleting document");
-                        }
+                        }).addOnFailureListener( (@NonNull Exception e) ->
+                                System.out.println("Error deleting document") );
+
                     });
 
 
-                }
+                    }
+
             }).setNegativeButton("NO",  (DialogInterface dialog, int which) -> {
                 dialog.dismiss();
                 Toast.makeText(DatosPersonalesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();

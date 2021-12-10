@@ -107,7 +107,7 @@ public class RegistrarActivity extends AppCompatActivity {
                         }
                         Toast.makeText(RegistrarActivity.this, "Usuario creado con exito. Verifique su correo", Toast.LENGTH_SHORT).show();
 
-                        Long num = 0L;
+                        long num = 0L;
 
                         /*if (generoFem) {
                             urlPerfil = perfilMuj;
@@ -124,7 +124,7 @@ public class RegistrarActivity extends AppCompatActivity {
                         user.put("email",mail);
                         user.put("esAdmin","false");
                         user.put("numDonaciones", num);
-                        user.put("numPrestamos",num);
+                        user.put("numPrestamos", num);
                         user.put("fotoPerfil",urlImagen);
 
                         db.collection("users").document(mail).set(user);
