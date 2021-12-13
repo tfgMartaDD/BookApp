@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,11 @@ public class DatosPersonalesActivity extends AppCompatActivity {
     TextView mail;
     EditText nombre, apellido;
     Button modificarBTN, eliminarBTN, modoAdminBTN;
+
+    Button modificarFotoBTN, anadirFotoBTN;
+    ImageView fotoPerfil;
+    String foto;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
     String actualUser;
@@ -57,14 +64,41 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         }*/
         modoAdminBTN = findViewById(R.id.modoAdmin);
 
+        modificarFotoBTN = findViewById(R.id.modificarFotoButton);
+        anadirFotoBTN = findViewById(R.id.anadirFotoButton);
+        fotoPerfil = findViewById(R.id.fotoPerfil);
+
         db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
             nombre.setText(documentSnapshot.getString("nombre"));
             apellido.setText(documentSnapshot.getString("apellido"));
             mail.setText(documentSnapshot.getString("email"));
 
+            foto = documentSnapshot.getString("fotoPerfil");
+            if(foto == null){
+                anadirFotoBTN.setVisibility(View.VISIBLE);
+            }else{
+                Glide.with(DatosPersonalesActivity.this)
+                        .load(foto)
+                        .into(fotoPerfil);
+            }
+
             boolean esAdmin = Boolean.parseBoolean(documentSnapshot.getString("esAdmin"));
             if (esAdmin) {
                 modoAdminBTN.setVisibility(View.VISIBLE);
+            }
+        });
+
+        modificarFotoBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        anadirFotoBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
