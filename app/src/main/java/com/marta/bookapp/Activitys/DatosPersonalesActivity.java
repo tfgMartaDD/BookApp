@@ -25,6 +25,7 @@ import com.marta.bookapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class DatosPersonalesActivity extends AppCompatActivity {
 
@@ -113,7 +114,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                         long numPrest = documentSnapshot.getLong("numPrestamos");*/
 
                         datosUser = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
-                                documentSnapshot.getString("fotoPerfil"),documentSnapshot.getLong("numDonaciones"), documentSnapshot.getLong("numPrestamos"));
+                                documentSnapshot.getString("fotoPerfil"), Objects.requireNonNull(documentSnapshot.getLong("numDonaciones")), Objects.requireNonNull(documentSnapshot.getLong("numPrestamos")));
 
                         db.collection("users").document(actualUser).delete().addOnSuccessListener( (Void aVoid) -> {
                             System.out.println("DocumentSnapshot successfully deleted!");

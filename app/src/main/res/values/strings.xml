@@ -11,11 +11,13 @@
     <string name="aceptar_todas_peticiones">ACEPTAR TODAS LAS PETICIONES</string>
     <string name="anadir">AÑADIR</string>
     <string name="anadir_donacion">QUIERO DONAR UN LIBRO</string>
+    <string name="anadir_foto">AÑADIR FOTO DE PERFIL</string>
     <string name="anadir_libro">AÑADIR LIBRO</string>
     <string name="anadir_portada">AÑADIR PORTADA</string>
     <string name="anadir_portada_defecto">PORTADA POR DEFECTO</string>
     <string name="anadir_portada_galeria">DESDE GALERIA</string>
     <string name="apellido">Apellido</string>
+    <string name="apellido_mayus">APELLIDO: </string>
     <string name="asignatura">ASIGNATURA</string>
     <string name="buscar_escaneando">ESCANEAR CODIGO</string>
     <string name="clase">CLASE</string>
@@ -38,6 +40,7 @@
     <string name="eliminar_cuenta">ELIMINAR CUENTA</string>
     <string name="eliminar_libro">ELIMINAR LIBRO</string>
     <string name="email">Email</string>
+    <string name="email_mayus">EMAIL: </string>
     <string name="enviar_email">ENVIAR EMAIL</string>
     <string name="escanea">ESCANEA ALGO…</string>
     <string name="estado">ESTADO</string>
@@ -73,12 +76,15 @@
     <string name="menu_admin">MENU ADMINISTRADORES</string>
     <string name="mis_datos">MIS DATOS</string>
     <string name="modificar">MODIFICAR</string>
+    <string name="modificar_datos">MODIFICAR DATOS</string>
+    <string name="modificar_foto">MODIFICAR FOTO DE PERFIL</string>
     <string name="modo_admin">CAMBIAR A  MODO ADMINISTRADOR</string>
     <string name="modo_usuarios">CAMBIAR A \n MODO USUARIOS</string>
     <string name="mostrar">MOSTRAR</string>
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="name_app"> BOOK APP!</string>
     <string name="nombre">Nombre</string>
+    <string name="nombre_mayus">NOMBRE: </string>
     <string name="nombre_completo">NOMBRE Y APELLIDOS</string>
     <string name="nueva_donacion">NUEVA DONACION</string>
     <string name="numero_donaciones">Nº DON.</string>
@@ -102,6 +108,7 @@
     <string name="rechazar_peticion">RECHAZAR PETICION</string>
     <string name="registrar">REGISTRAR</string>
     <string name="registrar_cuenta">Registrar Cuenta</string>
+    <string name="repetir_contra">Repita su contraseña</string>
     <string name="reservado">RESERVADO POR</string>
     <string name="reservar">RESERVAR</string>
     <string name="reset_password">Se le enviará un correo con la nueva contraseña al email con el que se registró.</string>

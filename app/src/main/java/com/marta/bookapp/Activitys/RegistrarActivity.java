@@ -35,10 +35,11 @@ import java.util.Objects;
 
 public class RegistrarActivity extends AppCompatActivity {
 
-    EditText  email, password, nombre, apellido;
+    EditText  email, password, password2, nombre, apellido;
+
     Button registrar;
 
-    String mail, pass;
+    String mail, pass, pass2;
 
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 1;
@@ -49,9 +50,10 @@ public class RegistrarActivity extends AppCompatActivity {
 
     String perfilHom = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_male.png?alt=media&token=e7aa38b8-195c-4d39-8384-1bef39162bcd";
     String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
-    String defecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Fno-image.png?alt=media&token=2f77ddd8-1cc8-456f-9aca-e0dbc1bde9fb";
-    String urlPerfil, urlImagen;
-    boolean generoFem = false;
+    //String defecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Fno-image.png?alt=media&token=2f77ddd8-1cc8-456f-9aca-e0dbc1bde9fb";
+    //String urlPerfil;
+    String urlImagen;
+    //boolean generoFem = false;
 
     Button seleccionarBTN;
     RadioButton hombreRB, mujerRB, galeriaRB;
@@ -80,6 +82,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
+        password2 = findViewById(R.id.passwordEditText2);
         nombre = findViewById(R.id.nombreEditText);
         apellido = findViewById(R.id.apellidoEditText);
 
@@ -96,18 +99,19 @@ public class RegistrarActivity extends AppCompatActivity {
         registrar.setOnClickListener( (View v) -> {
             mail = email.getText().toString();
             pass = password.getText().toString();
+            pass2 = password2.getText().toString();
 
+            if (pass.equalsIgnoreCase(pass2)){
+                if(awesomeValidation.validate()){
+                    firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
+                        if(task.isSuccessful()){
+                            FirebaseUser usuario = firebaseAuth.getCurrentUser();
+                            if (usuario != null) {
+                                usuario.sendEmailVerification();
+                            }
+                            Toast.makeText(RegistrarActivity.this, "Usuario creado con exito. Verifique su correo", Toast.LENGTH_SHORT).show();
 
-            if(awesomeValidation.validate()){
-                firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
-                    if(task.isSuccessful()){
-                        FirebaseUser usuario = firebaseAuth.getCurrentUser();
-                        if (usuario != null) {
-                            usuario.sendEmailVerification();
-                        }
-                        Toast.makeText(RegistrarActivity.this, "Usuario creado con exito. Verifique su correo", Toast.LENGTH_SHORT).show();
-
-                        long num = 0L;
+                            long num = 0L;
 
                         /*if (generoFem) {
                             urlPerfil = perfilMuj;
@@ -115,30 +119,37 @@ public class RegistrarActivity extends AppCompatActivity {
                             urlPerfil = perfilHom;
                         }*/
 
-                        System.out.println("HHH\t"+urlImagen);
+                            System.out.println("HHH\t"+urlImagen);
 
-                        //guardar en la firestore
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("nombre", nombre.getText().toString());
-                        user.put("apellido", apellido.getText().toString());
-                        user.put("email",mail);
-                        user.put("esAdmin","false");
-                        user.put("numDonaciones", num);
-                        user.put("numPrestamos", num);
-                        user.put("fotoPerfil",urlImagen);
+                            //guardar en la firestore
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("nombre", nombre.getText().toString());
+                            user.put("apellido", apellido.getText().toString());
+                            user.put("email",mail);
+                            user.put("esAdmin","false");
+                            user.put("numDonaciones", num);
+                            user.put("numPrestamos", num);
+                            user.put("fotoPerfil",urlImagen);
 
-                        db.collection("users").document(mail).set(user);
+                            db.collection("users").document(mail).set(user);
 
 
-                        finish();
-                    }else {
-                        String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
-                        MensajeError.menError(errorCode,RegistrarActivity.this, email, password);
-                    }
-                });
-            }else{
-                Toast.makeText(RegistrarActivity.this, "Completa todos los datos.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else {
+                            String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+                            MensajeError.menError(errorCode,RegistrarActivity.this, email, password);
+                        }
+                    });
+                }else{
+                    Toast.makeText(RegistrarActivity.this, "Completa todos los datos.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(RegistrarActivity.this, "La contraseña no es correcta. \n Tiene que ser igual en los dos campos, intentelo de nuevo.", Toast.LENGTH_LONG).show();
             }
+
+
+
+
         });
     }
 
@@ -154,7 +165,7 @@ public class RegistrarActivity extends AppCompatActivity {
             Glide.with(RegistrarActivity.this)
                     .load(urlImagen)
                     .into(hombreiv);
-            String frase ="Imagen por defecto perfil hombre";
+            //String frase ="Imagen por defecto perfil hombre";
             //imagenTv.setText(frase);
 
             //anadirBTN.setVisibility(View.VISIBLE);
@@ -168,7 +179,7 @@ public class RegistrarActivity extends AppCompatActivity {
             Glide.with(RegistrarActivity.this)
                     .load(urlImagen)
                     .into(mujeriv);
-            String frase ="Imagen por defecto perfil mujer";
+            //String frase ="Imagen por defecto perfil mujer";
 
         }else if(galeriaRB.isChecked()){
 
