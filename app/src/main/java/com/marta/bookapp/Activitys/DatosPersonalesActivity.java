@@ -38,6 +38,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
     Button modificarFotoBTN, anadirFotoBTN;
     ImageView fotoPerfil;
     String foto;
+    private static final int GALLERY_INTENT = 1;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
@@ -91,6 +92,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         modificarFotoBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                seleccionarFoto();
 
             }
         });
@@ -204,5 +206,11 @@ public class DatosPersonalesActivity extends AppCompatActivity {
             startActivity(in);
         });
 
+    }
+
+    protected void seleccionarFoto(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_INTENT);
     }
 }
