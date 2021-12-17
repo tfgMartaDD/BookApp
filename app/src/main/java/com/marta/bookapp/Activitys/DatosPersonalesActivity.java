@@ -138,15 +138,6 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                     //guardamos los datos temporalmente por si no se elimina correctamente el usuario
                     db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
-                       /* System.out.println("ID "+ documentSnapshot.getId() + "kkkk "+ documentSnapshot.getString("email"));
-                        //String numd = documentSnapshot.getString("numDonaciones");
-                        System.out.println("HHHH: " + documentSnapshot.getLong("numDonaciones"));
-
-                        long numDon =  documentSnapshot.getLong("numDonaciones");
-                        System.out.println("HHHH: " + numDon);
-
-                        //String nump = documentSnapshot.getString("numPrestamos");
-                        long numPrest = documentSnapshot.getLong("numPrestamos");*/
 
                         datosUser = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
                                 documentSnapshot.getString("fotoPerfil"), Objects.requireNonNull(documentSnapshot.getLong("numDonaciones")), Objects.requireNonNull(documentSnapshot.getLong("numPrestamos")));
@@ -187,8 +178,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                     });
 
-
-                    }
+                }
 
             }).setNegativeButton("NO",  (DialogInterface dialog, int which) -> {
                 dialog.dismiss();
@@ -227,16 +217,13 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
             filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                 urlImagen = String.valueOf(uri);
-                System.out.println(urlImagen);
+                //System.out.println(urlImagen);
             }));
-            //System.out.println(urlImagen);
 
             Glide.with(DatosPersonalesActivity.this)
                     .load(fileUri)
                     .into(fotoPerfil);
 
-
-            //System.out.println(actualUser);
             db.collection("users").document(actualUser).update("fotoPerfil", urlImagen);
 
         }

@@ -50,10 +50,8 @@ public class RegistrarActivity extends AppCompatActivity {
 
     String perfilHom = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_male.png?alt=media&token=e7aa38b8-195c-4d39-8384-1bef39162bcd";
     String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
-    //String defecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Fno-image.png?alt=media&token=2f77ddd8-1cc8-456f-9aca-e0dbc1bde9fb";
-    //String urlPerfil;
+
     String urlImagen;
-    //boolean generoFem = false;
 
     Button seleccionarBTN;
     RadioButton hombreRB, mujerRB, galeriaRB;
@@ -113,12 +111,6 @@ public class RegistrarActivity extends AppCompatActivity {
 
                             long num = 0L;
 
-                        /*if (generoFem) {
-                            urlPerfil = perfilMuj;
-                        } else {
-                            urlPerfil = perfilHom;
-                        }*/
-
                             System.out.println("HHH\t"+urlImagen);
 
                             //guardar en la firestore
@@ -165,10 +157,6 @@ public class RegistrarActivity extends AppCompatActivity {
             Glide.with(RegistrarActivity.this)
                     .load(urlImagen)
                     .into(hombreiv);
-            //String frase ="Imagen por defecto perfil hombre";
-            //imagenTv.setText(frase);
-
-            //anadirBTN.setVisibility(View.VISIBLE);
 
         }else if(mujerRB.isChecked()){
             hombreiv.setVisibility(View.INVISIBLE);
@@ -179,7 +167,6 @@ public class RegistrarActivity extends AppCompatActivity {
             Glide.with(RegistrarActivity.this)
                     .load(urlImagen)
                     .into(mujeriv);
-            //String frase ="Imagen por defecto perfil mujer";
 
         }else if(galeriaRB.isChecked()){
 
@@ -191,12 +178,6 @@ public class RegistrarActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, GALLERY_INTENT);
-
-            /*urlImagen = defecto;
-            Glide.with(RegistrarActivity.this)
-                    .load(urlImagen)
-                    .into(galeriaiv);
-            String frase ="Imagen no disponible";*/
 
         }
     }
@@ -215,15 +196,13 @@ public class RegistrarActivity extends AppCompatActivity {
 
             filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                 urlImagen = String.valueOf(uri);
-                System.out.println(urlImagen);
+                //System.out.println(urlImagen);
             }));
 
             Glide.with(RegistrarActivity.this)
                     .load(fileUri)
                     .into(galeriaiv);
 
-            //String frase = "Imagen de la portada del libro que quiere donar";
-            //imagenTv.setText(frase);
         }
     }
 
