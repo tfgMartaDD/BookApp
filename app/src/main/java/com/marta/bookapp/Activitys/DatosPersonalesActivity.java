@@ -1,6 +1,7 @@
 package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.marta.bookapp.Modelo.Usuario;
 import com.marta.bookapp.R;
 
@@ -38,13 +42,16 @@ public class DatosPersonalesActivity extends AppCompatActivity {
     Button modificarFotoBTN, anadirFotoBTN;
     ImageView fotoPerfil;
     String foto;
-    private static final int GALLERY_INTENT = 1;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences prefs;
     String actualUser;
 
     Usuario datosUser;
+
+    String urlImagen;
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,9 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         actualUser = prefs.getString("email","");
+
+        mStorage = FirebaseStorage.getInstance().getReference();
+
 
         /*FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         if (usuario != null) {
@@ -89,20 +99,9 @@ public class DatosPersonalesActivity extends AppCompatActivity {
             }
         });
 
-        modificarFotoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                seleccionarFoto();
+        modificarFotoBTN.setOnClickListener( (View v) -> seleccionarFoto() );
 
-            }
-        });
-
-        anadirFotoBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        anadirFotoBTN.setOnClickListener( (View v) -> seleccionarFoto() );
 
         modificarBTN = findViewById(R.id.modificarbutton);
         modificarBTN.setOnClickListener( (View v) -> {
@@ -212,5 +211,34 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_INTENT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
+
+            Uri fileUri = data.getData();
+
+            StorageReference carpeta = mStorage.child("fotosPerfil");
+
+            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
+
+            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                urlImagen = String.valueOf(uri);
+                System.out.println(urlImagen);
+            }));
+            //System.out.println(urlImagen);
+
+            Glide.with(DatosPersonalesActivity.this)
+                    .load(fileUri)
+                    .into(fotoPerfil);
+
+
+            //System.out.println(actualUser);
+            db.collection("users").document(actualUser).update("fotoPerfil", urlImagen);
+
+        }
     }
 }
