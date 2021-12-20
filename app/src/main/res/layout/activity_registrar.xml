@@ -164,7 +164,6 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="8dp"
             android:minHeight="48dp"
-            android:onClick="comprobarRBPerfil"
             android:text="@string/seleccionar_perfil" />
 
     </LinearLayout>

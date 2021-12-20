@@ -1,5 +1,9 @@
 package com.marta.bookapp.Activitys;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -139,9 +143,10 @@ public class RegistrarActivity extends AppCompatActivity {
                 Toast.makeText(RegistrarActivity.this, "La contraseña no es correcta. \n Tiene que ser igual en los dos campos, intentelo de nuevo.", Toast.LENGTH_LONG).show();
             }
 
+        });
 
-
-
+        seleccionarBTN.setOnClickListener( (View v) -> {
+            comprobarRBPerfil(v);
         });
     }
 
@@ -174,15 +179,28 @@ public class RegistrarActivity extends AppCompatActivity {
             mujeriv.setVisibility(View.INVISIBLE);
             galeriaiv.setVisibility(View.VISIBLE);
 
+            mGetContent.launch("image/*");
 
-            Intent intent = new Intent(Intent.ACTION_PICK);
+
+            /*Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-            startActivityForResult(intent, GALLERY_INTENT);
+            startActivityForResult(intent, GALLERY_INTENT);*/
 
         }
     }
 
-    @Override
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if (result != null){
+                        galeriaiv.setImageURI(result);
+                    }
+                }
+            });
+
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -204,6 +222,6 @@ public class RegistrarActivity extends AppCompatActivity {
                     .into(galeriaiv);
 
         }
-    }
+    }*/
 
 }
