@@ -195,7 +195,15 @@ public class RegistrarActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(Uri result) {
                     if (result != null){
+                        StorageReference carpeta = mStorage.child("fotosPerfil");
+                        StorageReference filePath = carpeta.child(result.getLastPathSegment());
+                        filePath.putFile(result).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                            urlImagen = String.valueOf(uri);
+                            System.out.println("UUU: "+urlImagen);
+                        }));
                         galeriaiv.setImageURI(result);
+                        System.out.println("HHHH: "+result.toString());
+                        System.out.println(" LLLL: "+result.getLastPathSegment().toString());
                     }
                 }
             });
