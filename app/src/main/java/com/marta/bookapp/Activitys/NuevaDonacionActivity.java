@@ -2,13 +2,14 @@ package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenu;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,7 +54,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
     LinearLayout llimagen;
 
     private StorageReference mStorage;
-    private static final int GALLERY_INTENT = 1;
+    Uri uriImagen;
 
     String idPendiente;
     String urlImagen;
@@ -148,6 +149,15 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                         donation.put("Editorial", editorial);
                         donation.put("Usuario", actualUser);
                         donation.put("Fecha", date);
+                        if(urlImagen == null){
+                            StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
+                            StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                            filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                                urlImagen = String.valueOf(uri);
+                                System.out.println("UUU: "+urlImagen);
+                            }));
+                        }
+
                         donation.put("Imagen", urlImagen);
                         donation.put("idPendiente", idPendiente);
 
@@ -167,9 +177,10 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         });
 
         anadirImagen.setOnClickListener( (View v) -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
+            /*Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-            startActivityForResult(intent, GALLERY_INTENT);
+            startActivityForResult(intent, GALLERY_INTENT);*/
+            mGetContent.launch("image/*");
         });
 
         menuBTN = findViewById(R.id.menuDonacion);
@@ -197,6 +208,20 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         }
     }
 
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if (result != null){
+                        imagen.setImageURI(result);
+                        uriImagen = result;
+                        System.out.println("HHHH: "+result.toString());
+                        System.out.println(" LLLL: "+urlImagen);
+                    }
+                }
+            });
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -223,5 +248,5 @@ public class NuevaDonacionActivity extends AppCompatActivity {
             imagenTV.setText(frase);
             //imagenTV.setVisibility(View.VISIBLE);
         }
-    }
+    }*/
 }
