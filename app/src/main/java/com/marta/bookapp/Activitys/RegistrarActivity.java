@@ -2,13 +2,10 @@ package com.marta.bookapp.Activitys;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -46,7 +43,7 @@ public class RegistrarActivity extends AppCompatActivity {
     String mail, pass, pass2;
 
     private StorageReference mStorage;
-    private static final int GALLERY_INTENT = 1;
+    //private static final int GALLERY_INTENT = 1;
 
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
@@ -56,6 +53,7 @@ public class RegistrarActivity extends AppCompatActivity {
     String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
 
     String urlImagen;
+    Uri uriImagen;
 
     Button seleccionarBTN;
     RadioButton hombreRB, mujerRB, galeriaRB;
@@ -125,6 +123,15 @@ public class RegistrarActivity extends AppCompatActivity {
                             user.put("esAdmin","false");
                             user.put("numDonaciones", num);
                             user.put("numPrestamos", num);
+
+                            if(urlImagen == null){
+                                StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
+                                StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                                filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                                    urlImagen = String.valueOf(uri);
+                                    System.out.println("UUU: "+urlImagen);
+                                }));
+                            }
                             user.put("fotoPerfil",urlImagen);
 
                             db.collection("users").document(mail).set(user);
@@ -145,9 +152,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
         });
 
-        seleccionarBTN.setOnClickListener( (View v) -> {
-            comprobarRBPerfil(v);
-        });
+        seleccionarBTN.setOnClickListener( (View v) ->  comprobarRBPerfil(v) );
     }
 
     public void comprobarRBPerfil(View view){
@@ -195,15 +200,10 @@ public class RegistrarActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(Uri result) {
                     if (result != null){
-                        StorageReference carpeta = mStorage.child("fotosPerfil");
-                        StorageReference filePath = carpeta.child(result.getLastPathSegment());
-                        filePath.putFile(result).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                            urlImagen = String.valueOf(uri);
-                            System.out.println("UUU: "+urlImagen);
-                        }));
                         galeriaiv.setImageURI(result);
+                        uriImagen = result;
                         System.out.println("HHHH: "+result.toString());
-                        System.out.println(" LLLL: "+result.getLastPathSegment().toString());
+                        System.out.println(" LLLL: "+urlImagen);
                     }
                 }
             });
