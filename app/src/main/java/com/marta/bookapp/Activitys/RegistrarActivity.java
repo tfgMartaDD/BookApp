@@ -152,7 +152,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
         });
 
-        seleccionarBTN.setOnClickListener( (View v) ->  comprobarRBPerfil(v) );
+        seleccionarBTN.setOnClickListener(this::comprobarRBPerfil);
     }
 
     public void comprobarRBPerfil(View view){
