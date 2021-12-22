@@ -149,22 +149,30 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                         donation.put("Editorial", editorial);
                         donation.put("Usuario", actualUser);
                         donation.put("Fecha", date);
+                        donation.put("idPendiente", idPendiente);
                         if(urlImagen == null){
                             StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
                             StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                             filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                                 urlImagen = String.valueOf(uri);
                                 System.out.println("UUU: "+urlImagen);
+                                donation.put("Imagen", urlImagen);
+
+                                db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
+                                    Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                                    volverAMenu(NuevaDonacionActivity.this);
+                                });
                             }));
+                        }else{
+                            donation.put("Imagen", urlImagen);
+
+                            db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
+                                Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                                volverAMenu(NuevaDonacionActivity.this);
+                            });
                         }
 
-                        donation.put("Imagen", urlImagen);
-                        donation.put("idPendiente", idPendiente);
 
-                        db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
-                            Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                            volverAMenu(NuevaDonacionActivity.this);
-                        });
                     });
 
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());

@@ -124,17 +124,23 @@ public class RegistrarActivity extends AppCompatActivity {
                             user.put("numDonaciones", num);
                             user.put("numPrestamos", num);
 
+                            System.out.println("URL: "+urlImagen);
+
                             if(urlImagen == null){
                                 StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
                                 StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                                 filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                                     urlImagen = String.valueOf(uri);
-                                    System.out.println("UUU: "+urlImagen);
-                                }));
-                            }
-                            user.put("fotoPerfil",urlImagen);
+                                    System.out.println("VVVU: "+urlImagen);
 
-                            db.collection("users").document(mail).set(user);
+                                    user.put("fotoPerfil",urlImagen);
+                                    db.collection("users").document(mail).set(user);
+                                }));
+                            }else{
+
+                                user.put("fotoPerfil",urlImagen);
+                                db.collection("users").document(mail).set(user);
+                            }
 
 
                             finish();

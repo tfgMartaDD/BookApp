@@ -201,12 +201,7 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
     protected void seleccionarFoto(){
         mGetContent.launch("image/*");
-        StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
-        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
-        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-            urlImagen = String.valueOf(uri);
-            System.out.println("UUU: "+urlImagen);
-        }));
+
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(
@@ -219,6 +214,13 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                         uriImagen = result;
                         System.out.println("HHHH: "+result.toString());
                         System.out.println(" LLLL: "+urlImagen);
+                        StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos").child(actualUser);
+                        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                            urlImagen = String.valueOf(uri);
+                            System.out.println("UUU: "+urlImagen);
+                            db.collection("users").document(actualUser).update("fotoPerfil", urlImagen);
+                        }));
                     }
                 }
             });
