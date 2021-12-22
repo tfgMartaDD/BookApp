@@ -171,8 +171,6 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                                 volverAMenu(NuevaDonacionActivity.this);
                             });
                         }
-
-
                     });
 
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
