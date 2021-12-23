@@ -182,12 +182,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
         });
 
-        anadirImagen.setOnClickListener( (View v) -> {
-            /*Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, GALLERY_INTENT);*/
-            mGetContent.launch("image/*");
-        });
+        anadirImagen.setOnClickListener( (View v) ->  mGetContent.launch("image/*") );
 
         menuBTN = findViewById(R.id.menuDonacion);
         menuBTN.setOnClickListener( (View v) -> volverAMenu(NuevaDonacionActivity.this));
@@ -227,32 +222,5 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                     }
                 }
             });
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
-
-            Uri fileUri = data.getData();
-
-            StorageReference carpeta = mStorage.child("portadas");
-
-            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
-
-            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                urlImagen = String.valueOf(uri);
-                System.out.println(urlImagen);
-            }));
-
-
-            Glide.with(NuevaDonacionActivity.this)
-                    .load(fileUri)
-                    .into(imagen);
-
-            String frase = "Imagen de la portada del libro que quiere donar";
-            imagenTV.setText(frase);
-            //imagenTV.setVisibility(View.VISIBLE);
-        }
-    }*/
 }

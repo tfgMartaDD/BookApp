@@ -43,7 +43,6 @@ public class RegistrarActivity extends AppCompatActivity {
     String mail, pass, pass2;
 
     private StorageReference mStorage;
-    //private static final int GALLERY_INTENT = 1;
 
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
@@ -205,11 +204,6 @@ public class RegistrarActivity extends AppCompatActivity {
 
             mGetContent.launch("image/*");
 
-
-            /*Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, GALLERY_INTENT);*/
-
         }
     }
 
@@ -226,29 +220,5 @@ public class RegistrarActivity extends AppCompatActivity {
                     }
                 }
             });
-
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
-
-            Uri fileUri = data.getData();
-
-            StorageReference carpeta = mStorage.child("fotosPerfil");
-
-            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
-
-            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                urlImagen = String.valueOf(uri);
-                //System.out.println(urlImagen);
-            }));
-
-            Glide.with(RegistrarActivity.this)
-                    .load(fileUri)
-                    .into(galeriaiv);
-
-        }
-    }*/
 
 }
