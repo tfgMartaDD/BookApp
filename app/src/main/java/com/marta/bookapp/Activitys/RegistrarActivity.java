@@ -75,9 +75,17 @@ public class RegistrarActivity extends AppCompatActivity {
 
         //Filtros comprobacion email y contraseña
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this,R.id.emailEditText, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
-        awesomeValidation.addValidation(this, R.id.passwordEditText, ".{6,}" ,R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.emailEditText, Patterns.EMAIL_ADDRESS, R.string.error_email);
 
+        // to validate the confirmation of another field
+        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+        awesomeValidation.addValidation(this, R.id.passwordEditText, regexPassword, R.string.error_pass);
+        // to validate a confirmation field (don't validate any rule other than confirmation on confirmation field)
+        awesomeValidation.addValidation(this, R.id.passwordEditText2, R.id.passwordEditText, R.string.error_pass2);
+
+        /*awesomeValidation.addValidation(this,R.id.emailEditText, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
+        awesomeValidation.addValidation(this, R.id.passwordEditText, ".{6,}" ,R.string.invalid_password);
+*/
         registrar = findViewById(R.id.registrar);
 
         email = findViewById(R.id.emailEditText);
@@ -85,6 +93,7 @@ public class RegistrarActivity extends AppCompatActivity {
         password2 = findViewById(R.id.passwordEditText2);
         nombre = findViewById(R.id.nombreEditText);
         apellido = findViewById(R.id.apellidoEditText);
+
 
         hombreiv = findViewById(R.id.hombreIV);
         mujeriv = findViewById(R.id.mujerIV);
@@ -96,12 +105,16 @@ public class RegistrarActivity extends AppCompatActivity {
 
         seleccionarBTN = findViewById(R.id.selecFotoPerfil);
 
+
+        password.setOnClickListener( (View v) ->
+                Toast.makeText(this, getString(R.string.error_pass), Toast.LENGTH_LONG).show());
+
         registrar.setOnClickListener( (View v) -> {
             mail = email.getText().toString();
             pass = password.getText().toString();
             pass2 = password2.getText().toString();
 
-            if (pass.equalsIgnoreCase(pass2)){
+            //if (pass.equalsIgnoreCase(pass2)){
                 if(awesomeValidation.validate()){
                     firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener( (@NonNull Task<AuthResult> task) -> {
                         if(task.isSuccessful()){
@@ -152,9 +165,9 @@ public class RegistrarActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(RegistrarActivity.this, "Completa todos los datos.", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(RegistrarActivity.this, "La contraseña no es correcta. \n Tiene que ser igual en los dos campos, intentelo de nuevo.", Toast.LENGTH_LONG).show();
-            }
+            //} else {
+                //Toast.makeText(RegistrarActivity.this, "La contraseña no es correcta. \n Tiene que ser igual en los dos campos, intentelo de nuevo.", Toast.LENGTH_LONG).show();
+            //}
 
         });
 

@@ -42,6 +42,9 @@
     <string name="email">Email</string>
     <string name="email_mayus">EMAIL: </string>
     <string name="enviar_email">ENVIAR EMAIL</string>
+    <string name="error_email">El email introducido no es válido</string>
+    <string name="error_pass">LA CONTRASEÑA DEBE CONTENER AL MENOS 8 CARACTERES CON UNA LETRA MINÚSCULA, UNA MAYUSCULA, UN NÚMERO Y UN CARACTER ESPECIAL.</string>
+    <string name="error_pass2">La contraseña tiene que ser igual en los dos campos, intentelo de nuevo.</string>
     <string name="escanea">ESCANEA ALGO…</string>
     <string name="estado">ESTADO</string>
     <string name="estado_pendientes">ESTADO DE LAS DONACIONES Y PETICIONES PENDIENTES</string>
