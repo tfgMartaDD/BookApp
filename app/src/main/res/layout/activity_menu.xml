@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activitys.MenuActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
+
+    >
 
     <TextView
         android:id="@+id/textView19"
@@ -76,7 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
         android:text="@string/estado_pendientes"
-        style="?android:attr/buttonBarButtonStyle"/>
+        style="?android:attr/buttonBarButtonStyle"
+        android:textColor="@color/green_700"
+        android:textStyle="bold"
+        android:textSize="18dp"/>
 
     <Space
         android:layout_width="0dp"
