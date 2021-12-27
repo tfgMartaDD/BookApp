@@ -2,7 +2,6 @@ package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        findViewById(R.id.fondoMain).getBackground().mutate().setAlpha(80);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -88,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                     firebaseAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener((@NonNull Task<AuthResult> task) -> {
                         if (task.isSuccessful()) {
                             FirebaseUser user1 =  firebaseAuth.getCurrentUser();
+                            assert user1 != null;
                             if(user1.isEmailVerified()) {
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 CollectionReference users = db.collection("users");
                                 users.document(mail).get().addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
-                                    Boolean esAdmin = Boolean.valueOf(documentSnapshot.getString("esAdmin"));
+                                    boolean esAdmin = Boolean.parseBoolean(documentSnapshot.getString("esAdmin"));
                                     if (esAdmin) {
                                         Intent intent = new Intent(MainActivity.this, AdminMenuActivity.class);
                                         intent.putExtra("email",mail);

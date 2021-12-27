@@ -6,8 +6,7 @@
     tools:context=".Activitys.MenuActivity"
     android:orientation="vertical"
     android:background="@drawable/fondo"
-
-    >
+    android:id="@+id/fondoMenu">
 
     <TextView
         android:id="@+id/textView19"

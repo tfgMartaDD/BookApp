@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activitys.ResetPassActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
+    android:id="@+id/fondoReset">
 
     <LinearLayout
         android:id="@+id/linearLayout3"

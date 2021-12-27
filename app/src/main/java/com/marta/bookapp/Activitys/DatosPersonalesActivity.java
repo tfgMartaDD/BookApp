@@ -61,6 +61,8 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_personales);
 
+        findViewById(R.id.fondoDatos).getBackground().mutate().setAlpha(80);
+
         mail = findViewById(R.id.correoTextView);
         nombre = findViewById(R.id.nombreEditText);
         apellido = findViewById(R.id.apellidoEditText);

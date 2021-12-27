@@ -26,6 +26,9 @@ public class AdminMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
 
+        findViewById(R.id.fondoAdminMenu).getBackground().mutate().setAlpha(80);
+
+
         Bundle bundle = getIntent().getExtras();
         String email = bundle.getString("email");
 

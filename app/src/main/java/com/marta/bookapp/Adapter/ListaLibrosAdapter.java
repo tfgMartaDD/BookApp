@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.marta.bookapp.Activitys.AdminDonacionesActivity;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
 
@@ -47,6 +50,8 @@ public class ListaLibrosAdapter extends BaseAdapter {
         TextView editorialTV;
         TextView estadoTV;
 
+        ImageView portada;
+
         Libro l = lst.get(position);
 
         if(convertView == null){
@@ -56,6 +61,8 @@ public class ListaLibrosAdapter extends BaseAdapter {
         claseTV = convertView.findViewById(R.id.listaClase);
         editorialTV = convertView.findViewById(R.id.listaEditorial);
         estadoTV = convertView.findViewById(R.id.listaEstado);
+
+        portada = convertView.findViewById(R.id.listaPortada);
 
         asignaturaTV.setText(l.getAsignatura());
 
@@ -74,6 +81,10 @@ public class ListaLibrosAdapter extends BaseAdapter {
         }
 
         estadoTV.setText(estado.toUpperCase(Locale.ROOT));
+
+        Glide.with(context)
+                .load(l.getImagen())
+                .into(portada);
 
         return convertView;
     }

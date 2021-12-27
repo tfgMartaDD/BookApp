@@ -25,6 +25,8 @@ public class ResetPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
 
+        findViewById(R.id.fondoReset).getBackground().mutate().setAlpha(80);
+
         auth = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.emailEditText2);

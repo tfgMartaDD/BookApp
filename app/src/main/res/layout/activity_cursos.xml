@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/constraint_layout"
-    tools:context=".Activitys.CursosActivity">
+    tools:context=".Activitys.CursosActivity"
+    android:background="@drawable/fondo"
+    android:id="@+id/fondoCursos">
 
     <TextView
         android:id="@+id/textView"
@@ -17,7 +18,7 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/constraint_layout" />
+        app:layout_constraintTop_toTopOf="@id/fondoCursos" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -33,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="@string/primaria"
             android:textSize="24sp" />
 
@@ -48,7 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/primero" />
+                android:text="@string/primero"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <Button
                 android:id="@+id/segundoBoton"
@@ -56,7 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/segundo" />
+                android:text="@string/segundo"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <Button
                 android:id="@+id/terceroBoton"
@@ -64,7 +68,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/tercero" />
+                android:text="@string/tercero"
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck,TextContrastCheck" />
         </LinearLayout>
 
         <Space
@@ -83,7 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/cuarto" />
+                android:text="@string/cuarto"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
             <Button
                 android:id="@+id/quintoBoton"
@@ -91,7 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/quinto" />
+                android:text="@string/quinto"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/sextoBoton"
@@ -99,7 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/sexto" />
+                android:text="@string/sexto"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
         <Space
@@ -111,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="@string/eso"
             android:textSize="24sp" />
 
@@ -126,7 +135,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/primero" />
+                android:text="@string/primero"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/segundoesoBoton"
@@ -175,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/bachillerato"
+            android:textStyle="bold"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -214,7 +225,7 @@
             android:text="@string/volver_menu" />
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 

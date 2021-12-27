@@ -40,7 +40,7 @@ import java.util.Objects;
 public class AdminPeticionesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
-    Button aceptarTodas;
+    Button aceptarTodas, decidir;
 
 
     EditText fechaEditText;
@@ -74,6 +74,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
 
         aceptarTodas = findViewById(R.id.aceptarTodasPetButton);
+        decidir = findViewById(R.id.decidirPetButton);
 
         asignatura = findViewById(R.id.asignaturatvPet);
         editorial = findViewById(R.id.editorialTVPet);
@@ -104,84 +105,86 @@ public class AdminPeticionesActivity extends AppCompatActivity {
             usuario.setText(d.getEmailUsuario());
             fecha.setText(d.getFecha().toString());
 
+            decidir.setVisibility(View.VISIBLE);
+            decidir.setOnClickListener((View v) -> {
+                String frase = "¿Que desea hacer con la petición seleccionada?";
 
-            String frase = "¿Que desea hacer con la petición seleccionada?";
+                AlertDialog.Builder alerta1 = new AlertDialog.Builder(AdminPeticionesActivity.this);
+                alerta1.setMessage(frase).setPositiveButton("ACEPTAR",  (DialogInterface dialog, int id2) ->{
 
-            AlertDialog.Builder alerta1 = new AlertDialog.Builder(AdminPeticionesActivity.this);
-            alerta1.setMessage(frase).setPositiveButton("ACEPTAR",  (DialogInterface dialog, int id2) ->{
+                    Date date = new Date();
 
-                Date date = new Date();
+                    Map<String, Object> libro = new HashMap<>();
+                    libro.put("Asignatura", l.getAsignatura());
+                    libro.put("Clase", l.getClase());
+                    libro.put("Curso", l.getCurso());
+                    libro.put("Editorial", l.getEditorial());
+                    libro.put("Estado", "prestado");
+                    libro.put("Donante", d.getEmailUsuario());
+                    libro.put("Fecha",date);
+                    libro.put("Imagen",l.getImagen());
 
-                Map<String, Object> libro = new HashMap<>();
-                libro.put("Asignatura", l.getAsignatura());
-                libro.put("Clase", l.getClase());
-                libro.put("Curso", l.getCurso());
-                libro.put("Editorial", l.getEditorial());
-                libro.put("Estado", "prestado");
-                libro.put("Donante", d.getEmailUsuario());
-                libro.put("Fecha",date);
-                libro.put("Imagen",l.getImagen());
+                    db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
+                            Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA. ", Toast.LENGTH_SHORT).show() );
 
-                db.collection("libros").document(l.getId()).set(libro).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "PETICION ACEPTADA. ", Toast.LENGTH_SHORT).show() );
+                    db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
 
-                db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Aceptada");
+                    Map<String, Object> prestamo = new HashMap<>();
+                    prestamo.put("Libro", l.getId());
+                    prestamo.put("Usuario", d.getEmailUsuario());
+                    prestamo.put("FechaPrestamo", date);
+                    prestamo.put("FechaDevolucion", fechaDevolucion);
 
-                Map<String, Object> prestamo = new HashMap<>();
-                prestamo.put("Libro", l.getId());
-                prestamo.put("Usuario", d.getEmailUsuario());
-                prestamo.put("FechaPrestamo", date);
-                prestamo.put("FechaDevolucion", fechaDevolucion);
+                    db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
+                            Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDevolucion, Toast.LENGTH_LONG).show() );
 
-                db.collection("prestamos").document().set(prestamo).addOnSuccessListener( (Void unused) ->
-                        Toast.makeText(AdminPeticionesActivity.this, "LIBRO PRESTADO HASTA  "+ fechaDevolucion, Toast.LENGTH_LONG).show() );
+                    db.collection("peticiones").document(d.getId()).delete();
 
-                db.collection("peticiones").document(d.getId()).delete();
-
-                db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
-                    DocumentSnapshot document = task.getResult();
-                    if(document != null){
-                        Long num = document.getLong("numPrestamos");
-                        if(num != null){
-                            num++;
-                            db.collection("users").document(d.getEmailUsuario()).update("numPrestamos",num);
+                    db.collection("users").document(d.getEmailUsuario()).get().addOnCompleteListener( (@NonNull Task<DocumentSnapshot> task) -> {
+                        DocumentSnapshot document = task.getResult();
+                        if(document != null){
+                            Long num = document.getLong("numPrestamos");
+                            if(num != null){
+                                num++;
+                                db.collection("users").document(d.getEmailUsuario()).update("numPrestamos",num);
+                            }
                         }
-                    }
-                });
-
-                listaPeticiones.remove(position);
-                adapter.notifyDataSetChanged();
-                linearLayout.setVisibility(View.INVISIBLE);
-                tv.setVisibility(View.INVISIBLE);
-
-
-            }).setNegativeButton("RECHAZAR",  (DialogInterface dialog, int id2) ->  {
-
-                String frase3 = "¿Estás seguro de que desea rechazar la peticion de "+ d.getEmailUsuario()+" ? ";
-
-                AlertDialog.Builder alerta2 = new AlertDialog.Builder(AdminPeticionesActivity.this);
-                alerta2.setMessage(frase3).setPositiveButton("SI",  (DialogInterface dialog2, int id3) ->{
-
-                    db.collection("peticiones").document(d.getId()).delete().addOnSuccessListener( (Void unused) -> {
-                        Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
-                        listaPeticiones.remove(position);
-                        adapter.notifyDataSetChanged();
                     });
 
-                    db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Rechazada");
+                    listaPeticiones.remove(position);
+                    adapter.notifyDataSetChanged();
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
 
-                }).setNegativeButton("NO",  (DialogInterface dialog2, int id3) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
-                AlertDialog alertDialog2 = alerta2.create();
-                alertDialog2.setTitle("¿ESTAS SEGURO?");
-                alertDialog2.show();
+                }).setNegativeButton("RECHAZAR",  (DialogInterface dialog, int id2) ->  {
 
-                Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
+                    String frase3 = "¿Estás seguro de que desea rechazar la peticion de "+ d.getEmailUsuario()+" ? ";
+
+                    AlertDialog.Builder alerta2 = new AlertDialog.Builder(AdminPeticionesActivity.this);
+                    alerta2.setMessage(frase3).setPositiveButton("SI",  (DialogInterface dialog2, int id3) ->{
+
+                        db.collection("peticiones").document(d.getId()).delete().addOnSuccessListener( (Void unused) -> {
+                            Toast.makeText(AdminPeticionesActivity.this, "PETICION RECHAZADA.", Toast.LENGTH_SHORT).show();
+                            listaPeticiones.remove(position);
+                            adapter.notifyDataSetChanged();
+                        });
+
+                        db.collection("pendientes").document(d.getIdPendiente()).update("Estado","Rechazada");
+
+                    }).setNegativeButton("NO",  (DialogInterface dialog2, int id3) ->  Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+                    AlertDialog alertDialog2 = alerta2.create();
+                    alertDialog2.setTitle("¿ESTAS SEGURO?");
+                    alertDialog2.show();
+
+                    Toast.makeText(AdminPeticionesActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show();
+                });
+
+                AlertDialog alertDialog = alerta1.create();
+                alertDialog.setTitle("¿ESTAS SEGURO?");
+                alertDialog.show();
             });
-
-            AlertDialog alertDialog = alerta1.create();
-            alertDialog.setTitle("¿ESTAS SEGURO?");
-            alertDialog.show();
         });
 
 
@@ -226,7 +229,12 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
                         Long num = document.getLong("numPrestamos");
-                        num++;
+                        if (num != null) {
+                            num++;
+                        }else{
+                            num = 1L;
+                        }
+
                         db.collection("users").document(p.getEmailUsuario()).update("numPrestamos",num);
                     }
                 });

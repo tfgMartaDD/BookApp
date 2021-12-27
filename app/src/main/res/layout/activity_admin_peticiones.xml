@@ -181,13 +181,15 @@
         android:autofillHints="FECHA DEVOLUCION"
         android:clickable="true"
         android:focusable="false"
-        android:hint="@string/fecha_devolucion"
+        android:hint="@string/fecha_devolucion_anadir"
         android:inputType="date"
         android:maxLines="1"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/ll6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll5" />
+        app:layout_constraintTop_toBottomOf="@id/ll5"
+        tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -204,6 +206,18 @@
             android:text="@string/aceptar_todas"
             android:layout_marginHorizontal="4dp"
             android:layout_gravity="center" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/decidirPetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:text="@string/decidir"
+            android:visibility="invisible" />
     </LinearLayout>
 
 

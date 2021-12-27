@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activitys.AdminMenuActivity">
+    tools:context=".Activitys.AdminMenuActivity"
+    android:background="@drawable/fondo"
+    android:id="@+id/fondoAdminMenu">
 
   <TextView
       android:id="@+id/textView6"
@@ -48,14 +50,16 @@
           android:layout_width="150dp"
           android:layout_height="120dp"
           android:layout_margin="8dp"
-          android:text="@string/peticiones_pendientes" />
+          android:text="@string/peticiones_pendientes"
+          tools:ignore="ButtonStyle" />
 
       <Button
           android:id="@+id/prestamosActuales"
           android:layout_width="150dp"
           android:layout_height="120dp"
           android:layout_margin="8dp"
-          android:text="@string/prestamos_actuales" />
+          android:text="@string/prestamos_actuales"
+          tools:ignore="ButtonStyle"/>
 
     </TableRow>
 
@@ -69,14 +73,16 @@
           android:layout_width="150dp"
           android:layout_height="120dp"
           android:layout_margin="8dp"
-          android:text="@string/donaciones_aprobar" />
+          android:text="@string/donaciones_aprobar"
+          tools:ignore="ButtonStyle"/>
 
       <Button
           android:id="@+id/listalibros"
           android:layout_width="150dp"
           android:layout_height="120dp"
           android:layout_margin="8dp"
-          android:text="@string/lista_libros" />
+          android:text="@string/lista_libros"
+          tools:ignore="ButtonStyle"/>
 
     </TableRow>
 

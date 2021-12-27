@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="20dp"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <LinearLayout
         android:id="@+id/linearLayout6"
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/libro"
+            android:textStyle="bold"
             android:gravity="center"/>
 
         <TextView
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/usuario"
+            android:textStyle="bold"
             android:gravity="center"/>
 
         <TextView
@@ -50,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/fecha_reserva"
+            android:textStyle="bold"
             android:gravity="center"/>
     </LinearLayout>
 
@@ -81,23 +84,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout8"
         app:layout_constraintTop_toBottomOf="@id/textView25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:layout_marginTop="16dp">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_weight="3"
+            android:layout_marginStart="8dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvasig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="2dp"
                 android:text="@string/asignatura"
                 android:textStyle="bold" />
 
@@ -105,7 +111,7 @@
                 android:id="@+id/tvclase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="2dp"
                 android:text="@string/clase"
                 android:textStyle="bold"/>
 
@@ -113,77 +119,129 @@
                 android:id="@+id/tveditorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="2dp"
                 android:text="@string/editorial"
                 android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_weight="3"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/asignaturatvDon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/clasetvDon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/editorialTVDon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <View
+            android:layout_width="3dp"
             android:layout_height="match_parent"
+            android:background="@color/sec_green_200"
+            android:layout_marginHorizontal="2dp"/>
+
+        <ImageView
+            android:id="@+id/portadaPosibleDon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/portada" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout8"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout7"
+        app:layout_constraintBottom_toTopOf="@id/decidirDonButton"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/usuario"
                 android:textStyle="bold"
-                android:text="@string/usuario" />
-
-            <TextView
-                android:id="@+id/userDon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_marginHorizontal="2dp" />
 
             <TextView
                 android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/fecha_donacion"
                 android:textStyle="bold"
-                android:text="@string/fecha_reserva" />
+                android:layout_marginHorizontal="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp"
+            android:layout_marginHorizontal="8dp">
+
+            <TextView
+                android:id="@+id/userDon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"/>
 
             <TextView
                 android:id="@+id/fechaDon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp" />
 
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/aceptarTodasButton"
+        android:id="@+id/decidirDonButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/aceptar_todas_donaciones"
+        android:layout_height="48dp"
+        android:text="@string/decidir"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout7"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/linearLayout8"
+        app:layout_constraintBottom_toTopOf="@id/aceptarTodasButton"/>
+
+    <Button
+        android:id="@+id/aceptarTodasButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/aceptar_todas_donaciones"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/decidirDonButton"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,8 @@ public class EscaneoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escaneo);
 
+        findViewById(R.id.fondoEscaneo).getBackground().mutate().setAlpha(80);
+
         scanBTN = findViewById(R.id.scanButton);
         scanBTN.setOnClickListener( (View v) -> {
             IntentIntegrator intentIntegrator = new IntentIntegrator( EscaneoActivity.this);

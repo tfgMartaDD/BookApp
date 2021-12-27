@@ -102,28 +102,24 @@
                 android:id="@+id/asig"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="@string/asignatura"/>
             <TextView
                 android:id="@+id/asignaturaPrestamo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"/>
 
 
             <TextView
                 android:id="@+id/curso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/clase"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/clasePrestamo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

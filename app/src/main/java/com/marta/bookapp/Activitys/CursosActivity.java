@@ -26,6 +26,8 @@ public class CursosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos);
 
+        findViewById(R.id.fondoCursos).getBackground().mutate().setAlpha(80);
+
         pripriBTN = findViewById(R.id.primeroBoton);
         segpriBTN = findViewById(R.id.segundoBoton);
         terpriBTN = findViewById(R.id.terceroBoton);

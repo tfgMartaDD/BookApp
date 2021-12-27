@@ -63,6 +63,9 @@ public class RegistrarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
 
+        findViewById(R.id.fondoRegistrar).getBackground().mutate().setAlpha(80);
+
+
         registro();
 
     }

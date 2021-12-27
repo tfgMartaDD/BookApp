@@ -112,9 +112,16 @@ public class ListadoDispActivity extends AppCompatActivity {
                                     String cl = query2.getString("Clase");
                                     String cu = query2.getString("Curso");
 
-                                    if ((a.equalsIgnoreCase(asigL)) && (cl.equalsIgnoreCase(claseL)) && (cu.equalsIgnoreCase(cursoL))) {
-                                        flag = false;
-                                        flag2 = true;
+                                    assert a != null;
+                                    if ((a.equalsIgnoreCase(asigL))) {
+                                        assert cl != null;
+                                        if ((cl.equalsIgnoreCase(claseL))) {
+                                            assert cu != null;
+                                            if (cu.equalsIgnoreCase(cursoL)) {
+                                                flag = false;
+                                                flag2 = true;
+                                            }
+                                        }
                                     }
                                 }
                             }

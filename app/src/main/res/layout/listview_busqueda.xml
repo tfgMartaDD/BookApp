@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/imageBusqueda"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:contentDescription="@string/portada"/>
-
-    <TextView
-        android:id="@+id/estadoBusqueda"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"/>
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="3">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageBusqueda"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/portada" />
 
         <TextView
-            android:id="@+id/tipoBusqueda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/estadoBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tipoBusqueda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/userBusqueda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/userBusqueda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/fechaBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/fechaBusqueda"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="4" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="2dp"
+        android:background="@color/sec_green_200" />
 
 </LinearLayout>

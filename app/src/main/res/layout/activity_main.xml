@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activitys.MainActivity"
     android:background="@drawable/fondo"
-    android:id="@+id/clMain">
+    android:id="@+id/fondoMain">
 
 
     <TextView

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activitys.EscaneoActivity">
+    tools:context=".Activitys.EscaneoActivity"
+    android:background="@drawable/fondo"
+    android:id="@+id/fondoEscaneo">
 
     <Button
         android:id="@+id/scanButton"

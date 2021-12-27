@@ -25,6 +25,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+       findViewById(R.id.fondoMenu).getBackground().mutate().setAlpha(80);
+
 
         Bundle bundle = getIntent().getExtras();
         String email = bundle.getString("email");
