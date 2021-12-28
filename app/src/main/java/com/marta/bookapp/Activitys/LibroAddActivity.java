@@ -31,6 +31,7 @@ import com.marta.bookapp.R;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LibroAddActivity extends AppCompatActivity {
@@ -49,6 +50,8 @@ public class LibroAddActivity extends AppCompatActivity {
     ImageView imagen;
     TextView imagenTv;
     EditText codigoET;
+
+    EditText ETasignaturaR, ETcursoR, ETclaseR, ETeditorialR, ETcodigoR;
 
     Button anadirBTN, menuBTN, seleccionarPorBTN, galeriaBTN;
 
@@ -73,8 +76,9 @@ public class LibroAddActivity extends AppCompatActivity {
         galeriaRB = findViewById(R.id.galeriaRB2);
         seleccionarPorBTN = findViewById(R.id.selecPortada);
 
-        listarRB = findViewById(R.id.radioButton);
-        rellenarRB = findViewById(R.id.radioButton2);
+
+        rellenarRB = findViewById(R.id.radioButton);
+        listarRB = findViewById(R.id.radioButton2);
         seleccionar = findViewById(R.id.button2);
         ll1 = findViewById(R.id.llLibro);
         ll2 = findViewById(R.id.llLibro_2);
@@ -92,6 +96,12 @@ public class LibroAddActivity extends AppCompatActivity {
         editorialSpin = findViewById(R.id.spinnerEditorialLibro);
 
         codigoET = findViewById(R.id.codigoET);
+
+        ETasignaturaR = findViewById(R.id.etAsigLibro);
+        ETclaseR = findViewById(R.id.etClaseLibro);
+        ETcursoR = findViewById(R.id.etCursoLibro);
+        ETeditorialR = findViewById(R.id.etEditorialLibro);
+        ETcodigoR = findViewById(R.id.codigoET_2);
 
         llimagen = findViewById(R.id.llimagen2);
 
@@ -114,52 +124,62 @@ public class LibroAddActivity extends AppCompatActivity {
 
 
         anadirBTN.setOnClickListener( (View v) -> {
-            String claseTemp = claseSpin.getSelectedItem().toString();
-            String cursoTemp = cursoSpin.getSelectedItem().toString();
 
-            if( (claseTemp.equalsIgnoreCase("QUINTO") && ((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
-                    || ((claseTemp.equalsIgnoreCase("SEXTO"))&&((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
-                    || ((cursoTemp.equalsIgnoreCase("BACHILLERATO")) && ((claseTemp.equalsIgnoreCase("TERCERO")) || (claseTemp.equalsIgnoreCase("CUARTO"))))){
-                Toast.makeText(LibroAddActivity.this,"DEBE SELECCIONAR UNA CLASE Y CURSOS VÁLIDOS.",Toast.LENGTH_LONG).show();
+            if(flag){
+                String claseTemp = claseSpin.getSelectedItem().toString();
+                String cursoTemp = cursoSpin.getSelectedItem().toString();
 
-            }else {
-                String asignatura = asigSpin.getSelectedItem().toString();
-                String clase = claseSpin.getSelectedItem().toString();
-                String curso = cursoSpin.getSelectedItem().toString();
-                String editorial = editorialSpin.getSelectedItem().toString();
+                if( (claseTemp.equalsIgnoreCase("QUINTO") && ((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
+                        || ((claseTemp.equalsIgnoreCase("SEXTO"))&&((cursoTemp.equalsIgnoreCase("ESO")||((cursoTemp.equalsIgnoreCase("BACHILLERATO"))))))
+                        || ((cursoTemp.equalsIgnoreCase("BACHILLERATO")) && ((claseTemp.equalsIgnoreCase("TERCERO")) || (claseTemp.equalsIgnoreCase("CUARTO"))))){
+                    Toast.makeText(LibroAddActivity.this,"DEBE SELECCIONAR UNA CLASE Y CURSOS VÁLIDOS.",Toast.LENGTH_LONG).show();
+                }else {
+                    String asignatura = asigSpin.getSelectedItem().toString();
+                    String clase = claseSpin.getSelectedItem().toString();
+                    String curso = cursoSpin.getSelectedItem().toString();
+                    String editorial = editorialSpin.getSelectedItem().toString();
 
-                String c = String.valueOf(codigoET.getText());
-                long codigo;
+                    String c = String.valueOf(codigoET.getText());
+                    long codigo;
 
-                if(c.equalsIgnoreCase("")){
-                    codigo = 0L;
-                }else{
-                    codigo = Long.parseLong(c);
-                }
+                    if(c.equalsIgnoreCase("")){
+                        codigo = 0L;
+                    }else{
+                        codigo = Long.parseLong(c);
+                    }
+                    String frase = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
 
-                String frase = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignatura + " del curso " + clase + " " + curso + " de la editorial " + editorial + "?";
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(LibroAddActivity.this);
+                    alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(LibroAddActivity.this);
-                alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+                        Date date = new Date();
 
-                    Date date = new Date();
+                        Map<String, Object> libro = new HashMap<>();
+                        libro.put("Asignatura", asignatura);
+                        libro.put("Clase",clase);
+                        libro.put("Curso",curso);
+                        libro.put("Editorial", editorial);
+                        libro.put("Estado", "disponible");
+                        libro.put("Donante", donante);
+                        libro.put("Fecha", date);
+                        libro.put("Codigo", codigo);
+                        //libro.put("Imagen", urlImagen);
 
-                    Map<String, Object> libro = new HashMap<>();
-                    libro.put("Asignatura", asignatura);
-                    libro.put("Clase",clase);
-                    libro.put("Curso",curso);
-                    libro.put("Editorial", editorial);
-                    libro.put("Estado", "disponible");
-                    libro.put("Donante", donante);
-                    libro.put("Fecha", date);
-                    libro.put("Codigo", codigo);
-                    //libro.put("Imagen", urlImagen);
+                        if(urlImagen == null){
+                            StorageReference carpeta = mStorage.child("portadas").child("libros");
+                            StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                            filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                                urlImagen = String.valueOf(uri);
+                                libro.put("Imagen", urlImagen);
 
-                    if(urlImagen == null){
-                        StorageReference carpeta = mStorage.child("portadas").child("libros");
-                        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
-                        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                            urlImagen = String.valueOf(uri);
+                                db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
+                                    Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+
+                                    Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
+                                    startActivity(in);
+                                });
+                            }));
+                        }else{
                             libro.put("Imagen", urlImagen);
 
                             db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
@@ -168,11 +188,65 @@ public class LibroAddActivity extends AppCompatActivity {
                                 Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
                                 startActivity(in);
                             });
+                        }
+
+                    }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(LibroAddActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
+
+                    AlertDialog alertDialog = alerta.create();
+                    alertDialog.setTitle("AÑADIR LIBRO");
+                    alertDialog.show();
+                }
+            }else{
+
+                String asignaturaR = String.valueOf(ETasignaturaR.getText());
+                String claseR = String.valueOf(ETclaseR.getText());
+                String cursoR = String.valueOf(ETcursoR.getText());
+                String editorialR = String.valueOf(ETeditorialR.getText());
+
+                long codigoR;
+                String cod = String.valueOf(ETcodigoR.getText());
+                if(cod.equalsIgnoreCase("")){
+                    codigoR = 0L;
+                }else{
+                    codigoR = Long.parseLong(cod);
+                }
+
+                String frase2 = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignaturaR + " del curso " + claseR + " " + cursoR + " de la editorial " + editorialR + "?";
+
+                AlertDialog.Builder alerta2 = new AlertDialog.Builder(LibroAddActivity.this);
+                alerta2.setMessage(frase2).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+
+                    Date date = new Date();
+
+                    Map<String, Object> libro2 = new HashMap<>();
+                    libro2.put("Asignatura", asignaturaR.toUpperCase(Locale.ROOT));
+                    libro2.put("Clase",claseR.toUpperCase(Locale.ROOT));
+                    libro2.put("Curso",cursoR.toUpperCase(Locale.ROOT));
+                    libro2.put("Editorial", editorialR.toUpperCase(Locale.ROOT));
+                    libro2.put("Estado", "disponible");
+                    libro2.put("Donante", donante);
+                    libro2.put("Fecha", date);
+                    libro2.put("Codigo", codigoR);
+                    //libro.put("Imagen", urlImagen);
+
+                    if(urlImagen == null){
+                        StorageReference carpeta = mStorage.child("portadas").child("libros");
+                        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                            urlImagen = String.valueOf(uri);
+                            libro2.put("Imagen", urlImagen);
+
+                            db.collection("libros").document().set(libro2).addOnSuccessListener((Void unused) ->{
+                                Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+
+                                Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
+                                startActivity(in);
+                            });
                         }));
                     }else{
-                        libro.put("Imagen", urlImagen);
+                        libro2.put("Imagen", urlImagen);
 
-                        db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
+                        db.collection("libros").document().set(libro2).addOnSuccessListener((Void unused) ->{
                             Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
 
                             Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
@@ -180,36 +254,22 @@ public class LibroAddActivity extends AppCompatActivity {
                         });
                     }
 
-                    /*db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
-                        Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
-
-                        Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
-                        startActivity(in);
-                    });*/
-
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(LibroAddActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
-                AlertDialog alertDialog = alerta.create();
+                AlertDialog alertDialog = alerta2.create();
                 alertDialog.setTitle("AÑADIR LIBRO");
                 alertDialog.show();
-            }
 
+            }
         });
 
-        /*galeriaBTN.setOnClickListener( (View v) -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, GALLERY_INTENT);
-        });*/
         galeriaBTN.setOnClickListener( (View v) ->  mGetContent.launch("image/*") );
-
 
         menuBTN.setOnClickListener( (View v) -> volverAMenuAdmin(LibroAddActivity.this));
 
     }
 
     public void comprobarRBLibro(View view){
-
         if(defectoRB.isChecked()){
             galeriaBTN.setVisibility(View.INVISIBLE);
             urlImagen = urlDefecto;
@@ -228,45 +288,18 @@ public class LibroAddActivity extends AppCompatActivity {
     }
 
     public void comprobarRBSelec(View view){
-
         if(rellenarRB.isChecked()){
-            ll2.setVisibility(View.INVISIBLE);
-            ll1.setVisibility(View.VISIBLE);
-            flag = true;
-
-        }else if(listarRB.isChecked()){
             ll2.setVisibility(View.VISIBLE);
             ll1.setVisibility(View.INVISIBLE);
             flag = false;
+
+        }else if(listarRB.isChecked()){
+            ll2.setVisibility(View.INVISIBLE);
+            ll1.setVisibility(View.VISIBLE);
+            flag = true;
         }
     }
 
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
-
-            Uri fileUri = data.getData();
-
-            StorageReference carpeta = mStorage.child("portadas");
-
-            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
-
-            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                urlImagen = String.valueOf(uri);
-                System.out.println(urlImagen);
-            }));
-
-            Glide.with(LibroAddActivity.this)
-                    .load(fileUri)
-                    .into(imagen);
-
-            String frase = "Imagen de la portada del libro que quiere donar";
-            imagenTv.setText(frase);
-        }
-    }*/
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
