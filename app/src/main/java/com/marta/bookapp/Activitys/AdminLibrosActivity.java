@@ -54,7 +54,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinnerLL);
 
-        String [] opciones = {"todos", "reservado", "prestado", "disponible" };
+        String [] opciones = {"Escoja que libros desea listar","TODOS", "RESERVADO", "PRESTADO", "DISPONIBLE" };
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
         spinner.setAdapter(arrayAdapter);
@@ -71,7 +71,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
             i = position;
             flag = true;
 
-            System.out.println("posiiccion "+ i);
+            //System.out.println("posiiccion "+ i);
         });
 
         eliminarBTN = findViewById(R.id.eliminarLibroButton);
@@ -221,6 +221,8 @@ public class AdminLibrosActivity extends AppCompatActivity {
                     }
                 }
             });
+        }if(eleccion.length()>15){
+            Toast.makeText(AdminLibrosActivity.this, "Escoja una opción de la lista.",Toast.LENGTH_SHORT).show();
         }else{
             db.collection("libros").whereEqualTo("Estado",eleccion).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) ->{
                 if(task.isSuccessful()){

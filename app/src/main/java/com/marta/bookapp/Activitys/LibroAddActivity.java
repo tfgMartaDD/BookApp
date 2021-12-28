@@ -2,7 +2,9 @@ package com.marta.bookapp.Activitys;
 
 import static com.marta.bookapp.BotonesComunes.volverAMenuAdmin;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,7 +47,7 @@ public class LibroAddActivity extends AppCompatActivity {
     Button anadirBTN, menuBTN, seleccionarBTN, galeriaBTN;
 
     private StorageReference mStorage;
-    private static final int GALLERY_INTENT = 1;
+    Uri uriImagen;
 
     String urlImagen;
     String donante = "COLEGIO";
@@ -138,15 +140,40 @@ public class LibroAddActivity extends AppCompatActivity {
                     libro.put("Estado", "disponible");
                     libro.put("Donante", donante);
                     libro.put("Fecha", date);
-                    libro.put("Imagen", urlImagen);
                     libro.put("Codigo", codigo);
+                    //libro.put("Imagen", urlImagen);
 
-                    db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
+                    if(urlImagen == null){
+                        StorageReference carpeta = mStorage.child("portadas").child("libros");
+                        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                            urlImagen = String.valueOf(uri);
+                            libro.put("Imagen", urlImagen);
+
+                            db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
+                                Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+
+                                Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
+                                startActivity(in);
+                            });
+                        }));
+                    }else{
+                        libro.put("Imagen", urlImagen);
+
+                        db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
+                            Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+
+                            Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
+                            startActivity(in);
+                        });
+                    }
+
+                    /*db.collection("libros").document().set(libro).addOnSuccessListener((Void unused) ->{
                         Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
 
                         Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
                         startActivity(in);
-                    });
+                    });*/
 
                 }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(LibroAddActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
@@ -157,11 +184,13 @@ public class LibroAddActivity extends AppCompatActivity {
 
         });
 
-        galeriaBTN.setOnClickListener( (View v) -> {
+        /*galeriaBTN.setOnClickListener( (View v) -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, GALLERY_INTENT);
-        });
+        });*/
+        galeriaBTN.setOnClickListener( (View v) ->  mGetContent.launch("image/*") );
+
 
         menuBTN.setOnClickListener( (View v) -> volverAMenuAdmin(LibroAddActivity.this));
 
@@ -186,6 +215,7 @@ public class LibroAddActivity extends AppCompatActivity {
         }
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -210,5 +240,16 @@ public class LibroAddActivity extends AppCompatActivity {
             String frase = "Imagen de la portada del libro que quiere donar";
             imagenTv.setText(frase);
         }
-    }
+    }*/
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if (result != null){
+                        imagen.setImageURI(result);
+                        uriImagen = result;
+                    }
+                }
+            });
 }

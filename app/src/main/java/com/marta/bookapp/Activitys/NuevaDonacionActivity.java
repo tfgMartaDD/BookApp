@@ -151,7 +151,7 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                         donation.put("Fecha", date);
                         donation.put("idPendiente", idPendiente);
                         if(urlImagen == null){
-                            StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
+                            StorageReference carpeta = mStorage.child("portadas").child("donaciones");
                             StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                             filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                                 urlImagen = String.valueOf(uri);
