@@ -155,7 +155,6 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                             StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                             filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                                 urlImagen = String.valueOf(uri);
-                                System.out.println("UUU: "+urlImagen);
                                 donation.put("Imagen", urlImagen);
 
                                 db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
@@ -217,8 +216,6 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                     if (result != null){
                         imagen.setImageURI(result);
                         uriImagen = result;
-                        System.out.println("HHHH: "+result.toString());
-                        System.out.println(" LLLL: "+urlImagen);
                     }
                 }
             });

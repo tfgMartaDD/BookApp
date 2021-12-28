@@ -68,7 +68,7 @@ public class EscaneoActivity extends AppCompatActivity {
 
             db.collection("users").whereEqualTo("email",email).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) -> {
                 if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())){
+                    for(QueryDocumentSnapshot ignored : Objects.requireNonNull(task.getResult())){
                         Intent in = new Intent (this, UsuarioScanActivity.class);
                         in.putExtra("email",email);
                         startActivity(in);

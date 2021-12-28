@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.marta.bookapp.Activitys.AdminDonacionesActivity;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.R;
 

@@ -70,8 +70,6 @@ public class AdminLibrosActivity extends AppCompatActivity {
         listViewListaLibros.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             i = position;
             flag = true;
-
-            //System.out.println("posiiccion "+ i);
         });
 
         eliminarBTN = findViewById(R.id.eliminarLibroButton);
@@ -102,9 +100,9 @@ public class AdminLibrosActivity extends AppCompatActivity {
                             }
 
                         });
-                        System.out.println("ID --->>>> "+idPendiente +"Pet---> "+idPet);
+                        //System.out.println("ID --->>>> "+idPendiente +"Pet---> "+idPet);
 
-                        System.out.println("librooo"+idLibro);
+                        //System.out.println("librooo"+idLibro);
 
                         db.collection("libros").document(idLibro).delete().addOnSuccessListener( (Void unused) -> {
                             Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();

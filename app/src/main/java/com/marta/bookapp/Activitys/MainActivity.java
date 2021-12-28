@@ -1,5 +1,7 @@
 package com.marta.bookapp.Activitys;
 
+import static com.marta.bookapp.BotonesComunes.cerrarSesion;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,9 +53,18 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
 
-
+        //al cerrarse inesperadamente la app, comprueba si había una sesion abierta, y si el usuario es admin, cierra sesión
         if(user != null){
-            redirigirAmenu(user.getEmail());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").document(Objects.requireNonNull(user.getEmail())).get().addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
+                boolean esAdmin = Boolean.parseBoolean(documentSnapshot.getString("esAdmin"));
+
+                if (esAdmin) {
+                   cerrarSesion(MainActivity.this);
+                } else {
+                    redirigirAmenu(user.getEmail());
+                }
+            });
         }
 
         //Filtros comprobacion email y contraseña

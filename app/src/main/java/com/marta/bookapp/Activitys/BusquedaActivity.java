@@ -49,8 +49,9 @@ public class BusquedaActivity extends AppCompatActivity {
 
 
         db.collection("libros").document(id).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
-            Libro libro = new Libro(documentSnapshot.getId(), documentSnapshot.getString("Asignatura"), documentSnapshot.getString("Clase"), documentSnapshot.getString("Curso"),
-                    documentSnapshot.getString("Donante"), documentSnapshot.getString("Editorial"), documentSnapshot.getString("Estado"), documentSnapshot.getString("Imagen"), documentSnapshot.getString("Tipo") );
+           // Libro libro = new Libro(documentSnapshot.getId(), documentSnapshot.getString("Asignatura"), documentSnapshot.getString("Clase"), documentSnapshot.getString("Curso"),
+           //         documentSnapshot.getString("Donante"), documentSnapshot.getString("Editorial"), documentSnapshot.getString("Estado"), documentSnapshot.getString("Imagen"), documentSnapshot.getString("Tipo") );
+
             asig = documentSnapshot.getString("Asignatura");
             asignatura.setText(asig);
 

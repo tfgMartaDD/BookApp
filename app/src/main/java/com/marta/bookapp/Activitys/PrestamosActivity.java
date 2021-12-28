@@ -76,16 +76,13 @@ public class PrestamosActivity extends AppCompatActivity {
             String clasecurso = l.getClase() +" "+l.getCurso();
             clase.setText(clasecurso);
             fecha.setText(p.getFecha().toString());
-            fechaDev.setText(p.getFechaDev().toString());
+            fechaDev.setText(p.getFechaDev());
+            //fechaDev.setText(p.getFechaDev().toString());
 
-
-            System.out.println(p.getFechaDev().toString());
-            System.out.println("ppppp " +fechaDev.getText());
 
             Glide.with(PrestamosActivity.this)
                     .load(l.getImagen())
                     .into(imagen);
-            //imagen.setImageResource(l.getImagen());
 
             linearLayout.setVisibility(View.VISIBLE);
             seleccion.setVisibility(View.VISIBLE);

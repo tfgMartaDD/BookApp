@@ -63,7 +63,6 @@ public class AdminUsuariosActivity extends AppCompatActivity {
 
                     if(document != null){
                         numDonaciones = document.getLong("numDonaciones");
-
                         numPrestamos =  document.getLong("numPrestamos");
 
                         Usuario user = new Usuario(document.getId(), document.getString("nombre"),document.getString("apellido"),

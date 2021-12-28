@@ -273,12 +273,11 @@ public class AdminPeticionesActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                 Libro libro = new Libro(document2.getId(), document2.getString("Asignatura"), document2.getString("Clase"), document2.getString("Curso"),
                                         document2.getString("Donante"),document2.getString("Editorial"), document2.getString("Estado"), document2.getString("Imagen"));
-                                System.out.println("asig:"+libro.getAsignatura());
+
                                 DonacionPeticion donacion = new DonacionPeticion(document.getId(), document.getString("Usuario"),
                                         libro, document.getDate("Fecha"), document.getString("idPendiente"));
                                 lista.add(donacion);
                                 adapter.notifyDataSetChanged();
-
                             }
                         }
                     });

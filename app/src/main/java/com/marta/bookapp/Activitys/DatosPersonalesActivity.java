@@ -72,11 +72,6 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
-
-        /*FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        if (usuario != null) {
-            usuario.sendEmailVerification();
-        }*/
         modoAdminBTN = findViewById(R.id.modoAdmin);
 
         modificarFotoBTN = findViewById(R.id.modificarFotoButton);
@@ -110,10 +105,6 @@ public class DatosPersonalesActivity extends AppCompatActivity {
         modificarBTN = findViewById(R.id.modificarbutton);
         modificarBTN.setOnClickListener( (View v) -> {
 
-            /*Map<String, Object> user = new HashMap<>();
-            user.put("nombre", nombre.getText().toString());
-            user.put("apellido", apellido.getText().toString());
-            user.put("email",mail.getText().toString());*/
             String email = mail.getText().toString();
             String nom = nombre.getText().toString();
             String ape = apellido.getText().toString();
@@ -138,16 +129,13 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                 if (user != null) {
 
-                    System.out.println("ACTUAL USER: " + actualUser);
-
                     //guardamos los datos temporalmente por si no se elimina correctamente el usuario
                     db.collection("users").document(actualUser).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) -> {
 
                         datosUser = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
                                 documentSnapshot.getString("fotoPerfil"), Objects.requireNonNull(documentSnapshot.getLong("numDonaciones")), Objects.requireNonNull(documentSnapshot.getLong("numPrestamos")));
 
-                        db.collection("users").document(actualUser).delete().addOnSuccessListener( (Void aVoid) -> {
-                            System.out.println("DocumentSnapshot successfully deleted!");
+                        db.collection("users").document(actualUser).delete().addOnSuccessListener( (Void aVoid) ->
                             user.delete().addOnCompleteListener( (@NonNull Task<Void> task) -> {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(DatosPersonalesActivity.this, "CUENTA ELIMINADA CORRECTAMENTE", Toast.LENGTH_LONG).show();
@@ -175,11 +163,8 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
                                     db.collection("users").document(actualUser).set(userTemp);
                                 }
-                            });
-
-                        }).addOnFailureListener( (@NonNull Exception e) ->
-                                System.out.println("Error deleting document") );
-
+                            })
+                        );
                     });
 
                 }
@@ -214,41 +199,15 @@ public class DatosPersonalesActivity extends AppCompatActivity {
                     if (result != null){
                         fotoPerfil.setImageURI(result);
                         uriImagen = result;
-                        System.out.println("HHHH: "+result.toString());
-                        System.out.println(" LLLL: "+urlImagen);
+
                         StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos").child(actualUser);
                         StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                         filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                             urlImagen = String.valueOf(uri);
-                            System.out.println("UUU: "+urlImagen);
                             db.collection("users").document(actualUser).update("fotoPerfil", urlImagen);
                         }));
                     }
                 }
             });
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK && data != null){
-
-            Uri fileUri = data.getData();
-            StorageReference carpeta = mStorage.child("fotosPerfil");
-
-            StorageReference filePath = carpeta.child("file"+fileUri.getLastPathSegment());
-
-            filePath.putFile(fileUri).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                urlImagen = String.valueOf(uri);
-                //System.out.println(urlImagen);
-            }));
-
-            Glide.with(DatosPersonalesActivity.this)
-                    .load(fileUri)
-                    .into(fotoPerfil);
-
-            db.collection("users").document(actualUser).update("fotoPerfil", urlImagen);
-
-        }
-    }*/
 }

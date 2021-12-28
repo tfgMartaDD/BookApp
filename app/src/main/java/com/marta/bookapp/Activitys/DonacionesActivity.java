@@ -32,9 +32,7 @@ public class DonacionesActivity extends AppCompatActivity {
     Button addBTN;
 
     ListView listViewDonaciones;
-    //List<DonacionPeticion> listaDonacion = new ArrayList<>();
     List<Libro> listaDonacion = new ArrayList<>();
-    //DonAdapter adapter;
     ListAdapter adapter;
 
     ImageView imagen;
@@ -97,7 +95,6 @@ public class DonacionesActivity extends AppCompatActivity {
             clase.setText(clasecurso);
 
             editorial.setText(l.getEditorial());
-            System.out.println(l.getEditorial());
         });
 
     }

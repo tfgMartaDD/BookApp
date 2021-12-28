@@ -130,7 +130,7 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
             if(task3.isSuccessful()){
                 for(QueryDocumentSnapshot document3 : Objects.requireNonNull(task3.getResult())){
                     String libroid = document3.getString("Libro");
-                    System.out.println("Libro----> "+libroid);
+
                     db.collection("libros").whereEqualTo(FieldPath.documentId(), libroid).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task2) -> {
                         if (task2.isSuccessful()) {
                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {

@@ -128,8 +128,6 @@ public class RegistrarActivity extends AppCompatActivity {
 
                             long num = 0L;
 
-                            System.out.println("HHH\t"+urlImagen);
-
                             //guardar en la firestore
                             Map<String, Object> user = new HashMap<>();
                             user.put("nombre", nombre.getText().toString());
@@ -139,14 +137,11 @@ public class RegistrarActivity extends AppCompatActivity {
                             user.put("numDonaciones", num);
                             user.put("numPrestamos", num);
 
-                            System.out.println("URL: "+urlImagen);
-
                             if(urlImagen == null){
                                 StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
                                 StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
                                 filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
                                     urlImagen = String.valueOf(uri);
-                                    System.out.println("VVVU: "+urlImagen);
 
                                     user.put("fotoPerfil",urlImagen);
                                     db.collection("users").document(mail).set(user);
@@ -179,7 +174,6 @@ public class RegistrarActivity extends AppCompatActivity {
     public void comprobarRBPerfil(View view){
 
         if(hombreRB.isChecked()){
-            System.out.println("hhh");
             hombreiv.setVisibility(View.VISIBLE);
             mujeriv.setVisibility(View.INVISIBLE);
             galeriaiv.setVisibility(View.INVISIBLE);
@@ -218,8 +212,6 @@ public class RegistrarActivity extends AppCompatActivity {
                     if (result != null){
                         galeriaiv.setImageURI(result);
                         uriImagen = result;
-                        System.out.println("HHHH: "+result.toString());
-                        System.out.println(" LLLL: "+urlImagen);
                     }
                 }
             });
