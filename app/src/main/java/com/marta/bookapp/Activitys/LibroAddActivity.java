@@ -39,12 +39,18 @@ public class LibroAddActivity extends AppCompatActivity {
 
     RadioButton defectoRB, galeriaRB;
 
+    RadioButton rellenarRB, listarRB;
+    Button seleccionar;
+    LinearLayout ll1, ll2;
+
+    Boolean flag = true;
+
     LinearLayout llimagen;
     ImageView imagen;
     TextView imagenTv;
     EditText codigoET;
 
-    Button anadirBTN, menuBTN, seleccionarBTN, galeriaBTN;
+    Button anadirBTN, menuBTN, seleccionarPorBTN, galeriaBTN;
 
     private StorageReference mStorage;
     Uri uriImagen;
@@ -65,8 +71,14 @@ public class LibroAddActivity extends AppCompatActivity {
 
         defectoRB = findViewById(R.id.defectoRB2);
         galeriaRB = findViewById(R.id.galeriaRB2);
+        seleccionarPorBTN = findViewById(R.id.selecPortada);
 
-        seleccionarBTN = findViewById(R.id.selecPortada);
+        listarRB = findViewById(R.id.radioButton);
+        rellenarRB = findViewById(R.id.radioButton2);
+        seleccionar = findViewById(R.id.button2);
+        ll1 = findViewById(R.id.llLibro);
+        ll2 = findViewById(R.id.llLibro_2);
+
         anadirBTN = findViewById(R.id.anadirLibroBTN);
         menuBTN = findViewById(R.id.volverMenuBTN);
         galeriaBTN = findViewById(R.id.galeriaBTN);
@@ -212,6 +224,20 @@ public class LibroAddActivity extends AppCompatActivity {
         }else if(galeriaRB.isChecked()){
             galeriaBTN.setVisibility(View.VISIBLE);
             anadirBTN.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void comprobarRBSelec(View view){
+
+        if(rellenarRB.isChecked()){
+            ll2.setVisibility(View.INVISIBLE);
+            ll1.setVisibility(View.VISIBLE);
+            flag = true;
+
+        }else if(listarRB.isChecked()){
+            ll2.setVisibility(View.VISIBLE);
+            ll1.setVisibility(View.INVISIBLE);
+            flag = false;
         }
     }
 
