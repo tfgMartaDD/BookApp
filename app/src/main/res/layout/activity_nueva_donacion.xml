@@ -22,20 +22,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/deseo_donar"
-        android:textSize="22sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"/>
 
     <LinearLayout
-        android:id="@+id/agrupacion"
+        android:id="@+id/llTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/textView16"
+        android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView16" >
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/rgDonacion"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:id="@+id/rbRellenar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rellenar" />
+
+            <RadioButton
+                android:id="@+id/rbListar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mostrar_lista" />
+        </RadioGroup>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/buttonSeleccionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seleccionar"
+            android:onClick="comprobarRBDonacion"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/agrupacionListar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/llTipo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -119,11 +166,109 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/agrupacionRellenar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/llTipo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/textView39_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/asignatura"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/donClase_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/clase"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/donCurso_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/curso"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/donEditorial_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/editorial"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/asigET"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:hint="@string/asignatura"
+                android:autofillHints="asignatura" />
+
+            <EditText
+                android:id="@+id/claseET"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:hint="@string/clase"
+                android:autofillHints="clase" />
+
+            <EditText
+                android:id="@+id/cursoET"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:hint="@string/curso"
+                android:autofillHints="curso" />
+
+            <EditText
+                android:id="@+id/editorialET"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:hint="@string/editorial"
+                android:autofillHints="editorial"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/llrgroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/agrupacion"
+        app:layout_constraintTop_toBottomOf="@id/agrupacionListar"
         app:layout_constraintBottom_toTopOf="@id/llimagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

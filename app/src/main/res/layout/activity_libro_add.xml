@@ -251,41 +251,45 @@
             android:layout_marginHorizontal="8dp"
             android:id="@+id/llDatosLibro_2">
 
-            <EditText
+             <EditText
                 android:id="@+id/etAsigLibro"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_margin="4dp"
                 android:autofillHints="asignatura"
                 android:hint="@string/asignatura"
-                android:layout_margin="4dp"
-                android:inputType="text" />
+                android:inputType="text"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/etClaseLibro"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_margin="4dp"
                 android:autofillHints="clase"
                 android:hint="@string/clase"
-                android:layout_margin="4dp"
-                android:inputType="text"/>
+                android:inputType="text"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/etCursoLibro"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_margin="4dp"
                 android:autofillHints="curso"
                 android:hint="@string/curso"
-                android:layout_margin="4dp"
-                android:inputType="text"/>
+                android:inputType="text"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/etEditorialLibro"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_margin="4dp"
                 android:autofillHints="editorial"
                 android:hint="@string/editorial"
-                android:layout_margin="4dp"
-                android:inputType="text"/>
+                android:inputType="text"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/codigoET_2"
