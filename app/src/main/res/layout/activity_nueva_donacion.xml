@@ -232,33 +232,37 @@
                 android:id="@+id/asigET"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:inputType="text"
+                android:autofillHints="asignatura"
                 android:hint="@string/asignatura"
-                android:autofillHints="asignatura" />
+                android:inputType="text"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
             <EditText
                 android:id="@+id/claseET"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:inputType="text"
+                android:autofillHints="clase"
                 android:hint="@string/clase"
-                android:autofillHints="clase" />
+                android:inputType="text"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/cursoET"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:inputType="text"
+                android:autofillHints="curso"
                 android:hint="@string/curso"
-                android:autofillHints="curso" />
+                android:inputType="text"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
             <EditText
                 android:id="@+id/editorialET"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:inputType="text"
+                android:autofillHints="editorial"
                 android:hint="@string/editorial"
-                android:autofillHints="editorial"/>
+                android:inputType="text"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
     </LinearLayout>

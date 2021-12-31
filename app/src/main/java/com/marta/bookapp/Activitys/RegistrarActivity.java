@@ -51,6 +51,9 @@ public class RegistrarActivity extends AppCompatActivity {
     String perfilHom = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_male.png?alt=media&token=e7aa38b8-195c-4d39-8384-1bef39162bcd";
     String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
 
+    String urlDefectoBot = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_bot.png?alt=media&token=e408919f-d2ad-4a4f-9642-b9be3c0c8b3e";
+    Boolean flag = true;
+
     String urlImagen;
     Uri uriImagen;
 
@@ -137,21 +140,26 @@ public class RegistrarActivity extends AppCompatActivity {
                             user.put("numDonaciones", num);
                             user.put("numPrestamos", num);
 
-                            if(urlImagen == null){
-                                StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
-                                StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
-                                filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                                    urlImagen = String.valueOf(uri);
+
+                            if(flag){
+                                urlImagen = urlDefectoBot;
+                                db.collection("users").document(mail).set(user);
+                            }else{
+                                if(urlImagen == null){
+                                    StorageReference carpeta = mStorage.child("fotosPerfil").child("archivos");
+                                    StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                                    filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                                        urlImagen = String.valueOf(uri);
+
+                                        user.put("fotoPerfil",urlImagen);
+                                        db.collection("users").document(mail).set(user);
+                                    }));
+                                }else{
 
                                     user.put("fotoPerfil",urlImagen);
                                     db.collection("users").document(mail).set(user);
-                                }));
-                            }else{
-
-                                user.put("fotoPerfil",urlImagen);
-                                db.collection("users").document(mail).set(user);
+                                }
                             }
-
 
                             finish();
                         }else {
@@ -168,7 +176,10 @@ public class RegistrarActivity extends AppCompatActivity {
 
         });
 
-        seleccionarBTN.setOnClickListener(this::comprobarRBPerfil);
+        seleccionarBTN.setOnClickListener( (View v) -> {
+            flag = false;
+            comprobarRBPerfil(v);
+        });
     }
 
     public void comprobarRBPerfil(View view){

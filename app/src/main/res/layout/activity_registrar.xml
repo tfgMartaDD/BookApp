@@ -24,9 +24,10 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
-        android:hint="@string/email"
         android:autofillHints="emailAddress"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        tools:ignore="TextContrastCheck" />
     <!---android:ems="10"-->
     <EditText
         android:id="@+id/passwordEditText"
@@ -34,9 +35,10 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
-        android:hint="@string/password"
         android:autofillHints="password"
-        android:inputType="textPassword" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/passwordEditText2"
@@ -55,9 +57,10 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
-        android:hint="@string/nombre"
         android:autofillHints="name"
-        android:inputType="text"/>
+        android:hint="@string/nombre"
+        android:inputType="text"
+        tools:ignore="TextContrastCheck" />
 
 
     <EditText
@@ -66,20 +69,11 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
-        android:hint="@string/apellido"
         android:autofillHints="apellido"
-        android:inputType="text"/>
+        android:hint="@string/apellido"
+        android:inputType="text"
+        tools:ignore="TextContrastCheck" />
 
-
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/foto_perfil"
-        android:layout_margin="8dp"
-        android:layout_gravity="center"
-        android:textSize="24sp"/>
-        -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,14 +87,17 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginHorizontal="8dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp">
 
         <RadioButton
             android:id="@+id/defectoMujRB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/foto_defecto_mujer" />
+            android:text="@string/foto_defecto_mujer"
+            tools:ignore="TextContrastCheck" />
 
         <RadioButton
             android:id="@+id/defectoHomRB"
@@ -124,7 +121,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:id="@+id/mujerIV"
@@ -169,13 +167,17 @@
             android:text="@string/seleccionar_perfil" />
 
     </LinearLayout>
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 
     <Button
         android:id="@+id/registrar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
         android:layout_gravity="bottom"
         android:text="@string/registrar" />
 
