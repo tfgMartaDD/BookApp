@@ -33,7 +33,7 @@ public class PrestamosActivity extends AppCompatActivity {
     ListView listViewPrestamos;
 
     TextView seleccion;
-    LinearLayout linearLayout;
+    LinearLayout linearLayout, llfechas;
 
     TextView asignatura, clase, fecha, fechaDev;
     ImageView imagen;
@@ -60,6 +60,7 @@ public class PrestamosActivity extends AppCompatActivity {
 
         seleccion = findViewById(R.id.prestamoSelec);
         linearLayout = findViewById(R.id.llSeleccion);
+        llfechas = findViewById(R.id.llfechas);
 
         asignatura = findViewById(R.id.asignaturaPrestamo);
         clase = findViewById(R.id.clasePrestamo);
@@ -85,6 +86,7 @@ public class PrestamosActivity extends AppCompatActivity {
                     .into(imagen);
 
             linearLayout.setVisibility(View.VISIBLE);
+            llfechas.setVisibility(View.VISIBLE);
             seleccion.setVisibility(View.VISIBLE);
         });
 

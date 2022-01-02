@@ -100,7 +100,7 @@ public class PeticionesActivity extends AppCompatActivity {
         deshacerBTN.setOnClickListener( (View v) -> {
             Libro li = reserva.getLibro();
             String libro = li.getAsignatura()+" del curso "+li.getClase() +" "+li.getCurso()+" de la editorial "+li.getEditorial();
-            String frase = "¿Está seguro de que desea quitar la reserva de "+libro + "que hizo en la fecha "+reserva.getFecha()+ " ?";
+            String frase = "¿Está seguro de que desea quitar la reserva de "+libro + " que hizo en la fecha "+reserva.getFecha()+ " ?";
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(PeticionesActivity.this);
             alerta.setMessage(frase).setPositiveButton("SI",  (DialogInterface dialog, int id) -> {
