@@ -89,6 +89,7 @@
     <string name="mostrar_libros_disp">MOSTRAR LIBROS DISPONIBLES</string>
     <string name="mostrar_lista">MOSTRAR LISTA</string>
     <string name="name_app"> BOOK APP!</string>
+    <string name="no_libros_disponibles">NO HAY LIBROS DISPONIBLES PARA RESERVAR DEL CURSO SELECCIONADO</string>
     <string name="nombre">Nombre</string>
     <string name="nombre_mayus">NOMBRE: </string>
     <string name="nombre_completo">NOMBRE Y APELLIDOS</string>

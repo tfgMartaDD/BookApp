@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.marta.bookapp.Modelo.Pendientes;
 import com.marta.bookapp.R;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PendientesAdapter extends BaseAdapter {
 
@@ -60,11 +63,11 @@ public class PendientesAdapter extends BaseAdapter {
         String tipo;
         if (p.getEsPeticion()){
             tipo="PETICION";
-            tipoTV.setTextColor(Color.argb(200,255,88,41));
+            tipoTV.setTextColor(Color.argb(255,255,88,41));
         }else{
             tipo="DONACION";
 
-            tipoTV.setTextColor(Color.argb(200, 16,72,2));
+            tipoTV.setTextColor(Color.argb(255, 8,127,35));
         }
 
         tipoTV.setText(tipo);
@@ -73,10 +76,10 @@ public class PendientesAdapter extends BaseAdapter {
         String clasecurso = p.getClase() +" " +p.getCurso();
         claseCursoTV.setText(clasecurso);
 
-        String estado = p.getEstado();
+        String estado = p.getEstado().toUpperCase(Locale.ROOT);
 
         if(estado.equalsIgnoreCase("pendiente")){
-            estadoTV.setTextColor(Color.BLUE);
+            estadoTV.setTextColor(ContextCompat.getColor(context, R.color.blue));
         } else if(estado.equalsIgnoreCase("rechazada")){
             estadoTV.setTextColor(Color.RED);
         }else if(estado.equalsIgnoreCase("aceptada")){

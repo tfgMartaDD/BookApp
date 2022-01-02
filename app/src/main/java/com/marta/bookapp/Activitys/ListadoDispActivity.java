@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,9 @@ public class ListadoDispActivity extends AppCompatActivity {
     Button reservarBTN, volverBTN, menuBTN;
     Libro libro;
 
+    TextView noDisp;
+    LinearLayout ll4;
+
     int i = 0;
     String idPendiente = "";
     Boolean flag = false;
@@ -65,6 +69,9 @@ public class ListadoDispActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         String actualUser = prefs.getString("email","");
         //final String idPendiente = "";
+
+        noDisp = findViewById(R.id.noDisponibles);
+        ll4 = findViewById(R.id.ll4);
 
         campos = findViewById(R.id.camposTV);
         seleccion = findViewById(R.id.seleccionTV);
@@ -88,6 +95,7 @@ public class ListadoDispActivity extends AppCompatActivity {
             Libro l = listaLibro.get(position);
             libro = listaLibro.get(position);
 
+            reservarBTN.setVisibility(View.VISIBLE);
             campos.setVisibility(View.VISIBLE);
             seleccion.setVisibility(View.VISIBLE);
 
@@ -224,6 +232,13 @@ public class ListadoDispActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(ListadoDispActivity.this,  "Error getting documents: ", Toast.LENGTH_LONG).show();
+                    }
+                    if(lista.size()!=0){
+                        noDisp.setVisibility(View.INVISIBLE);
+                        ll4.setVisibility(View.VISIBLE);
+                    }else{
+                        noDisp.setVisibility(View.VISIBLE);
+                        ll4.setVisibility(View.INVISIBLE);
                     }
                 });
         return lista;

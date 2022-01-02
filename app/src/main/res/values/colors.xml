@@ -10,10 +10,12 @@
     <color name="green_500">#1b5e20</color>
     <color name="green_200">#4c8c4a</color>
     <color name="green_700">#003300</color>
-    <color name="sec_green_500">#4caf50</color>s
+    <color name="sec_green_500">#4caf50</color>
     <color name="sec_green_200">#80e27e</color>
     <color name="sec_green_700">#087f23</color>
     <color name="white">#ffffff</color>
+    <color name="white2">#59FFFFFF</color>
     <color name="black">#000000</color>
     <color name="red">#ED2B2B</color>
+    <color name="blue">#0369E5</color>
 </resources>

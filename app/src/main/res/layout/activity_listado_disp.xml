@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Activitys.ListadoDispActivity">
 
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/libros_disponibles"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
@@ -13,16 +26,7 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/libros_disponibles"
-            android:textSize="30sp" />
+        app:layout_constraintTop_toBottomOf="@id/textView13">
 
         <LinearLayout
             android:id="@+id/ll1"
@@ -47,6 +51,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:textSize="20sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll4"
             android:layout_width="match_parent"
@@ -117,6 +122,20 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/noDisponibles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_margin="40dp"
+        android:textColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/no_libros_disponibles" />
 
     <Button
         android:id="@+id/reservarButton"
@@ -125,7 +144,8 @@
         android:text="@string/reservar"
         app:layout_constraintTop_toBottomOf="@id/mostrarTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:layout_width="match_parent"

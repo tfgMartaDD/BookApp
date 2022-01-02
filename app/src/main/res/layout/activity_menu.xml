@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/menu_principal"
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_margin="20dp" />
 
     <TableLayout
@@ -33,14 +33,16 @@
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
-                android:text="@string/peticiones"/>
+                android:text="@string/peticiones"
+                tools:ignore="ButtonStyle,TextContrastCheck" />
 
             <Button
                 android:id="@+id/prestamosButton"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
-                android:text="@string/prestamos" />
+                android:text="@string/prestamos"
+                tools:ignore="ButtonStyle,TextContrastCheck" />
 
         </TableRow>
 
@@ -54,14 +56,16 @@
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
-                android:text="@string/donaciones" />
+                android:text="@string/donaciones"
+                tools:ignore="ButtonStyle,TextContrastCheck" />
 
             <Button
                 android:id="@+id/listaButton"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
-                android:text="@string/libros_disponibles" />
+                android:text="@string/libros_disponibles"
+                tools:ignore="ButtonStyle"  />
 
         </TableRow>
 
@@ -76,12 +80,14 @@
         android:id="@+id/estadoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="50dp"
+        android:backgroundTint="@color/white2"
         android:text="@string/estado_pendientes"
-        style="?android:attr/buttonBarButtonStyle"
-        android:textColor="@color/green_700"
+        android:textColor="@color/sec_green_700"
         android:textStyle="bold"
-        android:textSize="18dp"/>
+        tools:ignore="TextContrastCheck"
+        android:textSize="17sp"/>
 
     <Space
         android:layout_width="0dp"
