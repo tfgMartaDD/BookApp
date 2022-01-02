@@ -142,7 +142,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
 
                             if(flag){
-                                urlImagen = urlDefectoBot;
+                                urlImagen = "";
                                 db.collection("users").document(mail).set(user);
                             }else{
                                 if(urlImagen == null){
