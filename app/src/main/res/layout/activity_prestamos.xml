@@ -72,14 +72,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="invisible"
-        android:layout_margin="8dp">
+        android:layout_marginHorizontal="8dp">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:padding="8dp"
             android:contentDescription="@string/imagen_portada"/>
 
         <LinearLayout
