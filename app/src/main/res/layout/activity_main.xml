@@ -13,15 +13,16 @@
         android:id="@+id/appImagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="40dp"
         android:text="@string/name_app"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:drawableTopCompat="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@id/mainLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginVertical="40dp"
-        app:drawableTopCompat="@mipmap/ic_launcher" />
+        tools:ignore="TextContrastCheck" />
 
 
     <LinearLayout
@@ -57,7 +58,8 @@
                 android:autofillHints="emailAddress"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
         <Space
@@ -73,8 +75,9 @@
                 android:id="@+id/imageView6"
                 android:layout_width="48sp"
                 android:layout_height="48sp"
+                android:contentDescription="@string/password"
                 app:srcCompat="@drawable/icons8_password"
-                android:contentDescription="@string/password" />
+                tools:ignore="ImageContrastCheck" />
 
             <EditText
                 android:id="@+id/passwordET"
@@ -102,7 +105,8 @@
             android:id="@+id/olvideBoton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/olvide" />
+            android:text="@string/olvide"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/registrarBoton"

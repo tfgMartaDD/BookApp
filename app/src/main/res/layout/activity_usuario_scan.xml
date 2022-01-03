@@ -4,73 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activitys.UsuarioScanActivity">
+    tools:context=".Activitys.UsuarioScanActivity"
+    android:background="@drawable/fondo"
+    android:id="@+id/fondoUsuario">
 
 
     <TextView
         android:id="@+id/tituloTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="@string/datos_personales_scan"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="16dp" />
+    <ImageView
+        android:id="@+id/imagenPerfil"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/foto_perfil"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:layout_margin="8dp"
-        android:text="@string/nombre" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/nombre"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/nombreET"
+    <TextView
+        android:id="@+id/nombretv"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
         android:autofillHints="name"
         android:hint="@string/nombre"
-        android:inputType="text"
         android:textSize="20sp"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/apellido"
-        android:textSize="17sp" />
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/apellidoET"
+    <TextView
+        android:id="@+id/apellidotv"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
         android:autofillHints="apellido"
         android:hint="@string/apellido"
-        android:inputType="text"
         android:textSize="20sp"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/email"
-        android:textSize="17sp" />
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/correoTV"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
         android:textSize="20sp" />
 
     <Space
@@ -81,39 +99,21 @@
 
     <Button
         android:id="@+id/adminButton"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white2"
         android:text="@string/hacer_admin"
         android:layout_gravity="center"
-        style="?android:attr/buttonBarButtonStyle"/>
+        tools:ignore="TextContrastCheck" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp">
-
-        <Button
-            android:id="@+id/buttonmodificar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/modificar" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/buttonVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/volver_menu"
-            android:layout_margin="20dp"/>
-
-
-    </LinearLayout>
+        android:text="@string/volver_menu"
+        android:layout_gravity="center"
+        tools:ignore="ButtonStyle" />
 
 
 

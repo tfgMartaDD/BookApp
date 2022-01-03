@@ -9,25 +9,27 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.marta.bookapp.R;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class UsuarioScanActivity extends AppCompatActivity {
 
-    EditText nombreET, apellidoET;
-    TextView emailTV;
-    Button modificarBTN, volverBTN;
+    TextView nombreET, apellidoET, emailTV;
+    Button  volverBTN;
     Button adminBTN;
 
+    ImageView perfil;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    String urlDefecto = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Fno-image.png?alt=media&token=2f77ddd8-1cc8-456f-9aca-e0dbc1bde9fb";
 
 
     @Override
@@ -35,36 +37,38 @@ public class UsuarioScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_scan);
 
+        findViewById(R.id.fondoUsuario).getBackground().mutate().setAlpha(80);
+
         Bundle bundle = getIntent().getExtras();
         String email = bundle.getString("email");
+
+        perfil = findViewById(R.id.imagenPerfil);
 
         volverBTN = findViewById(R.id.buttonVolver);
         volverBTN.setOnClickListener( (View v) -> volverAMenuAdmin(UsuarioScanActivity.this) );
 
-        nombreET = findViewById(R.id.nombreET);
-        apellidoET = findViewById(R.id.apellidoET);
+        nombreET = findViewById(R.id.nombretv);
+        apellidoET = findViewById(R.id.apellidotv);
         emailTV = findViewById(R.id.correoTV);
-        modificarBTN = findViewById(R.id.buttonmodificar);
 
         db.collection("users").document(email).get().addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
             nombreET.setText(documentSnapshot.getString("nombre"));
             apellidoET.setText(documentSnapshot.getString("apellido"));
             emailTV.setText(documentSnapshot.getString("email"));
 
+            String foto = documentSnapshot.getString("fotoPerfil");
+            if(foto == null){
+                Glide.with(UsuarioScanActivity.this)
+                        .load(urlDefecto)
+                        .into(perfil);
+
+            }else{
+                Glide.with(UsuarioScanActivity.this)
+                        .load(foto)
+                        .into(perfil);
+            }
         });
 
-        modificarBTN.setOnClickListener( (View v) -> {
-
-
-            String nom = nombreET.getText().toString();
-            String ape = apellidoET.getText().toString();
-
-            db.collection("users").document(email).update("nombre",nom);
-
-            db.collection("users").document(email).update("apellido",ape).addOnSuccessListener( (Void unused) ->
-                    Toast.makeText(UsuarioScanActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
-
-        });
 
         adminBTN = findViewById(R.id.adminButton);
         adminBTN.setOnClickListener( (View v)  -> {
