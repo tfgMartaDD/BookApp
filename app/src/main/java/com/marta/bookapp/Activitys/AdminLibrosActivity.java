@@ -12,10 +12,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,6 +32,7 @@ import com.marta.bookapp.Adapter.ListaLibrosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AdminLibrosActivity extends AppCompatActivity {
@@ -45,12 +49,19 @@ public class AdminLibrosActivity extends AppCompatActivity {
     String idPendiente;
     String idPet;
 
+    LinearLayout llLibros;
+    TextView tipo, usuario;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_libros);
+
+        llLibros = findViewById(R.id.llLibros);
+        tipo = findViewById(R.id.tipoTV);
+        usuario = findViewById(R.id.nombreUserTV);
 
         spinner = findViewById(R.id.spinnerLL);
 
@@ -70,6 +81,35 @@ public class AdminLibrosActivity extends AppCompatActivity {
         listViewListaLibros.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
             i = position;
             flag = true;
+            Libro l = listaLibros.get(i);
+            String estado = l.getEstado();
+            if(estado.equalsIgnoreCase("reservado")){
+                String frase = " RESERVADO POR ";
+                tipo.setText(frase);
+                db.collection("peticiones").whereEqualTo("Libro", l.getId()).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+                    if(task.isSuccessful()) {
+                        for (QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())) {
+                            String user = query.getString("Usuario");
+                            usuario.setText(user);
+                            llLibros.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+            }else if(estado.equalsIgnoreCase("prestado")){
+                String frase = " PRESTADO A ";
+                tipo.setText(frase);
+                db.collection("prestamos").whereEqualTo("Libro", l.getId()).get().addOnCompleteListener( (@NonNull Task<QuerySnapshot> task) -> {
+                    if(task.isSuccessful()) {
+                        for (QueryDocumentSnapshot query : Objects.requireNonNull(task.getResult())) {
+                            String user = query.getString("Usuario");
+                            usuario.setText(user);
+                            llLibros.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+            }else{
+                llLibros.setVisibility(View.INVISIBLE);
+            }
         });
 
         eliminarBTN = findViewById(R.id.eliminarLibroButton);
@@ -161,6 +201,7 @@ public class AdminLibrosActivity extends AppCompatActivity {
     }
 
     public void listar(View view){
+        llLibros.setVisibility(View.INVISIBLE);
 
         String eleccion = spinner.getSelectedItem().toString();
 
@@ -222,6 +263,8 @@ public class AdminLibrosActivity extends AppCompatActivity {
         }if(eleccion.length()>15){
             Toast.makeText(AdminLibrosActivity.this, "Escoja una opción de la lista.",Toast.LENGTH_SHORT).show();
         }else{
+
+            eleccion = eleccion.toLowerCase(Locale.ROOT);
             db.collection("libros").whereEqualTo("Estado",eleccion).get().addOnCompleteListener((@NonNull Task<QuerySnapshot> task) ->{
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {

@@ -79,8 +79,53 @@
     <ListView
         android:id="@+id/lvlistaLibros"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:layout_margin="16dp"/>
+        android:layout_height="360dp"
+        android:layout_marginHorizontal="16dp">
+    </ListView>
+
+
+    <LinearLayout
+        android:id="@+id/llLibros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/libro"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/green_700"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tipoTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/green_700"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/nombreUserTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/green_700"
+            android:textSize="16sp"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -93,7 +93,7 @@ public class AdminPeticionesActivity extends AppCompatActivity {
             DonacionPeticion d = listaPeticiones.get(position);
             Libro l = d.getLibro();
 
-
+            fechaEditText.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
             tv.setVisibility(View.VISIBLE);
 
