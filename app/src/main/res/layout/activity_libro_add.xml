@@ -363,28 +363,15 @@
             android:layout_margin="8dp"
             android:contentDescription="@string/imagen_portada"
             />
-
-        <LinearLayout
+        <Button
+            android:id="@+id/galeriaBTN"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:text="@string/anadir_portada"
+            android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/galeriaBTN"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/anadir_portada"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/tvimagen2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

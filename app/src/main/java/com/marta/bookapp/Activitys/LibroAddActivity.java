@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,7 +47,6 @@ public class LibroAddActivity extends AppCompatActivity {
 
     LinearLayout llimagen;
     ImageView imagen;
-    TextView imagenTv;
     EditText codigoET;
 
     EditText ETasignaturaR, ETcursoR, ETclaseR, ETeditorialR, ETcodigoR;
@@ -87,7 +85,6 @@ public class LibroAddActivity extends AppCompatActivity {
         menuBTN = findViewById(R.id.volverMenuBTN);
         galeriaBTN = findViewById(R.id.galeriaBTN);
 
-        imagenTv =findViewById(R.id.tvimagen2);
         imagen = findViewById(R.id.portadaImagen);
 
         asigSpin = findViewById(R.id.spinnerAsigLibro);
@@ -276,8 +273,6 @@ public class LibroAddActivity extends AppCompatActivity {
             Glide.with(LibroAddActivity.this)
                     .load(urlDefecto)
                     .into(imagen);
-            String frase ="Portada no disponible";
-            imagenTv.setText(frase);
 
             anadirBTN.setVisibility(View.VISIBLE);
 
