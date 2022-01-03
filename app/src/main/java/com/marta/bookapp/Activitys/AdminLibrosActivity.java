@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -140,9 +139,6 @@ public class AdminLibrosActivity extends AppCompatActivity {
                             }
 
                         });
-                        //System.out.println("ID --->>>> "+idPendiente +"Pet---> "+idPet);
-
-                        //System.out.println("librooo"+idLibro);
 
                         db.collection("libros").document(idLibro).delete().addOnSuccessListener( (Void unused) -> {
                             Toast.makeText(AdminLibrosActivity.this, "LIBRO ELIMINADO.", Toast.LENGTH_SHORT).show();
