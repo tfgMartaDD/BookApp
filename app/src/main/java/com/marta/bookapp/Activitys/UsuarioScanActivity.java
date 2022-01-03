@@ -55,12 +55,13 @@ public class UsuarioScanActivity extends AppCompatActivity {
 
         modificarBTN.setOnClickListener( (View v) -> {
 
-            Map<String, Object> user = new HashMap<>();
-            user.put("nombre", nombreET.getText().toString());
-            user.put("apellido", apellidoET.getText().toString());
-            user.put("email", email);
 
-            db.collection("users").document(email).set(user).addOnSuccessListener( (Void unused) ->
+            String nom = nombreET.getText().toString();
+            String ape = apellidoET.getText().toString();
+
+            db.collection("users").document(email).update("nombre",nom);
+
+            db.collection("users").document(email).update("apellido",ape).addOnSuccessListener( (Void unused) ->
                     Toast.makeText(UsuarioScanActivity.this, "Datos modificados con exito", Toast.LENGTH_SHORT).show());
 
         });
