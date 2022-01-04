@@ -199,69 +199,74 @@ public class NuevaDonacionActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
             }else{
+
                 String asignaturaR = String.valueOf(asignaturaET.getText());
                 String claseR = String.valueOf(claseET.getText());
                 String cursoR = String.valueOf(cursoET.getText());
                 String editorialR = String.valueOf(editorialET.getText());
 
-                prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-                String actualUser = prefs.getString("email", "");
+                if( asignaturaR.isEmpty() || claseR.isEmpty() || cursoR.isEmpty() || editorialR.isEmpty()){
+                    Toast.makeText(NuevaDonacionActivity.this, "Primero debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
+                }else {
 
-                String frase = "¿Está seguro de que quiere donar el libro de la asignatura " + asignaturaR + " del curso " + claseR + " " + cursoR + " de la editorial " + editorialR + "?";
+                    prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+                    String actualUser = prefs.getString("email", "");
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
-                alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+                    String frase = "¿Está seguro de que quiere donar el libro de la asignatura " + asignaturaR + " del curso " + claseR + " " + cursoR + " de la editorial " + editorialR + "?";
 
-                    Date date = new Date();
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(NuevaDonacionActivity.this);
+                    alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
 
-                    Map<String, Object> pendiente = new HashMap<>();
-                    pendiente.put("Asignatura", asignaturaR);
-                    pendiente.put("esPeticion","false");
-                    pendiente.put("Clase",claseR);
-                    pendiente.put("Curso",cursoR);
-                    pendiente.put("Estado", "Pendiente");
-                    pendiente.put("Usuario",actualUser);
+                        Date date = new Date();
 
-                    db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->{
-                        idPendiente = documentReference.getId();
+                        Map<String, Object> pendiente = new HashMap<>();
+                        pendiente.put("Asignatura", asignaturaR);
+                        pendiente.put("esPeticion", "false");
+                        pendiente.put("Clase", claseR);
+                        pendiente.put("Curso", cursoR);
+                        pendiente.put("Estado", "Pendiente");
+                        pendiente.put("Usuario", actualUser);
 
-                        Map<String, Object> donation = new HashMap<>();
-                        donation.put("Asignatura", asignaturaR);
-                        donation.put("Clase", claseR);
-                        donation.put("Curso", cursoR);
-                        donation.put("Editorial", editorialR);
-                        donation.put("Usuario", actualUser);
-                        donation.put("Fecha", date);
-                        donation.put("idPendiente", idPendiente);
-                        if(urlImagen == null){
-                            StorageReference carpeta = mStorage.child("portadas").child("donaciones");
-                            StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
-                            filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                                urlImagen = String.valueOf(uri);
+                        db.collection("pendientes").add(pendiente).addOnSuccessListener((DocumentReference documentReference) -> {
+                            idPendiente = documentReference.getId();
+
+                            Map<String, Object> donation = new HashMap<>();
+                            donation.put("Asignatura", asignaturaR);
+                            donation.put("Clase", claseR);
+                            donation.put("Curso", cursoR);
+                            donation.put("Editorial", editorialR);
+                            donation.put("Usuario", actualUser);
+                            donation.put("Fecha", date);
+                            donation.put("idPendiente", idPendiente);
+                            if (urlImagen == null) {
+                                StorageReference carpeta = mStorage.child("portadas").child("donaciones");
+                                StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                                filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                                    urlImagen = String.valueOf(uri);
+                                    donation.put("Imagen", urlImagen);
+
+                                    db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
+                                        Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
+                                        volverAMenu(NuevaDonacionActivity.this);
+                                    });
+                                }));
+                            } else {
                                 donation.put("Imagen", urlImagen);
 
                                 db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
                                     Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
                                     volverAMenu(NuevaDonacionActivity.this);
                                 });
-                            }));
-                        }else{
-                            donation.put("Imagen", urlImagen);
+                            }
+                        });
 
-                            db.collection("posiblesDonaciones").document().set(donation).addOnSuccessListener((Void unused) -> {
-                                Toast.makeText(NuevaDonacionActivity.this, "DONACION RECIBIDA.\nLos administradores tienen que aprobar la donación. Se pondran en contacto con usted en breve. ", Toast.LENGTH_LONG).show();
-                                volverAMenu(NuevaDonacionActivity.this);
-                            });
-                        }
-                    });
+                    }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
 
-                }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(NuevaDonacionActivity.this, "DONACION CANCELADA", Toast.LENGTH_SHORT).show());
-
-                AlertDialog alertDialog = alerta.create();
-                alertDialog.setTitle("¿ESTAS SEGURO?");
-                alertDialog.show();
+                    AlertDialog alertDialog = alerta.create();
+                    alertDialog.setTitle("¿ESTAS SEGURO?");
+                    alertDialog.show();
+                }
             }
-
         });
 
         anadirImagen.setOnClickListener( (View v) ->  mGetContent.launch("image/*") );

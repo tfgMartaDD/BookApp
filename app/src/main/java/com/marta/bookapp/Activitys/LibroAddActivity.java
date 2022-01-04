@@ -203,37 +203,51 @@ public class LibroAddActivity extends AppCompatActivity {
                 String cursoR = String.valueOf(ETcursoR.getText());
                 String editorialR = String.valueOf(ETeditorialR.getText());
 
-                long codigoR;
-                String cod = String.valueOf(ETcodigoR.getText());
-                if(cod.equalsIgnoreCase("")){
-                    codigoR = 0L;
-                }else{
-                    codigoR = Long.parseLong(cod);
-                }
+                if( asignaturaR.isEmpty() || claseR.isEmpty() || cursoR.isEmpty() || editorialR.isEmpty()){
+                    Toast.makeText(LibroAddActivity.this, "Primero debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
+                }else {
 
-                String frase2 = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignaturaR + " del curso " + claseR + " " + cursoR + " de la editorial " + editorialR + "?";
+                    long codigoR;
+                    String cod = String.valueOf(ETcodigoR.getText());
+                    if(cod.equalsIgnoreCase("")){
+                        codigoR = 0L;
+                    }else{
+                        codigoR = Long.parseLong(cod);
+                    }
 
-                AlertDialog.Builder alerta2 = new AlertDialog.Builder(LibroAddActivity.this);
-                alerta2.setMessage(frase2).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+                    String frase2 = "¿Está seguro de que quiere añadir el libro de la asignatura " + asignaturaR + " del curso " + claseR + " " + cursoR + " de la editorial " + editorialR + "?";
 
-                    Date date = new Date();
+                    AlertDialog.Builder alerta2 = new AlertDialog.Builder(LibroAddActivity.this);
+                    alerta2.setMessage(frase2).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
 
-                    Map<String, Object> libro2 = new HashMap<>();
-                    libro2.put("Asignatura", asignaturaR.toUpperCase(Locale.ROOT));
-                    libro2.put("Clase",claseR.toUpperCase(Locale.ROOT));
-                    libro2.put("Curso",cursoR.toUpperCase(Locale.ROOT));
-                    libro2.put("Editorial", editorialR.toUpperCase(Locale.ROOT));
-                    libro2.put("Estado", "disponible");
-                    libro2.put("Donante", donante);
-                    libro2.put("Fecha", date);
-                    libro2.put("Codigo", codigoR);
-                    //libro.put("Imagen", urlImagen);
+                        Date date = new Date();
 
-                    if(urlImagen == null){
-                        StorageReference carpeta = mStorage.child("portadas").child("libros");
-                        StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
-                        filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
-                            urlImagen = String.valueOf(uri);
+                        Map<String, Object> libro2 = new HashMap<>();
+                        libro2.put("Asignatura", asignaturaR.toUpperCase(Locale.ROOT));
+                        libro2.put("Clase",claseR.toUpperCase(Locale.ROOT));
+                        libro2.put("Curso",cursoR.toUpperCase(Locale.ROOT));
+                        libro2.put("Editorial", editorialR.toUpperCase(Locale.ROOT));
+                        libro2.put("Estado", "disponible");
+                        libro2.put("Donante", donante);
+                        libro2.put("Fecha", date);
+                        libro2.put("Codigo", codigoR);
+                        //libro.put("Imagen", urlImagen);
+
+                        if(urlImagen == null){
+                            StorageReference carpeta = mStorage.child("portadas").child("libros");
+                            StorageReference filePath = carpeta.child(uriImagen.getLastPathSegment());
+                            filePath.putFile(uriImagen).addOnSuccessListener(taskSnapshot -> filePath.getDownloadUrl().addOnSuccessListener( uri -> {
+                                urlImagen = String.valueOf(uri);
+                                libro2.put("Imagen", urlImagen);
+
+                                db.collection("libros").document().set(libro2).addOnSuccessListener((Void unused) ->{
+                                    Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+
+                                    Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
+                                    startActivity(in);
+                                });
+                            }));
+                        }else{
                             libro2.put("Imagen", urlImagen);
 
                             db.collection("libros").document().set(libro2).addOnSuccessListener((Void unused) ->{
@@ -242,24 +256,14 @@ public class LibroAddActivity extends AppCompatActivity {
                                 Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
                                 startActivity(in);
                             });
-                        }));
-                    }else{
-                        libro2.put("Imagen", urlImagen);
+                        }
 
-                        db.collection("libros").document().set(libro2).addOnSuccessListener((Void unused) ->{
-                            Toast.makeText(LibroAddActivity.this, "LIBRO AÑADIDO.\n", Toast.LENGTH_LONG).show();
+                    }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(LibroAddActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
 
-                            Intent in = new Intent (LibroAddActivity.this, AdminLibrosActivity.class);
-                            startActivity(in);
-                        });
-                    }
-
-                }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(LibroAddActivity.this, "ACCION CANCELADA", Toast.LENGTH_SHORT).show());
-
-                AlertDialog alertDialog = alerta2.create();
-                alertDialog.setTitle("AÑADIR LIBRO");
-                alertDialog.show();
-
+                    AlertDialog alertDialog = alerta2.create();
+                    alertDialog.setTitle("AÑADIR LIBRO");
+                    alertDialog.show();
+                }
             }
         });
 
