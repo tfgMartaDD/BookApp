@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,6 +42,12 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
     Button mostrar;
 
+    Button devolver;
+    LinearLayout llprestamo;
+    TextView user, fecha, libro;
+    ImageView imagen;
+    int i;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -46,6 +56,8 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_prestamos);
 
         listViewAdminPrestamos = findViewById(R.id.lvPrestamosAdmin);
+        adapter = new PrestAdminAdapter(this, listaPrestamos);
+        listViewAdminPrestamos.setAdapter(adapter);
 
         rbt = findViewById(R.id.rbTodos);
         rbc = findViewById(R.id.rbClase);
@@ -56,6 +68,32 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
         mostrar = findViewById(R.id.buttonMostrar);
 
+        devolver = findViewById(R.id.devolverBoton);
+        user = findViewById(R.id.usertv);
+        fecha = findViewById(R.id.fechaDevtv);
+        libro = findViewById(R.id.libroprestamotv);
+        llprestamo = findViewById(R.id.llprestamo);
+        imagen = findViewById(R.id.imageView7);
+
+        listViewAdminPrestamos.setOnItemClickListener( (AdapterView<?> parent, View view, int position, long id) -> {
+            i = position;
+            Prestamo p = listaPrestamos.get(position);
+            Libro l = p.getLibro();
+
+            user.setText(p.getUsuario());
+            fecha.setText(p.getFechaDev());
+
+            Glide.with(AdminPrestamosActivity.this)
+                    .load(l.getImagen())
+                    .into(imagen);
+
+            String prestamo = l.getAsignatura()+ " "+l.getClase()+ " "+l.getCurso()+ " "+l.getEditorial();
+            libro.setText(prestamo);
+
+            llprestamo.setVisibility(View.VISIBLE);
+            devolver.setVisibility(View.VISIBLE);
+
+        });
     }
 
     public void comprobarRadioButton(View view){

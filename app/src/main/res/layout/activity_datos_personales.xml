@@ -23,7 +23,8 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:contentDescription="@string/foto_perfil" />
+        android:contentDescription="@string/foto_perfil"
+        tools:ignore="ImageContrastCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,22 +35,23 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:text="@string/nombre_mayus"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/nombreEditText"
             android:layout_width="0dp"
-            android:layout_weight="5"
             android:layout_height="48dp"
             android:layout_margin="8dp"
+            android:layout_weight="5"
             android:autofillHints="name"
             android:hint="@string/nombre"
             android:inputType="text"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
     </LinearLayout>
 
     <Space
@@ -65,11 +67,12 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:text="@string/apellido_mayus"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/apellidoEditText"
@@ -96,11 +99,12 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:text="@string/email_mayus"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/correoTextView"
