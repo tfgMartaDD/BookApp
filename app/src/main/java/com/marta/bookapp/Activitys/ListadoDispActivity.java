@@ -158,7 +158,7 @@ public class ListadoDispActivity extends AppCompatActivity {
                 db.collection("pendientes").add(pendiente).addOnSuccessListener( (DocumentReference documentReference) ->  {
                     idPendiente = documentReference.getId();
 
-                    //cambiamos el estado del libro de Disponible a Reservado
+                    /*//cambiamos el estado del libro de Disponible a Reservado
                     Map<String, Object> reserva= new HashMap<>();
                     reserva.put("Asignatura",libro.getAsignatura());
                     reserva.put("Clase",libro.getClase());
@@ -166,10 +166,10 @@ public class ListadoDispActivity extends AppCompatActivity {
                     reserva.put("Donante",libro.getDonante());
                     reserva.put("Editorial",libro.getEditorial());
                     reserva.put("Estado", "reservado");
-                    reserva.put("Imagen", libro.getImagen());
+                    reserva.put("Imagen", libro.getImagen());*/
 
 
-                    libros.document(libro.getId()).set(reserva).addOnSuccessListener( (Void unused) ->
+                    libros.document(libro.getId()).update("Estado", "reservado").addOnSuccessListener( (Void unused) ->
                             Toast.makeText(ListadoDispActivity.this, "Libros Reservados con exito", Toast.LENGTH_SHORT).show());
 
                     Date date = new Date();

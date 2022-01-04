@@ -31,6 +31,7 @@
     <string name="deseo_donar">Si desea donar un libro, rellene los siguientes campos:</string>
     <string name="deshacer_reserva">DESHACER RESERVA</string>
     <string name="detalles_libro_scan">DETALLES LIBRO ESCANEADO</string>
+    <string name="devolver_libro">DEVOLVER LIBRO</string>
     <string name="donaciones">DONACIONES</string>
     <string name="donaciones_aprobar">DONACIONES POR APROBAR</string>
     <string name="donacion_seleccionada">DONACION SELECCIONADA</string>
