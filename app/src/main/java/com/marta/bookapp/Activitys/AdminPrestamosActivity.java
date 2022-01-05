@@ -1,8 +1,10 @@
 package com.marta.bookapp.Activitys;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,14 +16,17 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.marta.bookapp.Modelo.Libro;
 import com.marta.bookapp.Modelo.Prestamo;
+import com.marta.bookapp.Modelo.Usuario;
 import com.marta.bookapp.R;
 import com.marta.bookapp.Adapter.PrestAdminAdapter;
 
@@ -92,6 +97,40 @@ public class AdminPrestamosActivity extends AppCompatActivity {
 
             llprestamo.setVisibility(View.VISIBLE);
             devolver.setVisibility(View.VISIBLE);
+        });
+
+        devolver.setOnClickListener( (View v) ->{
+            Prestamo p = listaPrestamos.get(i);
+            Libro l = p.getLibro();
+
+            String frase = "¿Está seguro de que quiere devolver el libro de la asignatura " + l.getAsignatura() + " del curso " + l.getClase() + " " + l.getCurso() +
+                    " de la editorial " + l.getEditorial() + " cuya fecha de devolución es " + p.getFechaDev()+ "?";
+
+            AlertDialog.Builder alerta = new AlertDialog.Builder(AdminPrestamosActivity.this);
+            alerta.setMessage(frase).setPositiveButton("SI", (DialogInterface dialog, int id) -> {
+
+                db.collection("prestamos").document(p.getId()).delete().addOnCompleteListener( (@NonNull Task<Void> task) ->
+                        db.collection("libros").document(l.getId()).update("Estado", "disponible").addOnCompleteListener( (@NonNull Task<Void> task2) ->
+                                db.collection("users").document(p.getUsuario()).get().addOnSuccessListener( (DocumentSnapshot documentSnapshot) ->{
+                                    Usuario u = new Usuario(documentSnapshot.getId(), documentSnapshot.getString("nombre"), documentSnapshot.getString("apellido"),
+                                            documentSnapshot.getLong("numDonaciones"), documentSnapshot.getLong("numPrestamos"));
+                                    Long pres = documentSnapshot.getLong("numPrestamos");
+                                    pres--;
+                                    db.collection("users").document(u.getId()).update("numPrestamos", pres);
+                                    Toast.makeText(AdminPrestamosActivity.this,"Libro devuelto correctamente.", Toast.LENGTH_SHORT).show();
+
+                                    listaPrestamos.remove(i);
+                                    adapter.notifyDataSetChanged();
+                                })));
+
+                llprestamo.setVisibility(View.INVISIBLE);
+                devolver.setVisibility(View.INVISIBLE);
+
+            }).setNegativeButton("NO", (DialogInterface dialog, int id) -> Toast.makeText(AdminPrestamosActivity.this, "DEVOLUCIÓN CANCELADA", Toast.LENGTH_SHORT).show());
+
+            AlertDialog alertDialog = alerta.create();
+            alertDialog.setTitle("¿ESTAS SEGURO?");
+            alertDialog.show();
 
         });
     }
