@@ -13,21 +13,24 @@
       android:id="@+id/textView6"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
       android:text="@string/menu_admin"
-      app:layout_constraintStart_toStartOf="parent"
+      android:textSize="30sp"
+      android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:textSize="20sp"
-      android:layout_marginTop="16dp"/>
+      tools:ignore="TextContrastCheck" />
 
   <Button
       android:id="@+id/cambiarBTN"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/modo_usuarios"
       android:layout_margin="16dp"
+      android:text="@string/modo_usuarios"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/textView6" />
+      app:layout_constraintTop_toBottomOf="@+id/textView6"
+      tools:ignore="TextContrastCheck" />
 
   <TableLayout
       android:id="@+id/table"
@@ -37,52 +40,106 @@
       android:gravity="center"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/textView6"
+      app:layout_constraintTop_toBottomOf="@id/cambiarBTN"
       app:layout_constraintBottom_toTopOf="@id/llBotones">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+      <ImageView
+          android:id="@+id/imageView8"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/peticiones_pendientes"
+          app:srcCompat="@drawable/icons8_peticion"
+          tools:ignore="ImageContrastCheck" />
+
+      <ImageView
+          android:id="@+id/imageView9"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/prestamos"
+          app:srcCompat="@drawable/icons8_prestamo"
+          tools:ignore="ImageContrastCheck" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
       <Button
           android:id="@+id/peticionesPendientes"
           android:layout_width="150dp"
-          android:layout_height="120dp"
+          android:layout_height="80dp"
           android:layout_margin="8dp"
           android:text="@string/peticiones_pendientes"
-          tools:ignore="ButtonStyle" />
+          android:textStyle="bold"
+          tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,TextContrastCheck" />
 
       <Button
           android:id="@+id/prestamosActuales"
           android:layout_width="150dp"
-          android:layout_height="120dp"
+          android:layout_height="80dp"
           android:layout_margin="8dp"
           android:text="@string/prestamos_actuales"
-          tools:ignore="ButtonStyle"/>
+          android:textStyle="bold"
+          tools:ignore="ButtonStyle" />
 
+    </TableRow>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_weight="1" />
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+      <ImageView
+          android:id="@+id/imageView10"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/donaciones"
+          app:srcCompat="@drawable/icons8_donacion"
+          tools:ignore="ImageContrastCheck" />
+
+      <ImageView
+          android:id="@+id/imageView11"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/lista_libros"
+          app:srcCompat="@drawable/icons8_listalibros"
+          tools:ignore="ImageContrastCheck" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
       <Button
           android:id="@+id/donacionesAprobar"
           android:layout_width="150dp"
-          android:layout_height="120dp"
+          android:layout_height="80dp"
           android:layout_margin="8dp"
           android:text="@string/donaciones_aprobar"
+          android:textStyle="bold"
           tools:ignore="ButtonStyle"/>
 
       <Button
           android:id="@+id/listalibros"
           android:layout_width="150dp"
-          android:layout_height="120dp"
+          android:layout_height="80dp"
           android:layout_margin="8dp"
           android:text="@string/lista_libros"
-          tools:ignore="ButtonStyle"/>
+          android:textStyle="bold"
+          tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck" />
 
     </TableRow>
 
@@ -100,30 +157,36 @@
 
     <Button
         android:id="@+id/scannerbutton"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_weight="1"
         android:text="@string/ir_escaner"
-        android:layout_margin="8dp"
-        style="?android:attr/buttonBarButtonStyle" />
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/listaUsersBTN"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_weight="1"
         android:text="@string/lista_users"
-        android:layout_margin="8dp"
-        style="?android:attr/buttonBarButtonStyle" />
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/cerraradmin"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_weight="1"
         android:text="@string/cerrar_sesion"
-        android:layout_margin="8dp"
-        style="?android:attr/buttonBarButtonStyle" />
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
 
   </LinearLayout>
