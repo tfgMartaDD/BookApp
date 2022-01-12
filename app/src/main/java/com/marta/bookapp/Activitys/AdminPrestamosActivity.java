@@ -34,6 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al administrador todos las prestamos de libros
+ * que haya en el sistemas o mostrar los de un curso en concreto.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class AdminPrestamosActivity extends AppCompatActivity {
 
     PrestAdminAdapter adapter;
@@ -135,6 +141,11 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo para ver que boton del Radio Button ha seleccionado el usuario.
+     *
+     * @param view la vista en la que está.
+     */
     public void comprobarRadioButton(View view){
 
         if(rbt.isChecked()){
@@ -173,6 +184,10 @@ public class AdminPrestamosActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Metodo que recupera todos los prestamos almacenados en la base de datos.
+     * @return una lista de Prestamo con los prestamos recuperados.
+     */
     public List<Prestamo> obtenerPrestamos(){
         List<Prestamo> listaTodos = new ArrayList<>();
 
@@ -200,6 +215,12 @@ public class AdminPrestamosActivity extends AppCompatActivity {
         return listaTodos;
     }
 
+    /**
+     * Metodo que recupera los prestamos de un curso en concreto almacenados en la base de datos.
+     *
+     * @param cursoClase Curso del que queremos obtener los libros que estén prestados
+     * @return una lista de Prestamo con los prestamos recuperados.
+     */
     public List<Prestamo> obtenerPrestamosClases(String cursoClase){
         List<Prestamo> listaClases = new ArrayList<>();
 

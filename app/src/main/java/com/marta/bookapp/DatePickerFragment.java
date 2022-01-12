@@ -9,6 +9,11 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+/**
+ * Clase utilizada para mostrar un calendario
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class DatePickerFragment extends DialogFragment {
 
     private DatePickerDialog.OnDateSetListener listener;

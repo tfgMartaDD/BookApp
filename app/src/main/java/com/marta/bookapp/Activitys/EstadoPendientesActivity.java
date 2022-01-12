@@ -20,6 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase que muestra al usuario cual es el estado de sus peticiones
+ * y donaciones, si han sido aceptadas, rechazadas o siguen pendientes.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class EstadoPendientesActivity extends AppCompatActivity {
 
     ListView listViewPendientes;
@@ -45,6 +51,11 @@ public class EstadoPendientesActivity extends AppCompatActivity {
         listViewPendientes.setAdapter(adapter);
     }
 
+    /**
+     * Método para recuperar de la base de datos las donaciones y reservas pendientes.
+     * @param user identificador del usuario activo
+     * @return una lista de Pendientes con los datos recuperados
+     */
     private List<Pendientes> obtenerPendientes(String user) {
         List<Pendientes> lista = new ArrayList<>();
 

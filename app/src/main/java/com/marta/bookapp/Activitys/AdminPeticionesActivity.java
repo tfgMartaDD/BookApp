@@ -37,6 +37,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al administrador todas las peticiones de reserva de libros
+ * que haya en el sistema, y que el decida si aceptarlas o rechazarlas.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class AdminPeticionesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
@@ -249,6 +255,10 @@ public class AdminPeticionesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para mostrar un calendario para que el administrador
+     * elija la fecha de devolución del libro que le interese.
+     */
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance( (DatePicker datePicker, int year, int month, int day) -> {
             // +1 because January is zero
@@ -261,6 +271,11 @@ public class AdminPeticionesActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Metodo que recupera todas las peticiones almacenadas en la base de datos.
+     *
+     * @return una lista de DonacionPeticion con las peticiones recuperadas.
+     */
     public List<DonacionPeticion> obtenerPeticiones(){
 
         List<DonacionPeticion> lista = new ArrayList<>();

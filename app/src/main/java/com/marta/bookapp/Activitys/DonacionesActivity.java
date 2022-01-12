@@ -27,6 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase en la que un usuario puede ver que donaciones ha hecho
+ * o hacer una nueva.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class DonacionesActivity extends AppCompatActivity {
 
     Button addBTN;
@@ -99,6 +105,13 @@ public class DonacionesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo para recuperar de la base de datos todas
+     * todas las donaciones que haya hecho un usuario
+     *
+     * @param user identificador del usuario activo
+     * @return una lista con todos los libros que haya donado
+     */
     public List<Libro> obtenerMisDonaciones(String user){
         List<Libro> lista = new ArrayList<>();
 

@@ -12,6 +12,12 @@ import com.marta.bookapp.Modelo.Usuario;
 
 import java.util.List;
 
+/**
+ * Clase que sirve de adaptador para mostrar
+ * usuarios en un listView.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class UsuariosAdapter extends BaseAdapter {
 
     Context context;

@@ -12,6 +12,11 @@ import android.widget.Button;
 
 import com.marta.bookapp.R;
 
+/**
+ * Clase para elegir el curso del que se quiere buscar los libros disponibles
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class CursosActivity extends AppCompatActivity {
 
     Button pripriBTN, segpriBTN, terpriBTN, cuapriBTN, quipriBTN, sextpriBTN;
@@ -73,6 +78,12 @@ public class CursosActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que redirige a una lista de los libros disponibles,
+     * enviando como parametros el curso y la clase que nos interesa.
+     * @param clase Clase seleccionada
+     * @param curso Curso seleccionado
+     */
     private void redirigir(String clase, String curso){
 
         Intent in = new Intent (this, ListadoDispActivity.class);

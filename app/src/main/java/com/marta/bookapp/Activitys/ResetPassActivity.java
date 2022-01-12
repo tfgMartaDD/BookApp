@@ -14,6 +14,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.marta.bookapp.R;
 
+/**
+ * Clase para recuperar la contraseña si un usuario no se acuerda.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class ResetPassActivity extends AppCompatActivity {
 
     EditText email;
@@ -56,6 +61,9 @@ public class ResetPassActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que redirige a la pantalla principal al acabar.
+     */
     private void redirigirAmain() {
         Intent i = new Intent (this, MainActivity.class);
         startActivity(i);

@@ -20,7 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Clase en la que se muestra los datos de un libro escaneado
+ * (si es que hay algun libro almacenado con el código escaneado)
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class BusquedaActivity extends AppCompatActivity {
 
     TextView asignatura, clase, curso, editorial;
@@ -74,6 +79,16 @@ public class BusquedaActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para recuperar todos los libros almacenados en la base de datos,
+     * según el código escaneado.
+     *
+     * @param asig Asignatura del libro que se busca
+     * @param cl clase del libro eque se busca
+     * @param cu curso del libro que se busca
+     * @param edit editorial del libro que se busca
+     * @return una lista con los libros que tengan almacenado el código escaneado
+     */
     private List<Libro> obtenerLibros(String asig, String cl, String cu, String edit) {
 
         List<Libro> lista = new ArrayList<>();

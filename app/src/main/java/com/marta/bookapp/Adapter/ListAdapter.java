@@ -14,6 +14,12 @@ import com.marta.bookapp.R;
 
 import java.util.List;
 
+/**
+ * Clase que sirve de adaptador para mostrar
+ * libros en un listView.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class ListAdapter extends BaseAdapter {
 
     Context context;

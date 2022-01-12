@@ -16,6 +16,12 @@ import com.marta.bookapp.R;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Clase que sirve de adaptador para mostrar
+ * donaciones y peticiones pendientes en un listView.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class PendientesAdapter extends BaseAdapter {
 
     Context context;

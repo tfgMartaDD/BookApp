@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al usuario todas las peticiones de reserva de libros
+ * que haya hecho y que aun no le han concedido.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class PeticionesActivity extends AppCompatActivity {
 
     Button deshacerBTN, menuBTN;
@@ -126,6 +132,12 @@ public class PeticionesActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Metodo que recupera todas las peticiones almacenadas en la base de datos.
+     *
+     * @param user el identificador del usuario activo
+     * @return una lista de DonacionPeticion con las peticiones recuperadas.
+     */
     public List<DonacionPeticion> obtenerMisPeticiones(String user){
         List<DonacionPeticion> lista = new ArrayList<>();
 

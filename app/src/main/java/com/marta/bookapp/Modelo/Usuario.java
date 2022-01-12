@@ -1,5 +1,12 @@
 package com.marta.bookapp.Modelo;
 
+/**
+ * CLase correspondiente a los usuarios
+ * y los datos que nos interesa almacenar
+ * además de distintos constructores.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class Usuario {
 
     String id;

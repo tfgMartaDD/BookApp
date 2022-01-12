@@ -13,6 +13,12 @@ import android.widget.Button;
 
 import com.marta.bookapp.R;
 
+/**
+ * Clase que corresponde con el menú principal que verán los administradores
+ * una vez inicien sesión en el sistema.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class AdminMenuActivity extends AppCompatActivity {
 
     Button peticionesBTN, donacionesBTN, prestamosBTN, librosBTN;

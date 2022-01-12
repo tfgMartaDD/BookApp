@@ -2,6 +2,13 @@ package com.marta.bookapp.Modelo;
 
 import java.util.Date;
 
+/**
+ * CLase correspondiente a los libros
+ * y los datos que nos interesa almacenar
+ * además de distintos constructores.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class Libro {
 
     String id, asignatura, clase, curso, donante, editorial, estado;

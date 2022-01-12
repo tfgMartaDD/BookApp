@@ -1,5 +1,12 @@
 package com.marta.bookapp.Modelo;
 
+/**
+ * CLase correspondiente a las peticiones y donaciones pendientes
+ *
+ * y los datos que nos interesa almacenar.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class Pendientes {
 
     String id;

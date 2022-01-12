@@ -34,6 +34,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Clase  en la que un usuario encontrará el formulario para
+ * poder registrarse en el sistema.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class RegistrarActivity extends AppCompatActivity {
 
     EditText  email, password, password2, nombre, apellido;
@@ -51,7 +57,6 @@ public class RegistrarActivity extends AppCompatActivity {
     String perfilHom = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_male.png?alt=media&token=e7aa38b8-195c-4d39-8384-1bef39162bcd";
     String perfilMuj = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_user_female.png?alt=media&token=6fdfb7c3-05ad-4cb3-b39f-9f8ac3c8f134";
 
-    String urlDefectoBot = "https://firebasestorage.googleapis.com/v0/b/bookapp-3c15f.appspot.com/o/fotosPerfil%2Ficons8_bot.png?alt=media&token=e408919f-d2ad-4a4f-9642-b9be3c0c8b3e";
     Boolean flag = true;
 
     String urlImagen;
@@ -73,6 +78,10 @@ public class RegistrarActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método donde se encuentra toda la lógica necesaria para el registro
+     * de un usuario en el sistema.
+     */
     private void registro(){
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -182,6 +191,12 @@ public class RegistrarActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método en el que se comprueba que Radio Button se ha seleccionado
+     * para elegir la foto de perfil desde la galeria o una por defecto.
+     *
+     * @param view Vista en la que está.
+     */
     public void comprobarRBPerfil(View view){
 
         if(hombreRB.isChecked()){

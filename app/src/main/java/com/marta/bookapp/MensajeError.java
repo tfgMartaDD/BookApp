@@ -4,6 +4,11 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Clase utilizada para mostrar distintos mensajes de error
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class MensajeError {
 
 

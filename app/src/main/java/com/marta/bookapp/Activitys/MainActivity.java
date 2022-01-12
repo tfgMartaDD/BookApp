@@ -31,6 +31,16 @@ import com.marta.bookapp.R;
 
 import java.util.Objects;
 
+/**
+ * Clase principal del proyecto.
+ *
+ * Muestra el formulario para iniciar sesión en la aplicación.
+ * También permite registrarse si el usuario es nuevo
+ * o recuperar la contraseña en caso de haberla olvidado.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     Button accederBTN, registrarBTN, olvideBTN;
@@ -140,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Método que comprueba si hay una sesión iniciada
+     * al abir la aplicación
+     * y en caso afirmativo redirige al menu principal
+     */
     private void sesion() {
 
         SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
@@ -151,6 +166,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para redirigir a un usuario que inicie sesión
+     * al menu principal guardando su identificador
+     *
+     * @param email El identificador del usuario
+     */
     private void redirigirAmenu(String email) {
         Intent in = new Intent (this, MenuActivity.class);
         in.putExtra("email",email);

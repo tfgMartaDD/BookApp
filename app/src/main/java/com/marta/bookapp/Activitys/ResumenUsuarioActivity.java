@@ -30,6 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al administrador todos los datos de prestamos y donaciones
+ * que hay de un usuario en concreto.
+ * Desde aqui se puede hacer administrador a otro usuario.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class ResumenUsuarioActivity extends AppCompatActivity {
 
     Button menuBTN, adminBTN;
@@ -111,6 +118,13 @@ public class ResumenUsuarioActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo que recupera todos los prestamos y donaciones
+     * que tiene un usuario en concreto almacenados en la base de datos.
+     *
+     * @param mail el identificador del usuario elegido
+     * @return una lista de Libro con los libros recuperados.
+     */
     private List<Libro> obtenerLibros(String mail){
 
         List<Libro> lista = new ArrayList<>();

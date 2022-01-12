@@ -4,6 +4,13 @@ import com.marta.bookapp.Modelo.Libro;
 
 import java.util.Date;
 
+/**
+ * CLase correspondiente a los prestamos
+ * y los datos que nos interesa almacenar
+ * además de distintos constructores.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class Prestamo {
     String id;
     Libro libro;

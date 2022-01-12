@@ -37,6 +37,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase con la que los usuarios pueden añadir una donación de un libro al sistema.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class NuevaDonacionActivity extends AppCompatActivity {
 
     Spinner asigSpin;
@@ -276,6 +281,11 @@ public class NuevaDonacionActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método en el que se comprueba que Radio Button se ha seleccionado
+     * para elegir la portada por defecto o desde la galería.
+     * @param view Vista en la que está.
+     */
     public void comprobarRB(View view){
         if(defectoRB.isChecked()){
 
@@ -296,6 +306,13 @@ public class NuevaDonacionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método en el que se comprueba que Radio Button se ha seleccionado
+     * para elegir rellenar a mano el formulario para añadir un libro
+     * o si se eligen los datos desde una lista de posibles valores.
+     *
+     * @param view Vista en la que está.
+     */
     public void comprobarRBDonacion(View view){
         if(rellenarRB.isChecked()){
             llRellenar.setVisibility(View.VISIBLE);

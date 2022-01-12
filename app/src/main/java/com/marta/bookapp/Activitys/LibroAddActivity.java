@@ -34,6 +34,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Clase con la que los administradores pueden añadir un libro al sistema.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class LibroAddActivity extends AppCompatActivity {
 
     Spinner asigSpin, claseSpin, cursoSpin, editorialSpin;
@@ -273,6 +278,11 @@ public class LibroAddActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método en el que se comprueba que Radio Button se ha seleccionado
+     * para elegir la portada por defecto o desde la galería.
+     * @param view Vista en la que está.
+     */
     public void comprobarRBLibro(View view){
         if(defectoRB.isChecked()){
             galeriaBTN.setVisibility(View.INVISIBLE);
@@ -292,6 +302,12 @@ public class LibroAddActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método en el que se comprueba que Radio Button se ha seleccionado
+     * para elegir rellenar a mano el formulario para añadir un libro
+     * o si se eligen los datos desde una lista de posibles valores.
+     * @param view Vista en la que está.
+     */
     public void comprobarRBSelec(View view){
         if(rellenarRB.isChecked()){
             ll2.setVisibility(View.VISIBLE);

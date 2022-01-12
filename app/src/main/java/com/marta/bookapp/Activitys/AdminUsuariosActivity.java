@@ -21,6 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al administrador todos los usuarios
+ * que haya en el sistemas y mostrar su numero
+ * de donaciones y peticiones que tiene.
+ * Además puede seleccionar un usuario en concreto
+ * y verlo más detallado
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class AdminUsuariosActivity extends AppCompatActivity {
 
     UsuariosAdapter adapter;
@@ -50,6 +59,10 @@ public class AdminUsuariosActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo que recupera todos los usuarios almacenados en la base de datos.
+     * @return una lista de Usuario con los usuarios recuperados.
+     */
     private List<Usuario> obtenerListaUsuarios() {
 
         List<Usuario> lista = new ArrayList<>();

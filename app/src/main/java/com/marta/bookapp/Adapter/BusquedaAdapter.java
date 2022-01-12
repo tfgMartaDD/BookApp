@@ -15,6 +15,12 @@ import com.marta.bookapp.R;
 
 import java.util.List;
 
+/**
+ * Clase que sirve de adaptador para mostrar los libros
+ * buscados en un listView.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class BusquedaAdapter extends BaseAdapter {
 
     Context context;

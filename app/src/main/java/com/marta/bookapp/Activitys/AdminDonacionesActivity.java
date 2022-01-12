@@ -36,6 +36,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al administrador todas las posibles donaciones
+ * que haya en el sistema, y que el decida si aceptarlas o rechazarlas.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
+
 public class AdminDonacionesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout, ll2;
@@ -218,6 +225,10 @@ public class AdminDonacionesActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Metodo que recupera todas las donaciones almacenadas en la base de datos.
+     * @return una lista de DonacionPeticion con las donaciones recuperadas.
+     */
     public List<DonacionPeticion> obtenerDonaciones(){
 
         List<DonacionPeticion> lista = new ArrayList<>();

@@ -35,6 +35,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Clase que muestra un listado con los libros disponibles del
+ * curso que hemos seleccionado anteriormente.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class ListadoDispActivity extends AppCompatActivity {
 
     TextView cursoTV, claseTV, mostrarTV;
@@ -213,6 +219,13 @@ public class ListadoDispActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Método para recuperar los libros disponibles de la base de datos del curso seleccionado
+     * @param curso curso del libro que nos interesa
+     * @param clase clase del libro que nos interesa
+     * @return una lista de Libro con los libros recuperados
+     */
     public List<Libro> obtenerLibros(String curso, String clase){
 
         List<Libro> lista = new ArrayList<>();

@@ -13,6 +13,12 @@ import com.marta.bookapp.R;
 
 import java.util.List;
 
+/**
+ * Clase que sirve de adaptador para mostrar a un administrador,
+ * donaciones en un listView.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class DonAdminAdapter extends BaseAdapter {
 
     Context context;

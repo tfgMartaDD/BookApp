@@ -34,6 +34,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Clase en la que se muestra una lista con todos los libros del sistema
+ * y se permite al administrador listar por el tipo que desee ver
+ *
+ * @author Marta Diego u158691@usal.es
+ */
+
 public class AdminLibrosActivity extends AppCompatActivity {
 
     ListView listViewListaLibros;
@@ -196,6 +203,12 @@ public class AdminLibrosActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Método que se corresponde al evento cuando se pulsa el botón de listar.
+     *
+     * @param view Vista en la que estamos
+     */
     public void listar(View view){
         llLibros.setVisibility(View.INVISIBLE);
 
@@ -214,7 +227,6 @@ public class AdminLibrosActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         //Initialize intent result
-
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         //check condition
@@ -240,6 +252,12 @@ public class AdminLibrosActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Método para recuperar la lista de libros que le interese al administrador.
+     *
+     * @param eleccion El estaado de los libros a recuperar
+     * @return la lista con los libros recuperados
+     */
     public List<Libro> obtenerListaLibros(String eleccion){
 
         List<Libro> lista = new ArrayList<>();

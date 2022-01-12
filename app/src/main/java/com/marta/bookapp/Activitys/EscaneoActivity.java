@@ -23,7 +23,12 @@ import com.marta.bookapp.R;
 
 import java.util.Objects;
 
-
+/**
+ * Clase para escanear un código qr con el email de un usuario
+ * y mostrar los datos que se tengan de su perfil.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class EscaneoActivity extends AppCompatActivity {
 
     Button scanBTN;
@@ -52,6 +57,9 @@ public class EscaneoActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para iniciar la camara y en base a lo escaneado mostrar algo o no.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

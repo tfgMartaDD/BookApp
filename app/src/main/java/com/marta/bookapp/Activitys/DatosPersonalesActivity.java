@@ -35,6 +35,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar el perfil de un usuario
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class DatosPersonalesActivity extends AppCompatActivity {
 
     TextView mail;
@@ -186,6 +191,9 @@ public class DatosPersonalesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para elegir la foto que el usuario quiera poner de perfil.
+     */
     protected void seleccionarFoto(){
         mGetContent.launch("image/*");
 

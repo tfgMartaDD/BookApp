@@ -2,6 +2,12 @@ package com.marta.bookapp.Modelo;
 
 import java.util.Date;
 
+/**
+ * CLase correspondiente a las donaciones y las peticiones
+ * y los datos que nos interesa almacenar
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class DonacionPeticion {
     String id;
     String emailUsuario;

@@ -18,7 +18,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.marta.bookapp.R;
 
-
+/**
+ * Clase para mostrar al administrador todos los datos de perfil
+ * que hay de un usuario en concreto.
+ * Desde aqui se puede hacer administrador a otro usuario.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class UsuarioScanActivity extends AppCompatActivity {
 
     TextView nombreET, apellidoET, emailTV;

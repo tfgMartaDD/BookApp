@@ -34,6 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase para mostrar al usuario todos las prestamos de libros
+ * que le hayan concedido.
+ *
+ * @author Marta Diego u158691@usal.es
+ */
 public class PrestamosActivity extends AppCompatActivity {
 
     ListView listViewPrestamos;
@@ -144,6 +150,12 @@ public class PrestamosActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo que recupera los prestamos de un usuario en concreto almacenados en la base de datos.
+     *
+     * @param user el identificador del usuario activo
+     * @return una lista de Prestamo con los prestamos recuperados.
+     */
     public List<Prestamo> obtenerMisPrestamos(String user){
         List<Prestamo> lista = new ArrayList<>();
 

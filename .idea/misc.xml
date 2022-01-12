@@ -47,10 +47,10 @@
     </option>
   </component>
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/MARTA/TFG" />
-    <option name="OPTION_SCOPE" value="private" />
-    <option name="OTHER_OPTIONS" value="-encoding utf8 -docencoding utf8 -charset utf8" />
-    <option name="OPTION_INCLUDE_LIBS" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/MARTA/2022 TFG/MEMORIA diciembre/11 Enero" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
+    <option name="OTHER_OPTIONS" value="-encoding utf-8 -charset utf-8" />
+    <option name="LOCALE" value="es" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
